@@ -62,9 +62,9 @@ void ReverseGeolocator::readReverseGeocode()
 		QGeoAddress add = places.first().address();
 		LOGGER("======= DETAILS" << add.text());
 
-		emit finished( add.text(), m_reader.coordinates() );
+		emit finished( add.text(), add.city(), m_reader.coordinates() );
 	} else {
-		emit finished( tr("No matches found for phone coordinates..."), m_reader.coordinates(), true );
+		emit finished( tr("No matches found for phone coordinates..."), QString(), m_reader.coordinates(), true );
 	}
 
 	delete reply;

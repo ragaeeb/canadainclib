@@ -23,7 +23,7 @@ private slots:
 	void readReverseGeocode();
 
 Q_SIGNALS:
-	void finished(QString const& location, QPointF point, bool error=false);
+	void finished(QString const& location, QString const& city, QPointF const& point, bool error=false);
 
 public:
 	ReverseGeolocator(QObject* parent=NULL);

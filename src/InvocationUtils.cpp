@@ -94,7 +94,7 @@ bool InvocationUtils::validateLocationAccess(QString const& message, bool launch
 
 
 void InvocationUtils::launchLocationServices() {
-	launchSettingsApp("settings://location");
+	launchSettingsApp("location");
 }
 
 
