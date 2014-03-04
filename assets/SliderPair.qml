@@ -14,6 +14,7 @@ Container
     
     Label {
         text: labelValue
+        multiline: true
 
         layoutProperties: StackLayoutProperties {
             spaceQuota: 1

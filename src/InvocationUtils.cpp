@@ -59,7 +59,7 @@ bool InvocationUtils::validateEmailSMSAccess(QString const& message, bool launch
 	if ( !QFile("/var/db/text_messaging/messages.db").exists() )
 	{
 		LOGGER("messages.db did not exist!");
-		Persistance::showBlockingToast( message, tr("OK") );
+		Persistance::showBlockingToast( message, tr("OK"), "asset:///images/ic_pim_warning.png" );
 
 		if (launchAppPermissions) {
 			InvocationUtils::launchAppPermissionSettings();

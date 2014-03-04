@@ -47,6 +47,7 @@ void LazyMediaPlayer::play(QStringList const& playlist)
 		m_mp->reset();
 	}
 
+	seek(0);
 	m_currentIndex = 0;
 	m_playlist = playlist;
 
