@@ -1,21 +1,23 @@
 #include "PimUtil.h"
 #include "InvocationUtils.h"
 #include "Logger.h"
-#include "MessageManager.h"
 #include "Persistance.h"
-
-#include <bb/pim/message/Message>
 
 #include <bb/pim/calendar/CalendarService>
 #include <bb/pim/calendar/CalendarSettings>
 
 #include <bb/pim/contacts/ContactService>
 
+#include <bb/pim/message/MessageBuilder>
+#include <bb/pim/message/MessageService>
+
 #include <bb/PpsObject>
 
 #include <bb/system/InvokeManager>
 
 namespace canadainc {
+
+const int PimUtil::account_key_sms = 23;
 
 void PimUtil::openEmail(qint64 accountId, qint64 messageId)
 {
@@ -37,7 +39,7 @@ void PimUtil::openSMSMessage(QString const& conversationKey, qint64 messageId)
 	bb::system::InvokeManager invokeManager;
 
 	QVariantMap map;
-	map.insert( "accountid", MessageManager::account_key_sms );
+	map.insert( "accountid", account_key_sms );
 	map.insert( "messageid", messageId );
 	map.insert( "conversationid", conversationKey );
 
@@ -136,6 +138,48 @@ bool PimUtil::validateContactsAccess(QString const& message, bool launchAppPermi
 	}
 
 	return count > 0;
+}
+
+
+qint64 PimUtil::sendMessage(MessageService* m_ms, Message const& m, QString text, QList<Attachment> const& attachments, bool replyPrefix)
+{
+    QString ck = m.conversationId();
+    qint64 m_accountKey = m.accountId();
+    LOGGER("==========" << m.sender().address() << ck << text << m_accountKey);
+
+    const MessageContact from = m.sender();
+
+    MessageBuilder* mb = MessageBuilder::create(m_accountKey);
+    mb->conversationId(ck);
+
+    if (m_accountKey != account_key_sms) {
+        LOGGER("ADDING BODY TEXT" << text);
+        const MessageContact mc = MessageContact( from.id(), MessageContact::To, from.name(), from.address() );
+        mb->addRecipient(mc);
+        mb->subject( replyPrefix ? tr("RE: %1").arg( m.subject() ) : m.subject() );
+        mb->body( MessageBody::Html, text.replace("\n", "<br>").toUtf8() );
+    } else {
+        mb->addRecipient(from);
+
+        LOGGER("ADDING ATTACHMENT TEXT" << text);
+        mb->addAttachment( Attachment("text/plain", "<primary_text.txt>", text) );
+    }
+
+    for (int i = attachments.size()-1; i >= 0; i--) {
+        mb->addAttachment( attachments[i] );
+    }
+
+    LOGGER("Replying with" << m.sender().displayableName() << ck << text);
+
+    Message reply = *mb;
+    LOGGER("======== USING ACCOUNT KEY" << m_accountKey );
+    MessageKey mk = m_ms->send(m_accountKey, reply);
+
+    LOGGER("Sent, now deleting messagebuilder" << mk );
+
+    delete mb;
+
+    return mk;
 }
 
 } /* namespace canadainc */

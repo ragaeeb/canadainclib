@@ -27,16 +27,8 @@
 <context>
     <name>canadainc::MessageImporter</name>
     <message>
-        <location filename="../src/MessageImporter.cpp" line="15"/>
+        <location filename="../src/MessageImporter.cpp" line="14"/>
         <source>You</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>canadainc::MessageManager</name>
-    <message>
-        <location filename="../src/MessageManager.cpp" line="80"/>
-        <source>RE: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -51,9 +43,14 @@
 <context>
     <name>canadainc::PimUtil</name>
     <message>
-        <location filename="../src/PimUtil.cpp" line="112"/>
-        <location filename="../src/PimUtil.cpp" line="131"/>
+        <location filename="../src/PimUtil.cpp" line="114"/>
+        <location filename="../src/PimUtil.cpp" line="133"/>
         <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/PimUtil.cpp" line="159"/>
+        <source>RE: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

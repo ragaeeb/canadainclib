@@ -6,10 +6,13 @@
 
 #include <bb/system/InvokeManager>
 
+#include <bb/pim/message/Attachment>
+
 namespace bb {
 	namespace pim {
 		namespace message {
 			class Message;
+			class MessageService;
 		}
 	}
 }
@@ -31,6 +34,9 @@ public:
 	Q_INVOKABLE static void replyToSMS(QString const& senderAddress, QString const& body, InvokeManager& invokeManager);
 	Q_INVOKABLE static bool validateCalendarAccess(QString const& message, bool launchAppPermissions=true);
 	Q_INVOKABLE static bool validateContactsAccess(QString const& message, bool launchAppPermissions=true);
+	static qint64 sendMessage(MessageService* ms, Message const& m, QString text, QList<Attachment> const& attachments=QList<Attachment>(), bool replyPrefix=false);
+
+    static const int account_key_sms;
 };
 
 } /* namespace canadainc */

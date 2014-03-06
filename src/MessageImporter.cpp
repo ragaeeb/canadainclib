@@ -1,5 +1,4 @@
 #include "MessageImporter.h"
-#include "MessageManager.h"
 #include "Logger.h"
 #include "PimUtil.h"
 
@@ -95,7 +94,7 @@ QVariantList MessageImporter::processAllConversations()
 
 	QDateTime now = QDateTime::currentDateTime();
 
-	if (m_accountKey == MessageManager::account_key_sms)
+	if (m_accountKey == PimUtil::account_key_sms)
 	{
 	    LOGGER("PROCESSING SMS ROUTE");
 
