@@ -165,7 +165,7 @@ void CustomSqlDataSource::onLoadAsyncResultData(bb::data::DataAccessReply const&
         LOGGER( replyData.id() << ", SQL error: " << replyData );
     } else {
         QVariantList resultList = replyData.result().toList();
-        LOGGER( "Result list" << resultList.size() << resultList );
+        LOGGER( "Result list" << resultList.size() /*<< resultList*/ );
         emit dataLoaded( replyData.id(), resultList );
     }
 }
