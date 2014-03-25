@@ -50,6 +50,8 @@ QVariantMap MessageImporter::transform(Message const& m)
 {
     QVariantMap qvm;
     qvm.insert( "id", m.id() );
+    qvm.insert( "aid", m.accountId() );
+    qvm.insert( "cid", m.conversationId() );
     qvm.insert( "inbound", m.isInbound() );
     qvm.insert( "replyTo", m.replyTo().address() );
     qvm.insert( "sender", m.sender().displayableName() );
@@ -78,7 +80,7 @@ void MessageImporter::appendIfValid(Message const& m, QVariantList& variants)
 	    qvm.insert( "sender", m.isInbound() ? m.sender().displayableName() : m_userAlias );
 	    qvm.insert( "time", m_deviceTime ? m.deviceTimestamp() : m.serverTimestamp() );
 
-		variants << transform(m);
+		variants << qvm;
 	}
 }
 

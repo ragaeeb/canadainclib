@@ -55,14 +55,6 @@
     </message>
 </context>
 <context>
-    <name>canadainc::ReverseGeolocator</name>
-    <message>
-        <location filename="../src/ReverseGeolocator.cpp" line="67"/>
-        <source>No matches found for phone coordinates...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>canadainc::TextUtils</name>
     <message>
         <location filename="../src/TextUtils.cpp" line="38"/>
