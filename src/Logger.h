@@ -1,8 +1,6 @@
 #ifndef LOGGER_H_
 #define LOGGER_H_
 
-//#define TEST 1
-
 #if !defined(QT_NO_DEBUG)
 #include <QDebug>
 

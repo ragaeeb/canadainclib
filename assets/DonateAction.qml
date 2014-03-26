@@ -13,7 +13,7 @@ ActionItem
         Invocation {
             id: donator
 
-            query {
+            query: InvokeQuery {
                 mimeType: "text/html"
                 uri: "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=admin@canadainc.org&currency_code=CAD&no_shipping=1&tax=0&lc=CA&bn=PP-DonationsBF&item_name=Support NotepadPlus Development"
             }
