@@ -22,7 +22,7 @@ class LazyMediaPlayer : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(int currentIndex READ currentIndex)
-	Q_PROPERTY(int count READ count)
+	Q_PROPERTY(int count READ count FINAL)
 	Q_PROPERTY(bool playing READ playing NOTIFY playingChanged)
 	Q_PROPERTY(bool active READ active NOTIFY activeChanged)
 	Q_PROPERTY(QSize videoDimensions READ videoDimensions)
@@ -32,22 +32,19 @@ class LazyMediaPlayer : public QObject
 	QString m_name;
 	MediaPlayer* m_mp;
 	NowPlayingConnection* m_npc;
-	QStringList m_playlist;
-	int m_currentIndex;
 	QString m_videoWindowId;
 
 private slots:
-	void playbackCompleted();
 	void mediaStateChanged(bb::multimedia::MediaState::Type mediaState);
 
 signals:
-	void playlistCompleted();
+    void activeChanged();
+    void durationChanged(unsigned int duration);
+    void metaDataChanged(QVariantMap const& metaData);
+    void playingChanged();
 	void positionChanged(unsigned int position);
-	void durationChanged(unsigned int duration);
+	void currentIndexChanged(unsigned int index);
 	void videoDimensionsChanged(const QSize &videoDimensions);
-	void playingChanged();
-	void activeChanged();
-	void metaDataChanged(QVariantMap const& metaData);
 
 public:
 	LazyMediaPlayer(QObject* parent=NULL);
@@ -61,8 +58,7 @@ public:
 	QVariant currentPosition() const;
 	QSize videoDimensions() const;
 	Q_INVOKABLE void setName(QString const& name);
-	Q_INVOKABLE void play(QStringList const& playlist);
-	Q_INVOKABLE void play(QString const& uri);
+	Q_INVOKABLE void play(QUrl const& uri);
 	Q_SLOT void togglePlayback();
 	Q_INVOKABLE void seek(unsigned int position);
 	Q_INVOKABLE void jump(int secs);

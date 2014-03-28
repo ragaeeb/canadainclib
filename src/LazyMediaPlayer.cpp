@@ -9,7 +9,7 @@ namespace canadainc {
 using namespace bb::multimedia;
 
 LazyMediaPlayer::LazyMediaPlayer(QObject* parent) :
-		QObject(parent), m_mp(NULL), m_npc(NULL), m_currentIndex(0)
+		QObject(parent), m_mp(NULL), m_npc(NULL)
 {
 }
 
@@ -19,9 +19,9 @@ void LazyMediaPlayer::setName(QString const& name) {
 }
 
 
-void LazyMediaPlayer::play(QStringList const& playlist)
+void LazyMediaPlayer::play(QUrl const& uri)
 {
-	LOGGER("Play" << playlist);
+	LOGGER("Play" << uri);
 
 	if (m_npc == NULL) {
 		LOGGER("Creating MediaPlayer for first time");
@@ -32,11 +32,12 @@ void LazyMediaPlayer::play(QStringList const& playlist)
 		connect( m_npc, SIGNAL( acquired() ), m_mp, SLOT( play() ) );
 		connect( m_npc, SIGNAL( play() ), m_mp, SLOT( play() ) );
 		connect( m_npc, SIGNAL( revoked() ), m_mp, SLOT( pause() ) );
-		connect( m_mp, SIGNAL( positionChanged(unsigned int) ), this, SIGNAL( positionChanged(unsigned int) ) );
-		connect( m_mp, SIGNAL( mediaStateChanged(bb::multimedia::MediaState::Type) ), this, SLOT( mediaStateChanged(bb::multimedia::MediaState::Type) ) );
 		connect( m_mp, SIGNAL( durationChanged(unsigned int) ), this, SIGNAL( durationChanged(unsigned int) ) );
+        connect( m_mp, SIGNAL( mediaStateChanged(bb::multimedia::MediaState::Type) ), this, SLOT( mediaStateChanged(bb::multimedia::MediaState::Type) ) );
 		connect( m_mp, SIGNAL( metaDataChanged(QVariantMap const&) ), this, SIGNAL( metaDataChanged(QVariantMap const&) ) );
-		connect( m_mp, SIGNAL( playbackCompleted() ), this, SLOT( playbackCompleted() ) );
+		connect( m_mp, SIGNAL( playbackCompleted() ), this, SIGNAL( playbackCompleted() ) );
+        connect( m_mp, SIGNAL( positionChanged(unsigned int) ), this, SIGNAL( positionChanged(unsigned int) ) );
+        connect( m_mp, SIGNAL( trackChanged(unsigned int) ), this, SIGNAL( currentIndexChanged(QVariant const&) ) );
 		connect( m_mp, SIGNAL( videoDimensionsChanged(QSize const&) ), this, SIGNAL( videoDimensionsChanged(QSize const&) ) );
 
 		if ( !m_videoWindowId.isNull() ) {
@@ -47,60 +48,50 @@ void LazyMediaPlayer::play(QStringList const& playlist)
 		m_mp->reset();
 	}
 
-	seek(0);
-	m_currentIndex = 0;
-	m_playlist = playlist;
+	m_mp->setSourceUrl(uri);
 
-	skip(0);
+    if ( m_npc->isAcquired() ) {
+        LOGGER("Already acquired, playing!");
+        m_mp->play();
+    } else {
+        LOGGER("Acquiring NPC!");
+        m_npc->acquire();
+    }
 }
 
 
 void LazyMediaPlayer::mediaStateChanged(bb::multimedia::MediaState::Type mediaState)
 {
-	Q_UNUSED(mediaState);
+    if (mediaState == MediaState::Started) {
+        emit activeChanged();
+    }
 
-	emit activeChanged();
-	emit playingChanged();
-}
-
-void LazyMediaPlayer::play(QString const& uri) {
-	play( QStringList() << uri );
+    emit playingChanged();
 }
 
 
 void LazyMediaPlayer::skip(int n)
 {
 	LOGGER("============ SKIP" << n);
-	m_currentIndex += n;
 
-	if ( m_currentIndex < m_playlist.size() && m_currentIndex >= 0 )
-	{
-		QString uri = m_playlist[m_currentIndex];
-
-		if ( m_mp->sourceUrl().toString() != uri ) {
-			m_mp->setSourceUrl( QUrl(uri) );
-		}
-
-		if ( m_npc->isAcquired() ) {
-			LOGGER("Already acquired, playing!");
-			m_mp->play();
-		} else {
-			LOGGER("Acquiring NPC!");
-			m_npc->acquire();
-		}
-	} else {
-		emit playlistCompleted();
+	if (!m_mp) {
+	    return;
 	}
+
+	m_mp->seekTrack( m_mp->track() + n );
+
+    if ( m_npc->isAcquired() ) {
+        LOGGER("Already acquired, playing!");
+        m_mp->play();
+    } else {
+        LOGGER("Acquiring NPC!");
+        m_npc->acquire();
+    }
 }
 
 
 QVariant LazyMediaPlayer::currentPosition() const {
 	return m_mp ? m_mp->position() : 0;
-}
-
-
-void LazyMediaPlayer::playbackCompleted() {
-	skip(1);
 }
 
 
@@ -174,12 +165,12 @@ bool LazyMediaPlayer::active() const {
 
 
 int LazyMediaPlayer::currentIndex() const {
-	return m_currentIndex;
+	return m_mp ? m_mp->track() : 0;
 }
 
 
 int LazyMediaPlayer::count() const {
-	return m_playlist.size();
+	return m_mp ? m_mp->trackCount() : 0;
 }
 
 

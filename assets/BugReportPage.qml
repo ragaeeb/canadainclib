@@ -27,6 +27,16 @@ Page
             }
             
             title: qsTr("Open in Browser") + Retranslate.onLanguageChanged
+        },
+        
+        ActionItem
+        {
+            title: qsTr("Submit Logs") + Retranslate.onLanguageChanged
+            imageSource: "images/ic_bugs.png"
+            
+            onTriggered: {
+                reporter.submitLogs();
+            }
         }
     ]
     
