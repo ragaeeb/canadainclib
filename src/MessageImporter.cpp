@@ -96,7 +96,7 @@ QVariantList MessageImporter::processAllConversations()
 
 	QDateTime now = QDateTime::currentDateTime();
 
-	if (m_accountKey == PimUtil::account_key_sms)
+	if (m_accountKey == ACCOUNT_KEY_SMS)
 	{
 	    LOGGER("PROCESSING SMS ROUTE");
 

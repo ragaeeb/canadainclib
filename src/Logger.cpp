@@ -9,17 +9,17 @@ FILE* f = NULL;
 void redirectedMessageOutput(QtMsgType type, const char *msg)
 {
     Q_UNUSED(type);
-
-    if (f) {
-        fprintf(f, "%s\n", msg);
-    }
+    fprintf(f ? f : stderr, "%s\n", msg);
 }
 
 }
 
-void registerLogging()
+void registerLogging(QString const& fileName)
 {
-    f = fopen( QString( QDir::currentPath()+"/logs/ui.log").toUtf8().constData(), "w");
+    if ( !fileName.isNull() ) {
+        f = fopen( QString( QString("%1/logs/%2").arg( QDir::currentPath() ).arg(fileName) ).toUtf8().constData(), "w");
+    }
+
     qInstallMsgHandler(redirectedMessageOutput);
 }
 

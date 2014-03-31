@@ -1,12 +1,11 @@
 #ifndef PIMUTIL_H_
 #define PIMUTIL_H_
 
-#include <QObject>
-#include <QString>
-
 #include <bb/system/InvokeManager>
 
 #include <bb/pim/message/Attachment>
+
+#define ACCOUNT_KEY_SMS 23
 
 namespace bb {
 	namespace pim {
@@ -35,8 +34,6 @@ public:
 	Q_INVOKABLE static bool validateCalendarAccess(QString const& message, bool launchAppPermissions=true);
 	Q_INVOKABLE static bool validateContactsAccess(QString const& message, bool launchAppPermissions=true);
 	static qint64 sendMessage(MessageService* ms, Message const& m, QString text, QList<Attachment> const& attachments=QList<Attachment>(), bool replyPrefix=false);
-
-    static const int account_key_sms;
 };
 
 } /* namespace canadainc */

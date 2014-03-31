@@ -2,15 +2,14 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QStringList>
-#include <QUrl>
 
 #include "NetworkProcessor.h"
 #include "Logger.h"
 
 namespace canadainc {
 
-NetworkProcessor::NetworkProcessor(QObject* parent) : QObject(parent), m_networkManager(NULL)
-{
+NetworkProcessor::NetworkProcessor(QObject* parent) : QObject(parent), m_networkManager(NULL) {
+    connect( &m_config, SIGNAL( onlineStateChanged(bool) ), this, SIGNAL( onlineChanged() ) );
 }
 
 
@@ -117,6 +116,11 @@ void NetworkProcessor::abort()
 		current->abort();
 		current->deleteLater();
 	}
+}
+
+
+bool NetworkProcessor::online() const {
+    return m_config.isOnline();
 }
 
 

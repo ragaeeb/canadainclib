@@ -43,13 +43,13 @@
 <context>
     <name>canadainc::PimUtil</name>
     <message>
-        <location filename="../src/PimUtil.cpp" line="114"/>
-        <location filename="../src/PimUtil.cpp" line="133"/>
+        <location filename="../src/PimUtil.cpp" line="112"/>
+        <location filename="../src/PimUtil.cpp" line="131"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PimUtil.cpp" line="159"/>
+        <location filename="../src/PimUtil.cpp" line="157"/>
         <source>RE: %1</source>
         <translation type="unfinished"></translation>
     </message>

@@ -17,8 +17,6 @@
 
 namespace canadainc {
 
-const int PimUtil::account_key_sms = 23;
-
 void PimUtil::openEmail(qint64 accountId, qint64 messageId)
 {
 	LOGGER("==========" << accountId << messageId);
@@ -39,7 +37,7 @@ void PimUtil::openSMSMessage(QString const& conversationKey, qint64 messageId)
 	bb::system::InvokeManager invokeManager;
 
 	QVariantMap map;
-	map.insert( "accountid", account_key_sms );
+	map.insert( "accountid", ACCOUNT_KEY_SMS );
 	map.insert( "messageid", messageId );
 	map.insert( "conversationid", conversationKey );
 
@@ -141,18 +139,18 @@ bool PimUtil::validateContactsAccess(QString const& message, bool launchAppPermi
 }
 
 
-qint64 PimUtil::sendMessage(MessageService* m_ms, Message const& m, QString text, QList<Attachment> const& attachments, bool replyPrefix)
+qint64 PimUtil::sendMessage(MessageService* ms, Message const& m, QString text, QList<Attachment> const& attachments, bool replyPrefix)
 {
     QString ck = m.conversationId();
-    qint64 m_accountKey = m.accountId();
-    LOGGER("==========" << m.sender().address() << ck << text << m_accountKey);
+    qint64 accountKey = m.accountId();
+    LOGGER("==========" << m.sender().address() << ck << text << accountKey);
 
     const MessageContact from = m.sender();
 
-    MessageBuilder* mb = MessageBuilder::create(m_accountKey);
+    MessageBuilder* mb = MessageBuilder::create(accountKey);
     mb->conversationId(ck);
 
-    if (m_accountKey != account_key_sms) {
+    if (accountKey != ACCOUNT_KEY_SMS) {
         LOGGER("ADDING BODY TEXT" << text);
         const MessageContact mc = MessageContact( from.id(), MessageContact::To, from.name(), from.address() );
         mb->addRecipient(mc);
@@ -172,8 +170,8 @@ qint64 PimUtil::sendMessage(MessageService* m_ms, Message const& m, QString text
     LOGGER("Replying with" << m.sender().displayableName() << ck << text);
 
     Message reply = *mb;
-    LOGGER("======== USING ACCOUNT KEY" << m_accountKey );
-    MessageKey mk = m_ms->send(m_accountKey, reply);
+    LOGGER("======== USING ACCOUNT KEY" << accountKey );
+    MessageKey mk = ms->send(accountKey, reply);
 
     LOGGER("Sent, now deleting messagebuilder" << mk );
 
