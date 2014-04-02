@@ -19,13 +19,13 @@ public:
      * Utility function to strip html-formatting.
      * @param htmlString The string that is going to be stripped.
      */
-    Q_INVOKABLE QString plainText(QString const& htmlString);
+    Q_INVOKABLE static QString plainText(QString const& htmlString);
 
     /**
      * @param A duration in milliseconds.
      * @return 15:12:04
      */
-    Q_INVOKABLE QString formatTime(unsigned int duration);
+    Q_INVOKABLE static QString formatTime(unsigned int duration);
 };
 
 } /* namespace canadainc */
