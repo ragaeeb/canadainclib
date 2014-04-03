@@ -37,6 +37,27 @@ Page
             onTriggered: {
                 reporter.submitLogs();
             }
+        },
+        
+        ActionItem
+        {
+            title: qsTr("Start Logging") + Retranslate.onLanguageChanged
+            imageSource: "file:///usr/share/icons/bb_action_install.png"
+            
+            onTriggered: {
+                persist.saveValueFor("startLogging", 1);
+                persist.showToast( qsTr("Diagnostic Logging Started"), "", "asset:///images/ic_review.png" );
+            }
+        },
+        
+        DeleteActionItem
+        {
+            title: qsTr("Stop Logging") + Retranslate.onLanguageChanged
+            
+            onTriggered: {
+                persist.saveValueFor("stopLogging", 1);
+                persist.showToast( qsTr("Diagnostic Logging Stopped"), "", "file:///usr/share/icons/bb_action_delete.png" );
+            }
         }
     ]
     
