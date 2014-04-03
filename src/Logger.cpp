@@ -5,6 +5,7 @@
 namespace {
 
 FILE* f = NULL;
+const char* cached_file_name = NULL;
 
 void redirectedMessageOutput(QtMsgType type, const char *msg)
 {
@@ -16,8 +17,15 @@ void redirectedMessageOutput(QtMsgType type, const char *msg)
 
 void registerLogging(QString const& fileName)
 {
+    if (f) {
+        deregisterLogging();
+    }
+
     if ( !fileName.isNull() ) {
-        f = fopen( QString( QString("%1/logs/%2").arg( QDir::currentPath() ).arg(fileName) ).toUtf8().constData(), "w");
+        cached_file_name = QString( QString("%1/logs/%2").arg( QDir::currentPath() ).arg(fileName) ).toUtf8().constData();
+        f = fopen(cached_file_name, "w");
+    } else if (cached_file_name) {
+        f = fopen(cached_file_name, "w");
     }
 
     qInstallMsgHandler(redirectedMessageOutput);

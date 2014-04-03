@@ -3,6 +3,8 @@
 
 #include <QString>
 
+//#define BETA 1
+
 #if !defined(QT_NO_DEBUG)
 #include <QDebug>
 
