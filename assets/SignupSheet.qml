@@ -58,6 +58,8 @@ Sheet
                 horizontalAlignment: HorizontalAlignment.Center
                 
                 onClicked: {
+                    console.log("UserEvent: SetPassword");
+                    
                     if (passwordField.text != confirmField.text) {
                         persist.showToast( qsTr("Passwords do not match!") );
                         confirmField.requestFocus();
@@ -90,6 +92,7 @@ Sheet
                     title: qsTr("Cancel") + Retranslate.onLanguageChanged
                     
                     onTriggered: {
+                        console.log("UserEvent: SignupSheet Cancel");
                         sheet.close();
                     }
                 }

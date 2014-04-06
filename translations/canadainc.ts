@@ -15,6 +15,39 @@
     </message>
 </context>
 <context>
+    <name>canadainc::AppLogFetcher</name>
+    <message>
+        <location filename="../src/AppLogFetcher.cpp" line="52"/>
+        <source>Collecting logs...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/AppLogFetcher.cpp" line="57"/>
+        <source>Generating...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/AppLogFetcher.cpp" line="129"/>
+        <source>Submitting...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/AppLogFetcher.cpp" line="136"/>
+        <source>Could not submit logs! Please try again...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/AppLogFetcher.cpp" line="139"/>
+        <source>Logs have been submitted. Please provide the support team the following ID: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/AppLogFetcher.cpp" line="147"/>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>canadainc::InvocationUtils</name>
     <message>
         <location filename="../src/InvocationUtils.cpp" line="44"/>

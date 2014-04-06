@@ -2,7 +2,28 @@ import bb.cascades 1.0
 
 Page
 {
+    id: root
     property string projectName
+    property bool showLogCollector: false
+    property bool showSubmitLogs: false
+    
+    onShowLogCollectorChanged: {
+        if (showLogCollector) {
+            root.addAction(startLogging);
+            root.addAction(stopLogging);
+        } else {
+            root.removeAction(startLogging);
+            root.removeAction(stopLogging);
+        }
+    }
+    
+    onShowSubmitLogsChanged: {
+        if (showSubmitLogs) {
+            root.addAction(submitLogs);
+        } else {
+            root.removeAction(submitLogs);
+        }
+    }
     
     titleBar: TitleBar {
         title: qsTr("Bug Report") + Retranslate.onLanguageChanged
@@ -27,37 +48,6 @@ Page
             }
             
             title: qsTr("Open in Browser") + Retranslate.onLanguageChanged
-        },
-        
-        ActionItem
-        {
-            title: qsTr("Submit Logs") + Retranslate.onLanguageChanged
-            imageSource: "images/ic_bugs.png"
-            
-            onTriggered: {
-                reporter.submitLogs();
-            }
-        },
-        
-        ActionItem
-        {
-            title: qsTr("Start Logging") + Retranslate.onLanguageChanged
-            imageSource: "file:///usr/share/icons/bb_action_install.png"
-            
-            onTriggered: {
-                persist.saveValueFor("startLogging", 1);
-                persist.showToast( qsTr("Diagnostic Logging Started"), "", "asset:///images/ic_review.png" );
-            }
-        },
-        
-        DeleteActionItem
-        {
-            title: qsTr("Stop Logging") + Retranslate.onLanguageChanged
-            
-            onTriggered: {
-                persist.saveValueFor("stopLogging", 1);
-                persist.showToast( qsTr("Diagnostic Logging Stopped"), "", "file:///usr/share/icons/bb_action_delete.png" );
-            }
         }
     ]
     
@@ -117,4 +107,43 @@ Page
 	        topMargin: 0; bottomMargin: 0; leftMargin: 0; rightMargin: 0;
 	    }
 	}
+	
+	attachedObjects: [
+        ActionItem
+        {
+            id: submitLogs
+            title: qsTr("Submit Logs") + Retranslate.onLanguageChanged
+            imageSource: "images/ic_bugs.png"
+            
+            onTriggered: {
+                console.log("UserEvent: SubmitLogs");
+                reporter.submitLogs();
+            }
+        },
+        
+        ActionItem
+        {
+            id: startLogging
+            title: qsTr("Start Logging") + Retranslate.onLanguageChanged
+            imageSource: "file:///usr/share/icons/bb_action_install.png"
+            
+            onTriggered: {
+                console.log("UserEvent: StartLogging");
+                persist.saveValueFor("startLogging", 1);
+                persist.showToast( qsTr("Diagnostic Logging Started"), "", "asset:///images/ic_review.png" );
+            }
+        },
+        
+        DeleteActionItem
+        {
+            id: stopLogging
+            title: qsTr("Stop Logging") + Retranslate.onLanguageChanged
+            
+            onTriggered: {
+                console.log("UserEvent: StopLogging");
+                persist.saveValueFor("stopLogging", 1);
+                persist.showToast( qsTr("Diagnostic Logging Stopped"), "", "file:///usr/share/icons/bb_action_delete.png" );
+            }
+        }
+	]
 }

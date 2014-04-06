@@ -8,8 +8,17 @@
 
 namespace canadainc {
 
-NetworkProcessor::NetworkProcessor(QObject* parent) : QObject(parent), m_networkManager(NULL) {
-    connect( &m_config, SIGNAL( onlineStateChanged(bool) ), this, SIGNAL( onlineChanged() ) );
+NetworkProcessor::NetworkProcessor(QObject* parent) :
+        QObject(parent), m_networkManager(NULL)
+{
+    connect( &m_config, SIGNAL( onlineStateChanged(bool) ), this, SLOT( onlineStateChanged(bool) ) );
+}
+
+
+void NetworkProcessor::onlineStateChanged(bool online)
+{
+    Q_UNUSED(online);
+    emit onlineChanged();
 }
 
 
@@ -72,8 +81,6 @@ void NetworkProcessor::doGet(QString const& uri, QVariant const& cookie)
 void NetworkProcessor::downloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 {
 	QVariant cookie = sender()->property("cookie");
-	LOGGER("received,total" << bytesReceived << bytesTotal << cookie);
-
 	emit downloadProgress(cookie, bytesReceived, bytesTotal);
 }
 
@@ -82,10 +89,6 @@ void NetworkProcessor::onNetworkReply(QNetworkReply* reply)
 {
 	if ( reply->error() == QNetworkReply::NoError )
 	{
-//		int httpStatusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toUInt();
-//
-//		LOGGER("return code" << httpStatusCode);
-
 		if ( reply->isReadable() )
 		{
 			LOGGER("Reply readable");
@@ -93,7 +96,7 @@ void NetworkProcessor::onNetworkReply(QNetworkReply* reply)
 			QByteArray data = reply->readAll();
 			emit requestComplete( reply->property("cookie"), data );
 		} else {
-			LOGGER("\n\n\nUnreadable!!!!!!!\n\n\n");
+			LOGGER("Unreadable!!!!!!!");
 		}
 	} else {
 		LOGGER("Reply error!");
@@ -111,7 +114,8 @@ void NetworkProcessor::setHeaders(QHash<QString,QString> const& headers) {
 
 void NetworkProcessor::abort()
 {
-	while ( !m_currentRequests.isEmpty() ) {
+	while ( !m_currentRequests.isEmpty() )
+	{
 		QNetworkReply* current = m_currentRequests.dequeue();
 		current->abort();
 		current->deleteLater();

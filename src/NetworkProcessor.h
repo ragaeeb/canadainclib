@@ -32,6 +32,7 @@ signals:
 private slots:
 	void onNetworkReply(QNetworkReply* reply);
 	void downloadProgress(qint64 bytesReceived, qint64 bytesTotal);
+	void onlineStateChanged(bool online);
 
 public:
 	NetworkProcessor(QObject* parent=NULL);

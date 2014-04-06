@@ -8,6 +8,8 @@ MenuDefinition
     property bool allowDonations: false
     property bool promoteChannel: false
     property string bbWorldID
+    property bool showLogCollector: false
+    property bool showSubmitLogs: false
     
     function launchPage(page)
     {
@@ -39,6 +41,8 @@ MenuDefinition
         
         onTriggered:
         {
+            console.log("UserEvent: SettingsPage");
+            
             if (!settingsPage) {
                 definition.source = "SettingsPage.qml"
                 settingsPage = definition.createObject()
@@ -55,12 +59,16 @@ MenuDefinition
             imageSource: "images/ic_bugs.png"
             
             onTriggered: {
+                console.log("UserEvent: BugReportPage");
+                
                 if (!bugReportPage) {
                     definition.source = "BugReportPage.qml"
                     bugReportPage = definition.createObject()
                 }
                 
                 bugReportPage.projectName = projectName;
+                bugReportPage.showLogCollector = showLogCollector;
+                bugReportPage.showSubmitLogs = showSubmitLogs;
                 launchPage(bugReportPage);
             }
         }
@@ -73,6 +81,8 @@ MenuDefinition
         
         onTriggered:
         {
+            console.log("UserEvent: HelpPage");
+            
             if (!helpPage) {
                 definition.source = "HelpPage.qml"
                 helpPage = definition.createObject()
@@ -97,6 +107,7 @@ MenuDefinition
                 imageSource: "images/ic_donate.png"
                 
                 onTriggered: {
+                    console.log("UserEvent: Donate");
                     donator.trigger("bb.action.OPEN");
                 }
                 

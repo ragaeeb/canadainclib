@@ -26,6 +26,7 @@ ControlDelegate
                 gestureHandlers: [
                     TapHandler {
                         onTapped: {
+                            console.log("UserEvent: OfflineDelegate Tapped");
                             imageTapped();
                         }
                     }

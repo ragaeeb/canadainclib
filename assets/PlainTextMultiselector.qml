@@ -9,7 +9,9 @@ QtObject
         title: qsTr("Copy") + Retranslate.onLanguageChanged
         enabled: false
         imageSource: "images/ic_copy.png"
+        
         onTriggered: {
+            console.log("UserEvent: PlainTextMulti Copy");
             var result = plainTextHandler.getSelectedTextualData();
             persist.copyToClipboard(result);
         }
@@ -25,6 +27,7 @@ QtObject
         }
         
         onTriggered: {
+            console.log("UserEvent: PlainTextMulti Share");
             var result = plainTextHandler.getSelectedTextualData();
             result = persist.convertToUtf8(result);
             multiShareAction.data = result;
