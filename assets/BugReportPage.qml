@@ -4,16 +4,12 @@ Page
 {
     id: root
     property string projectName
-    property bool showLogCollector: false
+    property bool showServiceLogging: false
     property bool showSubmitLogs: false
     
-    onShowLogCollectorChanged: {
-        if (showLogCollector) {
-            root.addAction(startLogging);
-            root.addAction(stopLogging);
-        } else {
-            root.removeAction(startLogging);
-            root.removeAction(stopLogging);
+    onShowServiceLoggingChanged: {
+        if (showServiceLogging) {
+            root.titleBar = serviceTitle.createObject();
         }
     }
     
@@ -25,14 +21,14 @@ Page
         }
     }
     
-    titleBar: TitleBar {
-        title: qsTr("Bug Report") + Retranslate.onLanguageChanged
-    }
-    
     onProjectNameChanged: {
         webView.url = "http://code.google.com/p/%1/issues/list".arg(projectName);
         browserAction.query.uri = "http://code.google.com/p/%1/issues/list".arg(projectName);
         browserAction.query.updateQuery();
+    }
+    
+    titleBar: TitleBar {
+        title: qsTr("Bug Report") + Retranslate.onLanguageChanged
     }
     
     actions: [
@@ -116,33 +112,61 @@ Page
             imageSource: "images/ic_bugs.png"
             
             onTriggered: {
+                enabled = false;
                 console.log("UserEvent: SubmitLogs");
                 reporter.submitLogs();
             }
-        },
-        
-        ActionItem
-        {
-            id: startLogging
-            title: qsTr("Start Logging") + Retranslate.onLanguageChanged
-            imageSource: "file:///usr/share/icons/bb_action_install.png"
             
-            onTriggered: {
-                console.log("UserEvent: StartLogging");
-                persist.saveValueFor("startLogging", 1);
-                persist.showToast( qsTr("Diagnostic Logging Started"), "", "asset:///images/ic_review.png" );
+            function onSubmitted(message) {
+                persist.showBlockingToast( message, qsTr("OK"), "asset:///images/ic_bugs.png" );
+                enabled = true;
+            }
+            
+            onCreationCompleted: {
+                reporter.submitted.connect(onSubmitted);
             }
         },
         
-        DeleteActionItem
+        ComponentDefinition
         {
-            id: stopLogging
-            title: qsTr("Stop Logging") + Retranslate.onLanguageChanged
+            id: serviceTitle
             
-            onTriggered: {
-                console.log("UserEvent: StopLogging");
-                persist.saveValueFor("stopLogging", 1);
-                persist.showToast( qsTr("Diagnostic Logging Stopped"), "", "file:///usr/share/icons/bb_action_delete.png" );
+            TitleBar
+            {
+                kind: TitleBarKind.FreeForm
+                scrollBehavior: TitleBarScrollBehavior.NonSticky
+                kindProperties: FreeFormTitleBarKindProperties
+                {
+                    Container
+                    {
+                        leftPadding: 10; rightPadding: 10; topPadding: 10
+                        
+                        layout: StackLayout {
+                            orientation: LayoutOrientation.LeftToRight
+                        }
+                        
+                        Label {
+                            text: qsTr("Service Logging") + Retranslate.onLanguageChanged
+                            verticalAlignment: VerticalAlignment.Center
+                            textStyle.color: Color.White
+                            
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 1
+                            }
+                        }
+                        
+                        ToggleButton
+                        {
+                            verticalAlignment: VerticalAlignment.Center
+                            checked: persist.getValueFor("logService")
+                            
+                            onCheckedChanged: {
+                                console.log( "logSErvice", new Date() );
+                                persist.saveValueFor("logService", checked);
+                            }
+                        }
+                    }
+                }
             }
         }
 	]

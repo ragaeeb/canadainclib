@@ -1,7 +1,6 @@
 #ifndef PERSISTANCE_H_
 #define PERSISTANCE_H_
 
-#include <QObject>
 #include <QSettings>
 
 #include <bb/system/SystemUiResult>

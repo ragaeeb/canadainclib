@@ -6,6 +6,7 @@ namespace {
 
 FILE* f = NULL;
 const char* cached_file_name = NULL;
+bool frozen = false;
 
 void redirectedMessageOutput(QtMsgType type, const char *msg)
 {
@@ -15,14 +16,14 @@ void redirectedMessageOutput(QtMsgType type, const char *msg)
 
 }
 
-void registerLogging(QString const& fileName)
+void registerLogging(QString const& fileName, bool melt)
 {
-    if (f) {
-        deregisterLogging();
+    if ( f || (frozen && !melt) ) {
+        return;
     }
 
     if ( !fileName.isNull() ) {
-        cached_file_name = QString( QString("%1/logs/%2").arg( QDir::currentPath() ).arg(fileName) ).toUtf8().constData();
+        cached_file_name = fileName.toUtf8().constData();
         f = fopen(cached_file_name, "w");
     } else if (cached_file_name) {
         f = fopen(cached_file_name, "w");
@@ -32,10 +33,18 @@ void registerLogging(QString const& fileName)
 }
 
 
-void deregisterLogging()
+const char* logFilePath() {
+    return cached_file_name;
+}
+
+
+void deregisterLogging(bool freeze)
 {
+    frozen = freeze;
+
     if (f) {
         fclose(f);
         f = NULL;
+        qInstallMsgHandler(0);
     }
 }

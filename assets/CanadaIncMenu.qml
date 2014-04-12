@@ -8,7 +8,7 @@ MenuDefinition
     property bool allowDonations: false
     property bool promoteChannel: false
     property string bbWorldID
-    property bool showLogCollector: false
+    property bool showServiceLogging: false
     property bool showSubmitLogs: false
     
     function launchPage(page)
@@ -67,7 +67,7 @@ MenuDefinition
                 }
                 
                 bugReportPage.projectName = projectName;
-                bugReportPage.showLogCollector = showLogCollector;
+                bugReportPage.showServiceLogging = showServiceLogging;
                 bugReportPage.showSubmitLogs = showSubmitLogs;
                 launchPage(bugReportPage);
             }
