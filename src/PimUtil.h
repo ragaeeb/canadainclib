@@ -6,6 +6,7 @@
 #include <bb/pim/message/Attachment>
 
 #define ACCOUNT_KEY_SMS 23
+#define ACCOUNT_KEY_PIN 199
 
 namespace bb {
 	namespace pim {

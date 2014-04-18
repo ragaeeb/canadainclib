@@ -3,20 +3,32 @@
 #include "Logger.h"
 
 #include <QDateTime>
+#include <QFile>
+
+#define ONE_SECOND 1000
+#define ONE_MINUTE ONE_SECOND*60
+#define INTERVAL 30*ONE_MINUTE
+#define KB 1024
+#define MB 1024*KB
+#define MAX_LOG_SIZE 10*MB
 
 namespace canadainc {
 
 LogMonitor::LogMonitor(QString const& key, QString const& logFile, QObject* parent) :
         QObject(parent), m_logFile(logFile), m_key(key)
 {
-    QSettings m_settings;
+    QSettings settings;
 
-    m_settingsWatcher.addPath( m_settings.fileName() );
-
+    m_settingsWatcher.addPath( settings.fileName() );
     connect( &m_settingsWatcher, SIGNAL( fileChanged(QString const&) ), this, SLOT( settingChanged(QString const&) ) );
 
-    if ( m_settings.value(key).toBool() ) {
+    m_timer.setSingleShot(false);
+    m_timer.setInterval(INTERVAL);
+    connect( &m_timer, SIGNAL( timeout() ), this, SLOT( timeout() ) );
+
+    if ( settings.value(key).toBool() ) {
         registerLogging(logFile);
+        m_timer.start();
     }
 }
 
@@ -25,35 +37,52 @@ void LogMonitor::settingChanged(QString const& file)
 {
     Q_UNUSED(file);
 
-    LOGGER(QDateTime::currentDateTime() << file);
+    QSettings settings;
+    settings.sync();
 
-    QSettings m_settings;
-    m_settings.sync();
-
-    if ( m_settings.contains(STOP_LOGGING_KEY) ) {
-        LOGGER("stop logging key");
+    if ( settings.contains(STOP_LOGGING_KEY) ) {
         deregisterLogging(true);
-    } else if ( m_settings.contains(START_LOGGING_KEY) ) {
-        LOGGER("start logging key");
-        if ( m_settings.value(m_key).toBool() ) {
-            LOGGER("register logging");
-            registerLogging(m_logFile, true);
-        }
-    } else {
-        bool allowLogging = m_settings.value(m_key).toBool();
+        m_timer.stop();
+    } else if ( settings.contains(START_LOGGING_KEY) ) {
 
-        LOGGER("allowLogging" << allowLogging << m_settings.contains(m_key) << m_key);
-
-        if ( m_settings.contains(m_key) )
+        if ( settings.value(m_key).toBool() )
         {
-            if (allowLogging) {
-                LOGGER("registerLogging" << allowLogging << m_settings.contains(m_key) << m_key);
-                registerLogging(m_logFile);
-            } else {
-                LOGGER("deregister" << allowLogging << m_settings.contains(m_key) << m_key);
-                deregisterLogging();
+            registerLogging(m_logFile, true);
+
+            if ( !m_timer.isActive() ) {
+                m_timer.start();
             }
         }
+    } else {
+        bool allowLogging = settings.value(m_key).toBool();
+
+        LOGGER("allowLogging" << allowLogging << settings.contains(m_key) << m_key);
+
+        if ( settings.contains(m_key) )
+        {
+            if (allowLogging) {
+                LOGGER("registerLogging" << allowLogging << settings.contains(m_key) << m_key);
+                registerLogging(m_logFile);
+
+                if ( !m_timer.isActive() ) {
+                    m_timer.start();
+                }
+            } else {
+                LOGGER("deregister" << allowLogging << settings.contains(m_key) << m_key);
+                deregisterLogging();
+                m_timer.stop();
+            }
+        }
+    }
+}
+
+
+void LogMonitor::timeout()
+{
+    if ( QFile(m_logFile).size() > MAX_LOG_SIZE ) {
+        deregisterLogging();
+        registerLogging(m_logFile);
+        LOGGER("Log truncated at " << QDateTime::currentDateTime() );
     }
 }
 

@@ -100,6 +100,7 @@ void NetworkProcessor::onNetworkReply(QNetworkReply* reply)
 		}
 	} else {
 		LOGGER("Reply error!");
+		emit replyError();
 	}
 
 	m_currentRequests.removeAll(reply);

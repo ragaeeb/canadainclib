@@ -28,6 +28,7 @@ signals:
 	void downloadProgress(QVariant const& cookie, qint64 bytesReceived, qint64 bytesTotal);
 	void requestComplete(QVariant const& cookie, QByteArray const& data);
 	void onlineChanged();
+	void replyError();
 
 private slots:
 	void onNetworkReply(QNetworkReply* reply);
