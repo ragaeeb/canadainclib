@@ -2,15 +2,20 @@
 #include <bb/system/SystemDialog>
 #include <bb/system/SystemToast>
 
+#include <bb/cascades/QmlDocument>
+
 #include "Persistance.h"
 #include "Logger.h"
 
 namespace canadainc {
 
+using namespace bb::cascades;
 using namespace bb::system;
 
 Persistance::Persistance(QObject* parent) : QObject(parent), m_toast(NULL)
 {
+    QDeclarativeContext* rootContext = QmlDocument::defaultDeclarativeEngine()->rootContext();
+    rootContext->setContextProperty("persist", this);
 }
 
 Persistance::~Persistance()
