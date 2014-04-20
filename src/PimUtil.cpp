@@ -139,6 +139,24 @@ bool PimUtil::validateContactsAccess(QString const& message, bool launchAppPermi
 }
 
 
+bool PimUtil::validateEmailSMSAccess(QString const& message, bool launchAppPermissions)
+{
+    if ( !InvocationUtils::hasEmailSmsAccess()  )
+    {
+        LOGGER("messages.db did not exist!");
+        Persistance::showBlockingToast( message, tr("OK"), "asset:///images/ic_pim_warning.png" );
+
+        if (launchAppPermissions) {
+            InvocationUtils::launchAppPermissionSettings();
+        }
+
+        return false;
+    }
+
+    return true;
+}
+
+
 qint64 PimUtil::sendMessage(MessageService* ms, Message const& m, QString text, QList<Attachment> const& attachments, bool replyPrefix)
 {
     QString ck = m.conversationId();

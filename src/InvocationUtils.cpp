@@ -2,7 +2,19 @@
 #include "Logger.h"
 #include "Persistance.h"
 
+#include <bb/cascades/QmlDocument>
+
 namespace canadainc {
+
+InvocationUtils::InvocationUtils(QObject* parent) : QObject(parent) {
+    bb::cascades::QmlDocument::defaultDeclarativeEngine()->rootContext()->setContextProperty("invoke", this);
+}
+
+
+InvocationUtils::~InvocationUtils()
+{
+}
+
 
 void InvocationUtils::launchAppPermissionSettings() {
 	launchSettingsApp("permissions");
@@ -42,24 +54,6 @@ bool InvocationUtils::validateSharedFolderAccess(QString const& message, bool la
 	{
 		LOGGER(sdDirectory << "Did not exist!");
 		Persistance::showBlockingToast( message, tr("OK"), "asset:///images/ic_folder_warning.png" );
-
-		if (launchAppPermissions) {
-			InvocationUtils::launchAppPermissionSettings();
-		}
-
-		return false;
-	}
-
-	return true;
-}
-
-
-bool InvocationUtils::validateEmailSMSAccess(QString const& message, bool launchAppPermissions)
-{
-	if ( !QFile("/var/db/text_messaging/messages.db").exists() )
-	{
-		LOGGER("messages.db did not exist!");
-		Persistance::showBlockingToast( message, tr("OK"), "asset:///images/ic_pim_warning.png" );
 
 		if (launchAppPermissions) {
 			InvocationUtils::launchAppPermissionSettings();
@@ -218,40 +212,9 @@ void InvocationUtils::launchAudio(QString const& uri)
 }
 
 
-QVariantMap InvocationUtils::parseArgs(QString const& requestUri)
-{
-	QStringList args = requestUri.split("&");
-	QVariantMap argMap;
-
-	for (int i = args.size()-1; i >= 0; i--)
-	{
-		QStringList token = args[i].split("=");
-
-		if ( token.size() > 1 ) {
-			argMap[ token.first() ] = token.last();
-		}
-	}
-
-	return argMap;
+bool InvocationUtils::hasEmailSmsAccess() {
+    return QFile("/var/db/text_messaging/messages.db").exists();
 }
 
-
-QString InvocationUtils::encodeArgs(QVariantMap const& map)
-{
-	QString result;
-	QStringList keys = map.keys();
-
-	for (int i = keys.size()-1; i >= 0; i--)
-	{
-		QString key = keys[i];
-		result += key+"="+map.value(key).toString();
-
-		if (i > 0) {
-			result += "&";
-		}
-	}
-
-	return result;
-}
 
 } /* namespace canadainc */

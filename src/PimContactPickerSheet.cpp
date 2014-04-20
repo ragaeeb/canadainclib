@@ -1,9 +1,12 @@
-#include "Logger.h"
 #include "PimContactPickerSheet.h"
+#include "PimUtil.h"
+#include "Logger.h"
 
 #include <bb/pim/contacts/ContactService>
 
 #include <bb/cascades/pickers/ContactPicker>
+
+#include <QtConcurrentRun>
 
 using namespace bb::pim::contacts;
 
@@ -26,14 +29,48 @@ QVariantList populateAttributes(QList<ContactAttribute> const& source, QString c
 	return numbersResult;
 }
 
+QVariantList renderContacts(QList<int> const& ids)
+{
+    LOGGER("Rendering" << ids);
+    ContactService cs;
+    QVariantList all;
+
+    for (int i = ids.size()-1; i >= 0; i--)
+    {
+        Contact contact = cs.contactDetails(ids[i]);
+
+        QVariantMap result;
+        result["displayName"] = contact.displayName();
+
+        if ( !contact.smallPhotoFilepath().isEmpty() ) {
+            result["smallPhotoPath"] = contact.smallPhotoFilepath();
+        }
+
+        QVariantList mediums;
+        mediums.append( populateAttributes( contact.phoneNumbers(), "phone" ) );
+        mediums.append( populateAttributes( contact.phoneNumbers(), "sms" ) );
+        mediums.append( populateAttributes( contact.emails(), "email" ) );
+
+        result["mediums"] = mediums;
+
+        all << result;
+    }
+
+    LOGGER("Rendered" << all);
+
+    return all;
+}
+
 }
 
 namespace canadainc {
 
 using namespace bb::cascades::pickers;
 
-PimContactPickerSheet::PimContactPickerSheet(QObject* parent) : QObject(parent), m_picker(NULL), m_filterMobile(true)
+PimContactPickerSheet::PimContactPickerSheet(QObject* parent) :
+        QObject(parent), m_mode(ContactSelectionMode::Single)
 {
+    connect( &m_future, SIGNAL( finished() ), this, SLOT( onRenderComplete() ) );
 }
 
 
@@ -44,58 +81,56 @@ PimContactPickerSheet::~PimContactPickerSheet()
 
 void PimContactPickerSheet::open()
 {
-	if (m_picker == NULL)
-	{
-		m_picker = new ContactPicker(this);
-		connect( m_picker, SIGNAL( contactSelected(int) ), this, SLOT( onContactSelected(int) ) );
-		connect( m_picker, SIGNAL( canceled() ), this, SIGNAL( canceled() ) );
+    PimUtil::validateContactsAccess( tr("Warning: It seems like the app does not have access to your contacts. If you leave this permission off, some features may not work properly. Select OK to launch the Application Permissions screen where you can turn these settings on.") );
 
-		if (m_filterMobile)
-		{
-			QSet<AttributeKind::Type> filters;
-			filters << AttributeKind::Phone;
-			KindSubKindSpecifier mobileFilter(AttributeKind::Phone, AttributeSubKind::PhoneMobile);
-			QSet<KindSubKindSpecifier> subkindFilters;
-			subkindFilters << mobileFilter;
-			m_picker->setSubKindFilters(subkindFilters);
-			m_picker->setKindFilters(filters);
-		}
-	}
+    ContactPicker* picker = new ContactPicker(this);
+    picker->setMode(m_mode);
+    connect( picker, SIGNAL( contactSelected(int) ), this, SLOT( contactSelected(int) ) );
+    connect( picker, SIGNAL( contactsSelected(const QList<int> &) ), this, SLOT( contactsSelected(QList<int> const&) ) );
+    connect( picker, SIGNAL( canceled() ), this, SLOT( canceled() ) );
 
-	m_picker->open();
+	picker->open();
 }
 
 
-bool PimContactPickerSheet::filterMobile() const {
-	return m_filterMobile;
-}
-
-
-void PimContactPickerSheet::setFilterMobile(bool filter) {
-	m_filterMobile = filter;
-}
-
-void PimContactPickerSheet::onContactSelected(int id)
+void PimContactPickerSheet::contactsSelected(QList<int> const& contactIds)
 {
-	LOGGER("onContactSelected()" << id);
+    LOGGER(contactIds);
+    QFuture<QVariantList> future = QtConcurrent::run(renderContacts, contactIds);
+    m_future.setFuture(future);
 
-	Contact contact = ContactService().contactDetails(id);
+    sender()->deleteLater();
+}
 
-	QVariantMap result;
-	result["displayName"] = contact.displayName();
 
-	if ( !contact.smallPhotoFilepath().isEmpty() ) {
-		result["smallPhotoPath"] = contact.smallPhotoFilepath();
-	}
+void PimContactPickerSheet::contactSelected(int id) {
+	contactsSelected(QList<int>() << id);
+}
 
-	QVariantList mediums;
-	mediums.append( populateAttributes( contact.phoneNumbers(), "phone" ) );
-	mediums.append( populateAttributes( contact.phoneNumbers(), "sms" ) );
-	mediums.append( populateAttributes( contact.emails(), "email" ) );
 
-	result["mediums"] = mediums;
+void PimContactPickerSheet::canceled()
+{
+    sender()->deleteLater();
+    emit finished( QVariantList() );
+}
 
-	emit contactSelected(result);
+
+void PimContactPickerSheet::onRenderComplete()
+{
+    QVariantList result = m_future.result();
+    LOGGER("Render completed" << result);
+
+    emit finished(result);
+}
+
+
+ContactSelectionMode::Type PimContactPickerSheet::mode() const {
+    return m_mode;
+}
+
+
+void PimContactPickerSheet::setMode(ContactSelectionMode::Type mode) {
+    m_mode = mode;
 }
 
 }

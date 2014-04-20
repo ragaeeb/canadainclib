@@ -50,9 +50,8 @@
 <context>
     <name>canadainc::InvocationUtils</name>
     <message>
-        <location filename="../src/InvocationUtils.cpp" line="44"/>
-        <location filename="../src/InvocationUtils.cpp" line="62"/>
-        <location filename="../src/InvocationUtils.cpp" line="81"/>
+        <location filename="../src/InvocationUtils.cpp" line="56"/>
+        <location filename="../src/InvocationUtils.cpp" line="75"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
@@ -68,8 +67,16 @@
 <context>
     <name>canadainc::Persistance</name>
     <message>
-        <location filename="../src/Persistance.cpp" line="65"/>
+        <location filename="../src/Persistance.cpp" line="70"/>
         <source>Copied: %1 to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>canadainc::PimContactPickerSheet</name>
+    <message>
+        <location filename="../src/PimContactPickerSheet.cpp" line="84"/>
+        <source>Warning: It seems like the app does not have access to your contacts. If you leave this permission off, some features may not work properly. Select OK to launch the Application Permissions screen where you can turn these settings on.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -78,11 +85,12 @@
     <message>
         <location filename="../src/PimUtil.cpp" line="112"/>
         <location filename="../src/PimUtil.cpp" line="131"/>
+        <location filename="../src/PimUtil.cpp" line="147"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PimUtil.cpp" line="157"/>
+        <location filename="../src/PimUtil.cpp" line="175"/>
         <source>RE: %1</source>
         <translation type="unfinished"></translation>
     </message>

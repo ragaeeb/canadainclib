@@ -1,16 +1,10 @@
 #ifndef PIMCONTACTPICKERSHEET_H_
 #define PIMCONTACTPICKERSHEET_H_
 
-#include <QObject>
+#include <QFutureWatcher>
 #include <QVariant>
 
-namespace bb {
-	namespace cascades {
-		namespace pickers {
-			class ContactPicker;
-		}
-	}
-}
+#include <bb/cascades/pickers/ContactSelectionMode>
 
 namespace canadainc {
 
@@ -19,25 +13,27 @@ using namespace bb::cascades::pickers;
 class PimContactPickerSheet : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(bool filterMobile READ filterMobile WRITE setFilterMobile FINAL)
+    Q_PROPERTY(bb::cascades::pickers::ContactSelectionMode::Type mode READ mode WRITE setMode FINAL)
 
-    ContactPicker* m_picker;
-    bool m_filterMobile;
+    ContactSelectionMode::Type m_mode;
+    QFutureWatcher<QVariantList> m_future;
 
 public:
     PimContactPickerSheet(QObject* parent=NULL);
     virtual ~PimContactPickerSheet();
 
     Q_INVOKABLE void open();
-    bool filterMobile() const;
-    void setFilterMobile(bool filter);
+    bb::cascades::pickers::ContactSelectionMode::Type mode() const;
+    Q_SLOT void setMode(bb::cascades::pickers::ContactSelectionMode::Type mode);
 
 signals:
-	void contactSelected(QVariantMap const& result);
-	void canceled();
+	void finished(QVariantList const& result);
 
 private slots:
-	void onContactSelected(int);
+    void canceled();
+	void contactSelected(int);
+	void contactsSelected(QList<int> const& contactIds);
+	void onRenderComplete();
 };
 
 } /* namespace canadainc */
