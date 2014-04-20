@@ -28,14 +28,17 @@ class LazyMediaPlayer : public QObject
 	Q_PROPERTY(QSize videoDimensions READ videoDimensions)
 	Q_PROPERTY(QVariant position READ currentPosition)
 	Q_PROPERTY(QVariantMap metaData READ metaData)
+	Q_PROPERTY(bool repeat READ repeat WRITE setRepeat FINAL)
 
 	QString m_name;
 	MediaPlayer* m_mp;
 	NowPlayingConnection* m_npc;
 	QString m_videoWindowId;
+	bool m_repeat;
 
 private slots:
 	void mediaStateChanged(bb::multimedia::MediaState::Type mediaState);
+	void trackChanged(unsigned int track);
 
 signals:
     void activeChanged();
@@ -43,7 +46,8 @@ signals:
     void metaDataChanged(QVariantMap const& metaData);
     void playingChanged();
 	void positionChanged(unsigned int position);
-	void currentIndexChanged(unsigned int index);
+	void currentIndexChanged(int index);
+	void playbackCompleted();
 	void videoDimensionsChanged(const QSize &videoDimensions);
 
 public:
@@ -52,6 +56,7 @@ public:
 
 	bool playing() const;
 	bool active() const;
+	bool repeat() const;
 	QVariantMap metaData() const;
 	int currentIndex() const;
 	int count() const;
@@ -67,6 +72,7 @@ public:
 	Q_SLOT void pause();
 	Q_INVOKABLE QString videoWindowId();
 	MediaPlayer* mediaPlayer();
+	void setRepeat(bool value);
 
 	Q_INVOKABLE void setVideoWindowId(QString const& windowId);
 	Q_SLOT void toggleVideo();

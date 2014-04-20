@@ -9,7 +9,7 @@ namespace canadainc {
 using namespace bb::multimedia;
 
 LazyMediaPlayer::LazyMediaPlayer(QObject* parent) :
-		QObject(parent), m_mp(NULL), m_npc(NULL)
+		QObject(parent), m_mp(NULL), m_npc(NULL), m_repeat(false)
 {
 }
 
@@ -23,10 +23,12 @@ void LazyMediaPlayer::play(QUrl const& uri)
 {
 	LOGGER("Play" << uri);
 
-	if (m_npc == NULL) {
-		LOGGER("Creating MediaPlayer for first time");
+	if (m_npc == NULL)
+	{
 		m_mp = new MediaPlayer(this);
 		m_npc = new NowPlayingConnection(m_name, this);
+
+		setRepeat(m_repeat);
 
 		connect( m_npc, SIGNAL( pause() ), m_mp, SLOT( pause() ) );
 		connect( m_npc, SIGNAL( acquired() ), m_mp, SLOT( play() ) );
@@ -37,7 +39,7 @@ void LazyMediaPlayer::play(QUrl const& uri)
 		connect( m_mp, SIGNAL( metaDataChanged(QVariantMap const&) ), this, SIGNAL( metaDataChanged(QVariantMap const&) ) );
 		connect( m_mp, SIGNAL( playbackCompleted() ), this, SIGNAL( playbackCompleted() ) );
         connect( m_mp, SIGNAL( positionChanged(unsigned int) ), this, SIGNAL( positionChanged(unsigned int) ) );
-        connect( m_mp, SIGNAL( trackChanged(unsigned int) ), this, SIGNAL( currentIndexChanged(QVariant const&) ) );
+        connect( m_mp, SIGNAL( trackChanged(unsigned int) ), this, SLOT( trackChanged(unsigned int) ) );
 		connect( m_mp, SIGNAL( videoDimensionsChanged(QSize const&) ), this, SIGNAL( videoDimensionsChanged(QSize const&) ) );
 
 		if ( !m_videoWindowId.isNull() ) {
@@ -51,18 +53,24 @@ void LazyMediaPlayer::play(QUrl const& uri)
 	m_mp->setSourceUrl(uri);
 
     if ( m_npc->isAcquired() ) {
-        LOGGER("Already acquired, playing!");
         m_mp->play();
     } else {
-        LOGGER("Acquiring NPC!");
         m_npc->acquire();
     }
+}
+
+
+void LazyMediaPlayer::trackChanged(unsigned int track)
+{
+    int converted = track-1;
+    emit currentIndexChanged(converted);
 }
 
 
 void LazyMediaPlayer::mediaStateChanged(bb::multimedia::MediaState::Type mediaState)
 {
     if (mediaState == MediaState::Started) {
+        trackChanged( m_mp->track() );
         emit activeChanged();
     }
 
@@ -72,8 +80,6 @@ void LazyMediaPlayer::mediaStateChanged(bb::multimedia::MediaState::Type mediaSt
 
 void LazyMediaPlayer::skip(int n)
 {
-	LOGGER("============ SKIP" << n);
-
 	if (!m_mp) {
 	    return;
 	}
@@ -81,10 +87,8 @@ void LazyMediaPlayer::skip(int n)
 	m_mp->seekTrack( m_mp->track() + n );
 
     if ( m_npc->isAcquired() ) {
-        LOGGER("Already acquired, playing!");
         m_mp->play();
     } else {
-        LOGGER("Acquiring NPC!");
         m_npc->acquire();
     }
 }
@@ -165,7 +169,7 @@ bool LazyMediaPlayer::active() const {
 
 
 int LazyMediaPlayer::currentIndex() const {
-	return m_mp ? m_mp->track() : 0;
+	return m_mp ? m_mp->track()-1 : 0;
 }
 
 
@@ -191,6 +195,21 @@ void LazyMediaPlayer::togglePlayback()
 	} else if (m_mp) {
 		m_mp->play();
 	}
+}
+
+
+bool LazyMediaPlayer::repeat() const {
+    return m_repeat;
+}
+
+
+void LazyMediaPlayer::setRepeat(bool value)
+{
+    m_repeat = value;
+
+    if (m_mp) {
+        m_mp->setRepeatMode(value ? RepeatMode::All : RepeatMode::None);
+    }
 }
 
 
