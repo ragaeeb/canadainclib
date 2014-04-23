@@ -4,13 +4,18 @@
 #include <bb/multimedia/MediaPlayer>
 #include <bb/multimedia/NowPlayingConnection>
 
+#include <bb/cascades/QmlDocument>
+
 namespace canadainc {
 
+    using namespace bb::cascades;
 using namespace bb::multimedia;
 
 LazyMediaPlayer::LazyMediaPlayer(QObject* parent) :
 		QObject(parent), m_mp(NULL), m_npc(NULL), m_repeat(false)
 {
+    QDeclarativeContext* rootContext = QmlDocument::defaultDeclarativeEngine()->rootContext();
+    rootContext->setContextProperty("player", this);
 }
 
 

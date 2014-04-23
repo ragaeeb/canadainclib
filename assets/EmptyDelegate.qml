@@ -24,6 +24,7 @@ ControlDelegate
                 verticalAlignment: VerticalAlignment.Center
                 imageSource: graphic
                 scalingMethod: ScalingMethod.AspectFit
+                loadEffect: ImageViewLoadEffect.FadeZoom
                 
                 gestureHandlers: [
                     TapHandler {
