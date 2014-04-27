@@ -7,9 +7,6 @@
 class QNetworkAccessManager;
 class QNetworkReply;
 
-#define START_LOGGING_KEY "startLogging"
-#define STOP_LOGGING_KEY "stopLogging"
-
 namespace bb {
     namespace system {
         class SystemProgressToast;
@@ -17,6 +14,10 @@ namespace bb {
 }
 
 #define DEVICE_INFO_LOG QString("%1/deviceInfo.txt").arg( QDir::tempPath() )
+#define START_LOGGING_KEY "startLogging"
+#define STOP_LOGGING_KEY "stopLogging"
+#define UI_KEY "logUI"
+#define UI_LOG_FILE QString("%1/logs/ui.log").arg( QDir::currentPath() )
 #define ZIP_FILE_PATH QString("%1/logs.zip").arg( QDir::tempPath() )
 
 namespace canadainc {

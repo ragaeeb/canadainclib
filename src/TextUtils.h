@@ -26,6 +26,8 @@ public:
      * @return 15:12:04
      */
     Q_INVOKABLE static QString formatTime(unsigned int duration);
+
+    Q_INVOKABLE static QString sanitize(QString const& original);
 };
 
 } /* namespace canadainc */

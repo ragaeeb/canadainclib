@@ -1,7 +1,26 @@
 #include "TextUtils.h"
 
 #include <QRegExp>
+
 #include <math.h>
+#include <stdint.h>
+#include <sys/types.h>
+
+namespace {
+
+/*
+*  Refer to Microsoft Knowledge Base Q120138; valid SFN
+*  characters are: A-Z 0-9 $ % ' ` - @ { } ~ ! # ( ) & _ ^
+*  Embedded spaces and a single . are also allowed.
+*/
+const uint8_t sfn_chars[] = {
+    0x00, 0x00, 0x00, 0x00, 0xFB, 0x23, 0xFF, 0x03,
+    0xFF, 0xFF, 0xFF, 0xC7, 0xFF, 0xFF, 0xFF, 0x6F,
+    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF
+};
+
+}
 
 namespace canadainc {
 
@@ -36,6 +55,27 @@ QString TextUtils::formatTime(unsigned int duration)
 	QString hours = hrs > 0 ? QString("%1:").arg(hrs) : "";
 
 	return tr("%1%2:%3").arg(hours).arg(minutes).arg(seconds);
+}
+
+
+QString TextUtils::sanitize(QString const& original)
+{
+    QString result;
+
+    for (int i = original.length()-1; i >= 0; i--)
+    {
+        QChar c = original.at(i);
+        uchar_t mychar = c.toAscii();
+        bool valid = sfn_chars[mychar/8] & ( 1 << (mychar % 8) );
+
+        if (valid) {
+            result.append(c);
+        } else {
+            result.append("_");
+        }
+    }
+
+    return result;
 }
 
 

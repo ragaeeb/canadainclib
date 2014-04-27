@@ -27,8 +27,85 @@ Page
         browserAction.query.updateQuery();
     }
     
-    titleBar: TitleBar {
-        title: qsTr("Bug Report") + Retranslate.onLanguageChanged
+    titleBar: TitleBar
+    {
+        kind: TitleBarKind.FreeForm
+        scrollBehavior: TitleBarScrollBehavior.NonSticky
+        kindProperties: FreeFormTitleBarKindProperties
+        {
+            Container
+            {
+                leftPadding: 10; rightPadding: 10;
+                
+                layout: StackLayout {
+                    orientation: LayoutOrientation.LeftToRight
+                }
+                
+                Label {
+                    text: qsTr("UI Logging") + Retranslate.onLanguageChanged
+                    verticalAlignment: VerticalAlignment.Center
+                    textStyle.color: Color.White
+                    
+                    layoutProperties: StackLayoutProperties {
+                        spaceQuota: 1
+                    }
+                }
+                
+                ToggleButton
+                {
+                    verticalAlignment: VerticalAlignment.Center
+                    checked: persist.getValueFor("logUI")
+                    
+                    onCheckedChanged: {
+                        persist.saveValueFor("logUI", checked);
+                    }
+                }
+            }
+            
+            expandableArea
+            {
+                expanded: true
+                indicatorVisibility: showServiceLogging ? TitleBarExpandableAreaIndicatorVisibility.Visible : TitleBarExpandableAreaIndicatorVisibility.Hidden
+                
+                content: ControlDelegate
+                {
+                    delegateActive: showServiceLogging
+                    
+                    sourceComponent: ComponentDefinition
+                    {
+                        Container
+                        {
+                            background: Color.Black
+                            leftPadding: 10; rightPadding: 80; bottomPadding: 10
+                            
+                            layout: StackLayout {
+                                orientation: LayoutOrientation.LeftToRight
+                            }
+                            
+                            Label {
+                                text: qsTr("Service Logging") + Retranslate.onLanguageChanged
+                                verticalAlignment: VerticalAlignment.Center
+                                textStyle.color: Color.White
+                                
+                                layoutProperties: StackLayoutProperties {
+                                    spaceQuota: 1
+                                }
+                            }
+                            
+                            ToggleButton
+                            {
+                                verticalAlignment: VerticalAlignment.Center
+                                checked: persist.getValueFor("logService")
+                                
+                                onCheckedChanged: {
+                                    persist.saveValueFor("logService", checked);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
     actions: [
@@ -44,6 +121,33 @@ Page
             }
             
             title: qsTr("Open in Browser") + Retranslate.onLanguageChanged
+        },
+        
+        ActionItem
+        {
+            id: submitLogs
+            ActionBar.placement: ActionBarPlacement.OnBar
+            title: qsTr("Submit Logs") + Retranslate.onLanguageChanged
+            imageSource: "images/ic_bugs.png"
+            
+            onTriggered: {
+                enabled = false;
+                console.log("UserEvent: SubmitLogs");
+                reporter.submitLogs();
+            }
+            
+            function onSubmitted(message) {
+                persist.showBlockingToast( message, qsTr("OK"), "asset:///images/ic_bugs.png" );
+                enabled = true;
+            }
+            
+            onCreationCompleted: {
+                reporter.submitted.connect(onSubmitted);
+                
+                if (!showSubmitLogs) {
+                    root.removeAction(submitLogs);
+                }
+            }
         }
     ]
     
@@ -103,71 +207,4 @@ Page
 	        topMargin: 0; bottomMargin: 0; leftMargin: 0; rightMargin: 0;
 	    }
 	}
-	
-	attachedObjects: [
-        ActionItem
-        {
-            id: submitLogs
-            title: qsTr("Submit Logs") + Retranslate.onLanguageChanged
-            imageSource: "images/ic_bugs.png"
-            
-            onTriggered: {
-                enabled = false;
-                console.log("UserEvent: SubmitLogs");
-                reporter.submitLogs();
-            }
-            
-            function onSubmitted(message) {
-                persist.showBlockingToast( message, qsTr("OK"), "asset:///images/ic_bugs.png" );
-                enabled = true;
-            }
-            
-            onCreationCompleted: {
-                reporter.submitted.connect(onSubmitted);
-            }
-        },
-        
-        ComponentDefinition
-        {
-            id: serviceTitle
-            
-            TitleBar
-            {
-                kind: TitleBarKind.FreeForm
-                scrollBehavior: TitleBarScrollBehavior.NonSticky
-                kindProperties: FreeFormTitleBarKindProperties
-                {
-                    Container
-                    {
-                        leftPadding: 10; rightPadding: 10; topPadding: 10
-                        
-                        layout: StackLayout {
-                            orientation: LayoutOrientation.LeftToRight
-                        }
-                        
-                        Label {
-                            text: qsTr("Service Logging") + Retranslate.onLanguageChanged
-                            verticalAlignment: VerticalAlignment.Center
-                            textStyle.color: Color.White
-                            
-                            layoutProperties: StackLayoutProperties {
-                                spaceQuota: 1
-                            }
-                        }
-                        
-                        ToggleButton
-                        {
-                            verticalAlignment: VerticalAlignment.Center
-                            checked: persist.getValueFor("logService")
-                            
-                            onCheckedChanged: {
-                                console.log( "logSErvice", new Date() );
-                                persist.saveValueFor("logService", checked);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-	]
 }

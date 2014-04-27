@@ -98,7 +98,7 @@
 <context>
     <name>canadainc::TextUtils</name>
     <message>
-        <location filename="../src/TextUtils.cpp" line="38"/>
+        <location filename="../src/TextUtils.cpp" line="57"/>
         <source>%1%2:%3</source>
         <translation type="unfinished"></translation>
     </message>
