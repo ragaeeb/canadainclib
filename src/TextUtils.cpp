@@ -62,7 +62,7 @@ QString TextUtils::sanitize(QString const& original)
 {
     QString result;
 
-    for (int i = original.length()-1; i >= 0; i--)
+    for (int i = 0; i < original.length(); i++)
     {
         QChar c = original.at(i);
         uchar_t mychar = c.toAscii();

@@ -44,6 +44,7 @@ public:
     Q_INVOKABLE void clear();
     Q_INVOKABLE void copyToClipboard(QString const& text, bool showToastMessage=true);
     Q_INVOKABLE void showToast(QString const& text, QString const& buttonLabel=QString(), QString const& icon=QString());
+    Q_INVOKABLE bool tutorial(QString const& key, QString const& message, QString const& icon);
 
     /**
      * @param return <code>true</code> if the user selected the button to dismiss the toast, <code>false</code> otherwise.

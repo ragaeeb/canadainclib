@@ -71,6 +71,11 @@
         <source>Copied: %1 to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../src/Persistance.cpp" line="131"/>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>canadainc::PimContactPickerSheet</name>

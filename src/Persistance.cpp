@@ -125,6 +125,19 @@ void Persistance::remove(QString const& key)
 }
 
 
+bool Persistance::tutorial(QString const& key, QString const& message, QString const& icon)
+{
+    if ( !contains(key) ) {
+        showToast( message, tr("OK"), icon );
+        saveValueFor(key, 1);
+
+        return true;
+    }
+
+    return false;
+}
+
+
 void Persistance::clear() {
 	m_settings.clear();
 }

@@ -53,6 +53,7 @@ Page
                 
                 ToggleButton
                 {
+                    id: logUiToggle
                     verticalAlignment: VerticalAlignment.Center
                     checked: persist.getValueFor("logUI")
                     
@@ -129,6 +130,7 @@ Page
             ActionBar.placement: ActionBarPlacement.OnBar
             title: qsTr("Submit Logs") + Retranslate.onLanguageChanged
             imageSource: "images/ic_bugs.png"
+            enabled: logUiToggle.checked
             
             onTriggered: {
                 enabled = false;
