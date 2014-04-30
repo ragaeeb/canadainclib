@@ -5,6 +5,7 @@
 #include <bb/cascades/QmlDocument>
 
 #include "Persistance.h"
+#include "InvocationUtils.h"
 #include "Logger.h"
 
 namespace canadainc {
@@ -97,13 +98,17 @@ bool Persistance::contains(QString const& key) {
 }
 
 
-bool Persistance::saveValueFor(const QString &objectName, const QVariant &inputValue)
+bool Persistance::saveValueFor(const QString &objectName, const QVariant &inputValue, bool fireEvent)
 {
 	LOGGER("saveValueFor: " << objectName << inputValue);
 
 	if ( m_settings.value(objectName) != inputValue ) {
 		m_settings.setValue(objectName, inputValue);
-		emit settingChanged(objectName);
+
+		if (fireEvent) {
+	        emit settingChanged(objectName);
+		}
+
 		return true;
 	} else {
 		LOGGER("Duplicate value, ignoring");
@@ -112,26 +117,46 @@ bool Persistance::saveValueFor(const QString &objectName, const QVariant &inputV
 }
 
 
-void Persistance::remove(QString const& key)
+void Persistance::remove(QString const& key, bool fireEvent)
 {
 	LOGGER("remove key: " << key);
 
-	if ( contains(key) ) {
-		LOGGER("contains key: " << key);
+	if ( contains(key) )
+	{
 		m_settings.remove(key);
-		LOGGER("removed");
-		emit settingChanged(key);
+
+		if (fireEvent) {
+	        emit settingChanged(key);
+		}
 	}
 }
 
 
 bool Persistance::tutorial(QString const& key, QString const& message, QString const& icon)
 {
-    if ( !contains(key) ) {
+    if ( !contains(key) )
+    {
         showToast( message, tr("OK"), icon );
-        saveValueFor(key, 1);
+        saveValueFor(key, 1, false);
 
         return true;
+    }
+
+    return false;
+}
+
+
+bool Persistance::tutorialVideo(QString const& uri, QString const& key, QString const& message)
+{
+    if ( !contains(key) )
+    {
+        bool result = showBlockingDialog( tr("Tutorial"), message, tr("Yes"), tr("No") );
+
+        if (result) {
+            InvocationUtils::launchBrowser(uri);
+        }
+
+        saveValueFor(key, 1, false);
     }
 
     return false;

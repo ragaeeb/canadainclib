@@ -198,6 +198,19 @@ void InvocationUtils::launchDoc(QString const& uri, InvokeManager& invokeManager
 }
 
 
+void InvocationUtils::launchBrowser(QString const& uri)
+{
+    bb::system::InvokeManager invoker;
+
+    bb::system::InvokeRequest request;
+    request.setTarget("sys.browser");
+    request.setAction("bb.action.OPEN");
+    request.setUri(uri);
+
+    invoker.invoke(request);
+}
+
+
 void InvocationUtils::launchAudio(QString const& uri)
 {
 	bb::system::InvokeManager invokeManager;

@@ -35,6 +35,7 @@ class LazyMediaPlayer : public QObject
 	NowPlayingConnection* m_npc;
 	QString m_videoWindowId;
 	bool m_repeat;
+	bool m_fastShutDown;
 
 private slots:
 	void mediaStateChanged(bb::multimedia::MediaState::Type mediaState);
@@ -51,7 +52,7 @@ signals:
 	void videoDimensionsChanged(const QSize &videoDimensions);
 
 public:
-	LazyMediaPlayer(QObject* parent=NULL);
+	LazyMediaPlayer(bool fastShutDown=true, QObject* parent=NULL);
 	virtual ~LazyMediaPlayer();
 
 	bool playing() const;

@@ -22,6 +22,7 @@ public:
     Q_INVOKABLE static void launchBBM();
     Q_INVOKABLE static void launchBBMCall(QString const& pin, bool videoEnabled=true);
     static void launchBBMChat(QString const& pin, InvokeManager& invokeManager);
+    static void launchBrowser(QString const& uri);
     static void launchDoc(QString const& uri, InvokeManager& invokeManager);
     static void launchEmailComposer(QString const& address, InvokeManager& invokeManager);
     Q_INVOKABLE static void launchLocationServices();

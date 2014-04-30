@@ -5,6 +5,9 @@
 
 #include <bb/system/SystemUiResult>
 
+#define INIT_SETTING(a,b) if ( !m_persistance.contains(a) ) m_persistance.saveValueFor(a,b,false);
+#define INIT_FRESH(a) if ( !m_persistance.contains(a) ) {m_persistance.clear(); m_persistance.saveValueFor(a, true, false);}
+
 namespace bb {
 	namespace system {
 		class SystemToast;
@@ -12,9 +15,6 @@ namespace bb {
 }
 
 namespace canadainc {
-
-#define INIT_SETTING(a,b) if ( !m_persistance.contains(a) ) m_persistance.saveValueFor(a,b);
-#define INIT_FRESH(a) if ( !m_persistance.contains(a) ) {m_persistance.clear(); m_persistance.saveValueFor(a, true);}
 
 /**
  * @version 1.00 System toast with OK button and signal emitted.
@@ -38,13 +38,14 @@ public:
 	virtual ~Persistance();
 
     Q_INVOKABLE QVariant getValueFor(QString const& objectName);
-    Q_INVOKABLE bool saveValueFor(QString const& objectName, QVariant const& inputValue);
+    Q_INVOKABLE bool saveValueFor(QString const& objectName, QVariant const& inputValue, bool fireEvent=true);
     Q_INVOKABLE bool contains(QString const& key);
-    Q_INVOKABLE void remove(QString const& key);
+    Q_INVOKABLE void remove(QString const& key, bool fireEvent=true);
     Q_INVOKABLE void clear();
     Q_INVOKABLE void copyToClipboard(QString const& text, bool showToastMessage=true);
     Q_INVOKABLE void showToast(QString const& text, QString const& buttonLabel=QString(), QString const& icon=QString());
     Q_INVOKABLE bool tutorial(QString const& key, QString const& message, QString const& icon);
+    Q_INVOKABLE bool tutorialVideo(QString const& uri, QString const& key="tutorialVideo", QString const& message=tr("Would you like to see a video tutorial on how to use the app?"));
 
     /**
      * @param return <code>true</code> if the user selected the button to dismiss the toast, <code>false</code> otherwise.

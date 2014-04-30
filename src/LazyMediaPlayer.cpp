@@ -1,21 +1,21 @@
 #include "LazyMediaPlayer.h"
 #include "Logger.h"
 
+#include <bb/Application>
+
 #include <bb/multimedia/MediaPlayer>
 #include <bb/multimedia/NowPlayingConnection>
 
-#include <bb/cascades/QmlDocument>
-
 namespace canadainc {
 
-    using namespace bb::cascades;
 using namespace bb::multimedia;
 
-LazyMediaPlayer::LazyMediaPlayer(QObject* parent) :
-		QObject(parent), m_mp(NULL), m_npc(NULL), m_repeat(false)
+LazyMediaPlayer::LazyMediaPlayer(bool fastShutdown, QObject* parent) :
+		QObject(parent), m_mp(NULL), m_npc(NULL), m_repeat(false), m_fastShutDown(true)
 {
-    QDeclarativeContext* rootContext = QmlDocument::defaultDeclarativeEngine()->rootContext();
-    rootContext->setContextProperty("player", this);
+    if (m_fastShutDown) {
+        connect( bb::Application::instance(), SIGNAL( aboutToQuit() ), this, SLOT( pause() ) );
+    }
 }
 
 
@@ -30,8 +30,9 @@ void LazyMediaPlayer::play(QUrl const& uri)
 
 	if (m_npc == NULL)
 	{
-		m_mp = new MediaPlayer(this);
-		m_npc = new NowPlayingConnection(m_name, this);
+	    QObject* parent = m_fastShutDown ? NULL : this;
+		m_mp = new MediaPlayer(parent);
+		m_npc = new NowPlayingConnection(m_name, parent);
 
 		setRepeat(m_repeat);
 
