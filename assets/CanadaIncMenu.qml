@@ -6,7 +6,6 @@ MenuDefinition
     property alias settings: settingsActionItem
     property alias help: helpActionItem
     property bool allowDonations: false
-    property bool promoteChannel: false
     property string bbWorldID
     property bool showServiceLogging: false
     property bool showSubmitLogs: false
@@ -158,9 +157,9 @@ MenuDefinition
             }
             
             onArmed: {
-                if ( promoteChannel && !persist.contains("promoted") ) {
+                if ( !persist.contains("promoted") ) {
                     trigger("bb.action.OPENBBMCHANNEL");
-                    persist.saveValueFor("promoted", 1);
+                    persist.saveValueFor("promoted", 1, false);
                 }
             }
         }

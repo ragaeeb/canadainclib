@@ -7,12 +7,6 @@ Page
     property bool showServiceLogging: false
     property bool showSubmitLogs: false
     
-    onShowServiceLoggingChanged: {
-        if (showServiceLogging) {
-            root.titleBar = serviceTitle.createObject();
-        }
-    }
-    
     onShowSubmitLogsChanged: {
         if (showSubmitLogs) {
             root.addAction(submitLogs);
@@ -58,7 +52,7 @@ Page
                     checked: persist.getValueFor("logUI")
                     
                     onCheckedChanged: {
-                        persist.saveValueFor("logUI", checked);
+                        persist.saveValueFor("logUI", checked, false);
                     }
                 }
             }
@@ -99,7 +93,7 @@ Page
                                 checked: persist.getValueFor("logService")
                                 
                                 onCheckedChanged: {
-                                    persist.saveValueFor("logService", checked);
+                                    persist.saveValueFor("logService", checked, false);
                                 }
                             }
                         }

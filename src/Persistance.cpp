@@ -68,7 +68,7 @@ void Persistance::copyToClipboard(QString const& text, bool showToastMessage)
 	clipboard.insert( "text/plain", convertToUtf8(text) );
 
 	if (showToastMessage) {
-		showToast( tr("Copied: %1 to clipboard").arg(text) );
+		showToast( tr("Copied: %1 to clipboard").arg(text), "", "asset:///images/menu/ic_copy.png" );
 	}
 }
 

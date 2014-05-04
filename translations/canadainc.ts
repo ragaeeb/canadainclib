@@ -83,11 +83,13 @@
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="153"/>
+        <location filename="../src/Persistance.h" line="54"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="153"/>
+        <location filename="../src/Persistance.h" line="54"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>

@@ -10,12 +10,9 @@ namespace canadainc {
 
 using namespace bb::multimedia;
 
-LazyMediaPlayer::LazyMediaPlayer(bool fastShutdown, QObject* parent) :
-		QObject(parent), m_mp(NULL), m_npc(NULL), m_repeat(false), m_fastShutDown(true)
+LazyMediaPlayer::LazyMediaPlayer(QObject* parent) : QObject(parent), m_mp(NULL), m_npc(NULL), m_repeat(false)
 {
-    if (m_fastShutDown) {
-        connect( bb::Application::instance(), SIGNAL( aboutToQuit() ), this, SLOT( pause() ) );
-    }
+    connect( bb::Application::instance(), SIGNAL( aboutToQuit() ), this, SLOT( pause() ) );
 }
 
 
@@ -30,9 +27,8 @@ void LazyMediaPlayer::play(QUrl const& uri)
 
 	if (m_npc == NULL)
 	{
-	    QObject* parent = m_fastShutDown ? NULL : this;
-		m_mp = new MediaPlayer(parent);
-		m_npc = new NowPlayingConnection(m_name, parent);
+		m_mp = new MediaPlayer(this);
+		m_npc = new NowPlayingConnection(m_name, this);
 
 		setRepeat(m_repeat);
 
@@ -211,10 +207,15 @@ bool LazyMediaPlayer::repeat() const {
 
 void LazyMediaPlayer::setRepeat(bool value)
 {
+    bool changed = m_repeat != value;
     m_repeat = value;
 
     if (m_mp) {
         m_mp->setRepeatMode(value ? RepeatMode::All : RepeatMode::None);
+    }
+
+    if (changed) {
+        emit repeatChanged();
     }
 }
 

@@ -5,7 +5,7 @@ ActionSet {
     
     ActionItem {
         title: qsTr("Copy") + Retranslate.onLanguageChanged
-        imageSource: "images/ic_copy.png"
+        imageSource: "images/menu/ic_copy.png"
         onTriggered: {
             console.log("UserEvent: PlainTextAction Copy");
             parent.parent.ListItem.view.copyItem(ListItemData)

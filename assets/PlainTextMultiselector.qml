@@ -8,7 +8,7 @@ QtObject
     {
         title: qsTr("Copy") + Retranslate.onLanguageChanged
         enabled: false
-        imageSource: "images/ic_copy.png"
+        imageSource: "images/menu/ic_copy.png"
         
         onTriggered: {
             console.log("UserEvent: PlainTextMulti Copy");
