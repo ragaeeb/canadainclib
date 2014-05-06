@@ -1,13 +1,24 @@
 #include "InvocationUtils.h"
 #include "Logger.h"
-#include "Persistance.h"
 
-#include <bb/cascades/QmlDocument>
+#include <bb/system/SystemToast>
+
+namespace {
+
+void showBlockingToast(QString const& text, QString const& buttonLabel, QString const& icon)
+{
+    bb::system::SystemToast toast;
+    toast.button()->setLabel(buttonLabel);
+    toast.setBody(text);
+    toast.setIcon(icon);
+}
+
+}
 
 namespace canadainc {
 
-InvocationUtils::InvocationUtils(QObject* parent) : QObject(parent) {
-    bb::cascades::QmlDocument::defaultDeclarativeEngine()->rootContext()->setContextProperty("invoke", this);
+InvocationUtils::InvocationUtils(QObject* parent) : QObject(parent)
+{
 }
 
 
@@ -53,7 +64,7 @@ bool InvocationUtils::validateSharedFolderAccess(QString const& message, bool la
 	if ( !QDir(sdDirectory).exists() )
 	{
 		LOGGER(sdDirectory << "Did not exist!");
-		Persistance::showBlockingToast( message, tr("OK"), "asset:///images/ic_folder_warning.png" );
+		showBlockingToast( message, tr("OK"), "file:///usr/share/icons/bb_action_saveas.png" );
 
 		if (launchAppPermissions) {
 			InvocationUtils::launchAppPermissionSettings();
@@ -72,7 +83,7 @@ bool InvocationUtils::validateLocationAccess(QString const& message, bool launch
 
 	if ( !target.open(QIODevice::ReadOnly) )
 	{
-		Persistance::showBlockingToast( message, tr("OK"), "asset:///images/ic_location_failed.png" );
+		showBlockingToast( message, tr("OK"), "file:///usr/share/icons/ic_map_all.png" );
 
 		if (launchAppPermissions) {
 			InvocationUtils::launchAppPermissionSettings();

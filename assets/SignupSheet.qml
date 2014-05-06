@@ -100,6 +100,10 @@ Sheet
         ]
     }
     
+    onOpened: {
+        passwordField.requestFocus();
+    }
+    
     onClosed: {
         sheet.destroy();
     }

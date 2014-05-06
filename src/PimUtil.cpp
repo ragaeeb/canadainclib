@@ -1,7 +1,6 @@
 #include "PimUtil.h"
 #include "InvocationUtils.h"
 #include "Logger.h"
-#include "Persistance.h"
 
 #include <bb/pim/calendar/CalendarService>
 #include <bb/pim/calendar/CalendarSettings>
@@ -14,6 +13,19 @@
 #include <bb/PpsObject>
 
 #include <bb/system/InvokeManager>
+#include <bb/system/SystemToast>
+
+namespace {
+
+void showBlockingToast(QString const& text, QString const& buttonLabel, QString const& icon)
+{
+    bb::system::SystemToast toast;
+    toast.button()->setLabel(buttonLabel);
+    toast.setBody(text);
+    toast.setIcon(icon);
+}
+
+}
 
 namespace canadainc {
 
@@ -109,7 +121,7 @@ bool PimUtil::validateCalendarAccess(QString const& message, bool launchAppPermi
 
 	if ( !cs.isValid() )
 	{
-		Persistance::showBlockingToast( message, tr("OK") );
+		showBlockingToast( message, tr("OK"), "file:///usr/share/icons/ic_add_event.png" );
 
 		if (launchAppPermissions) {
 			InvocationUtils::launchAppPermissionSettings();
@@ -128,7 +140,7 @@ bool PimUtil::validateContactsAccess(QString const& message, bool launchAppPermi
 	int count = cs.count( bb::pim::contacts::ContactListFilters() );
 
 	if (count == 0) {
-		Persistance::showBlockingToast( message, tr("OK") );
+		showBlockingToast( message, tr("OK"), "file:///usr/share/icons/ic_add_contact.png" );
 
 		if (launchAppPermissions) {
 			InvocationUtils::launchAppPermissionSettings();
@@ -144,7 +156,7 @@ bool PimUtil::validateEmailSMSAccess(QString const& message, bool launchAppPermi
     if ( !InvocationUtils::hasEmailSmsAccess()  )
     {
         LOGGER("messages.db did not exist!");
-        Persistance::showBlockingToast( message, tr("OK"), "asset:///images/ic_pim_warning.png" );
+        showBlockingToast( message, tr("OK"), "file:///usr/share/icons/ic_email.png" );
 
         if (launchAppPermissions) {
             InvocationUtils::launchAppPermissionSettings();
