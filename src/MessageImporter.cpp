@@ -5,9 +5,25 @@
 #include <bb/pim/message/MessageFilter>
 #include <bb/pim/message/MessageService>
 
-namespace canadainc {
-
 using namespace bb::pim::message;
+
+namespace {
+
+bool latestFirst = true;
+bool deviceTime = false;
+
+bool messageComparator(Message const& c1, Message const& c2)
+{
+    if (deviceTime) {
+        return !latestFirst ? c1.deviceTimestamp() < c2.deviceTimestamp() : c1.deviceTimestamp() > c2.deviceTimestamp();
+    } else {
+        return !latestFirst ? c1.serverTimestamp() < c2.serverTimestamp() : c1.serverTimestamp() > c2.serverTimestamp();
+    }
+}
+
+}
+
+namespace canadainc {
 
 MessageImporter::MessageImporter(qint64 accountKey, bool onlyInbound) :
 		m_accountKey(accountKey), m_inboundOnly(onlyInbound),
@@ -23,22 +39,19 @@ void MessageImporter::cancel() {
 
 QVariantList MessageImporter::processSingleConversation()
 {
+    latestFirst = m_latestFirst;
+    deviceTime = m_deviceTime;
+
 	MessageService messageService;
 	QList<Message> messages = messageService.messagesInConversation( m_accountKey, m_conversationKey, MessageFilter() );
+	qSort( messages.begin(), messages.end(), messageComparator );
 	QVariantList variants;
 
 	int total = messages.size();
 
-	if (!m_latestFirst)
-	{
-		for (int i = 0; i < total; i++) {
-			appendIfValid(messages[i], variants);
-		}
-	} else {
-		for (int i = total-1; i >= 0; i--) {
-			appendIfValid(messages[i], variants);
-		}
-	}
+    for (int i = 0; i < total; i++) {
+        appendIfValid(messages[i], variants);
+    }
 
 	emit progress(total, total);
 

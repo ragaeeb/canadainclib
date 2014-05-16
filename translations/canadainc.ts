@@ -59,7 +59,7 @@
 <context>
     <name>canadainc::MessageImporter</name>
     <message>
-        <location filename="../src/MessageImporter.cpp" line="14"/>
+        <location filename="../src/MessageImporter.cpp" line="30"/>
         <source>You</source>
         <translation type="unfinished"></translation>
     </message>
