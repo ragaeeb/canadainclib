@@ -38,7 +38,7 @@ DropDown
             id: optionDefinition
             
             Option {
-                imageSource: "images/ic_account.png"
+                imageSource: value == 23 ? "images/dropdown/ic_sms.png" : "images/dropdown/ic_account.png"
             }
         }
     ]

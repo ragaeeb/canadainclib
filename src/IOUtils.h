@@ -5,6 +5,8 @@
 #include <QRunnable>
 #include <QString>
 
+#define NEW_LINE "\r\n"
+
 namespace canadainc {
 
 class IOUtils

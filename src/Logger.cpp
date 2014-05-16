@@ -11,7 +11,11 @@ bool frozen = false;
 void redirectedMessageOutput(QtMsgType type, const char *msg)
 {
     Q_UNUSED(type);
-    fprintf(f ? f : stderr, "%s\n", msg);
+    fprintf(f ? f : stdout, "%s\n", msg);
+
+#if !defined(QT_NO_DEBUG)
+    fflush(f ? f : stdout);
+#endif
 }
 
 }

@@ -77,11 +77,11 @@ bool IOUtils::writeTextFile(QString const& filePath, QString contents, bool repl
 
 		if ( outputFile.exists() && !replace ) {
 			LOGGER("Appending to file");
-			stream << "\r\n\r\n";
+			stream << QString("%1%1").arg(NEW_LINE);
 		}
 
 		if (correctNewLines) {
-			stream << contents.replace("\n", "\r\n");
+			stream << contents.replace("\n", NEW_LINE);
 		} else {
 			stream << contents;
 		}

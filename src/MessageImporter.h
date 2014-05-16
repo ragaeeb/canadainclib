@@ -49,7 +49,7 @@ public:
 	MessageImporter(qint64 accountKey, bool onlyInbound=true);
 	~MessageImporter();
 	QVariantList getResult();
-	void cancel();
+	Q_SLOT void cancel();
 	void run();
 	void setUserAlias(QString const& alias);
 	void setConversation(QString const& conversationKey);
