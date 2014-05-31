@@ -26,6 +26,8 @@ Persistance::~Persistance()
 
 void Persistance::showToast(QString const& text, QString const& buttonLabel, QString const& icon)
 {
+    LOGGER(text);
+
 	if (m_toast == NULL) {
 		m_toast = new SystemToast(this);
 		connect( m_toast, SIGNAL( finished(bb::system::SystemUiResult::Type) ), this, SLOT( finished(bb::system::SystemUiResult::Type) ) );
@@ -40,6 +42,8 @@ void Persistance::showToast(QString const& text, QString const& buttonLabel, QSt
 
 bool Persistance::showBlockingToast(QString const& text, QString const& buttonLabel, QString const& icon)
 {
+    LOGGER(text);
+
 	SystemToast toast;
 	toast.button()->setLabel(buttonLabel);
 	toast.setBody(text);
@@ -51,6 +55,8 @@ bool Persistance::showBlockingToast(QString const& text, QString const& buttonLa
 
 bool Persistance::showBlockingDialog(QString const& title, QString const& text, QString const& okButton, QString const& cancelButton)
 {
+    LOGGER(title << text);
+
 	SystemDialog dialog;
 	dialog.setBody(text);
 	dialog.setTitle(title);
@@ -63,6 +69,8 @@ bool Persistance::showBlockingDialog(QString const& title, QString const& text, 
 
 void Persistance::copyToClipboard(QString const& text, bool showToastMessage)
 {
+    LOGGER(text);
+
 	Clipboard clipboard;
 	clipboard.clear();
 	clipboard.insert( "text/plain", convertToUtf8(text) );
@@ -86,8 +94,7 @@ QByteArray Persistance::convertToUtf8(QString const& text) {
 QVariant Persistance::getValueFor(const QString &objectName)
 {
     QVariant value( m_settings.value(objectName) );
-
-    LOGGER("getValueFor: " << objectName << value);
+    LOGGER(objectName << value);
 
     return value;
 }
@@ -100,9 +107,9 @@ bool Persistance::contains(QString const& key) {
 
 bool Persistance::saveValueFor(const QString &objectName, const QVariant &inputValue, bool fireEvent)
 {
-	LOGGER("saveValueFor: " << objectName << inputValue);
-
-	if ( m_settings.value(objectName) != inputValue ) {
+	if ( m_settings.value(objectName) != inputValue )
+	{
+	    LOGGER(objectName << inputValue);
 		m_settings.setValue(objectName, inputValue);
 
 		if (fireEvent) {
@@ -111,7 +118,6 @@ bool Persistance::saveValueFor(const QString &objectName, const QVariant &inputV
 
 		return true;
 	} else {
-		LOGGER("Duplicate value, ignoring");
 		return false;
 	}
 }
@@ -119,10 +125,9 @@ bool Persistance::saveValueFor(const QString &objectName, const QVariant &inputV
 
 void Persistance::remove(QString const& key, bool fireEvent)
 {
-	LOGGER("remove key: " << key);
-
 	if ( contains(key) )
 	{
+	    LOGGER(key);
 		m_settings.remove(key);
 
 		if (fireEvent) {

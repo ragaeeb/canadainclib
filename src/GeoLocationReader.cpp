@@ -32,9 +32,7 @@ void GeoLocationReader::positionUpdated(const QGeoPositionInfo& update)
 {
 	Q_UNUSED(update);
 
-	LOGGER( "latitude" << update.coordinate().latitude() );
-	LOGGER( "longitude" << update.coordinate().longitude() );
-
+	LOGGER( "latitude,longitude" << update.coordinate().latitude() << update.coordinate().longitude() );
 	emit coordinatesChanged();
 }
 

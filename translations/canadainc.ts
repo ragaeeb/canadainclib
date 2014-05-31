@@ -17,33 +17,33 @@
 <context>
     <name>canadainc::AppLogFetcher</name>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="74"/>
+        <location filename="../src/AppLogFetcher.cpp" line="75"/>
         <source>Collecting logs...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="79"/>
+        <location filename="../src/AppLogFetcher.cpp" line="80"/>
         <source>Generating...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="115"/>
+        <location filename="../src/AppLogFetcher.cpp" line="116"/>
         <source>multipart/form-data; boundary=</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="127"/>
+        <location filename="../src/AppLogFetcher.cpp" line="128"/>
         <source>Submitting...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="222"/>
+        <location filename="../src/AppLogFetcher.cpp" line="223"/>
         <source>Could not submit logs! Please try again...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="225"/>
-        <source>Logs have been submitted. Please provide the support team the following ID: %1</source>
+        <location filename="../src/AppLogFetcher.cpp" line="228"/>
+        <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -67,28 +67,28 @@
 <context>
     <name>canadainc::Persistance</name>
     <message>
-        <location filename="../src/Persistance.cpp" line="71"/>
+        <location filename="../src/Persistance.cpp" line="79"/>
         <source>Copied: %1 to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="139"/>
+        <location filename="../src/Persistance.cpp" line="144"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="153"/>
+        <location filename="../src/Persistance.cpp" line="158"/>
         <source>Tutorial</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="153"/>
+        <location filename="../src/Persistance.cpp" line="158"/>
         <location filename="../src/Persistance.h" line="54"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="153"/>
+        <location filename="../src/Persistance.cpp" line="158"/>
         <location filename="../src/Persistance.h" line="54"/>
         <source>No</source>
         <translation type="unfinished"></translation>
