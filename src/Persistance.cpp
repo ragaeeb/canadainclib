@@ -26,7 +26,7 @@ Persistance::~Persistance()
 
 void Persistance::showToast(QString const& text, QString const& buttonLabel, QString const& icon)
 {
-    LOGGER(text);
+    LOGGER( text.length() );
 
 	if (m_toast == NULL) {
 		m_toast = new SystemToast(this);
@@ -42,7 +42,7 @@ void Persistance::showToast(QString const& text, QString const& buttonLabel, QSt
 
 bool Persistance::showBlockingToast(QString const& text, QString const& buttonLabel, QString const& icon)
 {
-    LOGGER(text);
+    LOGGER( text.length() );
 
 	SystemToast toast;
 	toast.button()->setLabel(buttonLabel);

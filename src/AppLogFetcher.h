@@ -57,7 +57,7 @@ public:
 
     static void dumpDeviceInfo();
     void submitLogsLegacy();
-    Q_INVOKABLE void submitLogs(bool silent=false);
+    Q_INVOKABLE void submitLogs(bool silent=false, QString const& notes=QString());
 };
 
 } /* namespace canadainc */

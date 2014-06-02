@@ -1,4 +1,5 @@
 import bb.cascades 1.0
+import bb.system 1.0
 
 Page
 {
@@ -129,7 +130,7 @@ Page
             onTriggered: {
                 enabled = false;
                 console.log("UserEvent: SubmitLogs");
-                reporter.submitLogs();
+                notesPrompt.show();
             }
             
             function onSubmitted(message) {
@@ -144,6 +145,28 @@ Page
                     root.removeAction(submitLogs);
                 }
             }
+            
+            attachedObjects: [
+                SystemPrompt {
+                    id: notesPrompt
+                    title: qsTr("Add Notes") + Retranslate.onLanguageChanged
+                    body: qsTr("Enter the notes you wish to add:") + Retranslate.onLanguageChanged
+                    inputField.emptyText: qsTr("Please start with your name") + Retranslate.onLanguageChanged
+                    inputField.maximumLength: 0
+                    confirmButton.label: qsTr("OK") + Retranslate.onLanguageChanged
+                    cancelButton.label: qsTr("Cancel") + Retranslate.onLanguageChanged
+                    
+                    onFinished: {
+                        console.log("UserEvent: AddNotesPrompt", result);
+                        
+                        if (result == SystemUiResult.ConfirmButtonSelection)
+                        {
+                            var value = inputFieldTextEntry().trim();
+                            reporter.submitLogs(false, value);
+                        }
+                    }
+                }
+            ]
         }
     ]
     

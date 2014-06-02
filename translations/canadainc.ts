@@ -17,32 +17,32 @@
 <context>
     <name>canadainc::AppLogFetcher</name>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="75"/>
+        <location filename="../src/AppLogFetcher.cpp" line="78"/>
         <source>Collecting logs...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="80"/>
+        <location filename="../src/AppLogFetcher.cpp" line="83"/>
         <source>Generating...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="116"/>
+        <location filename="../src/AppLogFetcher.cpp" line="119"/>
         <source>multipart/form-data; boundary=</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="128"/>
+        <location filename="../src/AppLogFetcher.cpp" line="131"/>
         <source>Submitting...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="223"/>
+        <location filename="../src/AppLogFetcher.cpp" line="218"/>
         <source>Could not submit logs! Please try again...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="228"/>
+        <location filename="../src/AppLogFetcher.cpp" line="223"/>
         <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
         <translation type="unfinished"></translation>
     </message>

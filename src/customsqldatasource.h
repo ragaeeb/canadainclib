@@ -114,8 +114,8 @@ public:
     Q_INVOKABLE void executePrepared(QVariantList const& values, int id = 1);
 
     Q_INVOKABLE void executeTransaction(QStringList const& queries, int id=1);
-
-    Q_INVOKABLE void executePreparedTransaction(QStringList const& queries, QVariantList const& values, int id=1);
+    Q_INVOKABLE void startTransaction(int id);
+    Q_INVOKABLE void endTransaction(int id);
 
     /**
      * @param

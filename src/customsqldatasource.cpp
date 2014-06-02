@@ -61,11 +61,8 @@ bool CustomSqlDataSource::checkConnection()
                 m_sqlConnector->setParent(NULL);
                 delete m_sqlConnector;
             }
-
-            // Set up a connection to the data base
             m_sqlConnector = new SqlConnection(m_source, m_name, this);
 
-            // Connect to the reply function
             connect(m_sqlConnector, SIGNAL( reply(bb::data::DataAccessReply const&) ), this, SLOT( onLoadAsyncResultData(bb::data::DataAccessReply const&) ) );
 
             return true;
@@ -98,7 +95,7 @@ DataAccessReply CustomSqlDataSource::executeAndWait(QVariant const& criteria, in
 void CustomSqlDataSource::execute(QVariant const& criteria, int id)
 {
     if ( checkConnection() ) {
-    	LOGGER("Starting query" << id << criteria);
+    	LOGGER(id << criteria);
     	m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
         m_sqlConnector->execute(criteria, id);
     }
@@ -108,7 +105,7 @@ void CustomSqlDataSource::execute(QVariant const& criteria, int id)
 void CustomSqlDataSource::executePrepared(QVariantList const& values, int id)
 {
     if ( checkConnection() ) {
-    	LOGGER("Starting query" << m_query << values << id);
+    	LOGGER(m_query << values << id);
     	m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
         m_sqlConnector->execute(m_query, values, id);
     }
@@ -132,34 +129,33 @@ void CustomSqlDataSource::executeTransaction(QStringList const& queries, int id)
 }
 
 
-void CustomSqlDataSource::executePreparedTransaction(QStringList const& queries, QVariantList const& values, int id)
+void CustomSqlDataSource::startTransaction(int id)
 {
-	if ( checkConnection() && queries.size() == values.size() )
-	{
-    	LOGGER("Starting query" << queries << values << id);
-    	m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
-		m_sqlConnector->beginTransaction(id);
+    if ( checkConnection() ) {
+        m_sqlConnector->beginTransaction(id);
+    }
+}
 
-		for (int i = 0; i < queries.size(); i++) {
-			m_sqlConnector->execute(queries[i], values[i].toList(), id);
-		}
 
-		m_sqlConnector->endTransaction(id);
-	}
+void CustomSqlDataSource::endTransaction(int id)
+{
+    if ( checkConnection() ) {
+        m_sqlConnector->endTransaction(id);
+    }
 }
 
 
 void CustomSqlDataSource::load(int id)
 {
     if ( !m_query.isEmpty() ) {
-    	LOGGER("query is not empty..." << m_query);
+    	LOGGER(m_query << id);
         execute(m_query, id);
     }
 }
 
 void CustomSqlDataSource::onLoadAsyncResultData(bb::data::DataAccessReply const& replyData)
 {
-	LOGGER("Query " << replyData.id() << "took " << QDateTime::currentMSecsSinceEpoch()-m_execTimestamp );
+	LOGGER( replyData.id() << "took" << QDateTime::currentMSecsSinceEpoch()-m_execTimestamp );
 
     if ( replyData.hasError() ) {
         LOGGER( replyData.id() << ", SQL error: " << replyData );
