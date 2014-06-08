@@ -7,10 +7,6 @@
 
 namespace canadainc {
 
-const char* IOUtils::directory_local_shared = "/accounts/1000/shared";
-const char* IOUtils::directory_sdcard = "/accounts/1000/removable/sdcard";
-const char* IOUtils::directory_temp = "/var/tmp";
-
 void IOUtils::startThread(QRunnable* qr, bool autoDelete)
 {
 	qr->setAutoDelete(autoDelete);

@@ -6,6 +6,9 @@
 #include <QString>
 
 #define NEW_LINE "\r\n"
+#define directory_local_shared "/accounts/1000/shared"
+#define directory_sdcard "/accounts/1000/removable/sdcard"
+#define directory_temp "/var/tmp"
 
 namespace canadainc {
 
@@ -23,10 +26,6 @@ public:
 	static QString readTextFile(QString const& filePath);
 
 	static QString setupOutputDirectory(QString const& sharedFolder, QString const& name);
-
-	static const char* directory_local_shared;
-	static const char* directory_sdcard;
-	static const char* directory_temp;
 };
 
 } /* namespace canadainc */

@@ -17,32 +17,13 @@
 <context>
     <name>canadainc::AppLogFetcher</name>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="78"/>
-        <source>Collecting logs...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/AppLogFetcher.cpp" line="83"/>
-        <source>Generating...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/AppLogFetcher.cpp" line="119"/>
-        <source>multipart/form-data; boundary=</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/AppLogFetcher.cpp" line="131"/>
-        <source>Submitting...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/AppLogFetcher.cpp" line="218"/>
+        <location filename="../src/AppLogFetcher.cpp" line="87"/>
+        <location filename="../src/AppLogFetcher.cpp" line="204"/>
         <source>Could not submit logs! Please try again...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="223"/>
+        <location filename="../src/AppLogFetcher.cpp" line="180"/>
         <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -61,6 +42,14 @@
     <message>
         <location filename="../src/MessageImporter.cpp" line="30"/>
         <source>You</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>canadainc::NetworkProcessor</name>
+    <message>
+        <location filename="../src/NetworkProcessor.cpp" line="138"/>
+        <source>multipart/form-data; boundary=</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1,17 +1,9 @@
 #ifndef APPLOGFETCHER_H_
 #define APPLOGFETCHER_H_
 
-#include <QMap>
 #include <QFutureWatcher>
 
-class QNetworkAccessManager;
-class QNetworkReply;
-
-namespace bb {
-    namespace system {
-        class SystemProgressToast;
-    }
-}
+#include "NetworkProcessor.h"
 
 #define DEVICE_INFO_LOG QString("%1/deviceInfo.txt").arg( QDir::tempPath() )
 #define START_LOGGING_KEY "startLogging"
@@ -21,8 +13,6 @@ namespace bb {
 #define ZIP_FILE_PATH QString("%1/logs.zip").arg( QDir::tempPath() )
 
 namespace canadainc {
-
-using namespace bb::system;
 
 class LogCollector
 {
@@ -37,19 +27,21 @@ class AppLogFetcher : public QObject
 {
     Q_OBJECT
 
-    QNetworkAccessManager* m_networkManager;
-    SystemProgressToast* m_progress;
+    NetworkProcessor m_network;
     QFutureWatcher<QByteArray> m_future;
     LogCollector* m_collector;
 
+    void cleanUp();
+
 private slots:
     void onFinished();
-    void onNetworkReply(QNetworkReply* reply);
+    void onRequestComplete(QVariant const& cookie, QByteArray const& data);
+    void onReplyError();
     void startCollection();
-    void uploadProgress(qint64 bytesSent, qint64 bytesTotal);
 
 signals:
     void submitted(QString const& message);
+    void progress(QVariant const& cookie, qint64 bytesSent, qint64 bytesTotal);
 
 public:
     AppLogFetcher(LogCollector* collector, QObject* parent=NULL);
@@ -57,7 +49,7 @@ public:
 
     static void dumpDeviceInfo();
     void submitLogsLegacy();
-    Q_INVOKABLE void submitLogs(bool silent=false, QString const& notes=QString());
+    Q_INVOKABLE void submitLogs(QString const& notes=QString());
 };
 
 } /* namespace canadainc */

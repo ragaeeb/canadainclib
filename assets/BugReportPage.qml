@@ -133,7 +133,9 @@ Page
                 notesPrompt.show();
             }
             
-            function onSubmitted(message) {
+            function onSubmitted(message)
+            {
+                progressIndicator.visible = false;
                 persist.showBlockingToast( message, qsTr("OK"), "asset:///images/ic_bugs.png" );
                 enabled = true;
             }
@@ -162,7 +164,10 @@ Page
                         if (result == SystemUiResult.ConfirmButtonSelection)
                         {
                             var value = inputFieldTextEntry().trim();
-                            reporter.submitLogs(false, value);
+                            reporter.submitLogs(value);
+                            progressIndicator.value = 0;
+                            progressIndicator.state = ProgressIndicatorState.Progress;
+                            progressIndicator.visible = true;
                         }
                     }
                 }
@@ -214,16 +219,27 @@ Page
 	        }
 	    }
 	    
-	    ProgressIndicator {
+	    ProgressIndicator
+	    {
 	        id: progressIndicator
 	        horizontalAlignment: HorizontalAlignment.Center
-	        verticalAlignment: VerticalAlignment.Top
-	        visible: true
+	        verticalAlignment: VerticalAlignment.Center
 	        value: 0
 	        fromValue: 0
 	        toValue: 100
+	        opacity: value/100
 	        state: ProgressIndicatorState.Pause
 	        topMargin: 0; bottomMargin: 0; leftMargin: 0; rightMargin: 0;
+	        
+            function onNetworkProgressChanged(cookie, current, total)
+            {
+                value = current;
+                toValue = total;
+            }
+	        
+	        onCreationCompleted: {
+	            reporter.progress.connect(onNetworkProgressChanged);
+	        }
 	    }
 	}
 }

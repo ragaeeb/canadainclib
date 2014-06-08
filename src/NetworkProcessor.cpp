@@ -85,6 +85,13 @@ void NetworkProcessor::downloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 }
 
 
+void NetworkProcessor::uploadProgress(qint64 bytesSent, qint64 bytesTotal)
+{
+    QVariant cookie = sender()->property("cookie");
+    emit uploadProgress(cookie, bytesSent, bytesTotal);
+}
+
+
 void NetworkProcessor::onNetworkReply(QNetworkReply* reply)
 {
 	if ( reply->error() == QNetworkReply::NoError )
@@ -96,15 +103,44 @@ void NetworkProcessor::onNetworkReply(QNetworkReply* reply)
 			QByteArray data = reply->readAll();
 			emit requestComplete( reply->property("cookie"), data );
 		} else {
-			LOGGER("Unreadable!!!!!!!");
+			LOGGER("Unreadable!");
 		}
 	} else {
-		LOGGER("Reply error!");
+		LOGGER("Reply error!" << reply->errorString() << reply->error() );
 		emit replyError();
 	}
 
 	m_currentRequests.removeAll(reply);
 	reply->deleteLater();
+}
+
+
+void NetworkProcessor::upload(QString const& uri, QString const& name, QByteArray const& contents, QVariant const& cookie)
+{
+    init();
+
+    QString bound;
+    QString crlf;
+    QString data;
+    QByteArray dataToSend;
+    bound = "---------------------------7d935033608e2";
+    crlf = 0x0d;
+    crlf += 0x0a;
+    data = "--" + bound + crlf + "Content-Disposition: form-data; name=\"archiveFile\"; ";
+    data += QString("filename=\"%1\"").arg(name);
+    data += crlf + "Content-Type: application/octet-stream" + crlf + crlf;
+    dataToSend.insert(0, data);
+    dataToSend.append(contents);
+    dataToSend.append(crlf + "--" + bound + "--" + crlf);
+
+    QUrl url = QUrl(uri);
+    QNetworkRequest request(url); // DON'T TRY TO OPTIMIZE THIS BY MERGING WITH ABOVE LINE, IT DOESN'T WORK!
+    request.setHeader(QNetworkRequest::ContentTypeHeader, tr("multipart/form-data; boundary=") + bound);
+
+    QObject* reply = m_networkManager->post( request, dataToSend );
+    reply->setProperty("cookie", cookie);
+
+    connect( reply, SIGNAL( uploadProgress(qint64,qint64) ), this, SLOT( uploadProgress(qint64,qint64) ) );
 }
 
 
