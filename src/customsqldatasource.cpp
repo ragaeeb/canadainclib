@@ -10,7 +10,8 @@ namespace canadainc {
 
 using namespace bb::data;
 
-CustomSqlDataSource::CustomSqlDataSource(QObject *parent) : QObject(parent), m_name("connect"), m_sqlConnector(NULL), m_execTimestamp(0)
+CustomSqlDataSource::CustomSqlDataSource(QObject *parent) : QObject(parent),
+        m_name("connect"), m_sqlConnector(NULL), m_execTimestamp(0)
 {
 }
 
@@ -116,7 +117,7 @@ void CustomSqlDataSource::executeTransaction(QStringList const& queries, int id)
 {
 	if ( checkConnection() )
 	{
-    	LOGGER("Starting query" << queries << id);
+    	LOGGER("startQuery" << queries << id);
     	m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
 		m_sqlConnector->beginTransaction(id);
 
@@ -148,7 +149,6 @@ void CustomSqlDataSource::endTransaction(int id)
 void CustomSqlDataSource::load(int id)
 {
     if ( !m_query.isEmpty() ) {
-    	LOGGER(m_query << id);
         execute(m_query, id);
     }
 }
