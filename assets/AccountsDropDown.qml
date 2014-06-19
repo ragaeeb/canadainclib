@@ -3,9 +3,9 @@ import bb.cascades 1.0
 DropDown
 {
     id: accountChoice
-    title: qsTr("Account") + Retranslate.onLanguageChanged
     property variant selectedAccountId
     signal accountsLoaded(int numAccounts);
+    title: qsTr("Account") + Retranslate.onLanguageChanged
     horizontalAlignment: HorizontalAlignment.Fill
     
     function onAccountsImported(results)
@@ -17,6 +17,19 @@ DropDown
             option.text = current.name;
             option.description = current.address;
             option.value = current.accountId;
+            option.isCellular = current["isCellular"];
+            
+            var imageSource = "images/dropdown/ic_account.png";
+            
+            if (current.accountId == 23) {
+                imageSource = "images/dropdown/ic_sms.png";
+            } else if (current.isCellular) {
+                imageSource = "images/dropdown/ic_phone.png";
+            } else if (current.accountId == 199) {
+                imageSource = "images/dropdown/ic_pin.png";
+            }
+            
+            option.imageSource = imageSource;
             
             if (current.accountId == selectedAccountId) {
                 option.selected = true;
@@ -34,11 +47,12 @@ DropDown
     }
     
     attachedObjects: [
-        ComponentDefinition {
+        ComponentDefinition
+        {
             id: optionDefinition
-            
+
             Option {
-                imageSource: value == 23 ? "images/dropdown/ic_sms.png" : "images/dropdown/ic_account.png"
+                property bool isCellular: false
             }
         }
     ]

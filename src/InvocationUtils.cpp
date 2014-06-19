@@ -11,6 +11,7 @@ void showBlockingToast(QString const& text, QString const& buttonLabel, QString 
     toast.button()->setLabel(buttonLabel);
     toast.setBody(text);
     toast.setIcon(icon);
+    toast.exec();
 }
 
 }

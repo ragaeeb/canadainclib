@@ -16,12 +16,13 @@ class AccountImporter : public QObject, public QRunnable
 	Q_OBJECT
 
 	Service::Type m_type;
+	bool m_loadPhone;
 
 signals:
 	void importCompleted(QVariantList const& qvl);
 
 public:
-	AccountImporter(Service::Type type=Service::Messages);
+	AccountImporter(Service::Type type=Service::Messages, bool loadPhone=false);
 	virtual ~AccountImporter();
 	void run();
 };

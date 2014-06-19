@@ -2,8 +2,13 @@
 #include "Logger.h"
 #include "PimUtil.h"
 
+#include "bbndk.h"
+
 #include <bb/pim/message/MessageFilter>
 #include <bb/pim/message/MessageService>
+
+
+#include <bb/pim/phone/CallHistoryService>
 
 using namespace bb::pim::message;
 
@@ -27,7 +32,8 @@ namespace canadainc {
 
 MessageImporter::MessageImporter(qint64 accountKey, bool onlyInbound) :
 		m_accountKey(accountKey), m_inboundOnly(onlyInbound),
-		m_latestFirst(true), m_userAlias( tr("You") ), m_unreadOnly(false), m_deviceTime(false), m_timeLimit(INT_MAX), m_quit(false)
+		m_latestFirst(true), m_userAlias( tr("You") ), m_unreadOnly(false),
+		m_deviceTime(false), m_timeLimit(INT_MAX), m_quit(false), m_isCellular(false)
 {
 }
 
@@ -167,12 +173,55 @@ void MessageImporter::run()
 }
 
 
+QVariantList MessageImporter::fetchCalls()
+{
+    QVariantList result;
+
+#if BBNDK_VERSION_AT_LEAST(10,3,0)
+    bb::pim::phone::CallHistoryService chs;
+    bb::pim::phone::CallHistoryFilter chf = bb::pim::phone::CallHistoryFilter();
+    bb::pim::phone::CallTypeList types;
+    types << bb::pim::phone::CallType::Incoming;
+    chf.setTypeFilter(types);
+
+    QList<bb::pim::phone::CallEntryResult> entries = chs.callHistory(m_accountKey, chf);
+
+    int total = entries.size();
+
+    for (int i = 0; i < total; i++)
+    {
+        bb::pim::phone::CallEntry c = entries[i].call();
+        QVariantMap qvm;
+
+        qvm["id"] = c.id();
+        qvm["aid"] = c.accountId();
+        qvm["senderAddress"] = c.phoneNumber();
+        qvm["sender"] = c.callerName();
+        qvm["time"] = c.startDate();
+
+        emit progress(i, total);
+    }
+#endif
+
+    emit progress(total, total);
+
+    return result;
+}
+
+
 QVariantList MessageImporter::getResult()
 {
 	LOGGER("MessageImporter::run()" << m_accountKey << m_conversationKey);
 
-	QVariantList result = m_conversationKey.isNull() ? processAllConversations() : processSingleConversation();
-	LOGGER( "Elements generated:" << result.size() );
+	QVariantList result;
+
+	if (m_isCellular) {
+	    result = fetchCalls();
+	} else {
+	    result = m_conversationKey.isNull() ? processAllConversations() : processSingleConversation();
+	}
+
+    LOGGER( "Elements generated:" << result.size() );
 
 	return result;
 }
@@ -205,6 +254,11 @@ void MessageImporter::setUseDeviceTime(bool deviceTime) {
 
 void MessageImporter::setTimeLimit(int days) {
 	m_timeLimit = days;
+}
+
+
+void MessageImporter::setIsCellular(bool isCellular) {
+    m_isCellular = isCellular;
 }
 
 

@@ -56,12 +56,9 @@ void LogMonitor::settingChanged(QString const& file)
     } else {
         bool allowLogging = settings.value(m_key).toBool();
 
-        LOGGER("allowLogging" << allowLogging << settings.contains(m_key) << m_key);
-
         if ( settings.contains(m_key) )
         {
             if (allowLogging) {
-                LOGGER("registerLogging" << allowLogging << settings.contains(m_key) << m_key);
                 registerLogging(m_logFile);
 
                 if ( !m_timer.isActive() ) {
