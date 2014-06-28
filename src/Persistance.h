@@ -24,6 +24,7 @@ class Persistance : public QObject
 	Q_OBJECT
 
 	QSettings m_settings;
+	QMap<QString, QVariant> m_pending;
 	bb::system::SystemToast* m_toast;
 
 private slots:

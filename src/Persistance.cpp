@@ -21,6 +21,11 @@ Persistance::Persistance(QObject* parent) : QObject(parent), m_toast(NULL)
 
 Persistance::~Persistance()
 {
+    QStringList keys = m_pending.keys();
+
+    foreach ( QString const& key, m_pending.keys() ) {
+        m_settings.setValue( key, m_pending.value(key) );
+    }
 }
 
 
@@ -110,11 +115,13 @@ bool Persistance::saveValueFor(const QString &objectName, const QVariant &inputV
 	if ( m_settings.value(objectName) != inputValue )
 	{
 	    LOGGER(objectName << inputValue);
-		m_settings.setValue(objectName, inputValue);
 
-		if (fireEvent) {
+	    if (fireEvent) {
+	        m_settings.setValue(objectName, inputValue);
 	        emit settingChanged(objectName);
-		}
+	    } else {
+	        m_pending[objectName] = inputValue;
+	    }
 
 		return true;
 	} else {

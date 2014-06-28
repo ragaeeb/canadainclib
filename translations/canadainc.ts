@@ -23,12 +23,12 @@
     <name>canadainc::AppLogFetcher</name>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="112"/>
-        <location filename="../src/AppLogFetcher.cpp" line="250"/>
+        <location filename="../src/AppLogFetcher.cpp" line="252"/>
         <source>Could not submit logs! Please try again...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="226"/>
+        <location filename="../src/AppLogFetcher.cpp" line="228"/>
         <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -61,46 +61,46 @@
 <context>
     <name>canadainc::Persistance</name>
     <message>
-        <location filename="../src/Persistance.cpp" line="79"/>
+        <location filename="../src/Persistance.cpp" line="84"/>
         <source>Copied: %1 to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="144"/>
+        <location filename="../src/Persistance.cpp" line="151"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="158"/>
+        <location filename="../src/Persistance.cpp" line="165"/>
         <source>Tutorial</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="158"/>
-        <location filename="../src/Persistance.cpp" line="179"/>
-        <location filename="../src/Persistance.h" line="55"/>
+        <location filename="../src/Persistance.cpp" line="165"/>
+        <location filename="../src/Persistance.cpp" line="186"/>
+        <location filename="../src/Persistance.h" line="56"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="158"/>
-        <location filename="../src/Persistance.cpp" line="179"/>
-        <location filename="../src/Persistance.h" line="55"/>
+        <location filename="../src/Persistance.cpp" line="165"/>
+        <location filename="../src/Persistance.cpp" line="186"/>
+        <location filename="../src/Persistance.h" line="56"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="179"/>
+        <location filename="../src/Persistance.cpp" line="186"/>
         <source>Review</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.h" line="46"/>
+        <location filename="../src/Persistance.h" line="47"/>
         <source>If you enjoy the app, we would really appreciate if you left us a review! It should only take a second. Would you like to leave one?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.h" line="49"/>
+        <location filename="../src/Persistance.h" line="50"/>
         <source>Would you like to see a video tutorial on how to use the app?</source>
         <translation type="unfinished"></translation>
     </message>
