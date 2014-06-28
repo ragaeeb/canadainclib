@@ -168,6 +168,33 @@ bool Persistance::tutorialVideo(QString const& uri, QString const& key, QString 
 }
 
 
+void Persistance::reviewApp(bool prompt, QString const& key, QString const& message)
+{
+    if (prompt)
+    {
+        if ( contains(key) ) {
+            return;
+        }
+
+        prompt = showBlockingDialog( tr("Review"), message, tr("Yes"), tr("No") );
+
+        if (!prompt) {
+            return;
+        }
+
+        saveValueFor(key, 1, false);
+    }
+
+    InvokeRequest request;
+    request.setTarget("sys.appworld.review");
+    request.setAction("bb.action.OPEN");
+    request.setMimeType("text/html");
+    request.setUri("appworld://review"); // see below for available URIs
+
+    InvokeManager().invoke(request);
+}
+
+
 void Persistance::clear() {
 	m_settings.clear();
 }

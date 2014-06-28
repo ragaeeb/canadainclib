@@ -5,11 +5,13 @@
 
 #include "NetworkProcessor.h"
 
-#define DEVICE_INFO_LOG QString("%1/deviceInfo.txt").arg( QDir::tempPath() )
 #define START_LOGGING_KEY "startLogging"
 #define STOP_LOGGING_KEY "stopLogging"
 #define UI_KEY "logUI"
+#define REMOVED_APPS_PATH QString("%1/removedapps").arg( QDir::tempPath() )
+#define DEVICE_INFO_PATH QString("%1/deviceInfo.txt").arg( QDir::tempPath() )
 #define UI_LOG_FILE QString("%1/logs/ui.log").arg( QDir::currentPath() )
+#define DEFAULT_LOGS QStringList() << QSettings().fileName() << DEVICE_INFO_PATH << "/pps/system/installer/registeredapps/applications" << UI_LOG_FILE << "/pps/system/settings" << REMOVED_APPS_PATH << "/var/boottime.txt"
 #define ZIP_FILE_PATH QString("%1/logs.zip").arg( QDir::tempPath() )
 
 namespace canadainc {
@@ -47,7 +49,7 @@ public:
     AppLogFetcher(LogCollector* collector, QObject* parent=NULL);
     virtual ~AppLogFetcher();
 
-    static void dumpDeviceInfo();
+    static void dumpDeviceInfo(QString const& additional=QString());
     void submitLogsLegacy();
     Q_INVOKABLE void submitLogs(QString const& notes=QString());
 };

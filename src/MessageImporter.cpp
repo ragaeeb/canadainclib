@@ -33,7 +33,7 @@ namespace canadainc {
 MessageImporter::MessageImporter(qint64 accountKey, bool onlyInbound) :
 		m_accountKey(accountKey), m_inboundOnly(onlyInbound),
 		m_latestFirst(true), m_userAlias( tr("You") ), m_unreadOnly(false),
-		m_deviceTime(false), m_timeLimit(INT_MAX), m_quit(false), m_isCellular(false)
+		m_deviceTime(false), m_timeLimit(INT_MAX), m_quit(false)
 {
 }
 
@@ -74,10 +74,18 @@ QVariantMap MessageImporter::transform(Message const& m)
     qvm.insert( "inbound", m.isInbound() );
     qvm.insert( "replyTo", m.replyTo().address() );
     qvm.insert( "sender", m.sender().displayableName() );
-    qvm.insert( "subject", m.subject() );
     qvm.insert( "senderAddress", m.sender().address() );
-    qvm.insert( "text", canadainc::PimUtil::extractText(m) );
     qvm.insert( "time", m.deviceTimestamp() );
+
+    if ( !m.subject().isEmpty() ) {
+        qvm.insert( "subject", m.subject() );
+    }
+
+    QString text = canadainc::PimUtil::extractText(m);
+
+    if ( !text.isEmpty() ) {
+        qvm.insert("text", text);
+    }
 
     if ( !m.imagePath().isEmpty() ) {
         qvm.insert( "imageSource", m.imagePath() );
@@ -176,6 +184,7 @@ void MessageImporter::run()
 QVariantList MessageImporter::fetchCalls()
 {
     QVariantList result;
+    int total = 0;
 
 #if BBNDK_VERSION_AT_LEAST(10,3,0)
     bb::pim::phone::CallHistoryService chs;
@@ -184,9 +193,10 @@ QVariantList MessageImporter::fetchCalls()
     types << bb::pim::phone::CallType::Incoming;
     chf.setTypeFilter(types);
 
-    QList<bb::pim::phone::CallEntryResult> entries = chs.callHistory(m_accountKey, chf);
+    QList<bb::pim::phone::CallEntryResult> entries = chs.callHistory(8, chf);
+    total = entries.size();
 
-    int total = entries.size();
+    LOGGER("**** Total" << total);
 
     for (int i = 0; i < total; i++)
     {
@@ -196,8 +206,15 @@ QVariantList MessageImporter::fetchCalls()
         qvm["id"] = c.id();
         qvm["aid"] = c.accountId();
         qvm["senderAddress"] = c.phoneNumber();
-        qvm["sender"] = c.callerName();
+        qvm["duration"] = c.duration();
+
+        if ( !c.callerName().isEmpty() ) {
+            qvm["sender"] = c.callerName();
+        }
+
         qvm["time"] = c.startDate();
+
+        result << qvm;
 
         emit progress(i, total);
     }
@@ -215,7 +232,7 @@ QVariantList MessageImporter::getResult()
 
 	QVariantList result;
 
-	if (m_isCellular) {
+	if (m_accountKey == ACCOUNT_KEY_CELLULAR) {
 	    result = fetchCalls();
 	} else {
 	    result = m_conversationKey.isNull() ? processAllConversations() : processSingleConversation();
@@ -254,11 +271,6 @@ void MessageImporter::setUseDeviceTime(bool deviceTime) {
 
 void MessageImporter::setTimeLimit(int days) {
 	m_timeLimit = days;
-}
-
-
-void MessageImporter::setIsCellular(bool isCellular) {
-    m_isCellular = isCellular;
 }
 
 

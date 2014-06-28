@@ -30,7 +30,6 @@ class MessageImporter : public QObject, public QRunnable
 	bool m_deviceTime;
 	int m_timeLimit;
 	bool m_quit;
-	bool m_isCellular;
 
 	void appendIfValid(Message const& m, QVariantList& variants);
 	void processConversation();
@@ -59,7 +58,6 @@ public:
 	void setUnreadOnly(bool unreadOnly=true);
 	void setUseDeviceTime(bool deviceTime=true);
 	void setTimeLimit(int days=INT_MAX);
-	void setIsCellular(bool isCellular=true);
 	static QVariantMap transform(Message const& m);
 };
 

@@ -4,17 +4,17 @@
 <context>
     <name>canadainc::AccountImporter</name>
     <message>
-        <location filename="../src/AccountImporter.cpp" line="45"/>
+        <location filename="../src/AccountImporter.cpp" line="43"/>
         <source>SMS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AccountImporter.cpp" line="49"/>
+        <location filename="../src/AccountImporter.cpp" line="47"/>
         <source>Local</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AccountImporter.cpp" line="69"/>
+        <location filename="../src/AccountImporter.cpp" line="67"/>
         <source>Cellular</source>
         <translation type="unfinished"></translation>
     </message>
@@ -22,13 +22,13 @@
 <context>
     <name>canadainc::AppLogFetcher</name>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="87"/>
-        <location filename="../src/AppLogFetcher.cpp" line="211"/>
+        <location filename="../src/AppLogFetcher.cpp" line="112"/>
+        <location filename="../src/AppLogFetcher.cpp" line="250"/>
         <source>Could not submit logs! Please try again...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="187"/>
+        <location filename="../src/AppLogFetcher.cpp" line="226"/>
         <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -77,18 +77,30 @@
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="158"/>
-        <location filename="../src/Persistance.h" line="54"/>
+        <location filename="../src/Persistance.cpp" line="179"/>
+        <location filename="../src/Persistance.h" line="55"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="158"/>
-        <location filename="../src/Persistance.h" line="54"/>
+        <location filename="../src/Persistance.cpp" line="179"/>
+        <location filename="../src/Persistance.h" line="55"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.h" line="48"/>
+        <location filename="../src/Persistance.cpp" line="179"/>
+        <source>Review</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Persistance.h" line="46"/>
+        <source>If you enjoy the app, we would really appreciate if you left us a review! It should only take a second. Would you like to leave one?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Persistance.h" line="49"/>
         <source>Would you like to see a video tutorial on how to use the app?</source>
         <translation type="unfinished"></translation>
     </message>

@@ -43,6 +43,7 @@ public:
     Q_INVOKABLE void remove(QString const& key, bool fireEvent=true);
     Q_INVOKABLE void clear();
     Q_INVOKABLE void copyToClipboard(QString const& text, bool showToastMessage=true);
+    Q_SLOT void reviewApp(bool prompt=false, QString const& key="promptReview", QString const& message=tr("If you enjoy the app, we would really appreciate if you left us a review! It should only take a second. Would you like to leave one?"));
     Q_INVOKABLE void showToast(QString const& text, QString const& buttonLabel=QString(), QString const& icon=QString());
     Q_INVOKABLE bool tutorial(QString const& key, QString const& message, QString const& icon);
     Q_INVOKABLE bool tutorialVideo(QString const& uri, QString const& key="tutorialVideo", QString const& message=tr("Would you like to see a video tutorial on how to use the app?"));

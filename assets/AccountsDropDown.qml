@@ -17,13 +17,12 @@ DropDown
             option.text = current.name;
             option.description = current.address;
             option.value = current.accountId;
-            option.isCellular = current["isCellular"];
             
             var imageSource = "images/dropdown/ic_account.png";
             
             if (current.accountId == 23) {
                 imageSource = "images/dropdown/ic_sms.png";
-            } else if (current.isCellular) {
+            } else if (current.accountId == 8) {
                 imageSource = "images/dropdown/ic_phone.png";
             } else if (current.accountId == 199) {
                 imageSource = "images/dropdown/ic_pin.png";
@@ -50,10 +49,7 @@ DropDown
         ComponentDefinition
         {
             id: optionDefinition
-
-            Option {
-                property bool isCellular: false
-            }
+            Option {}
         }
     ]
 }
