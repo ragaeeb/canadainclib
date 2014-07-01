@@ -77,20 +77,20 @@
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="165"/>
-        <location filename="../src/Persistance.cpp" line="186"/>
-        <location filename="../src/Persistance.h" line="56"/>
+        <location filename="../src/Persistance.cpp" line="191"/>
+        <location filename="../src/Persistance.h" line="58"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="165"/>
-        <location filename="../src/Persistance.cpp" line="186"/>
-        <location filename="../src/Persistance.h" line="56"/>
+        <location filename="../src/Persistance.cpp" line="191"/>
+        <location filename="../src/Persistance.h" line="58"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="186"/>
+        <location filename="../src/Persistance.cpp" line="191"/>
         <source>Review</source>
         <translation type="unfinished"></translation>
     </message>
@@ -100,7 +100,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.h" line="50"/>
+        <location filename="../src/Persistance.h" line="52"/>
         <source>Would you like to see a video tutorial on how to use the app?</source>
         <translation type="unfinished"></translation>
     </message>

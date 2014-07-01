@@ -201,7 +201,27 @@ void Persistance::reviewApp(bool prompt, QString const& key, QString const& mess
     request.setTarget("sys.appworld.review");
     request.setAction("bb.action.OPEN");
     request.setMimeType("text/html");
-    request.setUri("appworld://review"); // see below for available URIs
+    request.setUri("appworld://review");
+
+    InvokeManager().invoke(request);
+}
+
+
+void Persistance::openChannel(bool promote)
+{
+    if (promote)
+    {
+        if ( contains("promoted") ) {
+            return;
+        }
+
+        saveValueFor("promoted", 1, false);
+    }
+
+    InvokeRequest request;
+    request.setTarget("sys.bbm.channels.card.previewer");
+    request.setAction("bb.action.OPENBBMCHANNEL");
+    request.setUri("bbmc:C0034D28B");
 
     InvokeManager().invoke(request);
 }

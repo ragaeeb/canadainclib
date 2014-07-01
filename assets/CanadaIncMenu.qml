@@ -21,6 +21,10 @@ MenuDefinition
         }
     }
     
+    function openChannel() {
+        persist.openChannel(true);
+    }
+    
     onCreationCompleted: {
         if (allowDonations) {
             var donator = donateDefinition.createObject();
@@ -31,6 +35,8 @@ MenuDefinition
             var reviewer = reviewDefinition.createObject();
             addAction(reviewer);
         }
+        
+        app.initialize.connect(openChannel);
     }
     
     settingsAction: SettingsActionItem
@@ -124,21 +130,6 @@ MenuDefinition
                 onTriggered: {
                     console.log("UserEvent: ReviewApp");
                     persist.reviewApp();
-                }
-            }
-        },
-        
-        Invocation
-        {
-            query {
-                invokeTargetId: "sys.bbm.channels.card.previewer"
-                uri: "bbmc:C0034D28B"
-            }
-            
-            onArmed: {
-                if ( !persist.contains("promoted") ) {
-                    trigger("bb.action.OPENBBMCHANNEL");
-                    persist.saveValueFor("promoted", 1, false);
                 }
             }
         }
