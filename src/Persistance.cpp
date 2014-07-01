@@ -175,6 +175,11 @@ bool Persistance::tutorialVideo(QString const& uri, QString const& key, QString 
 }
 
 
+void Persistance::donate(QString const& uri) {
+    InvocationUtils::launchBrowser(uri);
+}
+
+
 void Persistance::reviewApp(bool prompt, QString const& key, QString const& message)
 {
     if (prompt)

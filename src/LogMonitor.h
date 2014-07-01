@@ -16,12 +16,14 @@ class LogMonitor : public QObject
     QString m_key;
     QTimer m_timer;
 
+    LogMonitor(QString const& key, QString const& logFile, QObject* parent=NULL);
+
 private slots:
     void settingChanged(QString const& file);
     void timeout();
 
 public:
-    LogMonitor(QString const& key, QString const& logFile, QObject* parent=NULL);
+    static void create(QString const& key, QString const& logFile, QObject* parent=NULL);
     virtual ~LogMonitor();
 };
 

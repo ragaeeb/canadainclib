@@ -14,6 +14,10 @@
 
 namespace canadainc {
 
+void LogMonitor::create(QString const& key, QString const& logFile, QObject* parent) {
+    new LogMonitor(key, logFile, parent);
+}
+
 LogMonitor::LogMonitor(QString const& key, QString const& logFile, QObject* parent) :
         QObject(parent), m_logFile(logFile), m_key(key)
 {

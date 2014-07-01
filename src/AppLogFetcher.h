@@ -33,6 +33,7 @@ class AppLogFetcher : public QObject
     QFutureWatcher<QByteArray> m_future;
     LogCollector* m_collector;
 
+    AppLogFetcher(LogCollector* collector, QObject* parent=NULL);
     void cleanUp();
 
 private slots:
@@ -46,7 +47,7 @@ signals:
     void progress(QVariant const& cookie, qint64 bytesSent, qint64 bytesTotal);
 
 public:
-    AppLogFetcher(LogCollector* collector, QObject* parent=NULL);
+    static void create(LogCollector* collector, QObject* parent=NULL);
     virtual ~AppLogFetcher();
 
     static void dumpDeviceInfo(QString const& additional=QString());
