@@ -71,26 +71,26 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="165"/>
+        <location filename="../src/Persistance.cpp" line="170"/>
         <source>Tutorial</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="165"/>
-        <location filename="../src/Persistance.cpp" line="191"/>
+        <location filename="../src/Persistance.cpp" line="170"/>
+        <location filename="../src/Persistance.cpp" line="196"/>
         <location filename="../src/Persistance.h" line="58"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="165"/>
-        <location filename="../src/Persistance.cpp" line="191"/>
+        <location filename="../src/Persistance.cpp" line="170"/>
+        <location filename="../src/Persistance.cpp" line="196"/>
         <location filename="../src/Persistance.h" line="58"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="191"/>
+        <location filename="../src/Persistance.cpp" line="196"/>
         <source>Review</source>
         <translation type="unfinished"></translation>
     </message>

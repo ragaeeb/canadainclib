@@ -158,8 +158,13 @@ bool Persistance::tutorial(QString const& key, QString const& message, QString c
 }
 
 
-bool Persistance::tutorialVideo(QString const& uri, QString const& key, QString const& message)
+bool Persistance::tutorialVideo(QString const& uri, bool prompt, QString const& key, QString const& message)
 {
+    if (!prompt) {
+        InvocationUtils::launchBrowser(uri);
+        return true;
+    }
+
     if ( !contains(key) )
     {
         bool result = showBlockingDialog( tr("Tutorial"), message, tr("Yes"), tr("No") );

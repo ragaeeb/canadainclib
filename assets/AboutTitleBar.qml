@@ -5,8 +5,6 @@ TitleBar
 {
     id: titleControl
     property string channelTitle: qsTr("Our BBM Channel") + Retranslate.onLanguageChanged
-    property string invokeTargetId: "sys.bbm.channels.card.previewer"
-    property variant channelUri: "bbmc:C0034D28B"
     kind: TitleBarKind.FreeForm
     scrollBehavior: TitleBarScrollBehavior.NonSticky
     kindProperties: FreeFormTitleBarKindProperties
