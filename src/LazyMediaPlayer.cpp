@@ -48,11 +48,19 @@ void LazyMediaPlayer::play(QUrl const& uri)
 			m_mp->setWindowId(m_videoWindowId);
 			m_mp->setVideoOutput(VideoOutput::PrimaryDisplay);
 		}
-	} else {
-		m_mp->reset();
 	}
 
-	m_mp->setSourceUrl(uri);
+	QtConcurrent::run(this, &LazyMediaPlayer::doPlayback, uri);
+}
+
+
+void LazyMediaPlayer::doPlayback(QUrl const& uri)
+{
+    if (m_mp) {
+        m_mp->reset();
+    }
+
+    m_mp->setSourceUrl(uri);
 
     if ( m_npc->isAcquired() ) {
         m_mp->play();
@@ -237,4 +245,4 @@ LazyMediaPlayer::~LazyMediaPlayer()
 	}
 }
 
-} /* namespace salat */
+} /* namespace canadainc */

@@ -96,7 +96,7 @@ QByteArray Persistance::convertToUtf8(QString const& text) {
 }
 
 
-QVariant Persistance::getValueFor(const QString &objectName)
+QVariant Persistance::getValueFor(const QString &objectName) const
 {
     QVariant value( m_settings.value(objectName) );
     LOGGER(objectName << value);

@@ -36,6 +36,8 @@ class LazyMediaPlayer : public QObject
 	QString m_videoWindowId;
 	bool m_repeat;
 
+	void doPlayback(QUrl const& uri);
+
 private slots:
 	void mediaStateChanged(bb::multimedia::MediaState::Type mediaState);
 	void trackChanged(unsigned int track);
@@ -55,28 +57,27 @@ public:
 	LazyMediaPlayer(QObject* parent=NULL);
 	virtual ~LazyMediaPlayer();
 
+    bool active() const;
+    int count() const;
+    int currentIndex() const;
+    QVariant currentPosition() const;
+    QVariantMap metaData() const;
 	bool playing() const;
-	bool active() const;
 	bool repeat() const;
-	QVariantMap metaData() const;
-	int currentIndex() const;
-	int count() const;
-	QVariant currentPosition() const;
 	QSize videoDimensions() const;
+    Q_INVOKABLE void jump(int secs);
+    Q_SLOT void pause();
+    Q_INVOKABLE void play(QUrl const& uri);
 	Q_INVOKABLE void setName(QString const& name);
-	Q_INVOKABLE void play(QUrl const& uri);
-	Q_SLOT void togglePlayback();
+    void setRepeat(bool value);
+    Q_INVOKABLE void setVideoWindowId(QString const& windowId);
 	Q_INVOKABLE void seek(unsigned int position);
-	Q_INVOKABLE void jump(int secs);
 	Q_INVOKABLE void skip(int n);
 	Q_SLOT void stop();
-	Q_SLOT void pause();
+    Q_SLOT void togglePlayback();
+    Q_SLOT void toggleVideo();
 	Q_INVOKABLE QString videoWindowId();
 	MediaPlayer* mediaPlayer();
-	void setRepeat(bool value);
-
-	Q_INVOKABLE void setVideoWindowId(QString const& windowId);
-	Q_SLOT void toggleVideo();
 };
 
 } /* namespace canadainc */
