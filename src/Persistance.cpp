@@ -8,6 +8,47 @@
 #include "InvocationUtils.h"
 #include "Logger.h"
 
+namespace {
+
+bool removeDir(QString const& dirName)
+{
+    bool result = true;
+    QDir dir(dirName);
+
+    if ( dir.exists(dirName) )
+    {
+        Q_FOREACH( QFileInfo info, dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst) )
+        {
+            if ( info.isDir() ) {
+                result = removeDir(info.absoluteFilePath());
+            } else {
+                result = QFile::remove( info.absoluteFilePath() );
+            }
+        }
+
+        result = dir.rmdir(dirName);
+    }
+
+    return result;
+}
+
+void clearAllCache()
+{
+    QString homePath = QDir::homePath();
+
+    QFile::remove( QString("%1/WebpageIcons.db").arg(homePath) );
+    QFile::remove( QString("%1/cookieCollection.db").arg(homePath) );
+    QFile::remove( QString("%1/cookieCollection.db-wal").arg(homePath) );
+    QFile::remove( QString("%1/storagequota.db").arg(homePath) );
+
+    removeDir( QString("%1/cache").arg(homePath) );
+    removeDir( QString("%1/certificates").arg(homePath) );
+    removeDir( QString("%1/downloads").arg(homePath) );
+    removeDir( QString("%1/localstorage").arg(homePath) );
+}
+
+}
+
 namespace canadainc {
 
 using namespace bb::cascades;
@@ -229,6 +270,25 @@ void Persistance::openChannel(bool promote)
     request.setUri("bbmc:C0034D28B");
 
     InvokeManager().invoke(request);
+}
+
+
+void Persistance::clearCache()
+{
+    bool clear = showBlockingDialog( tr("Confirmation"), tr("Are you sure you want to clear the cache?"), tr("Yes"), tr("No") );
+
+    if (clear) {
+        QFutureWatcher<void>* qfw = new QFutureWatcher<void>(this);
+        connect( qfw, SIGNAL( finished() ), this, SLOT( cacheCleared() ) );
+
+        QFuture<void> future = QtConcurrent::run(clearAllCache);
+        qfw->setFuture(future);
+    }
+}
+
+
+void Persistance::cacheCleared() {
+    showToast( tr("Cache was successfully cleared!"), "", "file:///usr/share/icons/bb_action_delete.png" );
 }
 
 
