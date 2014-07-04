@@ -6,6 +6,7 @@ Dialog
     id: root
     property bool canClose: true
     property alias dialogContent: dialogContainer.controls
+    property alias display: displayInfo
     signal closing();
     
     onOpened: {
