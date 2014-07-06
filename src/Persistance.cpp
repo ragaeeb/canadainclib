@@ -72,8 +72,6 @@ Persistance::~Persistance()
 
 void Persistance::showToast(QString const& text, QString const& buttonLabel, QString const& icon)
 {
-    LOGGER( text.length() );
-
 	if (m_toast == NULL) {
 		m_toast = new SystemToast(this);
 		connect( m_toast, SIGNAL( finished(bb::system::SystemUiResult::Type) ), this, SLOT( finished(bb::system::SystemUiResult::Type) ) );
@@ -88,8 +86,6 @@ void Persistance::showToast(QString const& text, QString const& buttonLabel, QSt
 
 bool Persistance::showBlockingToast(QString const& text, QString const& buttonLabel, QString const& icon)
 {
-    LOGGER( text.length() );
-
 	SystemToast toast;
 	toast.button()->setLabel(buttonLabel);
 	toast.setBody(text);

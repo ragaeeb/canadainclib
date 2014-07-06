@@ -1,5 +1,7 @@
 #include "DatabaseHelper.h"
 
+#include <QDir>
+
 #define ATTACH_DATABASE_ID -1
 
 namespace canadainc {
