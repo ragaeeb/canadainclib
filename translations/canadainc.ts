@@ -22,13 +22,13 @@
 <context>
     <name>canadainc::AppLogFetcher</name>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="112"/>
-        <location filename="../src/AppLogFetcher.cpp" line="252"/>
+        <location filename="../src/AppLogFetcher.cpp" line="115"/>
+        <location filename="../src/AppLogFetcher.cpp" line="261"/>
         <source>Could not submit logs! Please try again...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="228"/>
+        <location filename="../src/AppLogFetcher.cpp" line="237"/>
         <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
         <translation type="unfinished"></translation>
     </message>

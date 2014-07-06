@@ -29,6 +29,7 @@ class AppLogFetcher : public QObject
 {
     Q_OBJECT
 
+    static AppLogFetcher* instance;
     NetworkProcessor m_network;
     QFutureWatcher<QByteArray> m_future;
     LogCollector* m_collector;
@@ -48,6 +49,7 @@ signals:
 
 public:
     static void create(LogCollector* collector, QObject* parent=NULL);
+    static AppLogFetcher* getInstance();
     virtual ~AppLogFetcher();
 
     static void dumpDeviceInfo(QString const& additional=QString());
