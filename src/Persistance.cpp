@@ -135,7 +135,7 @@ QByteArray Persistance::convertToUtf8(QString const& text) {
 
 QVariant Persistance::getValueFor(const QString &objectName) const
 {
-    QVariant value( m_settings.value(objectName) );
+    QVariant value = m_pending.contains(objectName) ? m_pending.value(objectName) : m_settings.value(objectName);
     LOGGER(objectName << value);
 
     return value;
@@ -143,7 +143,7 @@ QVariant Persistance::getValueFor(const QString &objectName) const
 
 
 bool Persistance::contains(QString const& key) {
-	return m_settings.contains(key);
+	return m_pending.contains(key) || m_settings.contains(key);
 }
 
 

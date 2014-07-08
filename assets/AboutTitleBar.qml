@@ -34,7 +34,7 @@ TitleBar
             
             Label
             {
-                text: ftbkp.expandableArea.expanded ? qsTr("Please report all bugs to: support@canadainc.org") : qsTr("(c) %1 %2. All Rights Reserved.").arg( new Date().getFullYear() ).arg(packageInfo.author)
+                id: body
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Fill
                 textStyle.color: Color.White
@@ -48,11 +48,24 @@ TitleBar
                         id: packageInfo
                     }
                 ]
+                
+                onCreationCompleted: {
+                    kindProperties.expandableArea.expandedChanged(kindProperties.expandableArea.expanded);
+                }
             }
         }
         
-        expandableArea {
-            content: ControlDelegate {}
+        expandableArea
+        {
+            content: Container {}
+            
+            onExpandedChanged: {
+                if (expanded) {
+                    body.text = qsTr("Please report all bugs to: support@canadainc.org");
+                } else {
+                    body.text = qsTr("(c) %1 %2. All Rights Reserved.").arg( new Date().getFullYear() ).arg(packageInfo.author);
+                }
+            }
         }
     }
 }

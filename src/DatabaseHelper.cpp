@@ -1,4 +1,5 @@
 #include "DatabaseHelper.h"
+#include "Logger.h"
 
 #include <QDir>
 
@@ -14,11 +15,11 @@ DatabaseHelper::DatabaseHelper(QString const& dbase, QObject* parent) :
 }
 
 
-void DatabaseHelper::attachIfNecessary(QString const& dbase)
+void DatabaseHelper::attachIfNecessary(QString const& dbase, bool homePath)
 {
     if ( !m_attached.contains(dbase) )
     {
-        QString path = QString("%1/app/native/assets/dbase/%2.db").arg( QDir::currentPath() ).arg(dbase);
+        QString path = homePath ? QString("%1/%2.db").arg( QDir::homePath() ).arg(dbase) : QString("%1/app/native/assets/dbase/%2.db").arg( QDir::currentPath() ).arg(dbase);
         m_sql.setQuery( QString("ATTACH DATABASE '%1' AS %2").arg(path).arg(dbase) );
         m_sql.load(ATTACH_DATABASE_ID);
         m_attached.insert(dbase, true);
