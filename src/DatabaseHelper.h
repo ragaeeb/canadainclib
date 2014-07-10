@@ -28,6 +28,7 @@ public:
     void executeQuery(QObject* caller, QString const& query, int t, QVariantList const& args=QVariantList());
     void attachIfNecessary(QString const& dbase, bool homePath=false);
     void initSetup(QObject* caller, QStringList const& setupStatements, int id=-2);
+    void enableForeignKeys();
 };
 
 } /* namespace canadainc */

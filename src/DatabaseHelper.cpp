@@ -4,6 +4,7 @@
 #include <QDir>
 
 #define ATTACH_DATABASE_ID -1
+#define FOREIGN_KEY_SETUP -2
 
 namespace canadainc {
 
@@ -24,6 +25,13 @@ void DatabaseHelper::attachIfNecessary(QString const& dbase, bool homePath)
         m_sql.load(ATTACH_DATABASE_ID);
         m_attached.insert(dbase, true);
     }
+}
+
+
+void DatabaseHelper::enableForeignKeys()
+{
+    m_sql.setQuery("PRAGMA foreign_keys = ON");
+    m_sql.load(FOREIGN_KEY_SETUP);
 }
 
 
