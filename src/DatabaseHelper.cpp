@@ -3,9 +3,6 @@
 
 #include <QDir>
 
-#define ATTACH_DATABASE_ID -1
-#define FOREIGN_KEY_SETUP -2
-
 namespace canadainc {
 
 DatabaseHelper::DatabaseHelper(QString const& dbase, QObject* parent) :
@@ -16,22 +13,37 @@ DatabaseHelper::DatabaseHelper(QString const& dbase, QObject* parent) :
 }
 
 
-void DatabaseHelper::attachIfNecessary(QString const& dbase, bool homePath)
+void DatabaseHelper::attachIfNecessary(QString const& dbase, bool homePath, int id) {
+    attachIfNecessary( dbase, homePath ? QDir::homePath() : QString("%1/app/native/assets/dbase").arg( QDir::currentPath() ), id );
+}
+
+
+void DatabaseHelper::attachIfNecessary(QString const& dbase, QString const& path, int id)
 {
     if ( !m_attached.contains(dbase) )
     {
-        QString path = homePath ? QString("%1/%2.db").arg( QDir::homePath() ).arg(dbase) : QString("%1/app/native/assets/dbase/%2.db").arg( QDir::currentPath() ).arg(dbase);
-        m_sql.setQuery( QString("ATTACH DATABASE '%1' AS %2").arg(path).arg(dbase) );
-        m_sql.load(ATTACH_DATABASE_ID);
+        m_sql.setQuery( QString("ATTACH DATABASE '%1' AS %2").arg( QString("%1/%2.db") ).arg(path).arg(dbase) );
+        m_sql.load(id);
         m_attached.insert(dbase, true);
     }
 }
 
 
-void DatabaseHelper::enableForeignKeys()
+void DatabaseHelper::detach(QString const& dbase, int id)
+{
+    if ( m_attached.contains(dbase) )
+    {
+        m_sql.setQuery( QString("DETACH DATABASE %1").arg(dbase) );
+        m_sql.load(id);
+        m_attached.remove(dbase);
+    }
+}
+
+
+void DatabaseHelper::enableForeignKeys(int id)
 {
     m_sql.setQuery("PRAGMA foreign_keys = ON");
-    m_sql.load(FOREIGN_KEY_SETUP);
+    m_sql.load(id);
 }
 
 
@@ -59,6 +71,8 @@ void DatabaseHelper::dataLoaded(int id, QVariant const& data)
 
         //LOGGER("DATA" << data);
         QMetaObject::invokeMethod(caller, "onDataLoaded", Qt::QueuedConnection, Q_ARG(QVariant, t), Q_ARG(QVariant, data) );
+    } else {
+        emit finished(id);
     }
 }
 
@@ -67,7 +81,7 @@ void DatabaseHelper::stash(QObject* caller, int t)
 {
     ++m_currentId;
 
-    //LOGGER(caller << query << t << m_currentId);
+    //LOGGER(caller << t << m_currentId);
 
     QPair<QObject*, int> pair = qMakePair<QObject*, int>(caller, t);
     m_idToObjectQueryType.insert(m_currentId, pair);
@@ -84,7 +98,9 @@ void DatabaseHelper::stash(QObject* caller, int t)
 
 void DatabaseHelper::executeQuery(QObject* caller, QString const& query, int t, QVariantList const& args)
 {
-    stash(caller, t);
+    if (caller) {
+        stash(caller, t);
+    }
 
     m_sql.setQuery(query);
 
@@ -114,6 +130,16 @@ void DatabaseHelper::onDestroyed(QObject* obj)
     for (int i = ids.size()-1; i >= 0; i--) {
         m_idToObjectQueryType.remove(ids[i]);
     }
+}
+
+
+void DatabaseHelper::startTransaction(int id) {
+    m_sql.startTransaction(id);
+}
+
+
+void DatabaseHelper::endTransaction(int id) {
+    m_sql.endTransaction(id);
 }
 
 

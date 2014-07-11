@@ -1,5 +1,4 @@
 import bb.cascades 1.0
-import bb.device 1.0
 
 Dialog
 {
@@ -16,8 +15,8 @@ Dialog
     Container
     {
         id: dialogContainer
-        preferredWidth: displayInfo.pixelSize.width
-        preferredHeight: displayInfo.pixelSize.height
+        preferredWidth: Infinity
+        preferredHeight: Infinity
         background: Color.create(0.0, 0.0, 0.0, 0.5)
         layout: DockLayout {}
         opacity: 0
@@ -33,12 +32,6 @@ Dialog
                         root.close();
                     }
                 }
-            }
-        ]
-        
-        attachedObjects: [
-            DisplayInfo {
-                id: displayInfo
             }
         ]
     }

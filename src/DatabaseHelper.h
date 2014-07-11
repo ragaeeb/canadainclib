@@ -3,6 +3,13 @@
 
 #include "customsqldatasource.h"
 
+#include <QDir>
+
+#define ATTACH_DATABASE_ID -1
+#define INIT_SETUP_ID -2
+#define FOREIGN_KEY_SETUP -3
+#define DETACH_DATABASE_ID -4
+
 namespace canadainc {
 
 class DatabaseHelper : public QObject
@@ -17,6 +24,9 @@ class DatabaseHelper : public QObject
 
     void stash(QObject* caller, int t);
 
+signals:
+    void finished(int id);
+
 private slots:
     void dataLoaded(int id, QVariant const& data);
     void onDestroyed(QObject* obj);
@@ -26,9 +36,13 @@ public:
     virtual ~DatabaseHelper();
 
     void executeQuery(QObject* caller, QString const& query, int t, QVariantList const& args=QVariantList());
-    void attachIfNecessary(QString const& dbase, bool homePath=false);
-    void initSetup(QObject* caller, QStringList const& setupStatements, int id=-2);
-    void enableForeignKeys();
+    void attachIfNecessary(QString const& dbase, bool homePath=false, int id=ATTACH_DATABASE_ID);
+    void attachIfNecessary(QString const& dbase, QString const& path, int id=ATTACH_DATABASE_ID);
+    void detach(QString const& dbase, int id=DETACH_DATABASE_ID);
+    void initSetup(QObject* caller, QStringList const& setupStatements, int id=INIT_SETUP_ID);
+    void enableForeignKeys(int id=FOREIGN_KEY_SETUP);
+    void startTransaction(int id);
+    void endTransaction(int id);
 };
 
 } /* namespace canadainc */
