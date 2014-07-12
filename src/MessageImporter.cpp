@@ -7,8 +7,9 @@
 #include <bb/pim/message/MessageFilter>
 #include <bb/pim/message/MessageService>
 
-
+#if BBNDK_VERSION_AT_LEAST(10,3,0)
 #include <bb/pim/phone/CallHistoryService>
+#endif
 
 using namespace bb::pim::message;
 
