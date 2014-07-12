@@ -43,6 +43,89 @@
     </message>
 </context>
 <context>
+    <name>canadainc::LazyMediaPlayer</name>
+    <message>
+        <location filename="../src/LazyMediaPlayer.cpp" line="62"/>
+        <source>A DRM related error was encountered.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/LazyMediaPlayer.cpp" line="67"/>
+        <source>An unexpected internal error has occured!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/LazyMediaPlayer.cpp" line="70"/>
+        <source>An invalid parameter was specified!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/LazyMediaPlayer.cpp" line="73"/>
+        <source>An illegal operation given the context state.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/LazyMediaPlayer.cpp" line="76"/>
+        <source>An unrecognized input or output type or an out-of-range speed setting encountered.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/LazyMediaPlayer.cpp" line="79"/>
+        <source>A data format not recognized by any plugin encountered.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/LazyMediaPlayer.cpp" line="82"/>
+        <source>A DRM protected input was specified.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/LazyMediaPlayer.cpp" line="85"/>
+        <source>An illegal operation was encountered by the playback process.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/LazyMediaPlayer.cpp" line="88"/>
+        <source>An I/O error has been encountered at the source!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/LazyMediaPlayer.cpp" line="91"/>
+        <source>An I/O error has been encountered at the sink!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/LazyMediaPlayer.cpp" line="94"/>
+        <source>The source is currently unavailable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/LazyMediaPlayer.cpp" line="97"/>
+        <source>The resource was corrupted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/LazyMediaPlayer.cpp" line="100"/>
+        <source>Cannot open the sink (possibly because no plugin recognizes it).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/LazyMediaPlayer.cpp" line="103"/>
+        <source>Insufficient memory to perform the requested operation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/LazyMediaPlayer.cpp" line="106"/>
+        <source>A required resource such as an encoder or an output feed is presently unavailable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/LazyMediaPlayer.cpp" line="109"/>
+        <source>A playback permission error (e.g., user prohibition, region mismatch) error was encountered.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>canadainc::MessageImporter</name>
     <message>
         <location filename="../src/MessageImporter.cpp" line="35"/>

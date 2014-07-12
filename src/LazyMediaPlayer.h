@@ -5,6 +5,7 @@
 #include <QSize>
 #include <QVariantMap>
 
+#include <bb/multimedia/MediaError>
 #include <bb/multimedia/MediaState>
 
 namespace bb {
@@ -39,6 +40,7 @@ class LazyMediaPlayer : public QObject
 	void doPlayback(QUrl const& uri);
 
 private slots:
+    void error(bb::multimedia::MediaError::Type mediaError, unsigned int position);
 	void mediaStateChanged(bb::multimedia::MediaState::Type mediaState);
 	void trackChanged(unsigned int track);
 
@@ -46,6 +48,7 @@ signals:
     void activeChanged();
     void currentIndexChanged(int index);
     void durationChanged(unsigned int duration);
+    void error(QString const& message);
     void metaDataChanged(QVariantMap const& metaData);
     void playbackCompleted();
     void playingChanged();

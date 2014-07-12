@@ -37,6 +37,7 @@ void LazyMediaPlayer::play(QUrl const& uri)
 		connect( m_npc, SIGNAL( play() ), m_mp, SLOT( play() ) );
 		connect( m_npc, SIGNAL( revoked() ), m_mp, SLOT( pause() ) );
 		connect( m_mp, SIGNAL( durationChanged(unsigned int) ), this, SIGNAL( durationChanged(unsigned int) ) );
+		connect( m_mp, SIGNAL( error(bb::multimedia::MediaError::Type, unsigned int) ), this, SLOT( error(bb::multimedia::MediaError::Type, unsigned int) ) );
         connect( m_mp, SIGNAL( mediaStateChanged(bb::multimedia::MediaState::Type) ), this, SLOT( mediaStateChanged(bb::multimedia::MediaState::Type) ) );
 		connect( m_mp, SIGNAL( metaDataChanged(QVariantMap const&) ), this, SIGNAL( metaDataChanged(QVariantMap const&) ) );
 		connect( m_mp, SIGNAL( playbackCompleted() ), this, SIGNAL( playbackCompleted() ) );
@@ -51,6 +52,67 @@ void LazyMediaPlayer::play(QUrl const& uri)
 	}
 
 	QtConcurrent::run(this, &LazyMediaPlayer::doPlayback, uri);
+}
+
+
+void LazyMediaPlayer::error(bb::multimedia::MediaError::Type mediaError, unsigned int position)
+{
+    LOGGER(mediaError << position);
+
+    QString message = tr("A DRM related error was encountered.");
+
+    switch (mediaError)
+    {
+        case MediaError::Internal:
+            message = tr("An unexpected internal error has occured!");
+            break;
+        case MediaError::InvalidParameter:
+            message = tr("An invalid parameter was specified!");
+            break;
+        case MediaError::InvalidState:
+            message = tr("An illegal operation given the context state.");
+            break;
+        case MediaError::UnsupportedValue:
+            message = tr("An unrecognized input or output type or an out-of-range speed setting encountered.");
+            break;
+        case MediaError::UnsupportedMediaType:
+            message = tr("A data format not recognized by any plugin encountered.");
+            break;
+        case MediaError::DrmProtected:
+            message = tr("A DRM protected input was specified.");
+            break;
+        case MediaError::UnsupportedOperation:
+            message = tr("An illegal operation was encountered by the playback process.");
+            break;
+        case MediaError::Read:
+            message = tr("An I/O error has been encountered at the source!");
+            break;
+        case MediaError::Write:
+            message = tr("An I/O error has been encountered at the sink!");
+            break;
+        case MediaError::SourceUnavailable:
+            message = tr("The source is currently unavailable.");
+            break;
+        case MediaError::ResourceCorrupted:
+            message = tr("The resource was corrupted.");
+            break;
+        case MediaError::OutputUnavailable:
+            message = tr("Cannot open the sink (possibly because no plugin recognizes it).");
+            break;
+        case MediaError::OutOfMemory:
+            message = tr("Insufficient memory to perform the requested operation.");
+            break;
+        case MediaError::ResourceUnavailable:
+            message = tr("A required resource such as an encoder or an output feed is presently unavailable.");
+            break;
+        case MediaError::Permission:
+            message = tr("A playback permission error (e.g., user prohibition, region mismatch) error was encountered.");
+            break;
+        default:
+            break;
+    }
+
+    emit error(message);
 }
 
 
