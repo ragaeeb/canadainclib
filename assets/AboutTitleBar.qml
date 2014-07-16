@@ -5,6 +5,7 @@ TitleBar
 {
     id: titleControl
     property string channelTitle: qsTr("Our BBM Channel") + Retranslate.onLanguageChanged
+    property variant labelColor: Color.White
     kind: TitleBarKind.FreeForm
     scrollBehavior: TitleBarScrollBehavior.NonSticky
     kindProperties: FreeFormTitleBarKindProperties
@@ -21,7 +22,7 @@ TitleBar
                 text: qsTr("%1 %2").arg(appInfo.title).arg(appInfo.version)
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Fill
-                textStyle.color: Color.White
+                textStyle.color: labelColor
                 textStyle.textAlign: TextAlign.Center
                 textStyle.base: SystemDefaults.TextStyles.BodyText
                 
@@ -37,7 +38,7 @@ TitleBar
                 id: body
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Fill
-                textStyle.color: Color.White
+                textStyle.color: labelColor
                 textStyle.textAlign: TextAlign.Center
                 textStyle.base: SystemDefaults.TextStyles.SmallText
                 content.flags: TextContentFlag.ActiveText | TextContentFlag.EmoticonsOff

@@ -6,9 +6,9 @@ MenuDefinition
     property alias settings: settingsActionItem
     property alias help: helpActionItem
     property bool allowDonations: false
-    property string bbWorldID
     property bool showServiceLogging: false
     property bool showSubmitLogs: false
+    property variant labelColor: Color.White
     
     function launchPage(page)
     {
@@ -29,11 +29,6 @@ MenuDefinition
         if (allowDonations) {
             var donator = donateDefinition.createObject();
             addAction(donator);
-        }
-        
-        if (bbWorldID.length > 0) {
-            var reviewer = reviewDefinition.createObject();
-            addAction(reviewer);
         }
         
         app.initialize.connect(openChannel);
@@ -74,7 +69,19 @@ MenuDefinition
                 bugReportPage.projectName = projectName;
                 bugReportPage.showServiceLogging = showServiceLogging;
                 bugReportPage.showSubmitLogs = showSubmitLogs;
+                bugReportPage.labelColor = labelColor;
                 launchPage(bugReportPage);
+            }
+        },
+        
+        ActionItem
+        {
+            title: qsTr("Review") + Retranslate.onLanguageChanged
+            imageSource: "images/ic_review.png"
+            
+            onTriggered: {
+                console.log("UserEvent: ReviewApp");
+                persist.reviewApp();
             }
         }
     ]
@@ -114,22 +121,6 @@ MenuDefinition
                 onTriggered: {
                     console.log("UserEvent: Donate");
                     persist.donate();
-                }
-            }
-        },
-        
-        ComponentDefinition
-        {
-            id: reviewDefinition
-            
-            ActionItem
-            {
-                title: qsTr("Review") + Retranslate.onLanguageChanged
-                imageSource: "images/ic_review.png"
-                
-                onTriggered: {
-                    console.log("UserEvent: ReviewApp");
-                    persist.reviewApp();
                 }
             }
         }

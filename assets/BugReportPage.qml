@@ -7,6 +7,7 @@ Page
     property string projectName
     property bool showServiceLogging: false
     property bool showSubmitLogs: false
+    property variant labelColor: Color.White
     
     onShowSubmitLogsChanged: {
         if (showSubmitLogs) {
@@ -32,29 +33,11 @@ Page
             {
                 leftPadding: 10; rightPadding: 10;
                 
-                layout: StackLayout {
-                    orientation: LayoutOrientation.LeftToRight
-                }
-                
                 Label {
-                    text: qsTr("UI Logging") + Retranslate.onLanguageChanged
+                    text: qsTr("Bug Reports") + Retranslate.onLanguageChanged
                     verticalAlignment: VerticalAlignment.Center
-                    textStyle.color: Color.White
-                    
-                    layoutProperties: StackLayoutProperties {
-                        spaceQuota: 1
-                    }
-                }
-                
-                ToggleButton
-                {
-                    id: logUiToggle
-                    verticalAlignment: VerticalAlignment.Center
-                    checked: persist.getValueFor("logUI")
-                    
-                    onCheckedChanged: {
-                        persist.saveValueFor("logUI", checked, false);
-                    }
+                    textStyle.base: SystemDefaults.TextStyles.BigText
+                    textStyle.color: labelColor
                 }
             }
             
@@ -63,42 +46,34 @@ Page
                 expanded: true
                 indicatorVisibility: showServiceLogging ? TitleBarExpandableAreaIndicatorVisibility.Visible : TitleBarExpandableAreaIndicatorVisibility.Hidden
                 
-                content: ControlDelegate
+                content: Container
                 {
-                    delegateActive: showServiceLogging
-                    
-                    sourceComponent: ComponentDefinition
+                    leftPadding: 10; rightPadding: 10; topPadding: 10
+
+                    PersistCheckBox
                     {
-                        Container
+                        id: logUiToggle
+                        isBool: true
+                        text: qsTr("UI Logging") + Retranslate.onLanguageChanged
+                        key: "logUI"
+                    }
+                    
+                    ControlDelegate
+                    {
+                        delegateActive: showServiceLogging
+                        
+                        sourceComponent: ComponentDefinition
                         {
-                            background: Color.Black
-                            leftPadding: 10; rightPadding: 80; bottomPadding: 10
-                            
-                            layout: StackLayout {
-                                orientation: LayoutOrientation.LeftToRight
-                            }
-                            
-                            Label {
-                                text: qsTr("Service Logging") + Retranslate.onLanguageChanged
-                                verticalAlignment: VerticalAlignment.Center
-                                textStyle.color: Color.White
-                                
-                                layoutProperties: StackLayoutProperties {
-                                    spaceQuota: 1
-                                }
-                            }
-                            
-                            ToggleButton
+                            PersistCheckBox
                             {
-                                verticalAlignment: VerticalAlignment.Center
-                                checked: persist.getValueFor("logService")
-                                
-                                onCheckedChanged: {
-                                    persist.saveValueFor("logService", checked, false);
-                                }
+                                isBool: true
+                                text: qsTr("Service Logging") + Retranslate.onLanguageChanged
+                                key: "logService"
                             }
                         }
                     }
+                    
+                    Divider {}
                 }
             }
         }

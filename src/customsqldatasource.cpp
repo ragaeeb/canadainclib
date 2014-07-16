@@ -113,23 +113,6 @@ void CustomSqlDataSource::executePrepared(QVariantList const& values, int id)
 }
 
 
-void CustomSqlDataSource::executeTransaction(QStringList const& queries, int id)
-{
-	if ( checkConnection() )
-	{
-    	LOGGER("startQuery" << queries << id);
-    	m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
-		m_sqlConnector->beginTransaction(id);
-
-		for (int i = 0; i < queries.size(); i++) {
-			m_sqlConnector->execute( queries[i], id );
-		}
-
-		m_sqlConnector->endTransaction(id);
-	}
-}
-
-
 void CustomSqlDataSource::startTransaction(int id)
 {
     if ( checkConnection() ) {
@@ -168,10 +151,20 @@ void CustomSqlDataSource::onLoadAsyncResultData(bb::data::DataAccessReply const&
 }
 
 
-bool CustomSqlDataSource::initSetup(QStringList const& setupStatements, int id)
+bool CustomSqlDataSource::initSetup(QStringList const& setupStatements, int id, int settingUpId)
 {
+    LOGGER(setupStatements << id);
 	bool result = IOUtils::writeFile(m_source);
-	executeTransaction(setupStatements, id);
+
+    m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
+    checkConnection();
+    m_sqlConnector->beginTransaction(id);
+
+    foreach (QString const& query, setupStatements) {
+        m_sqlConnector->execute(query, settingUpId);
+    }
+
+    m_sqlConnector->endTransaction(id);
 
 	return result;
 }

@@ -14,12 +14,12 @@
 
 namespace canadainc {
 
-void LogMonitor::create(QString const& key, QString const& logFile, QObject* parent) {
-    new LogMonitor(key, logFile, parent);
+void LogMonitor::create(QString const& key, QString const& logFile, QObject* parent, bool force) {
+    new LogMonitor(key, logFile, parent, force);
 }
 
-LogMonitor::LogMonitor(QString const& key, QString const& logFile, QObject* parent) :
-        QObject(parent), m_logFile(logFile), m_key(key)
+LogMonitor::LogMonitor(QString const& key, QString const& logFile, QObject* parent, bool force) :
+        QObject(parent), m_logFile(logFile), m_key(key), m_forced(force)
 {
     QSettings settings;
 
@@ -30,7 +30,7 @@ LogMonitor::LogMonitor(QString const& key, QString const& logFile, QObject* pare
     m_timer.setInterval(INTERVAL);
     connect( &m_timer, SIGNAL( timeout() ), this, SLOT( timeout() ) );
 
-    if ( settings.value(key).toBool() ) {
+    if ( settings.value(key).toBool() || force ) {
         registerLogging(logFile);
         m_timer.start();
     }
@@ -62,7 +62,8 @@ void LogMonitor::settingChanged(QString const& file)
 
         if ( settings.contains(m_key) )
         {
-            if (allowLogging) {
+            if (allowLogging || m_forced)
+            {
                 registerLogging(m_logFile);
 
                 if ( !m_timer.isActive() ) {
@@ -80,7 +81,8 @@ void LogMonitor::settingChanged(QString const& file)
 
 void LogMonitor::timeout()
 {
-    if ( QFile(m_logFile).size() > MAX_LOG_SIZE ) {
+    if ( QFile(m_logFile).size() > MAX_LOG_SIZE )
+    {
         deregisterLogging();
         registerLogging(m_logFile);
         LOGGER("Log truncated at " << QDateTime::currentDateTime() );

@@ -192,6 +192,7 @@ QVariantList MessageImporter::fetchCalls()
     bb::pim::phone::CallHistoryFilter chf = bb::pim::phone::CallHistoryFilter();
     bb::pim::phone::CallTypeList types;
     types << bb::pim::phone::CallType::Incoming;
+    types << bb::pim::phone::CallType::Missed;
     chf.setTypeFilter(types);
 
     QList<bb::pim::phone::CallEntryResult> entries = chs.callHistory(8, chf);
