@@ -158,7 +158,7 @@ bool CustomSqlDataSource::initSetup(QStringList const& setupStatements, int id, 
 
     m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
     checkConnection();
-    m_sqlConnector->beginTransaction(id);
+    m_sqlConnector->beginTransaction(settingUpId);
 
     foreach (QString const& query, setupStatements) {
         m_sqlConnector->execute(query, settingUpId);

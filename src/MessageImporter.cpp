@@ -200,7 +200,7 @@ QVariantList MessageImporter::fetchCalls()
 
     LOGGER("**** Total" << total);
 
-    for (int i = 0; i < total; i++)
+    for (int i = total-1; i >= 0; i--)
     {
         bb::pim::phone::CallEntry c = entries[i].call();
         QVariantMap qvm;
@@ -218,7 +218,7 @@ QVariantList MessageImporter::fetchCalls()
 
         result << qvm;
 
-        emit progress(i, total);
+        emit progress(total-i-1, total);
     }
 #endif
 
