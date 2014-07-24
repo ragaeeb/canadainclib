@@ -157,14 +157,17 @@ bool CustomSqlDataSource::initSetup(QStringList const& setupStatements, int id, 
 	bool result = IOUtils::writeFile(m_source);
 
     m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
-    checkConnection();
-    m_sqlConnector->beginTransaction(settingUpId);
 
-    foreach (QString const& query, setupStatements) {
-        m_sqlConnector->execute(query, settingUpId);
+    if ( checkConnection() )
+    {
+        m_sqlConnector->beginTransaction(settingUpId);
+
+        foreach (QString const& query, setupStatements) {
+            m_sqlConnector->execute(query, settingUpId);
+        }
+
+        m_sqlConnector->endTransaction(id);
     }
-
-    m_sqlConnector->endTransaction(id);
 
 	return result;
 }

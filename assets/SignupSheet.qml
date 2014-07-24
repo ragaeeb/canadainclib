@@ -12,7 +12,8 @@ Sheet
             passwordField.requestFocus();
         }
         
-        titleBar: TitleBar {
+        titleBar: TitleBar
+        {
             title: {
                 if ( security.accountCreated() ) {
                     return qsTr("Change Password") + Retranslate.onLanguageChanged
@@ -20,58 +21,74 @@ Sheet
                     return qsTr("Create Password") + Retranslate.onLanguageChanged
                 }
             }
+            
+            acceptAction: ActionItem
+            {
+                id: setPasswordAction
+                imageSource: "images/dropdown/set_password.png"
+                title: qsTr("Save") + Retranslate.onLanguageChanged
+                
+                onTriggered: {
+                    console.log("UserEvent: SetPassword");
+                    
+                    minCharValidator.validate();
+                    equalityValidator.validate();
+                    
+                    if (minCharValidator.valid && equalityValidator.valid)
+                    {
+                        security.savePassword(passwordField.text);
+                        persist.showToast( qsTr("Successfully set password!\n\nMake sure you remember it!"), "", "asset:///images/dropdown/set_password.png" );
+                        sheet.close();
+                    }
+                }
+            }
         }
         
         Container
         {
-            TextField {
+            TextField
+            {
                 id: passwordField
-                
                 inputMode: TextFieldInputMode.Password
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Center
-                
                 input.submitKey: SubmitKey.Submit
+                input.submitKeyFocusBehavior: SubmitKeyFocusBehavior.Next
                 
-                input.onSubmitted: {
-                    confirmField.requestFocus();
-                }
-            }
-            
-            TextField {
-                id: confirmField
-                
-                inputMode: TextFieldInputMode.Password
-                horizontalAlignment: HorizontalAlignment.Fill
-                verticalAlignment: VerticalAlignment.Center
-                
-                input.submitKey: SubmitKey.Submit
-                
-                input.onSubmitted: {
-                    setPasswordButton.clicked();
-                }
-            }
-            
-            Button {
-                id: setPasswordButton
-                text: qsTr("Set Password") + Retranslate.onLanguageChanged
-                horizontalAlignment: HorizontalAlignment.Center
-                
-                onClicked: {
-                    console.log("UserEvent: SetPassword");
+                validator: Validator
+                {
+                    id: minCharValidator
+                    errorMessage: qsTr("The password must be at least 3 characters!") + Retranslate.onLanguageChanged
+                    mode: ValidationMode.FocusLost
                     
-                    if (passwordField.text != confirmField.text) {
-                        persist.showToast( qsTr("Passwords do not match!") );
-                        confirmField.requestFocus();
-                    } else if ( passwordField.text.length < 3 ) {
-                        persist.showToast( qsTr("Password must be at least 3 characters minimum!") );
-                        passwordField.requestFocus();
-                    } else {
-                        security.savePassword(passwordField.text);
-                        persist.showToast( qsTr("Successfully set password!\n\nMake sure you remember it!") );
-                        
-                        sheet.close();
+                    onValidate: {
+                        valid = passwordField.text.length > 2;
                     }
+                }
+            }
+            
+            TextField
+            {
+                id: confirmField
+                inputMode: TextFieldInputMode.Password
+                horizontalAlignment: HorizontalAlignment.Fill
+                verticalAlignment: VerticalAlignment.Center
+                input.submitKey: SubmitKey.Submit
+                input.submitKeyFocusBehavior: SubmitKeyFocusBehavior.Lose
+                
+                validator: Validator
+                {
+                    id: equalityValidator
+                    errorMessage: qsTr("Passwords do not match!") + Retranslate.onLanguageChanged
+                    mode: ValidationMode.FocusLost
+                    
+                    onValidate: {
+                        valid = confirmField.text == passwordField.text;
+                    }
+                }
+                
+                input.onSubmitted: {
+                    setPasswordAction.triggered();
                 }
             }
         }
@@ -87,8 +104,10 @@ Sheet
             {
                 id: cancelDefinition
                 
-                ActionItem {
+                ActionItem
+                {
                     id: cancelAction
+                    imageSource: "images/dropdown/dismiss.png"
                     title: qsTr("Cancel") + Retranslate.onLanguageChanged
                     
                     onTriggered: {
