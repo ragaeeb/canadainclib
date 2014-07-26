@@ -98,8 +98,6 @@ bool Persistance::showBlockingToast(QString const& text, QString const& buttonLa
 
 bool Persistance::showBlockingDialog(QString const& title, QString const& text, QString const& okButton, QString const& cancelButton)
 {
-    LOGGER(title << text);
-
 	SystemDialog dialog;
 	dialog.setBody(text);
 	dialog.setTitle(title);
@@ -112,8 +110,6 @@ bool Persistance::showBlockingDialog(QString const& title, QString const& text, 
 
 void Persistance::copyToClipboard(QString const& text, bool showToastMessage)
 {
-    LOGGER(text);
-
 	Clipboard clipboard;
 	clipboard.clear();
 	clipboard.insert( "text/plain", convertToUtf8(text) );
@@ -150,6 +146,8 @@ bool Persistance::contains(QString const& key) {
 
 bool Persistance::saveValueFor(const QString &objectName, const QVariant &inputValue, bool fireEvent)
 {
+    Q_UNUSED(fireEvent);
+
 	if ( m_settings.value(objectName) != inputValue )
 	{
 	    LOGGER(objectName << inputValue);

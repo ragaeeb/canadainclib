@@ -1,4 +1,4 @@
-import bb.cascades 1.0
+import bb.cascades 1.2
 
 Sheet
 {
@@ -54,6 +54,7 @@ Sheet
                 verticalAlignment: VerticalAlignment.Center
                 input.submitKey: SubmitKey.Submit
                 input.submitKeyFocusBehavior: SubmitKeyFocusBehavior.Next
+                maximumLength: 20
                 
                 validator: Validator
                 {
