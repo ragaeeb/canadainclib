@@ -153,7 +153,10 @@ bool Persistance::saveValueFor(const QString &objectName, const QVariant &inputV
 	    LOGGER(objectName << inputValue);
 
         m_settings.setValue(objectName, inputValue);
-        emit settingChanged(objectName);
+
+        if (fireEvent) {
+            emit settingChanged(objectName);
+        }
 
 	    /*
 	    if (fireEvent) {

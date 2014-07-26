@@ -144,53 +144,53 @@
 <context>
     <name>canadainc::Persistance</name>
     <message>
-        <location filename="../src/Persistance.cpp" line="122"/>
+        <location filename="../src/Persistance.cpp" line="118"/>
         <source>Copied: %1 to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="193"/>
+        <location filename="../src/Persistance.cpp" line="194"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="212"/>
+        <location filename="../src/Persistance.cpp" line="213"/>
         <source>Tutorial</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="212"/>
-        <location filename="../src/Persistance.cpp" line="238"/>
-        <location filename="../src/Persistance.cpp" line="279"/>
+        <location filename="../src/Persistance.cpp" line="213"/>
+        <location filename="../src/Persistance.cpp" line="239"/>
+        <location filename="../src/Persistance.cpp" line="280"/>
         <location filename="../src/Persistance.h" line="59"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="212"/>
-        <location filename="../src/Persistance.cpp" line="238"/>
-        <location filename="../src/Persistance.cpp" line="279"/>
+        <location filename="../src/Persistance.cpp" line="213"/>
+        <location filename="../src/Persistance.cpp" line="239"/>
+        <location filename="../src/Persistance.cpp" line="280"/>
         <location filename="../src/Persistance.h" line="59"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="238"/>
+        <location filename="../src/Persistance.cpp" line="239"/>
         <source>Review</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="279"/>
+        <location filename="../src/Persistance.cpp" line="280"/>
         <source>Are you sure you want to clear the cache?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="279"/>
+        <location filename="../src/Persistance.cpp" line="280"/>
         <source>Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="292"/>
+        <location filename="../src/Persistance.cpp" line="293"/>
         <source>Cache was successfully cleared!</source>
         <translation type="unfinished"></translation>
     </message>

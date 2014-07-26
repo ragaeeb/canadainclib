@@ -143,6 +143,8 @@ Page
                             progressIndicator.value = 0;
                             progressIndicator.state = ProgressIndicatorState.Progress;
                             progressIndicator.visible = true;
+                        } else {
+                            submitLogs.enabled = true;
                         }
                     }
                 }
