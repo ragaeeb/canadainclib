@@ -97,7 +97,7 @@ Page
         ActionItem
         {
             id: submitLogs
-            ActionBar.placement: ActionBarPlacement.OnBar
+            ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
             title: qsTr("Submit Logs") + Retranslate.onLanguageChanged
             imageSource: "images/ic_bugs.png"
             enabled: logUiToggle.checked
