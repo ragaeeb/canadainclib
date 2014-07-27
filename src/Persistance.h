@@ -58,7 +58,7 @@ public:
     Q_INVOKABLE static bool showBlockingToast(QString const& text, QString const& buttonLabel=QString(), QString const& icon=QString());
     Q_INVOKABLE static bool showBlockingDialog(QString const& title, QString const& text, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"));
     Q_INVOKABLE static QByteArray convertToUtf8(QString const& text);
-    Q_SLOT void clearCache();
+    Q_SLOT bool clearCache();
 };
 
 } /* namespace canadainc */

@@ -41,6 +41,7 @@ void clearAllCache()
     QFile::remove( QString("%1/cookieCollection.db-wal").arg(homePath) );
     QFile::remove( QString("%1/storagequota.db").arg(homePath) );
 
+    removeDir( QString("%1/appcache").arg(homePath) );
     removeDir( QString("%1/cache").arg(homePath) );
     removeDir( QString("%1/certificates").arg(homePath) );
     removeDir( QString("%1/downloads").arg(homePath) );
@@ -275,7 +276,7 @@ void Persistance::openChannel(bool promote)
 }
 
 
-void Persistance::clearCache()
+bool Persistance::clearCache()
 {
     bool clear = showBlockingDialog( tr("Confirmation"), tr("Are you sure you want to clear the cache?"), tr("Yes"), tr("No") );
 
@@ -286,6 +287,8 @@ void Persistance::clearCache()
         QFuture<void> future = QtConcurrent::run(clearAllCache);
         qfw->setFuture(future);
     }
+
+    return clear;
 }
 
 
