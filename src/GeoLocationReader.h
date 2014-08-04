@@ -21,6 +21,7 @@ class GeoLocationReader : public QObject
     Q_PROPERTY(QPointF coordinates READ coordinates NOTIFY coordinatesChanged)
 
 	QGeoPositionInfoSource* m_src;
+	QPointF m_cached;
 
 Q_SIGNALS:
 	void coordinatesChanged();
@@ -33,7 +34,7 @@ public:
 	virtual ~GeoLocationReader() {};
 	Q_INVOKABLE bool requestUpdate();
 
-	QPointF coordinates() const;
+	QPointF coordinates();
 	QGeoCoordinate position() const;
 };
 

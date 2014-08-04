@@ -32,13 +32,21 @@ void GeoLocationReader::positionUpdated(const QGeoPositionInfo& update)
 {
 	Q_UNUSED(update);
 
-	LOGGER( "latitude,longitude" << update.coordinate().latitude() << update.coordinate().longitude() );
+	m_cached = QPointF( update.coordinate().latitude(), update.coordinate().longitude() );
+    LOGGER( "latitude,longitude" << m_cached );
 	emit coordinatesChanged();
 }
 
 
-QPointF GeoLocationReader::coordinates() const {
-	return m_src ? QPointF( m_src->lastKnownPosition().coordinate().latitude(), m_src->lastKnownPosition().coordinate().longitude() ) : QPointF();
+QPointF GeoLocationReader::coordinates()
+{
+    if ( m_cached.isNull() && m_src )
+    {
+        QGeoCoordinate coordinate = position();
+        m_cached = QPointF( coordinate.latitude(), coordinate.longitude() );
+    }
+
+    return m_cached;
 }
 
 
