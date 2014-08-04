@@ -72,7 +72,7 @@ void DatabaseHelper::dataLoaded(int id, QVariant const& data)
         //LOGGER("DATA" << data);
         QMetaObject::invokeMethod(caller, "onDataLoaded", Qt::QueuedConnection, Q_ARG(QVariant, t), Q_ARG(QVariant, data) );
     } else {
-        emit finished(id);
+        emit finished(id, data);
     }
 }
 
@@ -102,12 +102,18 @@ void DatabaseHelper::executeQuery(QObject* caller, QString const& query, int t, 
         stash(caller, t);
     }
 
+    executeInternal(query, m_currentId, args);
+}
+
+
+void DatabaseHelper::executeInternal(QString const& query, int t, QVariantList const& args)
+{
     m_sql.setQuery(query);
 
     if ( args.isEmpty() ) {
-        m_sql.load(m_currentId);
+        m_sql.load(t);
     } else {
-        m_sql.executePrepared(args, m_currentId);
+        m_sql.executePrepared(args, t);
     }
 }
 

@@ -138,14 +138,12 @@ void CustomSqlDataSource::load(int id)
 
 void CustomSqlDataSource::onLoadAsyncResultData(bb::data::DataAccessReply const& replyData)
 {
-	LOGGER( replyData.id() << "took" << QDateTime::currentMSecsSinceEpoch()-m_execTimestamp );
-
     if ( replyData.hasError() ) {
         LOGGER( replyData.id() << ", SQL error: " << replyData );
         emit error( replyData.errorMessage() );
     } else {
         QVariantList resultList = replyData.result().toList();
-        LOGGER( "Result list" << resultList.size() );
+        LOGGER( replyData.id() << "took" << QDateTime::currentMSecsSinceEpoch()-m_execTimestamp << "elements" << resultList.size() );
         emit dataLoaded( replyData.id(), resultList );
     }
 }

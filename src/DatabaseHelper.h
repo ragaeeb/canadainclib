@@ -25,7 +25,7 @@ class DatabaseHelper : public QObject
     void stash(QObject* caller, int t);
 
 signals:
-    void finished(int id);
+    void finished(int id, QVariant const& data);
 
 private slots:
     void dataLoaded(int id, QVariant const& data);
@@ -36,6 +36,7 @@ public:
     virtual ~DatabaseHelper();
 
     void executeQuery(QObject* caller, QString const& query, int t, QVariantList const& args=QVariantList());
+    void executeInternal(QString const& query, int t, QVariantList const& args=QVariantList());
     void attachIfNecessary(QString const& dbase, bool homePath=false, int id=ATTACH_DATABASE_ID);
     void attachIfNecessary(QString const& dbase, QString const& path, int id=ATTACH_DATABASE_ID);
     void detach(QString const& dbase, int id=DETACH_DATABASE_ID);
