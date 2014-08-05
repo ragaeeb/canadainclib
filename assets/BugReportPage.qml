@@ -139,7 +139,7 @@ Page
                         if (result == SystemUiResult.ConfirmButtonSelection)
                         {
                             var value = inputFieldTextEntry().trim();
-                            reporter.submitLogs(value);
+                            reporter.submitLogs(value, true);
                             progressIndicator.value = 0;
                             progressIndicator.state = ProgressIndicatorState.Progress;
                             progressIndicator.visible = true;
