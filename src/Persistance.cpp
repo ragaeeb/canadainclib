@@ -2,6 +2,7 @@
 #include <bb/system/SystemDialog>
 #include <bb/system/SystemToast>
 
+#include <bb/cascades/Application>
 #include <bb/cascades/QmlDocument>
 
 #include "Persistance.h"
@@ -17,7 +18,7 @@ bool removeDir(QString const& dirName)
 
     if ( dir.exists(dirName) )
     {
-        Q_FOREACH( QFileInfo info, dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst) )
+        foreach( QFileInfo info, dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst) )
         {
             if ( info.isDir() ) {
                 result = removeDir(info.absoluteFilePath());
@@ -59,16 +60,18 @@ Persistance::Persistance(QObject* parent) : QObject(parent), m_toast(NULL)
 {
     QDeclarativeContext* rootContext = QmlDocument::defaultDeclarativeEngine()->rootContext();
     rootContext->setContextProperty("persist", this);
+
+    connect( Application::instance(), SIGNAL( aboutToQuit() ), this, SLOT( commit() ) );
 }
 
-Persistance::~Persistance()
+
+void Persistance::commit()
 {
-    /*
     QStringList keys = m_pending.keys();
 
     foreach ( QString const& key, m_pending.keys() ) {
         m_settings.setValue( key, m_pending.value(key) );
-    } */
+    }
 }
 
 
@@ -76,7 +79,6 @@ void Persistance::showToast(QString const& text, QString const& buttonLabel, QSt
 {
 	if (m_toast == NULL) {
 		m_toast = new SystemToast(this);
-		connect( m_toast, SIGNAL( finished(bb::system::SystemUiResult::Type) ), this, SLOT( finished(bb::system::SystemUiResult::Type) ) );
 	}
 
 	m_toast->button()->setLabel(buttonLabel);
@@ -121,11 +123,6 @@ void Persistance::copyToClipboard(QString const& text, bool showToastMessage)
 }
 
 
-void Persistance::finished(bb::system::SystemUiResult::Type value) {
-	emit toastFinished(value == SystemUiResult::ButtonSelection);
-}
-
-
 QByteArray Persistance::convertToUtf8(QString const& text) {
 	return text.toUtf8();
 }
@@ -133,7 +130,7 @@ QByteArray Persistance::convertToUtf8(QString const& text) {
 
 QVariant Persistance::getValueFor(const QString &objectName) const
 {
-    QVariant value = /*m_pending.contains(objectName) ? m_pending.value(objectName) : */m_settings.value(objectName);
+    QVariant value = m_settings.value(objectName);
     LOGGER(objectName << value);
 
     return value;
@@ -155,17 +152,12 @@ bool Persistance::saveValueFor(const QString &objectName, const QVariant &inputV
 
         m_settings.setValue(objectName, inputValue);
 
-        if (fireEvent) {
-            emit settingChanged(objectName);
-        }
-
-	    /*
 	    if (fireEvent) {
 	        m_settings.setValue(objectName, inputValue);
 	        emit settingChanged(objectName);
 	    } else {
 	        m_pending[objectName] = inputValue;
-	    } */
+	    }
 
 		return true;
 	} else {
@@ -299,6 +291,11 @@ void Persistance::cacheCleared() {
 
 void Persistance::clear() {
 	m_settings.clear();
+}
+
+
+Persistance::~Persistance()
+{
 }
 
 

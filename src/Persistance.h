@@ -28,8 +28,8 @@ class Persistance : public QObject
 	bb::system::SystemToast* m_toast;
 
 private slots:
-	void finished(bb::system::SystemUiResult::Type value);
-	void cacheCleared();
+    void cacheCleared();
+    void commit();
 
 signals:
 	void settingChanged(QString const& key);
