@@ -36,6 +36,8 @@ class LazyMediaPlayer : public QObject
 	NowPlayingConnection* m_npc;
 	QString m_videoWindowId;
 	bool m_repeat;
+	double m_volume;
+	bool m_multiThreaded;
 
 	void doPlayback(QUrl const& uri);
 
@@ -57,30 +59,33 @@ signals:
 	void videoDimensionsChanged(const QSize &videoDimensions);
 
 public:
-	LazyMediaPlayer(QObject* parent=NULL);
+	LazyMediaPlayer(bool multiThreaded=false, QObject* parent=NULL);
 	virtual ~LazyMediaPlayer();
 
     bool active() const;
+    bool playing() const;
+    bool repeat() const;
     int count() const;
     int currentIndex() const;
+    MediaPlayer* mediaPlayer();
+    QSize videoDimensions() const;
     QVariant currentPosition() const;
     QVariantMap metaData() const;
-	bool playing() const;
-	bool repeat() const;
-	QSize videoDimensions() const;
-    Q_INVOKABLE void jump(int secs);
-    Q_SLOT void pause();
-    Q_INVOKABLE void play(QUrl const& uri);
-	Q_INVOKABLE void setName(QString const& name);
     void setRepeat(bool value);
+    double volume();
+
+    Q_INVOKABLE QString videoWindowId();
+    Q_INVOKABLE void jump(int secs);
+    Q_INVOKABLE void play(QUrl const& uri);
+    Q_INVOKABLE void seek(unsigned int position);
+    Q_INVOKABLE void setName(QString const& name);
     Q_INVOKABLE void setVideoWindowId(QString const& windowId);
-	Q_INVOKABLE void seek(unsigned int position);
-	Q_INVOKABLE void skip(int n);
-	Q_SLOT void stop();
+    Q_INVOKABLE void setVolume(double volume);
+    Q_INVOKABLE void skip(int n);
+    Q_SLOT void pause();
+    Q_SLOT void stop();
     Q_SLOT void togglePlayback();
     Q_SLOT void toggleVideo();
-	Q_INVOKABLE QString videoWindowId();
-	MediaPlayer* mediaPlayer();
 };
 
 } /* namespace canadainc */

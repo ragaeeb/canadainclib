@@ -10,7 +10,8 @@ namespace canadainc {
 
 using namespace bb::multimedia;
 
-LazyMediaPlayer::LazyMediaPlayer(QObject* parent) : QObject(parent), m_mp(NULL), m_npc(NULL), m_repeat(false)
+LazyMediaPlayer::LazyMediaPlayer(bool multiThreaded, QObject* parent) :
+        QObject(parent), m_mp(NULL), m_npc(NULL), m_repeat(false), m_volume(1), m_multiThreaded(multiThreaded)
 {
     connect( bb::Application::instance(), SIGNAL( aboutToQuit() ), this, SLOT( pause() ) );
 }
@@ -31,6 +32,9 @@ void LazyMediaPlayer::play(QUrl const& uri)
 		m_npc = new NowPlayingConnection(m_name, this);
 
 		setRepeat(m_repeat);
+		setVolume(m_volume);
+
+		LOGGER("Using vol" << m_volume << m_mp->volume());
 
 		connect( m_npc, SIGNAL( pause() ), m_mp, SLOT( pause() ) );
 		connect( m_npc, SIGNAL( acquired() ), m_mp, SLOT( play() ) );
@@ -51,7 +55,11 @@ void LazyMediaPlayer::play(QUrl const& uri)
 		}
 	}
 
-	QtConcurrent::run(this, &LazyMediaPlayer::doPlayback, uri);
+	if (m_multiThreaded) {
+	    QtConcurrent::run(this, &LazyMediaPlayer::doPlayback, uri);
+	} else {
+	    doPlayback(uri);
+	}
 }
 
 
@@ -297,6 +305,22 @@ QVariantMap LazyMediaPlayer::metaData() const {
 
 MediaPlayer* LazyMediaPlayer::mediaPlayer() {
 	return m_mp;
+}
+
+
+void LazyMediaPlayer::setVolume(double volume)
+{
+    m_volume = volume;
+    LOGGER("setVol" << m_volume);
+
+    if (m_mp) {
+        m_mp->setVolume(volume);
+    }
+}
+
+
+double LazyMediaPlayer::volume() {
+    return m_mp ? m_mp->volume() : 0;
 }
 
 
