@@ -46,6 +46,10 @@ Page
                 expanded: true
                 indicatorVisibility: showServiceLogging ? TitleBarExpandableAreaIndicatorVisibility.Visible : TitleBarExpandableAreaIndicatorVisibility.Hidden
                 
+                onExpandedChanged: {                    
+                    console.log("UserEvent: BugReportTitleExpanded", expanded);
+                }
+                
                 content: Container
                 {
                     leftPadding: 10; rightPadding: 10; topPadding: 10
@@ -92,6 +96,10 @@ Page
             }
             
             title: qsTr("Open in Browser") + Retranslate.onLanguageChanged
+            
+            onTriggered: {
+                console.log("UserEvent: OpenInBrowser");
+            }
         },
         
         ActionItem

@@ -128,10 +128,14 @@ QByteArray Persistance::convertToUtf8(QString const& text) {
 }
 
 
-QVariant Persistance::getValueFor(const QString &objectName) const
+QVariant Persistance::getValueFor(QString const& objectName)
 {
     QVariant value = m_settings.value(objectName);
-    LOGGER(objectName << value);
+
+    if ( !m_logMap.contains(objectName) ) {
+        LOGGER(objectName << value);
+        m_logMap.insert(objectName, true);
+    }
 
     return value;
 }
@@ -144,13 +148,12 @@ bool Persistance::contains(QString const& key) {
 
 bool Persistance::saveValueFor(const QString &objectName, const QVariant &inputValue, bool fireEvent)
 {
-    Q_UNUSED(fireEvent);
-
 	if ( m_settings.value(objectName) != inputValue )
 	{
 	    LOGGER(objectName << inputValue);
 
         m_settings.setValue(objectName, inputValue);
+        m_logMap.remove(objectName);
 
 	    if (fireEvent) {
 	        m_settings.setValue(objectName, inputValue);
@@ -172,6 +175,7 @@ void Persistance::remove(QString const& key, bool fireEvent)
 	{
 	    LOGGER(key);
 		m_settings.remove(key);
+		m_logMap.remove(key);
 
 		if (fireEvent) {
 	        emit settingChanged(key);
@@ -270,7 +274,7 @@ void Persistance::openChannel(bool promote)
 
 bool Persistance::clearCache()
 {
-    bool clear = showBlockingDialog( tr("Confirmation"), tr("Are you sure you want to clear the cache?"), tr("Yes"), tr("No") );
+    bool clear = showBlockingDialog( tr("Confirmation"), tr("Are you sure you want to clear the cache?") );
 
     if (clear) {
         QFutureWatcher<void>* qfw = new QFutureWatcher<void>(this);

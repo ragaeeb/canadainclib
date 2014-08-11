@@ -26,6 +26,7 @@ class Persistance : public QObject
 	QSettings m_settings;
 	QMap<QString, QVariant> m_pending;
 	bb::system::SystemToast* m_toast;
+	QMap<QString, bool> m_logMap;
 
 private slots:
     void cacheCleared();
@@ -39,7 +40,7 @@ public:
 	Persistance(QObject* parent=NULL);
 	virtual ~Persistance();
 
-    Q_INVOKABLE QVariant getValueFor(QString const& objectName) const;
+    Q_INVOKABLE QVariant getValueFor(QString const& objectName);
     Q_INVOKABLE bool saveValueFor(QString const& objectName, QVariant const& inputValue, bool fireEvent=true);
     Q_INVOKABLE bool contains(QString const& key);
     Q_INVOKABLE void remove(QString const& key, bool fireEvent=true);

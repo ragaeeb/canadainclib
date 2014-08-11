@@ -66,6 +66,8 @@ TitleBar
                 } else {
                     body.text = qsTr("(c) %1 %2. All Rights Reserved.").arg( new Date().getFullYear() ).arg(packageInfo.author);
                 }
+                
+                console.log("UserEvent: AboutTitleExpanded", expanded);
             }
         }
     }
