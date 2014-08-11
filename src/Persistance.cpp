@@ -128,6 +128,11 @@ QByteArray Persistance::convertToUtf8(QString const& text) {
 }
 
 
+void Persistance::forceSync() {
+    m_settings.sync();
+}
+
+
 QVariant Persistance::getValueFor(QString const& objectName)
 {
     QVariant value = m_settings.value(objectName);

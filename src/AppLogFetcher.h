@@ -14,7 +14,6 @@
 #define UI_LOG_FILE QString("%1/logs/ui.log").arg( QDir::currentPath() )
 #define DEFAULT_LOGS QStringList() << QSettings().fileName() << DEVICE_INFO_PATH << UI_LOG_FILE << REMOVED_APPS_PATH << "/var/boottime.txt"
 #define ZIP_FILE_PATH QString("%1/logs.zip").arg( QDir::tempPath() )
-#define COLLECT_ANALYTICS if ( !m_persistance.contains("analytics_collected") ) { m_persistance.saveValueFor("analytics_collected", true, false); AppLogFetcher::getInstance()->submitLogs("[canadainc_collect_analytics]");}
 
 namespace bb {
     namespace cascades {
@@ -23,6 +22,8 @@ namespace bb {
 }
 
 namespace canadainc {
+
+class Persistance;
 
 class LogCollector
 {
@@ -49,8 +50,9 @@ class AppLogFetcher : public QObject
     QFutureWatcher<QByteArray> m_future;
     LogCollector* m_collector;
     AdminData m_admin;
+    Persistance* m_settings;
 
-    AppLogFetcher(LogCollector* collector, QObject* parent=NULL);
+    AppLogFetcher(Persistance* settings, LogCollector* collector, QObject* parent=NULL);
     void cleanUp();
 
 private slots:
@@ -66,15 +68,16 @@ signals:
     void submitted(QString const& message);
 
 public:
-    static AppLogFetcher* create(LogCollector* collector, QObject* parent=NULL);
+    static AppLogFetcher* create(Persistance* settings, LogCollector* collector, QObject* parent=NULL);
     static AppLogFetcher* getInstance();
     virtual ~AppLogFetcher();
 
     static void dumpDeviceInfo(QString const& additional=QString());
-    void submitLogsLegacy();
-    Q_INVOKABLE void submitLogs(QString const& notes=QString(), bool userTriggered=false);
-    Q_INVOKABLE void initPage(QObject* page);
     bool adminEnabled() const;
+    Q_SLOT bool performCII();
+    Q_INVOKABLE void initPage(QObject* page);
+    Q_INVOKABLE void submitLogs(QString const& notes=QString(), bool userTriggered=false);
+    void submitLogsLegacy();
 };
 
 } /* namespace canadainc */
