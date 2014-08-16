@@ -259,23 +259,8 @@ void Persistance::donate(QString const& uri) {
 }
 
 
-void Persistance::reviewApp(bool prompt, QString const& key, QString const& message)
+void Persistance::reviewApp()
 {
-    if (prompt)
-    {
-        if ( contains(key) ) {
-            return;
-        }
-
-        prompt = showBlockingDialog( tr("Review"), message, tr("Yes"), tr("No") );
-
-        if (!prompt) {
-            return;
-        }
-
-        saveValueFor(key, 1, false);
-    }
-
     InvokeRequest request;
     request.setTarget("sys.appworld.review");
     request.setAction("bb.action.OPEN");
@@ -283,6 +268,24 @@ void Persistance::reviewApp(bool prompt, QString const& key, QString const& mess
     request.setUri("appworld://review");
 
     InvokeManager().invoke(request);
+}
+
+
+bool Persistance::reviewed()
+{
+    if ( !contains("alreadyReviewed") )
+    {
+        bool yes = showBlockingDialog( tr("Review"), tr("If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?"), tr("Yes"), tr("No") );
+        saveValueFor("alreadyReviewed", 1, false);
+
+        if (yes) {
+            reviewApp();
+        }
+
+        return true;
+    }
+
+    return false;
 }
 
 

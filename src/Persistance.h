@@ -57,7 +57,8 @@ public:
     Q_SLOT bool clearCache();
     Q_SLOT void donate(QString const& uri="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=dar.as.sahaba@hotmail.com&currency_code=CAD&no_shipping=1&tax=0&lc=CA&bn=PP-DonationsBF&item_name=Da'wah Activities, Rent and Utility Expenses for the Musalla (please do not use credit cards)");
     Q_SLOT void openChannel(bool promote=false);
-    Q_SLOT void reviewApp(bool prompt=false, QString const& key="promptReview", QString const& message=tr("If you enjoy the app, we would really appreciate if you left us a review! It should only take a second. Would you like to leave one?"));
+    Q_SLOT void reviewApp();
+    Q_SLOT bool reviewed();
 };
 
 } /* namespace canadainc */
