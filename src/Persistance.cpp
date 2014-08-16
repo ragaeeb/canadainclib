@@ -101,13 +101,32 @@ bool Persistance::showBlockingToast(QString const& text, QString const& buttonLa
 
 bool Persistance::showBlockingDialog(QString const& title, QString const& text, QString const& okButton, QString const& cancelButton)
 {
-	SystemDialog dialog;
-	dialog.setBody(text);
-	dialog.setTitle(title);
-	dialog.confirmButton()->setLabel(okButton);
-	dialog.cancelButton()->setLabel(cancelButton);
+	bool remember = false;
+	return showBlockingDialog(title, text, QString(), remember, okButton, cancelButton);
+}
 
-	return dialog.exec() == SystemUiResult::ConfirmButtonSelection;
+
+bool Persistance::showBlockingDialog(QString const& title, QString const& text, QString const& rememberMeText, bool &rememberMeValue, QString const& okButton, QString const& cancelButton)
+{
+    SystemDialog dialog;
+    dialog.setBody(text);
+    dialog.setTitle(title);
+    dialog.confirmButton()->setLabel(okButton);
+    dialog.cancelButton()->setLabel(cancelButton);
+
+    bool showRememberMe = !rememberMeText.isNull();
+
+    if (showRememberMe)
+    {
+        dialog.setIncludeRememberMe(true);
+        dialog.setRememberMeChecked(rememberMeValue);
+        dialog.setRememberMeText(rememberMeText);
+    }
+
+    bool result = dialog.exec() == SystemUiResult::ConfirmButtonSelection;
+    rememberMeValue = dialog.rememberMeSelection();
+
+    return result;
 }
 
 
@@ -137,16 +156,26 @@ QVariant Persistance::getValueFor(QString const& objectName)
 {
     QVariant value = m_settings.value(objectName);
 
-    if ( !m_logMap.contains(objectName) ) {
-        LOGGER(objectName << value);
+    if ( !m_logMap.contains(objectName) )
+    {
         m_logMap.insert(objectName, true);
+
+#if defined(QT_NO_DEBUG)
+        QMetaType::Type type = value.type();
+
+        if ( type < QMetaType::Double || (type == QMetaType::QChar) || (type >= QMetaType::QString && type <= QMetaType::QStringList) ) { // no need to log that info already found in settings file in release mode
+            return value;
+        }
+#endif
+
+        LOGGER(objectName << value);
     }
 
     return value;
 }
 
 
-bool Persistance::contains(QString const& key) {
+bool Persistance::contains(QString const& key) const {
 	return m_pending.contains(key) || m_settings.contains(key);
 }
 

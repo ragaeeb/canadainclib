@@ -40,12 +40,13 @@ public:
 	Persistance(QObject* parent=NULL);
 	virtual ~Persistance();
 
-    Q_INVOKABLE bool contains(QString const& key);
+    Q_INVOKABLE bool contains(QString const& key) const;
     Q_INVOKABLE bool saveValueFor(QString const& objectName, QVariant const& inputValue, bool fireEvent=true);
     Q_INVOKABLE bool tutorial(QString const& key, QString const& message, QString const& icon);
     Q_INVOKABLE bool tutorialVideo(QString const& uri, bool prompt=true, QString const& key="tutorialVideo", QString const& message=tr("Would you like to see a video tutorial on how to use the app?"));
     Q_INVOKABLE QVariant getValueFor(QString const& objectName);
     Q_INVOKABLE static bool showBlockingDialog(QString const& title, QString const& text, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"));
+    Q_INVOKABLE static bool showBlockingDialog(QString const& title, QString const& text, QString const& rememberMeText, bool &rememberMeValue, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"));
     Q_INVOKABLE static bool showBlockingToast(QString const& text, QString const& buttonLabel=QString(), QString const& icon=QString());
     Q_INVOKABLE static QByteArray convertToUtf8(QString const& text);
     Q_SLOT void clear();
