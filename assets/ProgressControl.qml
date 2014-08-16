@@ -3,6 +3,7 @@ import bb.cascades 1.0
 ControlDelegate
 {
     property variant asset
+    property string loadingText: qsTr("Loading...") + Retranslate.onLanguageChanged
     delegateActive: false
     horizontalAlignment: HorizontalAlignment.Center
     verticalAlignment: VerticalAlignment.Center
@@ -10,27 +11,42 @@ ControlDelegate
     
     sourceComponent: ComponentDefinition
     {
-        ImageView
+        Container
         {
+            layout: DockLayout {}
             horizontalAlignment: HorizontalAlignment.Center
-            imageSource: asset
-            loadEffect: ImageViewLoadEffect.FadeZoom
             
-            animations: [
-                RotateTransition {
-                    id: rt
-                    delay: 0
-                    easingCurve: StockCurve.SineOut
-                    fromAngleZ: 0
-                    toAngleZ: 360
-                    duration: 1000
-                    repeatCount: AnimationRepeatCount.Forever
-                    
-                    onCreationCompleted: {
-                        play();
+            ImageView
+            {
+                horizontalAlignment: HorizontalAlignment.Center
+                imageSource: asset
+                loadEffect: ImageViewLoadEffect.FadeZoom
+                
+                animations: [
+                    RotateTransition {
+                        id: rt
+                        delay: 0
+                        easingCurve: StockCurve.SineOut
+                        fromAngleZ: 0
+                        toAngleZ: 360
+                        duration: 1000
+                        repeatCount: AnimationRepeatCount.Forever
+                        
+                        onCreationCompleted: {
+                            play();
+                        }
                     }
-                }
-            ]
+                ]
+            }
+            
+            Label {
+                text: loadingText
+                horizontalAlignment: HorizontalAlignment.Fill
+                verticalAlignment: VerticalAlignment.Center
+                textStyle.textAlign: TextAlign.Center
+                textStyle.fontSize: FontSize.XXSmall
+                opacity: 0.7
+            }
         }
     }
 }
