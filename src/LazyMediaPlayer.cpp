@@ -37,8 +37,8 @@ void LazyMediaPlayer::play(QUrl const& uri)
 		LOGGER("Using vol" << m_volume << m_mp->volume());
 
 		connect( m_npc, SIGNAL( pause() ), m_mp, SLOT( pause() ) );
-		connect( m_npc, SIGNAL( acquired() ), m_mp, SLOT( play() ) );
-		connect( m_npc, SIGNAL( play() ), m_mp, SLOT( play() ) );
+		connect( m_npc, SIGNAL( acquired() ), this, SLOT( playNow() ) );
+		connect( m_npc, SIGNAL( play() ), this, SLOT( playNow() ) );
 		connect( m_npc, SIGNAL( revoked() ), m_mp, SLOT( pause() ) );
 		connect( m_mp, SIGNAL( durationChanged(unsigned int) ), this, SIGNAL( durationChanged(unsigned int) ) );
 		connect( m_mp, SIGNAL( error(bb::multimedia::MediaError::Type, unsigned int) ), this, SLOT( error(bb::multimedia::MediaError::Type, unsigned int) ) );
@@ -56,8 +56,10 @@ void LazyMediaPlayer::play(QUrl const& uri)
 	}
 
 	if (m_multiThreaded) {
+	    LOGGER("multithreadedPlay");
 	    QtConcurrent::run(this, &LazyMediaPlayer::doPlayback, uri);
 	} else {
+	    LOGGER("single-threadedPlay");
 	    doPlayback(uri);
 	}
 }
@@ -124,6 +126,17 @@ void LazyMediaPlayer::error(bb::multimedia::MediaError::Type mediaError, unsigne
 }
 
 
+void LazyMediaPlayer::playNow()
+{
+    MediaError::Type errType = m_mp->play();
+    LOGGER(errType);
+
+    if (errType != MediaError::None) {
+        error(errType, 0);
+    }
+}
+
+
 void LazyMediaPlayer::doPlayback(QUrl const& uri)
 {
     if (m_mp) {
@@ -133,7 +146,7 @@ void LazyMediaPlayer::doPlayback(QUrl const& uri)
     m_mp->setSourceUrl(uri);
 
     if ( m_npc->isAcquired() ) {
-        m_mp->play();
+        playNow();
     } else {
         m_npc->acquire();
     }
