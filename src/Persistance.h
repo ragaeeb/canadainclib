@@ -49,16 +49,16 @@ public:
     Q_INVOKABLE static bool showBlockingDialog(QString const& title, QString const& text, QString const& rememberMeText, bool &rememberMeValue, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"));
     Q_INVOKABLE static bool showBlockingToast(QString const& text, QString const& buttonLabel=QString(), QString const& icon=QString());
     Q_INVOKABLE static QByteArray convertToUtf8(QString const& text);
-    Q_SLOT void clear();
     Q_INVOKABLE void copyToClipboard(QString const& text, bool showToastMessage=true);
-    Q_SLOT void forceSync();
     Q_INVOKABLE void remove(QString const& key, bool fireEvent=true);
     Q_INVOKABLE void showToast(QString const& text, QString const& buttonLabel=QString(), QString const& icon=QString());
     Q_SLOT bool clearCache();
+    Q_SLOT bool reviewed();
+    Q_SLOT void clear();
     Q_SLOT void donate(QString const& uri="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=dar.as.sahaba@hotmail.com&currency_code=CAD&no_shipping=1&tax=0&lc=CA&bn=PP-DonationsBF&item_name=Da'wah Activities, Rent and Utility Expenses for the Musalla (please do not use credit cards)");
+    Q_SLOT void forceSync();
     Q_SLOT void openChannel(bool promote=false);
     Q_SLOT void reviewApp();
-    Q_SLOT bool reviewed();
 };
 
 } /* namespace canadainc */

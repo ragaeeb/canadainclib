@@ -19,7 +19,9 @@ ControlDelegate
             leftPadding: 80
             rightPadding: 80
             
-            ImageView {
+            ImageView
+            {
+                id: imageView
                 horizontalAlignment: HorizontalAlignment.Center
                 verticalAlignment: VerticalAlignment.Center
                 imageSource: graphic
@@ -34,6 +36,12 @@ ControlDelegate
                         }
                     }
                 ]
+                
+                onCreationCompleted: {
+                    if ( "navigation" in imageView ) {
+                        imageView.navigation.focusPolicy = 0x2;
+                    }
+                }
             }
             
             Label {

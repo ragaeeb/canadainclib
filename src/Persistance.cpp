@@ -161,7 +161,7 @@ QVariant Persistance::getValueFor(QString const& objectName)
         m_logMap.insert(objectName, true);
 
 #if defined(QT_NO_DEBUG)
-        QMetaType::Type type = value.type();
+        int type = value.type();
 
         if ( type < QMetaType::Double || (type == QMetaType::QChar) || (type >= QMetaType::QString && type <= QMetaType::QStringList) ) { // no need to log that info already found in settings file in release mode
             return value;
