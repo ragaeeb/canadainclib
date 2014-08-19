@@ -139,13 +139,23 @@ void DatabaseHelper::onDestroyed(QObject* obj)
 }
 
 
-void DatabaseHelper::startTransaction(int id) {
-    m_sql.startTransaction(id);
+void DatabaseHelper::startTransaction(QObject* caller, int id)
+{
+    if (caller) {
+        stash(caller, id);
+    }
+
+    m_sql.startTransaction(m_currentId);
 }
 
 
-void DatabaseHelper::endTransaction(int id) {
-    m_sql.endTransaction(id);
+void DatabaseHelper::endTransaction(QObject* caller, int id)
+{
+    if (caller) {
+        stash(caller, id);
+    }
+
+    m_sql.endTransaction(m_currentId);
 }
 
 

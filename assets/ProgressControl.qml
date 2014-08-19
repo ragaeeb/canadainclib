@@ -3,7 +3,7 @@ import bb.cascades 1.0
 ControlDelegate
 {
     property variant asset
-    property string loadingText: qsTr("Loading...") + Retranslate.onLanguageChanged
+    property string loadingText
     delegateActive: false
     horizontalAlignment: HorizontalAlignment.Center
     verticalAlignment: VerticalAlignment.Center
