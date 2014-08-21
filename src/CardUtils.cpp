@@ -25,6 +25,8 @@ QObject* CardUtils::initAppropriate(QString const& qmlDoc, QMap<QString, QObject
 
         if (page) {
             NavigationPane* np = NavigationPane::create().backButtons(true);
+            qml->setContextProperty("navigationPane", np);
+
             np->push(page);
 
             Application::instance()->setScene(np);

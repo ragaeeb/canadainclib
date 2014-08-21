@@ -6,6 +6,7 @@
 #include <bb/cascades/Page>
 #include <bb/cascades/QmlDocument>
 
+#include <bb/device/DisplayInfo>
 #include <bb/device/HardwareInfo>
 
 namespace canadainc {
@@ -13,31 +14,36 @@ namespace canadainc {
 using namespace bb::cascades;
 using namespace bb::device;
 
-DeviceUtils::DeviceUtils(QObject* parent) : QObject(parent), m_hw(NULL)
+DeviceUtils::DeviceUtils(QObject* parent) :
+        QObject(parent), m_hw(NULL), m_display(NULL)
 {
     QDeclarativeContext* rootContext = QmlDocument::defaultDeclarativeEngine()->rootContext();
     rootContext->setContextProperty("deviceUtils", this);
 }
 
 
-void DeviceUtils::lazyInit()
+QSize DeviceUtils::pixelSize()
 {
-    if (!m_hw) {
-        m_hw = new HardwareInfo(this);
+    if (!m_display) {
+        m_display = new DisplayInfo(this);
     }
+
+    return m_display->pixelSize();
 }
 
 
 void DeviceUtils::attachTopBottomKeys(QObject* p, QObject* listView, bool onBar)
 {
-    lazyInit();
+    if (!m_hw) {
+        m_hw = new HardwareInfo(this);
+    }
 
     if ( !m_hw->isPhysicalKeyboardDevice() )
     {
-        AbstractActionItem* top = ActionItem::create().title( tr("Top") ).imageSource( QUrl("asset:///images/menu/ic_top.png") ).onTriggered( this, SLOT( submitUpdates() ) );
+        AbstractActionItem* top = ActionItem::create().title( tr("Top") ).imageSource( QUrl("asset:///images/menu/ic_top.png") ).onTriggered( this, SLOT( onTopTriggered() ) );
         connect( top, SIGNAL( destroyed(QObject*) ), this, SLOT( onDestroyed(QObject*) ) );
 
-        AbstractActionItem* bottom = ActionItem::create().title( tr("Bottom") ).imageSource( QUrl("asset:///images/menu/ic_bottom.png") ).onTriggered( this, SLOT( uploadUpdates() ) );
+        AbstractActionItem* bottom = ActionItem::create().title( tr("Bottom") ).imageSource( QUrl("asset:///images/menu/ic_bottom.png") ).onTriggered( this, SLOT( onBottomTriggered() ) );
         connect( bottom, SIGNAL( destroyed(QObject*) ), this, SLOT( onDestroyed(QObject*) ) );
 
         Page* page = static_cast<Page*>(p);
@@ -46,9 +52,6 @@ void DeviceUtils::attachTopBottomKeys(QObject* p, QObject* listView, bool onBar)
 
         m_actionToList[top] = listView;
         m_actionToList[bottom] = listView;
-
-        connect( bottom, SIGNAL( triggered() ), this, SLOT( onBottomTriggered() ) );
-        connect( top, SIGNAL( triggered() ), this, SLOT( onTopTriggered() ) );
     }
 }
 

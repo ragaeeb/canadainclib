@@ -31,10 +31,10 @@ class Persistance : public QObject
 private slots:
     void cacheCleared();
     void commit();
+    void finished(bb::system::SystemUiResult::Type value);
 
 signals:
 	void settingChanged(QString const& key);
-	void toastFinished(bool buttonTriggered=false);
 
 public:
 	Persistance(QObject* parent=NULL);

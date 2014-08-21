@@ -84,7 +84,15 @@ void Persistance::showToast(QString const& text, QString const& buttonLabel, QSt
 	m_toast->button()->setLabel(buttonLabel);
 	m_toast->setBody(text);
 	m_toast->setIcon(icon);
+	m_toast->setProperty("showing", true);
 	m_toast->show();
+}
+
+
+void Persistance::finished(bb::system::SystemUiResult::Type value)
+{
+    Q_UNUSED(value);
+    sender()->setProperty("showing", false);
 }
 
 
@@ -222,8 +230,11 @@ bool Persistance::tutorial(QString const& key, QString const& message, QString c
 {
     if ( !contains(key) )
     {
-        showToast( message, tr("OK"), icon );
-        saveValueFor(key, 1, false);
+        if ( m_toast && m_toast->property("showing").toBool() )
+        {
+            showToast( message, tr("OK"), icon );
+            saveValueFor(key, 1, false);
+        }
 
         return true;
     }
