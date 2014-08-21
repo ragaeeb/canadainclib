@@ -3,6 +3,7 @@
 
 #include <QSettings>
 
+#include <bb/system/SystemUiPosition>
 #include <bb/system/SystemUiResult>
 
 #define INIT_SETTING(a,b) if ( !m_persistance.contains(a) ) m_persistance.saveValueFor(a,b,false);
@@ -51,7 +52,7 @@ public:
     Q_INVOKABLE static QByteArray convertToUtf8(QString const& text);
     Q_INVOKABLE void copyToClipboard(QString const& text, bool showToastMessage=true);
     Q_INVOKABLE void remove(QString const& key, bool fireEvent=true);
-    Q_INVOKABLE void showToast(QString const& text, QString const& buttonLabel=QString(), QString const& icon=QString());
+    Q_INVOKABLE void showToast(QString const& text, QString const& buttonLabel=QString(), QString const& icon=QString(), bb::system::SystemUiPosition::Type pos=bb::system::SystemUiPosition::MiddleCenter);
     Q_SLOT bool clearCache();
     Q_SLOT bool reviewed();
     Q_SLOT void clear();

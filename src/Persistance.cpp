@@ -75,16 +75,18 @@ void Persistance::commit()
 }
 
 
-void Persistance::showToast(QString const& text, QString const& buttonLabel, QString const& icon)
+void Persistance::showToast(QString const& text, QString const& buttonLabel, QString const& icon, bb::system::SystemUiPosition::Type pos)
 {
 	if (m_toast == NULL) {
 		m_toast = new SystemToast(this);
+        connect( m_toast, SIGNAL( finished(bb::system::SystemUiResult::Type) ), this, SLOT( finished(bb::system::SystemUiResult::Type) ) );
 	}
 
 	m_toast->button()->setLabel(buttonLabel);
 	m_toast->setBody(text);
 	m_toast->setIcon(icon);
 	m_toast->setProperty("showing", true);
+	m_toast->setPosition(pos);
 	m_toast->show();
 }
 
@@ -230,9 +232,9 @@ bool Persistance::tutorial(QString const& key, QString const& message, QString c
 {
     if ( !contains(key) )
     {
-        if ( m_toast && m_toast->property("showing").toBool() )
+        if ( !m_toast || !m_toast->property("showing").toBool() )
         {
-            showToast( message, tr("OK"), icon );
+            showToast( message, tr("OK"), icon, SystemUiPosition::BottomCenter );
             saveValueFor(key, 1, false);
         }
 
