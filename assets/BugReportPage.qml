@@ -6,16 +6,7 @@ Page
     id: root
     property string projectName
     property bool showServiceLogging: false
-    property bool showSubmitLogs: false
     property variant labelColor: Color.White
-    
-    onShowSubmitLogsChanged: {
-        if (showSubmitLogs) {
-            root.addAction(submitLogs);
-        } else {
-            root.removeAction(submitLogs);
-        }
-    }
     
     onProjectNameChanged: {
         webView.url = "http://code.google.com/p/%1/issues/list".arg(projectName);
@@ -125,10 +116,6 @@ Page
             
             onCreationCompleted: {
                 reporter.submitted.connect(onSubmitted);
-                
-                if (!showSubmitLogs) {
-                    root.removeAction(submitLogs);
-                }
             }
             
             attachedObjects: [
@@ -146,7 +133,7 @@ Page
                         
                         if (result == SystemUiResult.ConfirmButtonSelection)
                         {
-                            var value = inputFieldTextEntry().trim();
+                            var value = "UserEnteredReport: "+inputFieldTextEntry().trim();
                             reporter.submitLogs(value, true);
                             progressIndicator.value = 0;
                             progressIndicator.state = ProgressIndicatorState.Progress;

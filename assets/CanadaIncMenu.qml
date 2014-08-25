@@ -7,7 +7,6 @@ MenuDefinition
     property alias help: helpActionItem
     property bool allowDonations: false
     property bool showServiceLogging: false
-    property bool showSubmitLogs: false
     property variant labelColor: Color.White
     
     function launchPage(page)
@@ -68,7 +67,6 @@ MenuDefinition
                 
                 bugReportPage.projectName = projectName;
                 bugReportPage.showServiceLogging = showServiceLogging;
-                bugReportPage.showSubmitLogs = showSubmitLogs;
                 bugReportPage.labelColor = labelColor;
                 launchPage(bugReportPage);
             }
