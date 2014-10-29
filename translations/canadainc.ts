@@ -22,14 +22,37 @@
 <context>
     <name>canadainc::AppLogFetcher</name>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="115"/>
-        <location filename="../src/AppLogFetcher.cpp" line="261"/>
+        <location filename="../src/AppLogFetcher.cpp" line="108"/>
+        <source>Login</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/AppLogFetcher.cpp" line="109"/>
+        <source>Please enter the credentials provided to you by Canada Inc:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/AppLogFetcher.cpp" line="158"/>
+        <location filename="../src/AppLogFetcher.cpp" line="336"/>
         <source>Could not submit logs! Please try again...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="237"/>
+        <location filename="../src/AppLogFetcher.cpp" line="295"/>
         <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>canadainc::DeviceUtils</name>
+    <message>
+        <location filename="../src/DeviceUtils.cpp" line="43"/>
+        <source>Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceUtils.cpp" line="46"/>
+        <source>Bottom</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -45,82 +68,82 @@
 <context>
     <name>canadainc::LazyMediaPlayer</name>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="62"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="72"/>
         <source>A DRM related error was encountered.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="67"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="77"/>
         <source>An unexpected internal error has occured!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="70"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="80"/>
         <source>An invalid parameter was specified!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="73"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="83"/>
         <source>An illegal operation given the context state.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="76"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="86"/>
         <source>An unrecognized input or output type or an out-of-range speed setting encountered.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="79"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="89"/>
         <source>A data format not recognized by any plugin encountered.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="82"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="92"/>
         <source>A DRM protected input was specified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="85"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="95"/>
         <source>An illegal operation was encountered by the playback process.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="88"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="98"/>
         <source>An I/O error has been encountered at the source!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="91"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="101"/>
         <source>An I/O error has been encountered at the sink!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="94"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="104"/>
         <source>The source is currently unavailable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="97"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="107"/>
         <source>The resource was corrupted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="100"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="110"/>
         <source>Cannot open the sink (possibly because no plugin recognizes it).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="103"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="113"/>
         <source>Insufficient memory to perform the requested operation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="106"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="116"/>
         <source>A required resource such as an encoder or an output feed is presently unavailable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="109"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="119"/>
         <source>A playback permission error (e.g., user prohibition, region mismatch) error was encountered.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -144,63 +167,63 @@
 <context>
     <name>canadainc::Persistance</name>
     <message>
-        <location filename="../src/Persistance.cpp" line="118"/>
+        <location filename="../src/Persistance.cpp" line="150"/>
         <source>Copied: %1 to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="194"/>
+        <location filename="../src/Persistance.cpp" line="237"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="213"/>
+        <location filename="../src/Persistance.cpp" line="257"/>
         <source>Tutorial</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="213"/>
-        <location filename="../src/Persistance.cpp" line="239"/>
-        <location filename="../src/Persistance.cpp" line="280"/>
-        <location filename="../src/Persistance.h" line="59"/>
+        <location filename="../src/Persistance.cpp" line="257"/>
+        <location filename="../src/Persistance.cpp" line="291"/>
+        <location filename="../src/Persistance.h" line="49"/>
+        <location filename="../src/Persistance.h" line="50"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="213"/>
-        <location filename="../src/Persistance.cpp" line="239"/>
-        <location filename="../src/Persistance.cpp" line="280"/>
-        <location filename="../src/Persistance.h" line="59"/>
+        <location filename="../src/Persistance.cpp" line="257"/>
+        <location filename="../src/Persistance.cpp" line="291"/>
+        <location filename="../src/Persistance.h" line="49"/>
+        <location filename="../src/Persistance.h" line="50"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="239"/>
+        <location filename="../src/Persistance.cpp" line="291"/>
         <source>Review</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="280"/>
+        <location filename="../src/Persistance.cpp" line="291"/>
+        <source>If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Persistance.cpp" line="327"/>
         <source>Are you sure you want to clear the cache?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="280"/>
+        <location filename="../src/Persistance.cpp" line="327"/>
         <source>Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="293"/>
+        <location filename="../src/Persistance.cpp" line="342"/>
         <source>Cache was successfully cleared!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.h" line="48"/>
-        <source>If you enjoy the app, we would really appreciate if you left us a review! It should only take a second. Would you like to leave one?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Persistance.h" line="53"/>
+        <location filename="../src/Persistance.h" line="47"/>
         <source>Would you like to see a video tutorial on how to use the app?</source>
         <translation type="unfinished"></translation>
     </message>

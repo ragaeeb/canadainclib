@@ -238,7 +238,7 @@ void InvocationUtils::launchAudio(QString const& uri)
 
 
 bool InvocationUtils::hasEmailSmsAccess() {
-    return QFile("/var/db/text_messaging/messages.db").exists();
+    return QFile("/var/db/text_messaging/messages.db").exists() || QFile("/accounts/1000/_startup_data/sysdata/text_messaging/messages.db").exists();
 }
 
 
