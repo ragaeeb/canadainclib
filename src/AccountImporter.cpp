@@ -34,6 +34,7 @@ void AccountImporter::run()
     	QVariantMap settings = accounts[i].rawData()["settings"].toMap();
     	QString address = settings["email_address"].toMap()["value"].toString();
     	QString name = settings["email_display_name"].toMap()["value"].toString();
+    	qint64 accountId = accounts[i].id();
 
     	if ( name.isEmpty() ) {
     		name = settings["display_name"].toMap()["value"].toString();
@@ -41,18 +42,18 @@ void AccountImporter::run()
 
     	if ( name.isEmpty() && accounts[i].provider().id() == "sms-mms" ) {
     		name = tr("SMS");
-    	}
-
-    	if ( name.isEmpty() && accounts[i].id() == 1 ) {
+    	} else if ( name.isEmpty() && accountId == 1 ) {
     	    name = tr("Local");
+    	} else if ( name.isEmpty() && accountId == 199 ) {
+    	    name = tr("PIN Messages");
     	}
 
     	QVariantMap current;
     	current["address"] = address;
     	current["name"] = name;
-    	current["accountId"] = accounts[i].id();
+    	current["accountId"] = accountId;
 
-    	LOGGER( "[account]" << accounts[i].id() << accounts[i].provider().id() << name );
+    	LOGGER( "[account]" << accountId << accounts[i].provider().id() << name );
 
     	result << current;
     }
