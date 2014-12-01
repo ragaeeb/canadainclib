@@ -12,6 +12,7 @@ using namespace bb::cascades;
 QObject* CardUtils::initAppropriate(QString const& qmlDoc, QMap<QString, QObject*> const& context, QObject* parent)
 {
     QmlDocument* qml = QmlDocument::create( QString("asset:///%1").arg(qmlDoc) ).parent(parent);
+    qml->setContextProperty("app", parent);
 
     foreach ( QString const& key, context.keys() ) {
         qml->setContextProperty( key, context.value(key) );
