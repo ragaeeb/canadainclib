@@ -28,11 +28,6 @@ InvocationUtils::~InvocationUtils()
 }
 
 
-void InvocationUtils::launchAppPermissionSettings() {
-	launchSettingsApp("permissions");
-}
-
-
 void InvocationUtils::launchSettingsApp(QString const& key)
 {
 	bb::system::InvokeRequest request;
@@ -55,47 +50,6 @@ void InvocationUtils::replyToMessage(qint64 accountId, QString const& messageId,
 	request.setUri( QString("pim:message/rfc822:%1:%2").arg(accountId).arg(messageId) );
 
 	invokeManager.invoke(request);
-}
-
-
-bool InvocationUtils::validateSharedFolderAccess(QString const& message, bool launchAppPermissions)
-{
-	QString sdDirectory = QString("/accounts/1000/shared/downloads");
-
-	if ( !QDir(sdDirectory).exists() )
-	{
-		LOGGER(sdDirectory << "Did not exist!");
-		showBlockingToast( message, tr("OK"), "file:///usr/share/icons/bb_action_saveas.png" );
-
-		if (launchAppPermissions) {
-			InvocationUtils::launchAppPermissionSettings();
-		}
-
-		return false;
-	}
-
-	return true;
-}
-
-
-bool InvocationUtils::validateLocationAccess(QString const& message, bool launchAppPermissions)
-{
-	QFile target("/pps/services/geolocation/control");
-
-	if ( !target.open(QIODevice::ReadOnly) )
-	{
-		showBlockingToast( message, tr("OK"), "file:///usr/share/icons/ic_map_all.png" );
-
-		if (launchAppPermissions) {
-			InvocationUtils::launchAppPermissionSettings();
-		}
-
-		return false;
-	}
-
-	target.close();
-
-	return true;
 }
 
 
@@ -234,11 +188,6 @@ void InvocationUtils::launchAudio(QString const& uri)
 	request.setUri( QString("file://%1").arg(uri) );
 
 	invokeManager.invoke(request);
-}
-
-
-bool InvocationUtils::hasEmailSmsAccess() {
-    return QFile("/var/db/text_messaging/messages.db").exists() || QFile("/accounts/1000/_startup_data/sysdata/text_messaging/messages.db").exists();
 }
 
 

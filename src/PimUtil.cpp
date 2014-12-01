@@ -1,6 +1,6 @@
 #include "PimUtil.h"
-#include "InvocationUtils.h"
 #include "Logger.h"
+#include "Persistance.h"
 
 #include <bb/pim/calendar/CalendarService>
 #include <bb/pim/calendar/CalendarSettings>
@@ -125,7 +125,7 @@ bool PimUtil::validateCalendarAccess(QString const& message, bool launchAppPermi
 		showBlockingToast( message, tr("OK"), "file:///usr/share/icons/ic_add_event.png" );
 
 		if (launchAppPermissions) {
-			InvocationUtils::launchAppPermissionSettings();
+		    Persistance::launchAppPermissionSettings();
 		}
 
 		return false;
@@ -144,7 +144,7 @@ bool PimUtil::validateContactsAccess(QString const& message, bool launchAppPermi
 		showBlockingToast( message, tr("OK"), "file:///usr/share/icons/ic_add_contact.png" );
 
 		if (launchAppPermissions) {
-			InvocationUtils::launchAppPermissionSettings();
+		    Persistance::launchAppPermissionSettings();
 		}
 	}
 
@@ -154,13 +154,13 @@ bool PimUtil::validateContactsAccess(QString const& message, bool launchAppPermi
 
 bool PimUtil::validateEmailSMSAccess(QString const& message, bool launchAppPermissions)
 {
-    if ( !InvocationUtils::hasEmailSmsAccess()  )
+    if ( !Persistance::hasEmailSmsAccess()  )
     {
         LOGGER("messages.db did not exist!");
         showBlockingToast( message, tr("OK"), "file:///usr/share/icons/ic_email.png" );
 
         if (launchAppPermissions) {
-            InvocationUtils::launchAppPermissionSettings();
+            Persistance::launchAppPermissionSettings();
         }
 
         return false;

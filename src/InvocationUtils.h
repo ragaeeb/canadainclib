@@ -16,8 +16,6 @@ class InvocationUtils : public QObject
 public:
 	InvocationUtils(QObject* parent=NULL);
 	virtual ~InvocationUtils();
-    Q_INVOKABLE static bool hasEmailSmsAccess();
-    Q_INVOKABLE static void launchAppPermissionSettings();
     Q_INVOKABLE static void launchAudio(QString const& uri);
     Q_INVOKABLE static void launchBBM();
     Q_INVOKABLE static void launchBBMCall(QString const& pin, bool videoEnabled=true);
@@ -30,8 +28,6 @@ public:
     Q_INVOKABLE static void launchSettingsApp(QString const& key);
     static void launchSMSComposer(QString const& number, InvokeManager& invokeManager);
 	static void replyToMessage(qint64 accountId, QString const& messageId, InvokeManager& invokeManager);
-    Q_INVOKABLE static bool validateLocationAccess(QString const& message, bool launchAppPermissions=true);
-	Q_INVOKABLE static bool validateSharedFolderAccess(QString const& message, bool launchAppPermissions=true);
 };
 
 } /* namespace canadainc */

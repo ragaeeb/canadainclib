@@ -60,6 +60,10 @@ public:
     Q_SLOT void forceSync();
     Q_SLOT void openChannel(bool promote=false);
     Q_SLOT void reviewApp();
+    Q_INVOKABLE static void launchAppPermissionSettings();
+    Q_INVOKABLE static bool hasEmailSmsAccess();
+    Q_INVOKABLE static bool validateSharedFolderAccess(QString const& message, bool launchAppPermissions=true);
+    Q_INVOKABLE static bool validateLocationAccess(QString const& message, bool launchAppPermissions=true);
 };
 
 } /* namespace canadainc */

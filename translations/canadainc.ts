@@ -4,17 +4,22 @@
 <context>
     <name>canadainc::AccountImporter</name>
     <message>
-        <location filename="../src/AccountImporter.cpp" line="43"/>
+        <location filename="../src/AccountImporter.cpp" line="44"/>
         <source>SMS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AccountImporter.cpp" line="47"/>
+        <location filename="../src/AccountImporter.cpp" line="46"/>
         <source>Local</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AccountImporter.cpp" line="67"/>
+        <location filename="../src/AccountImporter.cpp" line="48"/>
+        <source>PIN Messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/AccountImporter.cpp" line="68"/>
         <source>Cellular</source>
         <translation type="unfinished"></translation>
     </message>
@@ -53,15 +58,6 @@
     <message>
         <location filename="../src/DeviceUtils.cpp" line="46"/>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>canadainc::InvocationUtils</name>
-    <message>
-        <location filename="../src/InvocationUtils.cpp" line="68"/>
-        <location filename="../src/InvocationUtils.cpp" line="87"/>
-        <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -173,6 +169,8 @@
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="237"/>
+        <location filename="../src/Persistance.cpp" line="362"/>
+        <location filename="../src/Persistance.cpp" line="384"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>

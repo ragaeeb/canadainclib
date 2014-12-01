@@ -348,6 +348,57 @@ void Persistance::clear() {
 }
 
 
+void Persistance::launchAppPermissionSettings() {
+    InvocationUtils::launchSettingsApp("permissions");
+}
+
+
+bool Persistance::validateLocationAccess(QString const& message, bool launchAppPermissions)
+{
+    QFile target("/pps/services/geolocation/control");
+
+    if ( !target.open(QIODevice::ReadOnly) )
+    {
+        showBlockingToast( message, tr("OK"), "file:///usr/share/icons/ic_map_all.png" );
+
+        if (launchAppPermissions) {
+            launchAppPermissionSettings();
+        }
+
+        return false;
+    }
+
+    target.close();
+
+    return true;
+}
+
+
+bool Persistance::validateSharedFolderAccess(QString const& message, bool launchAppPermissions)
+{
+    QString sdDirectory = QString("/accounts/1000/shared/downloads");
+
+    if ( !QDir(sdDirectory).exists() )
+    {
+        LOGGER(sdDirectory << "Did not exist!");
+        showBlockingToast( message, tr("OK"), "file:///usr/share/icons/bb_action_saveas.png" );
+
+        if (launchAppPermissions) {
+            launchAppPermissionSettings();
+        }
+
+        return false;
+    }
+
+    return true;
+}
+
+
+bool Persistance::hasEmailSmsAccess() {
+    return QFile("/var/db/text_messaging/messages.db").exists() || QFile("/accounts/1000/_startup_data/sysdata/text_messaging/messages.db").exists();
+}
+
+
 Persistance::~Persistance()
 {
 }
