@@ -170,7 +170,6 @@
     <message>
         <location filename="../src/Persistance.cpp" line="237"/>
         <location filename="../src/Persistance.cpp" line="362"/>
-        <location filename="../src/Persistance.cpp" line="384"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
@@ -239,12 +238,11 @@
     <message>
         <location filename="../src/PimUtil.cpp" line="125"/>
         <location filename="../src/PimUtil.cpp" line="144"/>
-        <location filename="../src/PimUtil.cpp" line="160"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/PimUtil.cpp" line="188"/>
+        <location filename="../src/PimUtil.cpp" line="170"/>
         <source>RE: %1</source>
         <translation type="unfinished"></translation>
     </message>

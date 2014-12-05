@@ -177,6 +177,11 @@ void InvocationUtils::launchBrowser(QString const& uri)
 }
 
 
+void InvocationUtils::launchAppPermissionSettings() {
+    launchSettingsApp("permissions");
+}
+
+
 void InvocationUtils::launchAudio(QString const& uri)
 {
 	bb::system::InvokeManager invokeManager;

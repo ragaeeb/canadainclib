@@ -28,6 +28,7 @@ public:
     Q_INVOKABLE static void launchSettingsApp(QString const& key);
     static void launchSMSComposer(QString const& number, InvokeManager& invokeManager);
 	static void replyToMessage(qint64 accountId, QString const& messageId, InvokeManager& invokeManager);
+    static void launchAppPermissionSettings();
 };
 
 } /* namespace canadainc */

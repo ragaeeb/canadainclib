@@ -374,19 +374,13 @@ bool Persistance::validateLocationAccess(QString const& message, bool launchAppP
 }
 
 
-bool Persistance::validateSharedFolderAccess(QString const& message, bool launchAppPermissions)
+bool Persistance::hasSharedFolderAccess()
 {
     QString sdDirectory = QString("/accounts/1000/shared/downloads");
 
     if ( !QDir(sdDirectory).exists() )
     {
-        LOGGER(sdDirectory << "Did not exist!");
-        showBlockingToast( message, tr("OK"), "file:///usr/share/icons/bb_action_saveas.png" );
-
-        if (launchAppPermissions) {
-            launchAppPermissionSettings();
-        }
-
+        LOGGER(sdDirectory << "DidNotExist!");
         return false;
     }
 
@@ -394,8 +388,25 @@ bool Persistance::validateSharedFolderAccess(QString const& message, bool launch
 }
 
 
-bool Persistance::hasEmailSmsAccess() {
-    return QFile("/var/db/text_messaging/messages.db").exists() || QFile("/accounts/1000/_startup_data/sysdata/text_messaging/messages.db").exists();
+bool Persistance::hasEmailSmsAccess()
+{
+    if ( QFile("/var/db/text_messaging/messages.db").exists() || QFile("/accounts/1000/_startup_data/sysdata/text_messaging/messages.db").exists() ) {
+        return true;
+    }
+
+    LOGGER("NoEmailSmsAccess");
+    return false;
+}
+
+
+bool Persistance::hasPhoneControlAccess()
+{
+    if ( QFile("/pps/services/phone/protected/status").exists() ) {
+        return true;
+    }
+
+    LOGGER("NoPhoneControlAccess");
+    return false;
 }
 
 

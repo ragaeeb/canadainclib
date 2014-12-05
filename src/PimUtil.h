@@ -35,7 +35,6 @@ public:
 	Q_INVOKABLE static void replyToSMS(QString const& senderAddress, QString const& body, InvokeManager& invokeManager);
 	Q_INVOKABLE static bool validateCalendarAccess(QString const& message, bool launchAppPermissions=true);
 	Q_INVOKABLE static bool validateContactsAccess(QString const& message, bool launchAppPermissions=true);
-    Q_INVOKABLE static bool validateEmailSMSAccess(QString const& message, bool launchAppPermissions=true);
 	static qint64 sendMessage(MessageService* ms, Message const& m, QString text, QList<Attachment> const& attachments=QList<Attachment>(), bool replyPrefix=false);
 };
 
