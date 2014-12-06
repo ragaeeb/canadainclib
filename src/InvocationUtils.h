@@ -25,7 +25,7 @@ public:
     static void launchEmailComposer(QString const& address, InvokeManager& invokeManager);
     Q_INVOKABLE static void launchLocationServices();
     static void launchPhoto(QString const& uri, InvokeManager* invokeManager);
-    Q_INVOKABLE static void launchSettingsApp(QString const& key);
+    Q_INVOKABLE static void launchSettingsApp(QString const& key, QVariantMap const& metadata=QVariantMap());
     static void launchSMSComposer(QString const& number, InvokeManager& invokeManager);
 	static void replyToMessage(qint64 accountId, QString const& messageId, InvokeManager& invokeManager);
     static void launchAppPermissionSettings();

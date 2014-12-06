@@ -1,6 +1,7 @@
 #include "PimContactPickerSheet.h"
-#include "PimUtil.h"
 #include "Logger.h"
+#include "Persistance.h"
+#include "PimUtil.h"
 
 #include <bb/pim/contacts/ContactService>
 
@@ -81,7 +82,9 @@ PimContactPickerSheet::~PimContactPickerSheet()
 
 void PimContactPickerSheet::open()
 {
-    PimUtil::validateContactsAccess( tr("Warning: It seems like the app does not have access to your contacts. If you leave this permission off, some features may not work properly. Select OK to launch the Application Permissions screen where you can turn these settings on.") );
+    if ( !PimUtil::hasContactsAccess() ) {
+        Persistance::showBlockingToast("Warning: It seems like the app does not have access to your contacts. If you leave this permission off, some features may not work properly. Select OK to launch the Application Permissions screen where you can turn these settings on.");
+    }
 
     ContactPicker* picker = new ContactPicker(this);
     picker->setMode(m_mode);

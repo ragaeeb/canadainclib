@@ -349,7 +349,7 @@ void Persistance::clear() {
 
 
 void Persistance::launchAppPermissionSettings() {
-    InvocationUtils::launchSettingsApp("permissions");
+    InvocationUtils::launchAppPermissionSettings();
 }
 
 

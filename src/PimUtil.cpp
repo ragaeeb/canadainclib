@@ -135,20 +135,17 @@ bool PimUtil::validateCalendarAccess(QString const& message, bool launchAppPermi
 }
 
 
-bool PimUtil::validateContactsAccess(QString const& message, bool launchAppPermissions)
+bool PimUtil::hasContactsAccess()
 {
 	bb::pim::contacts::ContactService cs;
 	int count = cs.count( bb::pim::contacts::ContactListFilters() );
 
 	if (count == 0) {
-		showBlockingToast( message, tr("OK"), "file:///usr/share/icons/ic_add_contact.png" );
-
-		if (launchAppPermissions) {
-		    InvocationUtils::launchAppPermissionSettings();
-		}
+	    LOGGER("ZeroContactsList");
+	    return false;
 	}
 
-	return count > 0;
+	return true;
 }
 
 

@@ -40,9 +40,13 @@ DropDown
         accountsLoaded(results.length);
     }
     
+    function onReady() {
+        app.loadAccounts();
+    }
+    
     onCreationCompleted: {
         app.accountsImported.connect(onAccountsImported);
-        app.loadAccounts();
+        app.lazyInitComplete.connect(onReady);
     }
     
     attachedObjects: [

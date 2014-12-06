@@ -1,6 +1,7 @@
 #include "InvocationUtils.h"
 #include "Logger.h"
 
+#include <bb/PackageInfo>
 #include <bb/system/SystemToast>
 
 namespace {
@@ -28,13 +29,17 @@ InvocationUtils::~InvocationUtils()
 }
 
 
-void InvocationUtils::launchSettingsApp(QString const& key)
+void InvocationUtils::launchSettingsApp(QString const& key, QVariantMap const& metadata)
 {
 	bb::system::InvokeRequest request;
 	request.setTarget("sys.settings.target");
 	request.setAction("bb.action.OPEN");
 	request.setMimeType("settings/view");
 	request.setUri( QUrl("settings://"+key) );
+
+	if ( !metadata.isEmpty() ) {
+	    request.setMetadata(metadata);
+	}
 
 	bb::system::InvokeManager().invoke(request);
 }
@@ -177,8 +182,12 @@ void InvocationUtils::launchBrowser(QString const& uri)
 }
 
 
-void InvocationUtils::launchAppPermissionSettings() {
-    launchSettingsApp("permissions");
+void InvocationUtils::launchAppPermissionSettings()
+{
+    QVariantMap qvm;
+    qvm["appId"] = bb::PackageInfo().installId();
+
+    launchSettingsApp("permissions", qvm);
 }
 
 
