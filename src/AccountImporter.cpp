@@ -53,7 +53,7 @@ void AccountImporter::run()
     	current["name"] = name;
     	current["accountId"] = accountId;
 
-    	LOGGER( "[account]" << accountId << accounts[i].provider().id() << name );
+    	LOGGER( "[account]" << accountId << accounts[i].provider().id() << name << address );
 
     	result << current;
     }

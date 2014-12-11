@@ -4,6 +4,7 @@ DropDown
 {
     id: accountChoice
     property variant selectedAccountId
+    property bool immediate: true
     signal accountsLoaded(int numAccounts);
     title: qsTr("Account") + Retranslate.onLanguageChanged
     horizontalAlignment: HorizontalAlignment.Fill
@@ -46,7 +47,12 @@ DropDown
     
     onCreationCompleted: {
         app.accountsImported.connect(onAccountsImported);
-        app.lazyInitComplete.connect(onReady);
+        
+        if (!immediate) {
+            app.lazyInitComplete.connect(onReady);
+        } else {
+            onReady();
+        }
     }
     
     attachedObjects: [
