@@ -1,4 +1,4 @@
-import bb.cascades 1.0
+import bb.cascades 1.2
 import bb.system 1.0
 
 Page
@@ -68,7 +68,10 @@ Page
                         }
                     }
                     
-                    Divider {}
+                    ImageView {
+                        imageSource: "images/ic_bugs_divider.png"
+                        horizontalAlignment: HorizontalAlignment.Center
+                    }
                 }
             }
         }
@@ -104,13 +107,13 @@ Page
             onTriggered: {
                 enabled = false;
                 console.log("UserEvent: SubmitLogs");
-                notesPrompt.show();
+                sheetDelegate.active = true;
             }
             
             function onSubmitted(message)
             {
                 progressIndicator.visible = false;
-                persist.showBlockingToast( message, qsTr("OK"), "asset:///images/ic_bugs.png" );
+                persist.showBlockingDialog( qsTr("Submission Status"), message, qsTr("OK"), "" );
                 enabled = true;
             }
             
@@ -119,27 +122,77 @@ Page
             }
             
             attachedObjects: [
-                SystemPrompt {
-                    id: notesPrompt
-                    title: qsTr("Add Notes") + Retranslate.onLanguageChanged
-                    body: qsTr("Enter the notes you wish to add:") + Retranslate.onLanguageChanged
-                    inputField.emptyText: qsTr("Please start with your name") + Retranslate.onLanguageChanged
-                    inputField.maximumLength: 0
-                    confirmButton.label: qsTr("OK") + Retranslate.onLanguageChanged
-                    cancelButton.label: qsTr("Cancel") + Retranslate.onLanguageChanged
+                Delegate
+                {
+                    id: sheetDelegate
                     
-                    onFinished: {
-                        console.log("UserEvent: AddNotesPrompt", result);
-                        
-                        if (result == SystemUiResult.ConfirmButtonSelection)
+                    sourceComponent: ComponentDefinition
+                    {
+                        Sheet
                         {
-                            var value = "UserEnteredReport: "+inputFieldTextEntry().trim();
-                            reporter.submitLogs(value, true);
-                            progressIndicator.value = 0;
-                            progressIndicator.state = ProgressIndicatorState.Progress;
-                            progressIndicator.visible = true;
-                        } else {
-                            submitLogs.enabled = true;
+                            id: sheet
+                            
+                            onCreationCompleted: {
+                                open();
+                            }
+                            
+                            onClosed: {
+                                sheetDelegate.active = false;
+                            }
+                            
+                            onOpened: {
+                                persist.showToast( qsTr("Enter the notes you wish to add.\n\nPlease include as much detail as possible about the issue you are having and how to reproduce it."), "", "asset:///images/toast/ic_bugs_info.png" );
+                                body.requestFocus();
+                            }
+                            
+                            Page
+                            {
+                                titleBar: TitleBar
+                                {
+                                    title: qsTr("Add Notes") + Retranslate.onLanguageChanged
+                                    
+                                    acceptAction: ActionItem
+                                    {
+                                        id: submit
+                                        imageSource: "images/dropdown/ic_bugs_submit.png"
+                                        title: qsTr("Submit") + Retranslate.onLanguageChanged
+                                        
+                                        onTriggered: {
+                                            var value = "UserEnteredReport: "+body.text;
+                                            reporter.submitLogs(value, true);
+                                            progressIndicator.value = 0;
+                                            progressIndicator.state = ProgressIndicatorState.Progress;
+                                            progressIndicator.visible = true;
+                                            sheet.close();
+                                        }
+                                    }
+                                    
+                                    dismissAction: ActionItem
+                                    {
+                                        imageSource: "images/dropdown/ic_bugs_cancel.png"
+                                        title: qsTr("Cancel") + Retranslate.onLanguageChanged
+                                        
+                                        onTriggered: {
+                                            submitLogs.enabled = true;
+                                            sheet.close();
+                                        }
+                                    }
+                                }
+                                
+                                TextArea
+                                {
+                                    id: body
+                                    property string template: qsTr("Name:\n\n\nEmail Address:\n\n\nSummary of Bug:\n\n\nSteps To Reproduce:\n\n\nHow often can you reproduce this?") + Retranslate.onLanguageChanged
+                                    backgroundVisible: false
+                                    hintText: qsTr("Enter the notes you wish to add\n\nPlease start with your name and email address...") + Retranslate.onLanguageChanged
+                                    text: template
+                                    content.flags: TextContentFlag.ActiveTextOff | TextContentFlag.EmoticonsOff
+                                    
+                                    onTextChanging: {
+                                        submit.enabled = text != template;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
