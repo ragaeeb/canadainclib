@@ -43,6 +43,7 @@ TitleBar
                 textStyle.base: SystemDefaults.TextStyles.SmallText
                 content.flags: TextContentFlag.ActiveText | TextContentFlag.EmoticonsOff
                 multiline: true
+                topMargin: 0
                 
                 attachedObjects: [
                     PackageInfo {
