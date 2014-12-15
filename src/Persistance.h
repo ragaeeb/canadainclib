@@ -65,6 +65,7 @@ public:
     Q_INVOKABLE static bool hasSharedFolderAccess();
     Q_INVOKABLE static bool hasPhoneControlAccess();
     Q_INVOKABLE static bool validateLocationAccess(QString const& message, bool launchAppPermissions=true);
+    Q_INVOKABLE void attachBackKeyToClickedSignal(QObject* abstractButton, QObject* rootControl);
 };
 
 } /* namespace canadainc */

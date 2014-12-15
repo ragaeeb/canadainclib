@@ -11,6 +11,12 @@
 #include "InvocationUtils.h"
 #include "Logger.h"
 
+#include "bbndk.h"
+
+#if BBNDK_VERSION_AT_LEAST(10,3,1)
+#include <bb/cascades/DeviceShortcut>
+#endif
+
 namespace {
 
 bool removeDir(QString const& dirName)
@@ -416,6 +422,16 @@ bool Persistance::hasPhoneControlAccess()
 
     LOGGER("NoPhoneControlAccess");
     return false;
+}
+
+
+void Persistance::attachBackKeyToClickedSignal(QObject* abstractButton, QObject* rootControl)
+{
+#if BBNDK_VERSION_AT_LEAST(10,3,1)
+    Control* c = static_cast<Control*>(rootControl);
+    DeviceShortcut* ds = DeviceShortcut::create(DeviceShortcuts::BackTap).onTriggered( abstractButton, SIGNAL( clicked() ) );
+    c->addShortcut(ds);
+#endif
 }
 
 
