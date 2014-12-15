@@ -5,6 +5,8 @@
 #include <bb/cascades/Application>
 #include <bb/cascades/QmlDocument>
 
+#include <sys/utsname.h>
+
 #include "Persistance.h"
 #include "InvocationUtils.h"
 #include "Logger.h"
@@ -392,6 +394,13 @@ bool Persistance::hasEmailSmsAccess()
 {
     if ( QFile("/var/db/text_messaging/messages.db").exists() || QFile("/accounts/1000/_startup_data/sysdata/text_messaging/messages.db").exists() ) {
         return true;
+    } else {
+        struct utsname udata;
+        uname(&udata);
+
+        if ( QString(udata.machine).startsWith("x86") ) { // simulator build doesn't have it
+            return true;
+        }
     }
 
     LOGGER("NoEmailSmsAccess");
