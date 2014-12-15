@@ -43,6 +43,7 @@ ControlDelegate
             {
                 Container
                 {
+                    id: permissionContainer
                     horizontalAlignment: HorizontalAlignment.Fill
                     topPadding: 10; leftPadding: 15; rightPadding: rightSpacing; bottomPadding: bottomSpacing
                     
@@ -89,6 +90,10 @@ ControlDelegate
             onCreationCompleted: {
                 tt.play();
                 showNext();
+                
+                if ( "navigation" in permissionContainer ) {
+                    permissionContainer.navigation.focusPolicy = 0x2;
+                }
             }
             
             gestureHandlers: [

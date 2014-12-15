@@ -14,6 +14,7 @@
 #include "bbndk.h"
 
 #if BBNDK_VERSION_AT_LEAST(10,3,1)
+#include <bb/cascades/Control>
 #include <bb/cascades/DeviceShortcut>
 #endif
 
