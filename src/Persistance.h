@@ -23,6 +23,7 @@ namespace canadainc {
 class Persistance : public QObject
 {
 	Q_OBJECT
+	Q_PROPERTY(bool isBlocked READ isBlocked NOTIFY isBlockedChanged)
 
 	QSettings m_settings;
 	QMap<QString, QVariant> m_pending;
@@ -35,6 +36,7 @@ private slots:
     void finished(bb::system::SystemUiResult::Type value);
 
 signals:
+    void isBlockedChanged();
 	void settingChanged(QString const& key);
 
 public:
@@ -64,8 +66,9 @@ public:
     Q_INVOKABLE static bool hasEmailSmsAccess();
     Q_INVOKABLE static bool hasSharedFolderAccess();
     Q_INVOKABLE static bool hasPhoneControlAccess();
-    Q_INVOKABLE static bool validateLocationAccess(QString const& message, bool launchAppPermissions=true);
+    Q_INVOKABLE static bool hasLocationAccess();
     Q_INVOKABLE void attachBackKeyToClickedSignal(QObject* abstractButton, QObject* rootControl);
+    bool isBlocked() const;
 };
 
 } /* namespace canadainc */

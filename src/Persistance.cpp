@@ -20,6 +20,8 @@
 
 namespace {
 
+bool isNowBlocked = false;
+
 bool removeDir(QString const& dirName)
 {
     bool result = true;
@@ -71,6 +73,8 @@ Persistance::Persistance(QObject* parent) : QObject(parent), m_toast(NULL)
     rootContext->setContextProperty("persist", this);
 
     connect( Application::instance(), SIGNAL( aboutToQuit() ), this, SLOT( commit() ) );
+
+    isNowBlocked = false;
 }
 
 
@@ -109,12 +113,15 @@ void Persistance::finished(bb::system::SystemUiResult::Type value)
 
 bool Persistance::showBlockingToast(QString const& text, QString const& buttonLabel, QString const& icon)
 {
+    isNowBlocked = true;
 	SystemToast toast;
 	toast.button()->setLabel(buttonLabel);
 	toast.setBody(text);
 	toast.setIcon(icon);
+	bool result = toast.exec() == SystemUiResult::ButtonSelection;
+	isNowBlocked = false;
 
-	return toast.exec() == SystemUiResult::ButtonSelection;
+	return result;
 }
 
 
@@ -127,6 +134,8 @@ bool Persistance::showBlockingDialog(QString const& title, QString const& text, 
 
 bool Persistance::showBlockingDialog(QString const& title, QString const& text, QString const& rememberMeText, bool &rememberMeValue, QString const& okButton, QString const& cancelButton)
 {
+    isNowBlocked = true;
+
     SystemDialog dialog;
     dialog.setBody(text);
     dialog.setTitle(title);
@@ -144,6 +153,8 @@ bool Persistance::showBlockingDialog(QString const& title, QString const& text, 
 
     bool result = dialog.exec() == SystemUiResult::ConfirmButtonSelection;
     rememberMeValue = dialog.rememberMeSelection();
+
+    isNowBlocked = false;
 
     return result;
 }
@@ -261,7 +272,7 @@ bool Persistance::tutorialVideo(QString const& uri, bool prompt, QString const& 
         return true;
     }
 
-    if ( !contains(key) )
+    if ( !contains(key) && !isNowBlocked )
     {
         bool result = showBlockingDialog( tr("Tutorial"), message, tr("Yes"), tr("No") );
 
@@ -295,7 +306,7 @@ void Persistance::reviewApp()
 
 bool Persistance::reviewed()
 {
-    if ( !contains("alreadyReviewed") )
+    if ( !contains("alreadyReviewed") && !isNowBlocked )
     {
         bool yes = showBlockingDialog( tr("Review"), tr("If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?"), tr("Yes"), tr("No") );
         saveValueFor("alreadyReviewed", 1, false);
@@ -362,18 +373,11 @@ void Persistance::launchAppPermissionSettings() {
 }
 
 
-bool Persistance::validateLocationAccess(QString const& message, bool launchAppPermissions)
+bool Persistance::hasLocationAccess()
 {
     QFile target("/pps/services/geolocation/control");
 
-    if ( !target.open(QIODevice::ReadOnly) )
-    {
-        showBlockingToast( message, tr("OK"), "file:///usr/share/icons/ic_map_all.png" );
-
-        if (launchAppPermissions) {
-            launchAppPermissionSettings();
-        }
-
+    if ( !target.open(QIODevice::ReadOnly) ) {
         return false;
     }
 
@@ -432,7 +436,15 @@ void Persistance::attachBackKeyToClickedSignal(QObject* abstractButton, QObject*
     Control* c = static_cast<Control*>(rootControl);
     DeviceShortcut* ds = DeviceShortcut::create(DeviceShortcuts::BackTap).onTriggered( abstractButton, SIGNAL( clicked() ) );
     c->addShortcut(ds);
+#else
+    Q_UNUSED(abstractButton);
+    Q_UNUSED(rootControl);
 #endif
+}
+
+
+bool Persistance::isBlocked() const {
+    return isNowBlocked;
 }
 
 
