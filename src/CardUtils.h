@@ -4,6 +4,8 @@
 #include <QMap>
 #include <QObject>
 
+#define CARD_KEY "logCard"
+
 namespace canadainc {
 
 class CardUtils

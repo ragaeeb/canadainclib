@@ -15,6 +15,8 @@
 #include <bb/system/InvokeManager>
 #include <bb/system/SystemToast>
 
+#include <bb/data/JsonDataAccess>
+
 namespace {
 
 void showBlockingToast(QString const& text, QString const& buttonLabel, QString const& icon)
@@ -116,22 +118,10 @@ QString PimUtil::extractText(Message const& m)
 }
 
 
-bool PimUtil::validateCalendarAccess(QString const& message, bool launchAppPermissions)
+bool PimUtil::hasCalendarAccess()
 {
 	bb::pim::calendar::CalendarSettings cs = bb::pim::calendar::CalendarService().settings();
-
-	if ( !cs.isValid() )
-	{
-		showBlockingToast( message, tr("OK"), "file:///usr/share/icons/ic_add_event.png" );
-
-		if (launchAppPermissions) {
-		    InvocationUtils::launchAppPermissionSettings();
-		}
-
-		return false;
-	}
-
-	return true;
+	return cs.isValid();
 }
 
 
@@ -189,5 +179,37 @@ qint64 PimUtil::sendMessage(MessageService* ms, Message const& m, QString text, 
 
     return mk;
 }
+
+
+qint64 PimUtil::extractIdsFromInvoke(QString const& uri, QByteArray const& data, qint64& accountId)
+{
+    qint64 messageId = 0;
+
+    if ( !data.isEmpty() )
+    {
+        bb::data::JsonDataAccess jda;
+        QVariantMap json = jda.loadFromBuffer(data).toMap().value("attributes").toMap();
+
+        if ( json.contains("accountid") && json.contains("messageid") )
+        {
+            accountId = json.value("accountid").toLongLong();
+            messageId = json.value("messageid").toLongLong();
+        }
+    } else if ( !uri.isEmpty() ) {
+        QStringList tokens = uri.split(":");
+
+        if ( tokens.size() > 3 ) {
+            accountId = tokens[2].toLongLong();
+            messageId = tokens[3].toLongLong();
+        } else {
+            LOGGER("NotEnoughTokens" << tokens);
+        }
+    }
+
+    LOGGER("Tokens" << accountId << messageId);
+
+    return messageId;
+}
+
 
 } /* namespace canadainc */
