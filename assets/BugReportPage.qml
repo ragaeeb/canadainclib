@@ -6,7 +6,6 @@ Page
     id: root
     property string projectName
     property bool showServiceLogging: false
-    property variant labelColor: Color.White
     
     onProjectNameChanged: {
         webView.url = "http://code.google.com/p/%1/issues/list".arg(projectName);
@@ -28,7 +27,7 @@ Page
                     text: qsTr("Bug Reports") + Retranslate.onLanguageChanged
                     verticalAlignment: VerticalAlignment.Center
                     textStyle.base: SystemDefaults.TextStyles.BigText
-                    textStyle.color: labelColor
+                    textStyle.color: 'Signature' in ActionBarPlacement ? Color.Black : Color.White
                 }
             }
             
