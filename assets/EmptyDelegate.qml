@@ -31,7 +31,7 @@ ControlDelegate
                 gestureHandlers: [
                     TapHandler {
                         onTapped: {
-                            console.log("UserEvent: EmptyDelegate Tapped");
+                            console.log("UserEvent: EmptyDelegateTapped");
                             imageTapped();
                         }
                     }

@@ -7,6 +7,7 @@ ControlDelegate
     property variant icons
     property real bottomSpacing: 30
     property real rightSpacing: 50
+    property variant labelColor: Color.White
     
     sourceComponent: ComponentDefinition
     {
@@ -69,7 +70,7 @@ ControlDelegate
                     {
                         id: warning
                         topMargin: 0
-                        textStyle.color: Color.White
+                        textStyle.color: labelColor
                         multiline: true
                         verticalAlignment: VerticalAlignment.Fill
                         textStyle.fontSize: FontSize.XXSmall
