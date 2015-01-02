@@ -5,7 +5,6 @@ TitleBar
 {
     id: titleControl
     property string channelTitle: qsTr("Our BBM Channel") + Retranslate.onLanguageChanged
-    property variant labelColor: Color.White
     kind: TitleBarKind.FreeForm
     scrollBehavior: TitleBarScrollBehavior.NonSticky
     kindProperties: FreeFormTitleBarKindProperties
@@ -22,7 +21,7 @@ TitleBar
                 text: qsTr("%1 %2").arg(appInfo.title).arg(appInfo.version)
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Fill
-                textStyle.color: labelColor
+                textStyle.color: 'Signature' in ActionBarPlacement ? Color.Black : Color.White
                 textStyle.textAlign: TextAlign.Center
                 textStyle.base: SystemDefaults.TextStyles.BodyText
                 
@@ -59,7 +58,20 @@ TitleBar
         
         expandableArea
         {
-            content: Container {}
+            content: Container
+            {
+                leftPadding: 10; rightPadding: 10; topPadding: 10
+                
+                PersistCheckBox
+                {
+                    text: qsTr("Suppress Tutorials") + Retranslate.onLanguageChanged
+                    key: "suppressTutorials"
+                }
+                
+                Divider {
+                    topMargin: 0;bottomMargin: 0
+                }
+            }
             
             onExpandedChanged: {
                 if (expanded) {

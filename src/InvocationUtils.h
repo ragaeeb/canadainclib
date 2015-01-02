@@ -18,7 +18,6 @@ public:
 	virtual ~InvocationUtils();
     Q_INVOKABLE static void launchAudio(QString const& uri);
     Q_INVOKABLE static void launchBBM();
-    Q_INVOKABLE static void launchBBMCall(QString const& pin, bool videoEnabled=true);
     static void launchBBMChat(QString const& pin, InvokeManager& invokeManager);
     static void launchBrowser(QString const& uri);
     static void launchDoc(QString const& uri, InvokeManager& invokeManager);

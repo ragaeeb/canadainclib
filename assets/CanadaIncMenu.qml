@@ -19,17 +19,18 @@ MenuDefinition
         }
     }
     
-    function openChannel() {
+    function openChannel()
+    {
         persist.openChannel(true);
-    }
-    
-    onCreationCompleted: {
+        
         if (allowDonations) {
             var donator = donateDefinition.createObject();
             addAction(donator);
         }
-        
-        app.initialize.connect(openChannel);
+    }
+    
+    onCreationCompleted: {
+        app.lazyInitComplete.connect(openChannel);
     }
     
     settingsAction: SettingsActionItem

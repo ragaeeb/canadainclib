@@ -85,19 +85,6 @@ void InvocationUtils::launchSMSComposer(QString const& number, InvokeManager& in
 }
 
 
-void InvocationUtils::launchBBMCall(QString const& pin, bool videoEnabled)
-{
-	LOGGER(pin << videoEnabled);
-
-	bb::system::InvokeRequest request;
-	request.setTarget("sys.service.videochat");
-	request.setAction("bb.action.OPEN");
-	request.setPerimeter(bb::system::SecurityPerimeter::Personal);
-	request.setData( QString("dest=%1&video=%2").arg(pin).arg( videoEnabled ? 1 : 0 ).toUtf8() );
-	bb::system::InvokeManager().invoke(request);
-}
-
-
 void InvocationUtils::launchBBMChat(QString const& pin, InvokeManager& invokeManager)
 {
 	LOGGER(pin);

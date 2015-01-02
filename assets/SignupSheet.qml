@@ -112,7 +112,7 @@ Sheet
                     title: qsTr("Cancel") + Retranslate.onLanguageChanged
                     
                     onTriggered: {
-                        console.log("UserEvent: SignupSheet Cancel");
+                        console.log("UserEvent: SignupSheetCancel");
                         sheet.close();
                     }
                 }

@@ -7,6 +7,8 @@ ControlDelegate
     property variant icons
     property real bottomSpacing: 30
     property real rightSpacing: 50
+    property real leftSpacing: 15
+    property real topSpacing: 10
     property variant labelColor: Color.White
     
     sourceComponent: ComponentDefinition
@@ -46,7 +48,7 @@ ControlDelegate
                 {
                     id: permissionContainer
                     horizontalAlignment: HorizontalAlignment.Fill
-                    topPadding: 10; leftPadding: 15; rightPadding: rightSpacing; bottomPadding: bottomSpacing
+                    topPadding: topSpacing; leftPadding: leftSpacing; rightPadding: rightSpacing; bottomPadding: bottomSpacing
                     
                     ImageView
                     {

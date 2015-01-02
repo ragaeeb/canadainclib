@@ -375,7 +375,7 @@ void Persistance::launchAppPermissionSettings() {
 
 bool Persistance::hasLocationAccess()
 {
-    QFile target("/pps/services/geolocation/control");
+    QFile target("/pps/services/geolocation/status");
 
     if ( !target.open(QIODevice::ReadOnly) ) {
         return false;

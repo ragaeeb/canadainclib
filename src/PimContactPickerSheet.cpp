@@ -87,7 +87,7 @@ void PimContactPickerSheet::open()
     }
 
     ContactPicker* picker = new ContactPicker(this);
-    picker->setMode(m_mode);
+    picker->setMode( (ContactSelectionMode::Type)m_mode );
     connect( picker, SIGNAL( contactSelected(int) ), this, SLOT( contactSelected(int) ) );
     connect( picker, SIGNAL( contactsSelected(const QList<int> &) ), this, SLOT( contactsSelected(QList<int> const&) ) );
     connect( picker, SIGNAL( canceled() ), this, SLOT( canceled() ) );
@@ -99,8 +99,14 @@ void PimContactPickerSheet::open()
 void PimContactPickerSheet::contactsSelected(QList<int> const& contactIds)
 {
     LOGGER(contactIds);
-    QFuture<QVariantList> future = QtConcurrent::run(renderContacts, contactIds);
-    m_future.setFuture(future);
+
+    if ( !contactIds.isEmpty() )
+    {
+        QFuture<QVariantList> future = QtConcurrent::run(renderContacts, contactIds);
+        m_future.setFuture(future);
+    } else {
+        emit finished( QVariantList() );
+    }
 
     sender()->deleteLater();
 }
@@ -127,12 +133,12 @@ void PimContactPickerSheet::onRenderComplete()
 }
 
 
-ContactSelectionMode::Type PimContactPickerSheet::mode() const {
+int PimContactPickerSheet::mode() const {
     return m_mode;
 }
 
 
-void PimContactPickerSheet::setMode(ContactSelectionMode::Type mode) {
+void PimContactPickerSheet::setMode(int mode) {
     m_mode = mode;
 }
 

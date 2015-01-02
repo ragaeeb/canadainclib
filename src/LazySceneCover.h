@@ -18,7 +18,7 @@ private slots:
 	void tearDown();
 
 public:
-	LazySceneCover(QString const& sceneCoverQml, bool cycle=false);
+	LazySceneCover(QString const& sceneCoverQml="Cover.qml", bool cycle=false);
 	virtual ~LazySceneCover();
 
 	void setContext(QString const& key, QObject* value);

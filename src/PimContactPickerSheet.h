@@ -13,9 +13,9 @@ using namespace bb::cascades::pickers;
 class PimContactPickerSheet : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(bb::cascades::pickers::ContactSelectionMode::Type mode READ mode WRITE setMode FINAL)
+    Q_PROPERTY(int mode READ mode WRITE setMode FINAL)
 
-    ContactSelectionMode::Type m_mode;
+    int m_mode;
     QFutureWatcher<QVariantList> m_future;
 
 public:
@@ -23,8 +23,8 @@ public:
     virtual ~PimContactPickerSheet();
 
     Q_INVOKABLE void open();
-    bb::cascades::pickers::ContactSelectionMode::Type mode() const;
-    Q_SLOT void setMode(bb::cascades::pickers::ContactSelectionMode::Type mode);
+    int mode() const;
+    Q_SLOT void setMode(int mode);
 
 signals:
 	void finished(QVariantList const& result);

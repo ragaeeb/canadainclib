@@ -193,12 +193,17 @@ QVariantList MessageImporter::fetchCalls()
     bb::pim::phone::CallTypeList types;
     types << bb::pim::phone::CallType::Incoming;
     types << bb::pim::phone::CallType::Missed;
+
+    if (!m_inboundOnly) {
+        types << bb::pim::phone::CallType::Outgoing;
+    }
+
     chf.setTypeFilter(types);
 
     QList<bb::pim::phone::CallEntryResult> entries = chs.callHistory(8, chf);
     total = entries.size();
 
-    LOGGER("**** Total" << total);
+    LOGGER("Total" << total);
 
     for (int i = total-1; i >= 0; i--)
     {
@@ -209,6 +214,7 @@ QVariantList MessageImporter::fetchCalls()
         qvm["aid"] = c.accountId();
         qvm["senderAddress"] = c.phoneNumber();
         qvm["duration"] = c.duration();
+        qvm["type"] = c.callType();
 
         if ( !c.callerName().isEmpty() ) {
             qvm["sender"] = c.callerName();
