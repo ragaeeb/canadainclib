@@ -68,7 +68,7 @@ Page
                     }
                     
                     ImageView {
-                        imageSource: "images/ic_bugs_divider.png"
+                        imageSource: "images/bugs/ic_bugs_divider.png"
                         horizontalAlignment: HorizontalAlignment.Center
                     }
                 }
@@ -140,7 +140,7 @@ Page
                             }
                             
                             onOpened: {
-                                persist.showToast( qsTr("Enter the notes you wish to add.\n\nPlease include as much detail as possible about the issue you are having and how to reproduce it."), "", "asset:///images/toast/ic_bugs_info.png" );
+                                persist.showToast( qsTr("Enter the notes you wish to add.\n\nPlease include as much detail as possible about the issue you are having and how to reproduce it."), "", "asset:///images/bugs/ic_bugs_info.png" );
                                 body.requestFocus();
                             }
                             
@@ -153,7 +153,7 @@ Page
                                     acceptAction: ActionItem
                                     {
                                         id: submit
-                                        imageSource: "images/dropdown/ic_bugs_submit.png"
+                                        imageSource: "images/bugs/ic_bugs_submit.png"
                                         title: qsTr("Submit") + Retranslate.onLanguageChanged
                                         
                                         onTriggered: {
@@ -168,7 +168,7 @@ Page
                                     
                                     dismissAction: ActionItem
                                     {
-                                        imageSource: "images/dropdown/ic_bugs_cancel.png"
+                                        imageSource: "images/bugs/ic_bugs_cancel.png"
                                         title: qsTr("Cancel") + Retranslate.onLanguageChanged
                                         
                                         onTriggered: {
