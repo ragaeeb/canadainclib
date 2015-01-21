@@ -14,13 +14,13 @@ DatabaseHelper::DatabaseHelper(QString const& dbase, QObject* parent) :
 
 
 void DatabaseHelper::attachIfNecessary(QString const& dbase, bool homePath, int id) {
-    attachIfNecessary( dbase, homePath ? QDir::homePath() : QString("%1/app/native/assets/dbase").arg( QDir::currentPath() ), id );
+    attachIfNecessary( dbase, homePath ? QDir::homePath() : QString("%1/assets/dbase").arg( QCoreApplication::applicationDirPath() ), id );
 }
 
 
 void DatabaseHelper::attachIfNecessary(QString const& dbase, QString const& path, int id)
 {
-    if ( !m_attached.contains(dbase) )
+    if ( !dbase.isEmpty() && !m_attached.contains(dbase) )
     {
         m_sql.setQuery( QString("ATTACH DATABASE '%1' AS %2").arg( QString("%1/%2.db") ).arg(path).arg(dbase) );
         m_sql.load(id);

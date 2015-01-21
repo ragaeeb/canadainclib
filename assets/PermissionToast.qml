@@ -10,6 +10,7 @@ ControlDelegate
     property real leftSpacing: 15
     property real topSpacing: 10
     property variant labelColor: Color.White
+    visible: delegateActive
     
     sourceComponent: ComponentDefinition
     {

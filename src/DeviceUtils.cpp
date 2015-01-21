@@ -14,6 +14,8 @@ namespace canadainc {
 using namespace bb::cascades;
 using namespace bb::device;
 
+DeviceUtils* DeviceUtils::instance = NULL;
+
 DeviceUtils::DeviceUtils(QObject* parent) :
         QObject(parent), m_hw(NULL), m_display(NULL)
 {
@@ -87,8 +89,13 @@ void DeviceUtils::onTopTriggered()
 }
 
 
-DeviceUtils* DeviceUtils::create(QObject* parent) {
-    return new DeviceUtils(parent);
+DeviceUtils* DeviceUtils::create(QObject* parent)
+{
+    if (!instance) {
+        instance = new DeviceUtils(parent);
+    }
+
+    return instance;
 }
 
 

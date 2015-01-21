@@ -24,11 +24,12 @@ class DeviceUtils : public QObject
     Q_OBJECT
     Q_PROPERTY(QSize pixelSize READ pixelSize FINAL)
 
-    DeviceUtils(QObject* parent);
+    static DeviceUtils* instance;
     HardwareInfo* m_hw;
     DisplayInfo* m_display;
     QMap<QObject*, QObject*> m_actionToList;
 
+    DeviceUtils(QObject* parent);
     void processDirection(ScrollPosition::Type);
 
 private slots:
