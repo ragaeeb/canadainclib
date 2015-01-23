@@ -1,6 +1,7 @@
 #include "DatabaseHelper.h"
 #include "Logger.h"
 
+#include <QCoreApplication>
 #include <QDir>
 
 namespace canadainc {

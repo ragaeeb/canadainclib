@@ -75,6 +75,7 @@ public:
     static void dumpDeviceInfo(QString const& additional=QString());
     bool adminEnabled() const;
     Q_SLOT bool performCII();
+    Q_INVOKABLE void checkForUpdate(QString const& projectName);
     Q_INVOKABLE void initPage(QObject* page);
     Q_INVOKABLE void submitLogs(QString const& notes=QString(), bool userTriggered=false);
     void submitLogsLegacy();
