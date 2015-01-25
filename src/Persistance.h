@@ -48,10 +48,17 @@ public:
     Q_INVOKABLE bool tutorial(QString const& key, QString const& message, QString const& icon);
     Q_INVOKABLE bool tutorialVideo(QString const& uri, bool prompt=true, QString const& key="tutorialVideo", QString const& message=tr("Would you like to see a video tutorial on how to use the app?"));
     Q_INVOKABLE QVariant getValueFor(QString const& objectName);
+    Q_INVOKABLE QVariantList showBlockingDialogWithRemember(QString const& title, QString const& text, QString const& rememberMeText, bool rememberMeValue=false, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"));
+    Q_INVOKABLE static bool hasEmailSmsAccess();
+    Q_INVOKABLE static bool hasLocationAccess();
+    Q_INVOKABLE static bool hasPhoneControlAccess();
+    Q_INVOKABLE static bool hasSharedFolderAccess();
+    Q_INVOKABLE static void openBlackBerryWorld(QString const& appID);
     Q_INVOKABLE static bool showBlockingDialog(QString const& title, QString const& text, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"));
-    Q_INVOKABLE static bool showBlockingDialog(QString const& title, QString const& text, QString const& rememberMeText, bool &rememberMeValue, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"));
     Q_INVOKABLE static bool showBlockingToast(QString const& text, QString const& buttonLabel=QString(), QString const& icon=QString());
     Q_INVOKABLE static QByteArray convertToUtf8(QString const& text);
+    Q_INVOKABLE static void launchAppPermissionSettings();
+    Q_INVOKABLE void attachBackKeyToClickedSignal(QObject* abstractButton, QObject* rootControl);
     Q_INVOKABLE void copyToClipboard(QString const& text, bool showToastMessage=true);
     Q_INVOKABLE void remove(QString const& key, bool fireEvent=true);
     Q_INVOKABLE void showToast(QString const& text, QString const& buttonLabel=QString(), QString const& icon=QString(), bb::system::SystemUiPosition::Type pos=bb::system::SystemUiPosition::MiddleCenter);
@@ -60,14 +67,10 @@ public:
     Q_SLOT void clear();
     Q_SLOT void donate(QString const& uri="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=dar.as.sahaba@hotmail.com&currency_code=CAD&no_shipping=1&tax=0&lc=CA&bn=PP-DonationsBF&item_name=Da'wah Activities, Rent and Utility Expenses for the Musalla (please do not use credit cards)");
     Q_SLOT void forceSync();
+
     Q_SLOT void openChannel(bool promote=false);
     Q_SLOT void reviewApp();
-    Q_INVOKABLE static void launchAppPermissionSettings();
-    Q_INVOKABLE static bool hasEmailSmsAccess();
-    Q_INVOKABLE static bool hasSharedFolderAccess();
-    Q_INVOKABLE static bool hasPhoneControlAccess();
-    Q_INVOKABLE static bool hasLocationAccess();
-    Q_INVOKABLE void attachBackKeyToClickedSignal(QObject* abstractButton, QObject* rootControl);
+    static bool showBlockingDialog(QString const& title, QString const& text, QString const& rememberMeText, bool &rememberMeValue, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"));
     bool isBlocked() const;
 };
 

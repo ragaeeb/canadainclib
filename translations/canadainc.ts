@@ -27,23 +27,23 @@
 <context>
     <name>canadainc::AppLogFetcher</name>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="108"/>
+        <location filename="../src/AppLogFetcher.cpp" line="111"/>
         <source>Login</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="109"/>
+        <location filename="../src/AppLogFetcher.cpp" line="112"/>
         <source>Please enter the credentials provided to you by Canada Inc:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="158"/>
-        <location filename="../src/AppLogFetcher.cpp" line="336"/>
+        <location filename="../src/AppLogFetcher.cpp" line="161"/>
+        <location filename="../src/AppLogFetcher.cpp" line="361"/>
         <source>Could not submit logs! Please try again...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="295"/>
+        <location filename="../src/AppLogFetcher.cpp" line="314"/>
         <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -51,12 +51,12 @@
 <context>
     <name>canadainc::DeviceUtils</name>
     <message>
-        <location filename="../src/DeviceUtils.cpp" line="43"/>
+        <location filename="../src/DeviceUtils.cpp" line="45"/>
         <source>Top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceUtils.cpp" line="46"/>
+        <location filename="../src/DeviceUtils.cpp" line="48"/>
         <source>Bottom</source>
         <translation type="unfinished"></translation>
     </message>
@@ -163,86 +163,73 @@
 <context>
     <name>canadainc::Persistance</name>
     <message>
-        <location filename="../src/Persistance.cpp" line="150"/>
+        <location filename="../src/Persistance.cpp" line="181"/>
         <source>Copied: %1 to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="237"/>
-        <location filename="../src/Persistance.cpp" line="362"/>
+        <location filename="../src/Persistance.cpp" line="268"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="257"/>
+        <location filename="../src/Persistance.cpp" line="288"/>
         <source>Tutorial</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="257"/>
-        <location filename="../src/Persistance.cpp" line="291"/>
-        <location filename="../src/Persistance.h" line="49"/>
-        <location filename="../src/Persistance.h" line="50"/>
+        <location filename="../src/Persistance.cpp" line="288"/>
+        <location filename="../src/Persistance.cpp" line="334"/>
+        <location filename="../src/Persistance.h" line="51"/>
+        <location filename="../src/Persistance.h" line="57"/>
+        <location filename="../src/Persistance.h" line="73"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="257"/>
-        <location filename="../src/Persistance.cpp" line="291"/>
-        <location filename="../src/Persistance.h" line="49"/>
-        <location filename="../src/Persistance.h" line="50"/>
+        <location filename="../src/Persistance.cpp" line="288"/>
+        <location filename="../src/Persistance.cpp" line="334"/>
+        <location filename="../src/Persistance.h" line="51"/>
+        <location filename="../src/Persistance.h" line="57"/>
+        <location filename="../src/Persistance.h" line="73"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="291"/>
+        <location filename="../src/Persistance.cpp" line="334"/>
         <source>Review</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="291"/>
+        <location filename="../src/Persistance.cpp" line="334"/>
         <source>If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="327"/>
+        <location filename="../src/Persistance.cpp" line="370"/>
         <source>Are you sure you want to clear the cache?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="327"/>
+        <location filename="../src/Persistance.cpp" line="370"/>
         <source>Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="342"/>
+        <location filename="../src/Persistance.cpp" line="385"/>
         <source>Cache was successfully cleared!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.h" line="47"/>
+        <location filename="../src/Persistance.h" line="49"/>
         <source>Would you like to see a video tutorial on how to use the app?</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>canadainc::PimContactPickerSheet</name>
-    <message>
-        <location filename="../src/PimContactPickerSheet.cpp" line="84"/>
-        <source>Warning: It seems like the app does not have access to your contacts. If you leave this permission off, some features may not work properly. Select OK to launch the Application Permissions screen where you can turn these settings on.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>canadainc::PimUtil</name>
     <message>
-        <location filename="../src/PimUtil.cpp" line="125"/>
-        <location filename="../src/PimUtil.cpp" line="144"/>
-        <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/PimUtil.cpp" line="170"/>
+        <location filename="../src/PimUtil.cpp" line="157"/>
         <source>RE: %1</source>
         <translation type="unfinished"></translation>
     </message>

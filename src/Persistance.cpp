@@ -132,6 +132,17 @@ bool Persistance::showBlockingDialog(QString const& title, QString const& text, 
 }
 
 
+QVariantList Persistance::showBlockingDialogWithRemember(QString const& title, QString const& text, QString const& rememberMeText, bool rememberMeValue, QString const& okButton, QString const& cancelButton)
+{
+    QVariantList result;
+    bool remember = rememberMeValue;
+    bool yesSelected = showBlockingDialog(title, text, rememberMeText, remember, okButton, cancelButton);
+
+    result << yesSelected << remember;
+    return result;
+}
+
+
 bool Persistance::showBlockingDialog(QString const& title, QString const& text, QString const& rememberMeText, bool &rememberMeValue, QString const& okButton, QString const& cancelButton)
 {
     isNowBlocked = true;
@@ -299,6 +310,18 @@ void Persistance::reviewApp()
     request.setAction("bb.action.OPEN");
     request.setMimeType("text/html");
     request.setUri("appworld://review");
+
+    InvokeManager().invoke(request);
+}
+
+
+void Persistance::openBlackBerryWorld(QString const& appID)
+{
+    InvokeRequest request;
+    request.setTarget("sys.appworld");
+    request.setAction("bb.action.OPEN");
+    request.setMimeType("text/html");
+    request.setUri("appworld://content/"+appID);
 
     InvokeManager().invoke(request);
 }

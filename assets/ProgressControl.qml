@@ -4,6 +4,7 @@ ControlDelegate
 {
     property variant asset
     property string loadingText
+    property variant curve: StockCurve.SineOut
     delegateActive: false
     horizontalAlignment: HorizontalAlignment.Center
     verticalAlignment: VerticalAlignment.Center
@@ -26,7 +27,7 @@ ControlDelegate
                     RotateTransition {
                         id: rt
                         delay: 0
-                        easingCurve: StockCurve.SineOut
+                        easingCurve: curve
                         fromAngleZ: 0
                         toAngleZ: 360
                         duration: 1000

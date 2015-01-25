@@ -2,10 +2,11 @@ import bb.cascades 1.0
 
 MenuDefinition
 {
-    property string projectName
-    property alias settings: settingsActionItem
-    property alias help: helpActionItem
     property bool allowDonations: false
+    property string bbWorldID
+    property string projectName
+    property alias help: helpActionItem
+    property alias settings: settingsActionItem
     property bool showServiceLogging: false
     
     function launchPage(page)
@@ -19,7 +20,27 @@ MenuDefinition
         }
     }
     
-    function openChannel()
+    function onLatestVersionFound(latestVersion)
+    {
+        var currentVersion = Application.applicationVersion;
+
+        if ( currentVersion.localeCompare(latestVersion) < 0 && !persist.isBlocked )
+        {
+            var result = persist.showBlockingDialogWithRemember( qsTr("Update Available"), qsTr("%1 %2 is available (you have %3). Would you like to visit BlackBerry World to download the latest version?").arg(Application.applicationName).arg(latestVersion).arg(currentVersion), qsTr("Don't Show Again") );
+            
+            if (result[0]) {
+                persist.openBlackBerryWorld(bbWorldID);
+            }
+            
+            if (result[1]) {
+                persist.saveValueFor("appLastUpdateCheck", -1);
+            } else {
+                persist.saveValueFor("appLastUpdateCheck", new Date().getTime());
+            }
+        }
+    }
+    
+    function asyncWork()
     {
         persist.openChannel(true);
         
@@ -27,10 +48,18 @@ MenuDefinition
             var donator = donateDefinition.createObject();
             addAction(donator);
         }
+        
+        var lastUpdateCheck = persist.contains("appLastUpdateCheck") ? persist.getValueFor("appLastUpdateCheck") : 0;
+        var diff = new Date().getTime() - lastUpdateCheck;
+        
+        if (lastUpdateCheck >= 0 && diff > 1000*60*60*24*30) { // 30 days have past since last update check
+            reporter.latestAppVersionFound.connect(onLatestVersionFound);
+            reporter.checkForUpdate(projectName);
+        }
     }
     
     onCreationCompleted: {
-        app.lazyInitComplete.connect(openChannel);
+        app.lazyInitComplete.connect(asyncWork);
     }
     
     settingsAction: SettingsActionItem

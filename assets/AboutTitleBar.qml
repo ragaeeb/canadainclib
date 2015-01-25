@@ -1,4 +1,3 @@
-import bb 1.0
 import bb.cascades 1.0
 
 TitleBar
@@ -19,18 +18,12 @@ TitleBar
             topPadding: 10
             
             Label {
-                text: qsTr("%1 %2").arg(appInfo.title).arg(appInfo.version)
+                text: qsTr("%1 %2").arg(Application.applicationName).arg(Application.applicationVersion)
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Fill
                 textStyle.color: textColor
                 textStyle.textAlign: TextAlign.Center
                 textStyle.base: SystemDefaults.TextStyles.BodyText
-                
-                attachedObjects: [
-                    ApplicationInfo {
-                        id: appInfo
-                    }
-                ]
             }
             
             Label
@@ -44,12 +37,6 @@ TitleBar
                 content.flags: TextContentFlag.ActiveText | TextContentFlag.EmoticonsOff
                 multiline: true
                 topMargin: 0
-                
-                attachedObjects: [
-                    PackageInfo {
-                        id: packageInfo
-                    }
-                ]
                 
                 onCreationCompleted: {
                     kindProperties.expandableArea.expandedChanged(kindProperties.expandableArea.expanded);
@@ -78,9 +65,9 @@ TitleBar
                 if (expanded) {
                     body.text = qsTr("Please report all bugs to: support@canadainc.org");
                 } else {
-                    body.text = qsTr("(c) %1 %2. All Rights Reserved.").arg( new Date().getFullYear() ).arg(packageInfo.author);
+                    body.text = qsTr("(c) %1 %2. All Rights Reserved.").arg( new Date().getFullYear() ).arg(Application.organizationName);
                 }
-                
+
                 console.log("UserEvent: AboutTitleExpanded", expanded);
             }
         }
