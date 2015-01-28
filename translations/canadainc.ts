@@ -27,23 +27,32 @@
 <context>
     <name>canadainc::AppLogFetcher</name>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="111"/>
+        <location filename="../src/AppLogFetcher.cpp" line="122"/>
         <source>Login</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="112"/>
+        <location filename="../src/AppLogFetcher.cpp" line="123"/>
         <source>Please enter the credentials provided to you by Canada Inc:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="161"/>
-        <location filename="../src/AppLogFetcher.cpp" line="361"/>
+        <location filename="../src/AppLogFetcher.cpp" line="172"/>
+        <source>Could not submit report! Please try again...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/AppLogFetcher.cpp" line="174"/>
+        <source>Report could not be submitted because you are offline! Please reconnect to the network and try again...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/AppLogFetcher.cpp" line="387"/>
         <source>Could not submit logs! Please try again...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="314"/>
+        <location filename="../src/AppLogFetcher.cpp" line="340"/>
         <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
         <translation type="unfinished"></translation>
     </message>
