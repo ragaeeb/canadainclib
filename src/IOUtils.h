@@ -21,11 +21,13 @@ public:
 	/**
 	 * @param replace If this is <code>false</code> then we will just append to the text file.
 	 */
-	static bool writeTextFile(QString const& filePath, QString contents, bool replace=true, bool correctNewLines=true);
+	static bool writeTextFile(QString const& filePath, QString contents, bool replace=true, bool correctNewLines=true, bool log=true);
 
 	static QString readTextFile(QString const& filePath);
 
 	static QString setupOutputDirectory(QString const& sharedFolder, QString const& name);
+
+	static QStringList executeCommand(QString const& command);
 };
 
 } /* namespace canadainc */

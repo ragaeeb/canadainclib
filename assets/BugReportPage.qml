@@ -156,8 +156,7 @@ Page
                                         title: qsTr("Submit") + Retranslate.onLanguageChanged
                                         
                                         onTriggered: {
-                                            var value = "UserEnteredReport: "+body.text;
-                                            reporter.submitLogs(value, true);
+                                            reporter.submitLogs(body.text, true);
                                             progressIndicator.value = 0;
                                             progressIndicator.state = ProgressIndicatorState.Progress;
                                             progressIndicator.visible = true;

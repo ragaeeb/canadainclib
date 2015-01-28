@@ -60,9 +60,11 @@ bool IOUtils::writeFile(QString const& filePath, QByteArray const& data, bool re
 }
 
 
-bool IOUtils::writeTextFile(QString const& filePath, QString contents, bool replace, bool correctNewLines)
+bool IOUtils::writeTextFile(QString const& filePath, QString contents, bool replace, bool correctNewLines, bool log)
 {
-	LOGGER(filePath << contents << replace);
+    if (log) {
+        LOGGER(filePath << contents.length() << replace << correctNewLines);
+    }
 
 	QFile outputFile(filePath);
 	bool opened = outputFile.open(replace ? QIODevice::WriteOnly : QIODevice::WriteOnly | QIODevice::Append);
@@ -71,8 +73,12 @@ bool IOUtils::writeTextFile(QString const& filePath, QString contents, bool repl
 	{
 		QTextStream stream(&outputFile);
 
-		if ( outputFile.exists() && !replace ) {
-			LOGGER("Appending to file");
+		if ( outputFile.exists() && !replace )
+		{
+		    if (log) {
+	            LOGGER("Appending to file");
+		    }
+
 			stream << QString("%1%1").arg(NEW_LINE);
 		}
 
@@ -84,7 +90,10 @@ bool IOUtils::writeTextFile(QString const& filePath, QString contents, bool repl
 
 		outputFile.close();
 	} else {
-		LOGGER("Could not open " << filePath << "for writing!");
+	    if (log) {
+	        LOGGER("Could not open " << filePath << "for writing!");
+	    }
+
 		return false;
 	}
 
@@ -108,6 +117,38 @@ QString IOUtils::readTextFile(QString const& filePath)
 
 	outputFile.close();
 	return result;
+}
+
+
+QStringList IOUtils::executeCommand(QString const& command)
+{
+    QStringList result;
+    FILE *fp;
+    char path[2048];
+
+    fflush(stdout);
+
+    // Open the command for reading.
+    fp = popen( command.toStdString().c_str(), "r" );
+
+    if (fp == NULL) {
+        printf("NoDataFound\n");
+        fflush(stdout);
+        pclose(fp);
+    }
+
+    // Read the output a line at a time - output it.
+    while ( fgets(path, sizeof(path) - 1, fp) != NULL )
+    {
+        // printf("%s\n", path);
+        // fflush(stdout);
+        result.append(path);
+    }
+
+    // close
+    pclose(fp);
+
+    return result;
 }
 
 
