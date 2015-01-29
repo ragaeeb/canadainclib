@@ -20,13 +20,13 @@ Page
         {
             Container
             {
-                leftPadding: 10; rightPadding: 10;
+                leftPadding: 10; rightPadding: 10; topPadding: 10
                 
                 Label {
                     text: qsTr("Bug Reports") + Retranslate.onLanguageChanged
                     verticalAlignment: VerticalAlignment.Center
                     textStyle.base: SystemDefaults.TextStyles.BigText
-                    textStyle.color: 'Signature' in ActionBarPlacement ? Color.Black : Color.White
+                    textStyle.color: 'Signature' in ActionBarPlacement && Application.themeSupport.theme.colorTheme.style == VisualStyle.Bright ? Color.Black : Color.White
                 }
             }
             

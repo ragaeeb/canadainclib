@@ -47,12 +47,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="387"/>
+        <location filename="../src/AppLogFetcher.cpp" line="415"/>
         <source>Could not submit logs! Please try again...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="340"/>
+        <location filename="../src/AppLogFetcher.cpp" line="368"/>
         <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
         <translation type="unfinished"></translation>
     </message>
