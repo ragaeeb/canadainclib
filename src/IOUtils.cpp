@@ -111,7 +111,7 @@ QString IOUtils::readTextFile(QString const& filePath)
 		QTextStream stream(&outputFile);
 		result = stream.readAll();
 	} else {
-		LOGGER("Could not open " << filePath << "for writing!");
+		LOGGER("Could not open " << filePath << "for reading!");
 		result = QString();
 	}
 

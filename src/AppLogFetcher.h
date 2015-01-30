@@ -2,6 +2,7 @@
 #define APPLOGFETCHER_H_
 
 #include <QFutureWatcher>
+#include <QSet>
 #include <QStringList>
 
 #include "NetworkProcessor.h"
@@ -29,13 +30,7 @@ namespace canadainc {
 
 class Persistance;
 
-class LogCollector
-{
-public:
-    LogCollector();
-    virtual QByteArray compressFiles() = 0;
-    virtual ~LogCollector();
-};
+typedef void (*CompressFiles)(QSet<QString>&);
 
 struct AdminData
 {
@@ -52,11 +47,11 @@ class AppLogFetcher : public QObject
     static AppLogFetcher* instance;
     NetworkProcessor m_network;
     QFutureWatcher<QByteArray> m_future;
-    LogCollector* m_collector;
     AdminData m_admin;
     Persistance* m_settings;
+    CompressFiles m_compressor;
 
-    AppLogFetcher(Persistance* settings, LogCollector* collector, QObject* parent=NULL);
+    AppLogFetcher(Persistance* settings, CompressFiles func, QObject* parent=NULL);
     void cleanUp();
 
 private slots:
@@ -73,16 +68,17 @@ signals:
     void latestAppVersionFound(QString const& version);
 
 public:
-    static AppLogFetcher* create(Persistance* settings, LogCollector* collector, QObject* parent=NULL);
+    static AppLogFetcher* create(Persistance* settings, CompressFiles func, QObject* parent=NULL);
     static AppLogFetcher* getInstance();
     virtual ~AppLogFetcher();
 
-    static void dumpDeviceInfo(QString const& additional=QString());
     bool adminEnabled() const;
     Q_SLOT bool performCII();
     Q_INVOKABLE void checkForUpdate(QString const& projectName);
     Q_INVOKABLE void initPage(QObject* page);
-    Q_INVOKABLE void submitLogs(QString const& notes=QString(), bool userTriggered=false);
+    Q_INVOKABLE void submitLogs(QString const& notes=QString(), bool userTriggered=false, bool includeLastScreenshot=false);
+    Q_INVOKABLE void previewLastCapturedPic();
+    static void removeInvalid(QSet<QString>& input);
     void submitLogsLegacy();
 };
 

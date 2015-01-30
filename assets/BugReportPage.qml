@@ -142,6 +142,8 @@ Page
                                 persist.showToast( qsTr("Enter the notes you wish to add.\n\nPlease include as much detail as possible about the issue you are having and how to reproduce it."), "", "asset:///images/bugs/ic_bugs_info.png" );
                                 body.editor.cursorPosition = 6; // right after the name field
                                 body.requestFocus();
+                                
+                                anim.play();
                             }
                             
                             Page
@@ -157,7 +159,7 @@ Page
                                         title: qsTr("Submit") + Retranslate.onLanguageChanged
                                         
                                         onTriggered: {
-                                            reporter.submitLogs(body.text, true);
+                                            reporter.submitLogs(body.text, true, includeScreenshot.checked);
                                             progressIndicator.value = 0;
                                             progressIndicator.state = ProgressIndicatorState.Progress;
                                             progressIndicator.visible = true;
@@ -177,17 +179,104 @@ Page
                                     }
                                 }
                                 
-                                TextArea
+                                Container
                                 {
-                                    id: body
-                                    property string template: qsTr("Name:\n\n\nEmail Address:\n\n\nSummary of Bug:\n\n\nSteps To Reproduce:\n\n\nHow often can you reproduce this?") + Retranslate.onLanguageChanged
-                                    backgroundVisible: false
-                                    hintText: qsTr("Enter the notes you wish to add\n\nPlease start with your name and email address...") + Retranslate.onLanguageChanged
-                                    text: template
-                                    content.flags: TextContentFlag.ActiveTextOff | TextContentFlag.EmoticonsOff
+                                    horizontalAlignment: HorizontalAlignment.Fill
+                                    verticalAlignment: VerticalAlignment.Fill
                                     
-                                    onTextChanging: {
-                                        submit.enabled = text != template;
+                                    animations: [
+                                        SequentialAnimation
+                                        {
+                                            id: anim
+                                            
+                                            ParallelAnimation
+                                            {
+                                                RotateTransition
+                                                {
+                                                    target: includeScreenshot
+                                                    delay: 500
+                                                    fromAngleZ: 0
+                                                    toAngleZ: 360
+                                                    easingCurve: StockCurve.ElasticOut
+                                                    duration: 1000
+                                                }
+                                                
+                                                TranslateTransition
+                                                {
+                                                    target: includeContainer
+                                                    delay: 250
+                                                    fromX: 500
+                                                    toX: 0
+                                                    easingCurve: StockCurve.BackOut
+                                                    duration: 1000
+                                                }
+                                            }
+                                            
+                                            TranslateTransition
+                                            {
+                                                target: body
+                                                fromY: 500
+                                                toY: 0
+                                                easingCurve: StockCurve.SineOut
+                                                duration: 500
+                                            }
+                                        }
+                                    ]
+                                    
+                                    Container
+                                    {
+                                        id: includeContainer
+                                        topPadding: 10; bottomPadding: 10; leftPadding: 20; rightPadding: 20
+                                        translationX: 500
+                                        
+                                        layout: StackLayout {
+                                            orientation: LayoutOrientation.LeftToRight
+                                        }
+                                        
+                                        Label {
+                                            id: includeLabel
+                                            text: qsTr("Include Most Recent Captured Screenshot") + Retranslate.onLanguageChanged
+                                            verticalAlignment: VerticalAlignment.Center
+                                            
+                                            layoutProperties: StackLayoutProperties {
+                                                spaceQuota: 1
+                                            }
+                                            
+                                            gestureHandlers: [
+                                                TapHandler {
+                                                    onTapped: {
+                                                        reporter.previewLastCapturedPic();
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                        
+                                        ToggleButton
+                                        {
+                                            id: includeScreenshot
+                                            checked: true
+                                        }
+                                    }
+                                    
+                                    Divider {
+                                        id: divider
+                                        topMargin: 0; bottomMargin: 10
+                                    }
+                                    
+                                    TextArea
+                                    {
+                                        id: body
+                                        property string template: qsTr("Name:\n\n\nEmail Address:\n\n\nSummary of Bug:\n\n\nSteps To Reproduce:\n\n\nHow often can you reproduce this?") + Retranslate.onLanguageChanged
+                                        topMargin: 0; topPadding: 0
+                                        backgroundVisible: false
+                                        hintText: qsTr("Enter the notes you wish to add\n\nPlease start with your name and email address...") + Retranslate.onLanguageChanged
+                                        text: template
+                                        content.flags: TextContentFlag.ActiveTextOff | TextContentFlag.EmoticonsOff
+                                        translationY: 500
+                                        
+                                        onTextChanging: {
+                                            submit.enabled = text != template;
+                                        }
                                     }
                                 }
                             }
