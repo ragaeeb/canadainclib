@@ -1,10 +1,13 @@
 #include "TextUtils.h"
 
 #include <QRegExp>
+#include <QStringList>
 
 #include <math.h>
 #include <stdint.h>
 #include <sys/types.h>
+
+#define BYTES_PER_KB 1024
 
 namespace {
 
@@ -76,6 +79,21 @@ QString TextUtils::sanitize(QString const& original)
     }
 
     return result;
+}
+
+
+QString TextUtils::bytesToSize(qint64 bytes)
+{
+    static QStringList sizes = QStringList() << tr("Bytes") << tr("KB") << tr("MB") << tr("GB") << tr("TB");
+
+    if (bytes == 0) {
+        return tr("0 Bytes");
+    }
+
+    int i = floor( log(bytes) / log(BYTES_PER_KB) );
+    double rounded = bytes / pow(BYTES_PER_KB, i);
+
+    return QString("%1 %2").arg( QString::number(rounded, 'f', 2) ).arg( sizes[i] );
 }
 
 

@@ -28,6 +28,8 @@ public:
     Q_INVOKABLE static QString formatTime(unsigned int duration);
 
     Q_INVOKABLE static QString sanitize(QString const& original);
+
+    Q_INVOKABLE static QString bytesToSize(qint64 bytes);
 };
 
 } /* namespace canadainc */
