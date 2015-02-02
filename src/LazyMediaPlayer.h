@@ -30,6 +30,7 @@ class LazyMediaPlayer : public QObject
 	Q_PROPERTY(QVariant position READ currentPosition)
 	Q_PROPERTY(QVariantMap metaData READ metaData)
 	Q_PROPERTY(bool repeat READ repeat WRITE setRepeat NOTIFY repeatChanged)
+	Q_PROPERTY(bool multiThreaded READ multiThreaded WRITE setMultiThreaded FINAL)
 
 	QString m_name;
 	MediaPlayer* m_mp;
@@ -74,6 +75,7 @@ public:
     QVariantMap metaData() const;
     void setRepeat(bool value);
     double volume();
+    bool multiThreaded() const;
 
     Q_INVOKABLE QString videoWindowId();
     Q_INVOKABLE void jump(int secs);
@@ -87,6 +89,7 @@ public:
     Q_SLOT void stop();
     Q_SLOT void togglePlayback();
     Q_SLOT void toggleVideo();
+    void setMultiThreaded(bool threaded);
 };
 
 } /* namespace canadainc */

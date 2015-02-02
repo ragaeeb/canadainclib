@@ -337,6 +337,16 @@ double LazyMediaPlayer::volume() {
 }
 
 
+bool LazyMediaPlayer::multiThreaded() const {
+    return m_multiThreaded;
+}
+
+
+void LazyMediaPlayer::setMultiThreaded(bool threaded) {
+    m_multiThreaded = threaded;
+}
+
+
 LazyMediaPlayer::~LazyMediaPlayer()
 {
 	if (m_npc != NULL) {
