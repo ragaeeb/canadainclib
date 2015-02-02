@@ -30,7 +30,6 @@ class LazyMediaPlayer : public QObject
 	Q_PROPERTY(QVariant position READ currentPosition)
 	Q_PROPERTY(QVariantMap metaData READ metaData)
 	Q_PROPERTY(bool repeat READ repeat WRITE setRepeat NOTIFY repeatChanged)
-	Q_PROPERTY(bool multiThreaded READ multiThreaded WRITE setMultiThreaded FINAL)
 
 	QString m_name;
 	MediaPlayer* m_mp;
@@ -38,9 +37,6 @@ class LazyMediaPlayer : public QObject
 	QString m_videoWindowId;
 	bool m_repeat;
 	double m_volume;
-	bool m_multiThreaded;
-
-	void doPlayback(QUrl const& uri);
 
 private slots:
     void error(bb::multimedia::MediaError::Type mediaError, unsigned int position);
@@ -61,7 +57,7 @@ signals:
 	void videoDimensionsChanged(const QSize &videoDimensions);
 
 public:
-	LazyMediaPlayer(bool multiThreaded=false, QObject* parent=NULL);
+	LazyMediaPlayer(QObject* parent=NULL);
 	virtual ~LazyMediaPlayer();
 
     bool active() const;
@@ -75,7 +71,6 @@ public:
     QVariantMap metaData() const;
     void setRepeat(bool value);
     double volume();
-    bool multiThreaded() const;
 
     Q_INVOKABLE QString videoWindowId();
     Q_INVOKABLE void jump(int secs);
@@ -89,7 +84,6 @@ public:
     Q_SLOT void stop();
     Q_SLOT void togglePlayback();
     Q_SLOT void toggleVideo();
-    void setMultiThreaded(bool threaded);
 };
 
 } /* namespace canadainc */

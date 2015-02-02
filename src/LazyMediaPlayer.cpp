@@ -10,8 +10,8 @@ namespace canadainc {
 
 using namespace bb::multimedia;
 
-LazyMediaPlayer::LazyMediaPlayer(bool multiThreaded, QObject* parent) :
-        QObject(parent), m_mp(NULL), m_npc(NULL), m_repeat(false), m_volume(1), m_multiThreaded(multiThreaded)
+LazyMediaPlayer::LazyMediaPlayer(QObject* parent) :
+        QObject(parent), m_mp(NULL), m_npc(NULL), m_repeat(false), m_volume(1)
 {
     connect( bb::Application::instance(), SIGNAL( aboutToQuit() ), this, SLOT( pause() ) );
 }
@@ -55,13 +55,17 @@ void LazyMediaPlayer::play(QUrl const& uri)
 		}
 	}
 
-	if (m_multiThreaded) {
-	    LOGGER("multithreadedPlay");
-	    QtConcurrent::run(this, &LazyMediaPlayer::doPlayback, uri);
-	} else {
-	    LOGGER("single-threadedPlay");
-	    doPlayback(uri);
-	}
+    if (m_mp) {
+        m_mp->reset();
+    }
+
+    m_mp->setSourceUrl(uri);
+
+    if ( m_npc->isAcquired() ) {
+        playNow();
+    } else {
+        m_npc->acquire();
+    }
 }
 
 
@@ -133,22 +137,6 @@ void LazyMediaPlayer::playNow()
 
     if (errType != MediaError::None) {
         error(errType, 0);
-    }
-}
-
-
-void LazyMediaPlayer::doPlayback(QUrl const& uri)
-{
-    if (m_mp) {
-        m_mp->reset();
-    }
-
-    m_mp->setSourceUrl(uri);
-
-    if ( m_npc->isAcquired() ) {
-        playNow();
-    } else {
-        m_npc->acquire();
     }
 }
 
@@ -334,16 +322,6 @@ void LazyMediaPlayer::setVolume(double volume)
 
 double LazyMediaPlayer::volume() {
     return m_mp ? m_mp->volume() : 0;
-}
-
-
-bool LazyMediaPlayer::multiThreaded() const {
-    return m_multiThreaded;
-}
-
-
-void LazyMediaPlayer::setMultiThreaded(bool threaded) {
-    m_multiThreaded = threaded;
 }
 
 
