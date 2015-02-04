@@ -1,5 +1,6 @@
 #include <bb/system/Clipboard>
 #include <bb/system/SystemDialog>
+#include <bb/system/SystemPrompt>
 #include <bb/system/SystemToast>
 
 #include <bb/cascades/Application>
@@ -168,6 +169,28 @@ bool Persistance::showBlockingDialog(QString const& title, QString const& text, 
     isNowBlocked = false;
 
     return result;
+}
+
+
+QString Persistance::showBlockingPrompt(QString const& title, QString const& body, QString const& defaultText, QString const& hintText, int maxLength, bool autoCapitalize, QString const& okButton, QString const& cancelButton)
+{
+    isNowBlocked = true;
+
+    SystemPrompt dialog;
+    dialog.setBody(body);
+    dialog.setTitle(title);
+    dialog.inputField()->setDefaultText(defaultText);
+    dialog.inputField()->setEmptyText(hintText);
+    dialog.inputField()->setMaximumLength(maxLength);
+    dialog.setInputOptions(autoCapitalize ? SystemUiInputOption::AutoCapitalize : SystemUiInputOption::None);
+    dialog.confirmButton()->setLabel(okButton);
+    dialog.cancelButton()->setLabel(cancelButton);
+
+    bool result = dialog.exec() == SystemUiResult::ConfirmButtonSelection;
+
+    isNowBlocked = false;
+
+    return result ? dialog.inputFieldTextEntry() : QString();
 }
 
 
