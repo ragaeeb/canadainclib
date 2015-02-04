@@ -23,8 +23,10 @@ MenuDefinition
     function onLatestVersionFound(latestVersion)
     {
         var currentVersion = Application.applicationVersion;
+        
+        var isOlder = currentVersion.localeCompare(latestVersion) < 0;
 
-        if ( currentVersion.localeCompare(latestVersion) < 0 && !persist.isBlocked )
+        if (isOlder && !persist.isBlocked) // if it's an older client, and we are not blocked
         {
             var result = persist.showBlockingDialogWithRemember( qsTr("Update Available"), qsTr("%1 %2 is available (you have %3). Would you like to visit BlackBerry World to download the latest version?").arg(Application.applicationName).arg(latestVersion).arg(currentVersion), qsTr("Don't Show Again") );
             
@@ -37,6 +39,8 @@ MenuDefinition
             } else {
                 persist.saveValueFor("appLastUpdateCheck", new Date().getTime());
             }
+        } else if (!isOlder) { // if it's a newer client, then don't check for a while
+            persist.saveValueFor("appLastUpdateCheck", new Date().getTime());
         }
     }
     

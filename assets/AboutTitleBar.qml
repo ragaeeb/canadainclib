@@ -18,12 +18,16 @@ TitleBar
             topPadding: 10
             
             Label {
-                text: qsTr("%1 %2").arg(Application.applicationName).arg(Application.applicationVersion)
+                id: appNameLabel
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Fill
                 textStyle.color: 'Signature' in ActionBarPlacement && Application.themeSupport.theme.colorTheme.style == VisualStyle.Bright ? Color.Black : Color.White
                 textStyle.textAlign: TextAlign.Center
                 textStyle.base: SystemDefaults.TextStyles.BodyText
+                
+                onCreationCompleted: {
+                    text = "%1 %2".arg(Application.applicationName).arg(Application.applicationVersion)
+                }
             }
             
             Label
@@ -31,7 +35,7 @@ TitleBar
                 id: body
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Fill
-                textStyle.color: labelColor
+                textStyle.color: appNameLabel.textStyle.color
                 textStyle.textAlign: TextAlign.Center
                 textStyle.base: SystemDefaults.TextStyles.SmallText
                 content.flags: TextContentFlag.ActiveText | TextContentFlag.EmoticonsOff
