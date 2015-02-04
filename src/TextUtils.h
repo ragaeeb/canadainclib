@@ -30,6 +30,8 @@ public:
     Q_INVOKABLE static QString sanitize(QString const& original);
 
     Q_INVOKABLE static QString bytesToSize(qint64 bytes);
+
+    static QString longestCommonSubstring(QString const& str1, QString const& str2);
 };
 
 } /* namespace canadainc */
