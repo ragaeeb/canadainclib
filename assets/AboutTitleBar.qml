@@ -4,6 +4,7 @@ TitleBar
 {
     id: titleControl
     property string channelTitle: qsTr("Our BBM Channel") + Retranslate.onLanguageChanged
+    property bool initialized: false
     kind: TitleBarKind.FreeForm
     scrollBehavior: TitleBarScrollBehavior.NonSticky
     kindProperties: FreeFormTitleBarKindProperties
@@ -68,7 +69,21 @@ TitleBar
                 }
 
                 console.log("UserEvent: AboutTitleExpanded", expanded);
+                
+                if (!initialized)
+                {
+                    reporter.initPage(titleControl.parent);
+                    reporter.adminEnabledChanged.connect(onAdminEnabledChanged);
+                    initialized = true;
+                }
             }
+        }
+    }
+    
+    function onAdminEnabledChanged()
+    {
+        if (reporter.isAdmin) {
+            persist.showToast( qsTr("Admin Access Granted"), "", "asset:///images/bugs/ic_bugs_submit.png" );
         }
     }
 }
