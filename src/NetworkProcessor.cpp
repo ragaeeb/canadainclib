@@ -24,7 +24,7 @@ void NetworkProcessor::onlineStateChanged(bool online)
 
 void NetworkProcessor::doRequest(QString const& uri, QVariant const& cookie, QVariantMap const& parameters)
 {
-	LOGGER(uri << parameters);
+	LOGGER( uri.right( uri.lastIndexOf("/") ) << parameters );
 
     QUrl params;
 
@@ -68,7 +68,7 @@ void NetworkProcessor::init()
 
 void NetworkProcessor::doGet(QString const& uri, QVariant const& cookie)
 {
-	LOGGER(uri << cookie);
+	LOGGER( uri.right( uri.lastIndexOf("/") ) << cookie );
 
 	init();
 

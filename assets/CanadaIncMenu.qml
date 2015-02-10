@@ -7,7 +7,6 @@ MenuDefinition
     property string projectName
     property alias help: helpActionItem
     property alias settings: settingsActionItem
-    property bool showServiceLogging: false
     
     function launchPage(page)
     {
@@ -23,8 +22,8 @@ MenuDefinition
     function onLatestVersionFound(latestVersion)
     {
         var currentVersion = Application.applicationVersion;
-        
         var isOlder = currentVersion.localeCompare(latestVersion) < 0;
+        console.log("latestVersionFound", latestVersion, currentVersion, isOlder);
 
         if (isOlder && !persist.isBlocked) // if it's an older client, and we are not blocked
         {
@@ -99,7 +98,6 @@ MenuDefinition
                 }
                 
                 bugReportPage.projectName = projectName;
-                bugReportPage.showServiceLogging = showServiceLogging;
                 launchPage(bugReportPage);
             }
         },

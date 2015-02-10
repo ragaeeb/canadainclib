@@ -4,7 +4,6 @@ Page
 {
     id: root
     property string projectName
-    property bool showServiceLogging: false
     
     onProjectNameChanged: {
         webView.url = "http://code.google.com/p/%1/issues/list".arg(projectName);
@@ -27,49 +26,6 @@ Page
                     verticalAlignment: VerticalAlignment.Center
                     textStyle.base: SystemDefaults.TextStyles.BigText
                     textStyle.color: 'Signature' in ActionBarPlacement && Application.themeSupport.theme.colorTheme.style == VisualStyle.Bright ? Color.Black : Color.White
-                }
-            }
-            
-            expandableArea
-            {
-                expanded: true
-                indicatorVisibility: showServiceLogging ? TitleBarExpandableAreaIndicatorVisibility.Visible : TitleBarExpandableAreaIndicatorVisibility.Hidden
-                
-                onExpandedChanged: {                    
-                    console.log("UserEvent: BugReportTitleExpanded", expanded);
-                }
-                
-                content: Container
-                {
-                    leftPadding: 10; rightPadding: 10; topPadding: 10
-
-                    PersistCheckBox
-                    {
-                        id: logUiToggle
-                        isBool: true
-                        text: qsTr("UI Logging") + Retranslate.onLanguageChanged
-                        key: "logUI"
-                    }
-                    
-                    ControlDelegate
-                    {
-                        delegateActive: showServiceLogging
-                        
-                        sourceComponent: ComponentDefinition
-                        {
-                            PersistCheckBox
-                            {
-                                isBool: true
-                                text: qsTr("Service Logging") + Retranslate.onLanguageChanged
-                                key: "logService"
-                            }
-                        }
-                    }
-                    
-                    ImageView {
-                        imageSource: "images/bugs/ic_bugs_divider.png"
-                        horizontalAlignment: HorizontalAlignment.Center
-                    }
                 }
             }
         }
@@ -100,7 +56,6 @@ Page
             ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
             title: qsTr("Submit Logs") + Retranslate.onLanguageChanged
             imageSource: "images/ic_bugs.png"
-            enabled: logUiToggle.checked
             
             onTriggered: {
                 enabled = false;
