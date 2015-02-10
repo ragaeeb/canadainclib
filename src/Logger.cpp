@@ -19,7 +19,23 @@ void redirectedMessageOutput(QtMsgType type, const char *msg)
     fprintf(f ? f : stdout, "%s\n", msg);
     fflush(f ? f : stdout);
 #endif
-    slog2c( buffer_handle[0], 0, SLOG2_DEBUG1, msg );
+    _Uint8t severity = SLOG2_DEBUG1;
+
+    switch ( type ) {
+    case QtWarningMsg:
+        severity = SLOG2_ERROR;
+        break;
+    case QtCriticalMsg:
+        severity = SLOG2_CRITICAL;
+        break;
+    case QtFatalMsg:
+        severity = SLOG2_SHUTDOWN;
+        break;
+    default:
+        break;
+    }
+
+    slog2c( buffer_handle[0], 0, severity, msg );
 }
 
 }
