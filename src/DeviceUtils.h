@@ -23,6 +23,7 @@ class DeviceUtils : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QSize pixelSize READ pixelSize FINAL)
+    Q_PROPERTY(bool isPhysicalKeyboardDevice READ isPhysicalKeyboardDevice FINAL)
 
     static DeviceUtils* instance;
     HardwareInfo* m_hw;
@@ -43,6 +44,7 @@ public:
 
     Q_INVOKABLE void attachTopBottomKeys(QObject* page, QObject* listView, bool onBar=false);
     QSize pixelSize();
+    bool isPhysicalKeyboardDevice();
 };
 
 } /* namespace canadainc */

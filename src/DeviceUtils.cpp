@@ -36,11 +36,7 @@ QSize DeviceUtils::pixelSize()
 
 void DeviceUtils::attachTopBottomKeys(QObject* p, QObject* listView, bool onBar)
 {
-    if (!m_hw) {
-        m_hw = new HardwareInfo(this);
-    }
-
-    if ( !m_hw->isPhysicalKeyboardDevice() )
+    if ( !isPhysicalKeyboardDevice() )
     {
         AbstractActionItem* top = ActionItem::create().title( tr("Top") ).imageSource( QUrl("asset:///images/menu/ic_top.png") ).onTriggered( this, SLOT( onTopTriggered() ) );
         connect( top, SIGNAL( destroyed(QObject*) ), this, SLOT( onDestroyed(QObject*) ) );
@@ -55,6 +51,16 @@ void DeviceUtils::attachTopBottomKeys(QObject* p, QObject* listView, bool onBar)
         m_actionToList[top] = listView;
         m_actionToList[bottom] = listView;
     }
+}
+
+
+bool DeviceUtils::isPhysicalKeyboardDevice()
+{
+    if (!m_hw) {
+        m_hw = new HardwareInfo(this);
+    }
+
+    return m_hw->isPhysicalKeyboardDevice();
 }
 
 
