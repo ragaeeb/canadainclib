@@ -40,6 +40,7 @@ class LazyMediaPlayer : public QObject
 
 private slots:
     void error(bb::multimedia::MediaError::Type mediaError, unsigned int position);
+    void onMetaDataChanged(QVariantMap const& metaData);
 	void mediaStateChanged(bb::multimedia::MediaState::Type mediaState);
     void playNow();
 	void trackChanged(unsigned int track);

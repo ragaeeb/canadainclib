@@ -43,7 +43,7 @@ void LazyMediaPlayer::play(QUrl const& uri)
 		connect( m_mp, SIGNAL( durationChanged(unsigned int) ), this, SIGNAL( durationChanged(unsigned int) ) );
 		connect( m_mp, SIGNAL( error(bb::multimedia::MediaError::Type, unsigned int) ), this, SLOT( error(bb::multimedia::MediaError::Type, unsigned int) ) );
         connect( m_mp, SIGNAL( mediaStateChanged(bb::multimedia::MediaState::Type) ), this, SLOT( mediaStateChanged(bb::multimedia::MediaState::Type) ) );
-		connect( m_mp, SIGNAL( metaDataChanged(QVariantMap const&) ), this, SIGNAL( metaDataChanged(QVariantMap const&) ) );
+		connect( m_mp, SIGNAL( metaDataChanged(QVariantMap const&) ), this, SLOT( onMetaDataChanged(QVariantMap const&) ) );
 		connect( m_mp, SIGNAL( playbackCompleted() ), this, SIGNAL( playbackCompleted() ) );
         connect( m_mp, SIGNAL( positionChanged(unsigned int) ), this, SIGNAL( positionChanged(unsigned int) ) );
         connect( m_mp, SIGNAL( trackChanged(unsigned int) ), this, SLOT( trackChanged(unsigned int) ) );
@@ -130,6 +130,13 @@ void LazyMediaPlayer::error(bb::multimedia::MediaError::Type mediaError, unsigne
 }
 
 
+void LazyMediaPlayer::onMetaDataChanged(QVariantMap const& metaData)
+{
+    m_npc->setMetaData(metaData);
+    emit metaDataChanged(metaData);
+}
+
+
 void LazyMediaPlayer::playNow()
 {
     MediaError::Type errType = m_mp->play();
@@ -150,6 +157,8 @@ void LazyMediaPlayer::trackChanged(unsigned int track)
 
 void LazyMediaPlayer::mediaStateChanged(bb::multimedia::MediaState::Type mediaState)
 {
+    m_npc->setMediaState(mediaState);
+
     if (mediaState == MediaState::Started) {
         trackChanged( m_mp->track() );
         emit activeChanged();
