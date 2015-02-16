@@ -152,6 +152,18 @@ int TextUtils::randInt(int low, int high) {
 }
 
 
+QString TextUtils::getPlaceHolders(int n, QString const& symbol)
+{
+    QStringList placeHolders;
+
+    for (int i = 0; i < n; i++) {
+        placeHolders << symbol;
+    }
+
+    return placeHolders.join("),(");
+}
+
+
 TextUtils::~TextUtils()
 {
 }

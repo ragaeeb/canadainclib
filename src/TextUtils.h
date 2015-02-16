@@ -34,6 +34,8 @@ public:
     static QString longestCommonSubstring(QString const& str1, QString const& str2);
 
     static int randInt(int low, int high);
+
+    static QString getPlaceHolders(int n, QString const& symbol="?");
 };
 
 } /* namespace canadainc */

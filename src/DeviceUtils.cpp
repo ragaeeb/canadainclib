@@ -51,6 +51,9 @@ void DeviceUtils::attachTopBottomKeys(QObject* p, QObject* listView, bool onBar)
         m_actionToList[top] = listView;
         m_actionToList[bottom] = listView;
     }
+
+    ListView* l = static_cast<ListView*>(listView);
+    l->setScrollRole(ScrollRole::Main);
 }
 
 
