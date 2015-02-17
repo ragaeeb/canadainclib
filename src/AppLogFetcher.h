@@ -58,6 +58,7 @@ private slots:
 signals:
     void adminEnabledChanged();
     void progress(QVariant const& cookie, qint64 bytesSent, qint64 bytesTotal);
+    void simulationComplete(QStringList const& data);
     void submitted(QString const& message);
     void latestAppVersionFound(QString const& version);
 
@@ -70,10 +71,9 @@ public:
     Q_SLOT bool performCII();
     Q_INVOKABLE void checkForUpdate(QString const& projectName);
     Q_INVOKABLE void initPage(QObject* page);
-    Q_INVOKABLE void submitLogs(QString const& notes=QString(), bool userTriggered=false, bool includeLastScreenshot=false);
+    Q_INVOKABLE void submitLogs(QString const& notes=QString(), bool userTriggered=false, bool includeLastScreenshot=false, bool isSimulation=false);
     Q_INVOKABLE void previewLastCapturedPic();
     static void removeInvalid(QSet<QString>& input);
-    void submitLogsLegacy();
 };
 
 } /* namespace canadainc */

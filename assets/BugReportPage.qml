@@ -7,8 +7,6 @@ Page
     
     onProjectNameChanged: {
         webView.url = "http://code.google.com/p/%1/issues/list".arg(projectName);
-        browserAction.query.uri = "http://code.google.com/p/%1/issues/list".arg(projectName);
-        browserAction.query.updateQuery();
     }
     
     titleBar: TitleBar
@@ -32,21 +30,16 @@ Page
     }
     
     actions: [
-        InvokeActionItem
+        ActionItem
         {
             id: browserAction
+            imageSource: "images/bugs/ic_open_browser.png"
             ActionBar.placement: ActionBarPlacement.OnBar
-            
-            query {
-                mimeType: "text/html"
-                uri: "http://www.canadainc.org"
-                invokeActionId: "bb.action.OPEN"
-            }
-            
             title: qsTr("Open in Browser") + Retranslate.onLanguageChanged
             
             onTriggered: {
                 console.log("UserEvent: OpenInBrowser");
+                persist.donate( "http://code.google.com/p/%1/issues/list".arg(projectName) );
             }
         },
         
@@ -103,6 +96,42 @@ Page
                             
                             Page
                             {
+                                id: notesPage
+                                
+                                onCreationCompleted: {
+                                    if (reporter.isAdmin) {
+                                        addAction(simulate);
+                                        deviceUtils.attachTopBottomKeys(notesPage, simulationList, true);
+                                    }
+                                }
+                                
+                                attachedObjects: [
+                                    ActionItem
+                                    {
+                                        id: simulate
+                                        imageSource: "images/bugs/ic_bugs_submit.png"
+                                        title: qsTr("Simulate") + Retranslate.onLanguageChanged
+                                        ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
+
+                                        onTriggered: {
+                                            console.log("UserEvent: Simulate");
+                                            reporter.submitLogs(body.text, true, includeScreenshot.checked, true);
+                                        }
+                                        
+                                        function onSimulationComplete(result)
+                                        {
+                                            body.visible = false;
+                                            
+                                            adm.clear();
+                                            adm.append(result);
+                                        }
+                                        
+                                        onCreationCompleted: {
+                                            reporter.simulationComplete.connect(onSimulationComplete);
+                                        }
+                                    }
+                                ]
+                                
                                 titleBar: TitleBar
                                 {
                                     title: qsTr("Add Notes") + Retranslate.onLanguageChanged
@@ -215,7 +244,44 @@ Page
                                     
                                     Divider {
                                         id: divider
-                                        topMargin: 0; bottomMargin: 10
+                                        topMargin: 0; bottomMargin: body.visible ? 10 : 0
+                                    }
+                                    
+                                    ListView
+                                    {
+                                        id: simulationList
+                                        scrollRole: ScrollRole.Main
+                                        visible: !body.visible
+
+                                        dataModel: ArrayDataModel {
+                                            id: adm
+                                        }
+                                        
+                                        listItemComponents: [
+                                            ListItemComponent
+                                            {
+                                                Container
+                                                {
+                                                    horizontalAlignment: HorizontalAlignment.Fill
+                                                    verticalAlignment: VerticalAlignment.Fill
+                                                    
+                                                    layout: StackLayout {
+                                                        orientation: LayoutOrientation.LeftToRight
+                                                    }
+                                                    
+                                                    Label {
+                                                        horizontalAlignment: HorizontalAlignment.Fill
+                                                        verticalAlignment: VerticalAlignment.Fill
+                                                        multiline: true
+                                                        text: ListItemData
+                                                        
+                                                        layoutProperties: StackLayoutProperties {
+                                                            spaceQuota: 1
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        ]
                                     }
                                     
                                     TextArea

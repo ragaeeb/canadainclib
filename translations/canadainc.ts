@@ -27,32 +27,32 @@
 <context>
     <name>canadainc::AppLogFetcher</name>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="286"/>
+        <location filename="../src/AppLogFetcher.cpp" line="299"/>
         <source>Login</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="287"/>
+        <location filename="../src/AppLogFetcher.cpp" line="300"/>
         <source>Please enter the credentials provided to you by Canada Inc:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="337"/>
+        <location filename="../src/AppLogFetcher.cpp" line="342"/>
         <source>Could not submit report! Please try again...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="339"/>
+        <location filename="../src/AppLogFetcher.cpp" line="348"/>
         <source>Report could not be submitted because you are offline! Please reconnect to the network and try again...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="469"/>
+        <location filename="../src/AppLogFetcher.cpp" line="426"/>
         <source>Could not submit logs! Please try again...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="422"/>
+        <location filename="../src/AppLogFetcher.cpp" line="389"/>
         <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -60,12 +60,12 @@
 <context>
     <name>canadainc::DeviceUtils</name>
     <message>
-        <location filename="../src/DeviceUtils.cpp" line="45"/>
+        <location filename="../src/DeviceUtils.cpp" line="41"/>
         <source>Top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceUtils.cpp" line="48"/>
+        <location filename="../src/DeviceUtils.cpp" line="44"/>
         <source>Bottom</source>
         <translation type="unfinished"></translation>
     </message>

@@ -152,7 +152,7 @@ int TextUtils::randInt(int low, int high) {
 }
 
 
-QString TextUtils::getPlaceHolders(int n, QString const& symbol)
+QString TextUtils::getPlaceHolders(int n, bool multi, QString const& symbol)
 {
     QStringList placeHolders;
 
@@ -160,7 +160,7 @@ QString TextUtils::getPlaceHolders(int n, QString const& symbol)
         placeHolders << symbol;
     }
 
-    return placeHolders.join("),(");
+    return placeHolders.join(multi ? "),(" : ",");
 }
 
 
