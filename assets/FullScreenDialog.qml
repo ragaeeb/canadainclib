@@ -4,6 +4,7 @@ Dialog
 {
     id: root
     property bool canClose: true
+    property alias mainContainer: dialogContainer
     property alias dialogContent: dialogContainer.controls
     signal closing();
     

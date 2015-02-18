@@ -96,7 +96,8 @@ ControlDelegate
                 showNext();
                 
                 if ( "navigation" in permissionContainer ) {
-                    permissionContainer.navigation.focusPolicy = 0x2;
+                    var nav = permissionContainer.navigation;
+                    nav.focusPolicy = 0x2;
                 }
             }
             
