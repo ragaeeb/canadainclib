@@ -27,7 +27,7 @@ class NetworkProcessor : public QObject
 signals:
 	void downloadProgress(QVariant const& cookie, qint64 bytesReceived, qint64 bytesTotal);
     void onlineChanged();
-	void requestComplete(QVariant const& cookie, QByteArray const& data);
+	void requestComplete(QVariant const& cookie, QByteArray const& data, bool error);
 	void sizeFetched(QVariant const& cookie, qint64 size);
     void uploadProgress(QVariant const& cookie, qint64 bytesSent, qint64 bytesTotal);
 

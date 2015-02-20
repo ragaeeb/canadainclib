@@ -39,6 +39,7 @@ class AppLogFetcher : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool isAdmin READ adminEnabled NOTIFY adminEnabledChanged)
+    Q_PROPERTY(bool online READ online NOTIFY onlineChanged)
 
     static AppLogFetcher* instance;
     NetworkProcessor m_network;
@@ -52,11 +53,11 @@ class AppLogFetcher : public QObject
 private slots:
     void onFinished();
     void onKeyReleasedHandler(bb::cascades::KeyEvent* event);
-    void onRequestComplete(QVariant const& cookie, QByteArray const& data);
-    void onReplyError();
+    void onRequestComplete(QVariant const& cookie, QByteArray const& data, bool error);
 
 signals:
     void adminEnabledChanged();
+    void onlineChanged();
     void progress(QVariant const& cookie, qint64 bytesSent, qint64 bytesTotal);
     void simulationComplete(QStringList const& data);
     void submitted(QString const& message);
@@ -68,6 +69,7 @@ public:
     virtual ~AppLogFetcher();
 
     bool adminEnabled() const;
+    bool online() const;
     Q_SLOT bool performCII();
     Q_INVOKABLE void checkForUpdate(QString const& projectName);
     Q_INVOKABLE void initPage(QObject* page);

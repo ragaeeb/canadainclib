@@ -101,6 +101,7 @@ void NetworkProcessor::onNetworkReply()
 
     QVariant cookie = reply->property("cookie");
     QByteArray result;
+    bool error = true;
 
 	if ( reply->error() == QNetworkReply::NoError )
 	{
@@ -108,6 +109,7 @@ void NetworkProcessor::onNetworkReply()
 		{
 			LOGGER("ReplyReadable");
 			result = reply->readAll();
+			error = false;
 		} else {
 			LOGGER("Unreadable!");
 		}
@@ -118,7 +120,7 @@ void NetworkProcessor::onNetworkReply()
 	m_currentRequests.removeAll(reply);
 	reply->deleteLater();
 
-    emit requestComplete(cookie, result);
+    emit requestComplete(cookie, result, error);
 }
 
 
