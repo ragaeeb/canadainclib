@@ -334,6 +334,18 @@ double LazyMediaPlayer::volume() {
 }
 
 
+int LazyMediaPlayer::equalizer() const {
+    return m_mp ? m_mp->property("equalizerPreset").toInt() : 0;
+}
+
+
+void LazyMediaPlayer::setEqualizer(int preset)
+{
+    LOGGER(preset);
+    m_mp->setProperty("equalizerPreset", preset);
+}
+
+
 LazyMediaPlayer::~LazyMediaPlayer()
 {
 	if (m_npc != NULL) {

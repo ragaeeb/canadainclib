@@ -6,7 +6,7 @@ DropDown
     signal valueChanged(bool diff);
     horizontalAlignment: HorizontalAlignment.Fill
     
-    onCreationCompleted: {
+    onKeyChanged: {
         var primary = persist.getValueFor(key)
         
         for (var i = 0; i < options.length; i ++) {
@@ -17,8 +17,17 @@ DropDown
         }
     }
     
+    onCreationCompleted: {
+        if (key.length > 0) {
+            keyChanged();
+        }
+    }
+    
     onSelectedValueChanged: {
-        var diff = persist.saveValueFor(key, selectedValue);
-        valueChanged(diff);
+        if (key.length > 0)
+        {
+            var diff = persist.saveValueFor(key, selectedValue);
+            valueChanged(diff);
+        }
     }
 }

@@ -30,6 +30,7 @@ class LazyMediaPlayer : public QObject
 	Q_PROPERTY(QVariant position READ currentPosition)
 	Q_PROPERTY(QVariantMap metaData READ metaData)
 	Q_PROPERTY(bool repeat READ repeat WRITE setRepeat NOTIFY repeatChanged)
+	Q_PROPERTY(int equalizer READ equalizer WRITE setEqualizer NOTIFY equalizerChanged)
 
 	QString m_name;
 	MediaPlayer* m_mp;
@@ -49,6 +50,7 @@ signals:
     void activeChanged();
     void currentIndexChanged(int index);
     void durationChanged(unsigned int duration);
+    void equalizerChanged();
     void error(QString const& message);
     void metaDataChanged(QVariantMap const& metaData);
     void playbackCompleted();
@@ -72,6 +74,8 @@ public:
     QVariantMap metaData() const;
     void setRepeat(bool value);
     double volume();
+    int equalizer() const;
+    void setEqualizer(int preset);
 
     Q_INVOKABLE QString videoWindowId();
     Q_INVOKABLE void jump(int secs);
