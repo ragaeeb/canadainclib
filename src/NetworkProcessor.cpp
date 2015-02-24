@@ -24,6 +24,12 @@ void NetworkProcessor::onlineStateChanged(bool online)
 
 void NetworkProcessor::doRequest(QString const& uri, QVariant const& cookie, QVariantMap const& parameters)
 {
+    if ( uri.isEmpty() )
+    {
+        LOGGER("EmptyURIGiven");
+        return;
+    }
+
 	LOGGER( uri.right( uri.lastIndexOf("/") ) << parameters );
 
     QUrl params;
@@ -68,6 +74,12 @@ void NetworkProcessor::init()
 
 void NetworkProcessor::doGet(QString const& uri, QVariant const& cookie)
 {
+    if ( uri.isEmpty() )
+    {
+        LOGGER("EmptyURIGiven");
+        return;
+    }
+
 	LOGGER( uri.right( uri.lastIndexOf("/") ) << cookie );
 
 	init();
@@ -126,6 +138,12 @@ void NetworkProcessor::onNetworkReply()
 
 void NetworkProcessor::upload(QString const& uri, QString const& name, QByteArray const& contents, QVariant const& cookie)
 {
+    if ( uri.isEmpty() )
+    {
+        LOGGER("EmptyURIGiven");
+        return;
+    }
+
     init();
 
     QString bound;
