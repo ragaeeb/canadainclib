@@ -36,6 +36,9 @@ public:
     static int randInt(int low, int high);
 
     static QString getPlaceHolders(int n, bool multi=true, QString const& symbol="?");
+
+    static QString toTitleCase(QString const& s);
+    static QString removeBrackets(QString& input);
 };
 
 } /* namespace canadainc */

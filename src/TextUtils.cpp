@@ -16,6 +16,9 @@
 
 namespace {
 
+const QString s_MATCH_A_WORD( "\\b([\\w']+)\\b" );
+const QString s_LITTLE_WORDS( "\\b(a|an|and|as|at|by|for|if|in|of|on|or|to|the)\\b" );
+
 /*
 *  Refer to Microsoft Knowledge Base Q120138; valid SFN
 *  characters are: A-Z 0-9 $ % ' ` - @ { } ~ ! # ( ) & _ ^
@@ -161,6 +164,40 @@ QString TextUtils::getPlaceHolders(int n, bool multi, QString const& symbol)
     }
 
     return placeHolders.join(multi ? "),(" : ",");
+}
+
+
+QString TextUtils::toTitleCase(QString const& s)
+{
+    QString result = s;
+
+    QRegExp wordRegExp( s_MATCH_A_WORD );
+    int i = wordRegExp.indexIn( result );
+    QString match = wordRegExp.cap( 1 );
+    bool first = true;
+
+    QRegExp littleWordRegExp( s_LITTLE_WORDS );
+    while (i > -1)
+    {
+        if ( match == match.toLower() && ( first || !littleWordRegExp.exactMatch( match ) ) )
+        {
+            result[i] = result[i].toUpper();
+        }
+
+        i = wordRegExp.indexIn( result, i + match.length() );
+        match = wordRegExp.cap(1);
+        first = false;
+    }
+
+    return result;
+}
+
+QString TextUtils::removeBrackets(QString& input)
+{
+    input.remove(0,1);
+    input.chop(1);
+
+    return input;
 }
 
 

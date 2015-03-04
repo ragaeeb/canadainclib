@@ -206,6 +206,14 @@ void Persistance::copyToClipboard(QString const& text, bool showToastMessage)
 }
 
 
+QString Persistance::getClipboardText() const
+{
+    Clipboard clipboard;
+    QByteArray qba = clipboard.value("text/plain");
+    return QString::fromUtf8( qba.data() );
+}
+
+
 QByteArray Persistance::convertToUtf8(QString const& text) {
 	return text.toUtf8();
 }

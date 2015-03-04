@@ -61,6 +61,7 @@ public:
     Q_INVOKABLE static void launchAppPermissionSettings();
     Q_INVOKABLE void attachBackKeyToClickedSignal(QObject* abstractButton, QObject* rootControl);
     Q_INVOKABLE void copyToClipboard(QString const& text, bool showToastMessage=true);
+    Q_INVOKABLE QString getClipboardText() const;
     Q_INVOKABLE void remove(QString const& key, bool fireEvent=true);
     Q_INVOKABLE void showToast(QString const& text, QString const& buttonLabel=QString(), QString const& icon=QString(), bb::system::SystemUiPosition::Type pos=bb::system::SystemUiPosition::MiddleCenter);
     Q_SLOT bool clearCache();
