@@ -5,6 +5,7 @@ CheckBox
     property bool isBool: false
     property string key
     property int value: 1
+    signal valueChanged()
 
     checked: {
         var actual = persist.getValueFor(key);
@@ -12,10 +13,16 @@ CheckBox
     }
     
     onCheckedChanged: {
+        var changed = false;
+        
         if (isBool) {
-            persist.saveValueFor(key, checked);
+            changed = persist.saveValueFor(key, checked);
         } else {
-            persist.saveValueFor(key, checked ? 1 : 0);
+            changed = persist.saveValueFor(key, checked ? 1 : 0);
+        }
+        
+        if (changed) {
+            valueChanged();
         }
     }
 }
