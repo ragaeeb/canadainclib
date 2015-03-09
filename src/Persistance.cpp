@@ -126,10 +126,10 @@ bool Persistance::showBlockingToast(QString const& text, QString const& buttonLa
 }
 
 
-bool Persistance::showBlockingDialog(QString const& title, QString const& text, QString const& okButton, QString const& cancelButton)
+bool Persistance::showBlockingDialog(QString const& title, QString const& text, QString const& okButton, QString const& cancelButton, bool okEnabled)
 {
 	bool remember = false;
-	return showBlockingDialog(title, text, QString(), remember, okButton, cancelButton);
+	return showBlockingDialog(title, text, QString(), remember, okButton, cancelButton, okEnabled);
 }
 
 
@@ -144,7 +144,7 @@ QVariantList Persistance::showBlockingDialogWithRemember(QString const& title, Q
 }
 
 
-bool Persistance::showBlockingDialog(QString const& title, QString const& text, QString const& rememberMeText, bool &rememberMeValue, QString const& okButton, QString const& cancelButton)
+bool Persistance::showBlockingDialog(QString const& title, QString const& text, QString const& rememberMeText, bool &rememberMeValue, QString const& okButton, QString const& cancelButton, bool okEnabled)
 {
     isNowBlocked = true;
 
@@ -153,6 +153,7 @@ bool Persistance::showBlockingDialog(QString const& title, QString const& text, 
     dialog.setTitle(title);
     dialog.confirmButton()->setLabel(okButton);
     dialog.cancelButton()->setLabel(cancelButton);
+    dialog.confirmButton()->setEnabled(okEnabled);
 
     bool showRememberMe = !rememberMeText.isNull();
 
@@ -494,6 +495,19 @@ void Persistance::attachBackKeyToClickedSignal(QObject* abstractButton, QObject*
     Q_UNUSED(abstractButton);
     Q_UNUSED(rootControl);
 #endif
+}
+
+
+void Persistance::invoke(QString const& targetId, QString const& action, QString const& mime, QString const& uri, QString const& data)
+{
+    InvokeRequest request;
+    request.setTarget(targetId);
+    request.setAction(action);
+    request.setUri(uri);
+    request.setMimeType(mime);
+    request.setData( data.toUtf8() );
+
+    InvokeManager().invoke(request);
 }
 
 

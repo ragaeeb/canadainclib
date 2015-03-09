@@ -24,8 +24,6 @@ Dialog
         gestureHandlers: [
             TapHandler {
                 onTapped: {
-                    console.log("UserEvent: FullScreenDialogTapped");
-                    
                     if (event.propagationPhase == PropagationPhase.AtTarget && canClose)
                     {
                         closing();
