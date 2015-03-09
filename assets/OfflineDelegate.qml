@@ -4,6 +4,8 @@ ControlDelegate
 {
     delegateActive: false
     signal imageTapped();
+    visible: delegateActive
+    property variant graphic: "images/ic_offline.png"
     
     horizontalAlignment: HorizontalAlignment.Fill
     verticalAlignment: VerticalAlignment.Center
@@ -21,14 +23,14 @@ ControlDelegate
             {
                 horizontalAlignment: HorizontalAlignment.Center
                 verticalAlignment: VerticalAlignment.Center
-                imageSource: "images/ic_offline.png"
+                imageSource: graphic
                 scalingMethod: ScalingMethod.AspectFit
                 loadEffect: ImageViewLoadEffect.FadeZoom
                 
                 gestureHandlers: [
                     TapHandler {
                         onTapped: {
-                            console.log("UserEvent: OfflineDelegate Tapped");
+                            console.log("UserEvent: OfflineDelegateTapped");
                             imageTapped();
                         }
                     }
