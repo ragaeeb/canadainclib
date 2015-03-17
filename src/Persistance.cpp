@@ -516,6 +516,17 @@ bool Persistance::isBlocked() const {
 }
 
 
+bool Persistance::isUpdateNeeded(QString const& key, int diffDaysMin)
+{
+    QDateTime now = QDateTime::currentDateTime();
+    QDateTime lastUpdateCheck = QDateTime::fromMSecsSinceEpoch( getValueFor(key).toLongLong() );
+    int diff = lastUpdateCheck.daysTo(now);
+
+    LOGGER("diffLastUpdateCheck" << diff);
+    return diff > diffDaysMin;
+}
+
+
 Persistance::~Persistance()
 {
 }

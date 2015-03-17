@@ -52,10 +52,8 @@ MenuDefinition
             addAction(donator);
         }
         
-        var lastUpdateCheck = persist.contains("appLastUpdateCheck") ? persist.getValueFor("appLastUpdateCheck") : 0;
-        var diff = new Date().getTime() - lastUpdateCheck;
-        
-        if (lastUpdateCheck >= 0 && diff > 1000*60*60*24*30) { // 30 days have past since last update check
+        if ( persist.isUpdateNeeded("appLastUpdateCheck") ) // 30 days have passed since last update check
+        {
             reporter.latestAppVersionFound.connect(onLatestVersionFound);
             reporter.checkForUpdate(projectName);
         }

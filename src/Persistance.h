@@ -73,6 +73,7 @@ public:
     Q_SLOT void forceSync();
     Q_SLOT void openChannel(bool promote=false);
     Q_SLOT void reviewApp();
+    Q_INVOKABLE bool isUpdateNeeded(QString const& key, int diffDaysMin=30);
     static bool showBlockingDialog(QString const& title, QString const& text, QString const& rememberMeText, bool &rememberMeValue, QString const& okButton, QString const& cancelButton, bool okEnabled=true);
 };
 
