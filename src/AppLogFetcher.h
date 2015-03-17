@@ -43,7 +43,7 @@ class AppLogFetcher : public QObject
 
     static AppLogFetcher* instance;
     NetworkProcessor m_network;
-    QFutureWatcher<QByteArray> m_future;
+    QFutureWatcher< QPair<QByteArray,QString> > m_future;
     AdminData m_admin;
     Persistance* m_settings;
     CompressFiles m_compressor;
