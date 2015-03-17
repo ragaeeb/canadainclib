@@ -50,7 +50,6 @@ void DatabaseHelper::enableForeignKeys(int id)
 
 void DatabaseHelper::dataLoaded(int id, QVariant const& data)
 {
-    //LOGGER(id);
     if ( m_idToObjectQueryType.contains(id) )
     {
         QPair<QObject*, int> value = m_idToObjectQueryType[id];
@@ -68,12 +67,8 @@ void DatabaseHelper::dataLoaded(int id, QVariant const& data)
             m_objectToIds.remove(caller);
         }
 
-        //LOGGER("Emitting data loaded" << t << caller);
-
-        //LOGGER("DATA" << data);
         QMetaObject::invokeMethod(caller, "onDataLoaded", Qt::QueuedConnection, Q_ARG(QVariant, t), Q_ARG(QVariant, data) );
-    } else {
-        emit finished(id, data);
+        emit finished(t);
     }
 }
 
@@ -81,8 +76,6 @@ void DatabaseHelper::dataLoaded(int id, QVariant const& data)
 void DatabaseHelper::stash(QObject* caller, int t)
 {
     ++m_currentId;
-
-    //LOGGER(caller << t << m_currentId);
 
     QPair<QObject*, int> pair = qMakePair<QObject*, int>(caller, t);
     m_idToObjectQueryType.insert(m_currentId, pair);

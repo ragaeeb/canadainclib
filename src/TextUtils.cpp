@@ -169,7 +169,7 @@ QString TextUtils::getPlaceHolders(int n, bool multi, QString const& symbol)
 
 QString TextUtils::toTitleCase(QString const& s)
 {
-    QString result = s;
+    QString result = s.toLower();
 
     QRegExp wordRegExp( s_MATCH_A_WORD );
     int i = wordRegExp.indexIn( result );
@@ -198,6 +198,13 @@ QString TextUtils::removeBrackets(QString& input)
     input.chop(1);
 
     return input;
+}
+
+
+QString TextUtils::optimize(QString input)
+{
+    input.replace( QRegExp("\n{2,}\\s*"), "\n\n" );
+    return input.trimmed();
 }
 
 

@@ -25,7 +25,12 @@ class DatabaseHelper : public QObject
     void stash(QObject* caller, int t);
 
 signals:
-    void finished(int id, QVariant const& data);
+    /**
+     * No one should really listen to this. This is a global signal for all executions that happened. Listening to this really defeats the purpose of this class
+     * but may be necessary in some isolated cases.
+     * @id The query ID executed.
+     */
+    void finished(int id);
 
 private slots:
     void dataLoaded(int id, QVariant const& data);

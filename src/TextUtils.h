@@ -31,14 +31,15 @@ public:
 
     Q_INVOKABLE static QString bytesToSize(qint64 bytes);
 
-    static QString longestCommonSubstring(QString const& str1, QString const& str2);
+    Q_INVOKABLE static QString longestCommonSubstring(QString const& str1, QString const& str2);
 
-    static int randInt(int low, int high);
+    Q_INVOKABLE static int randInt(int low, int high);
 
-    static QString getPlaceHolders(int n, bool multi=true, QString const& symbol="?");
+    Q_INVOKABLE static QString getPlaceHolders(int n, bool multi=true, QString const& symbol="?");
 
-    static QString toTitleCase(QString const& s);
-    static QString removeBrackets(QString& input);
+    Q_INVOKABLE static QString toTitleCase(QString const& s);
+    Q_INVOKABLE static QString removeBrackets(QString& input);
+    Q_INVOKABLE static QString optimize(QString input);
 };
 
 } /* namespace canadainc */

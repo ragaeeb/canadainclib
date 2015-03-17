@@ -101,7 +101,6 @@ Page
                                 onCreationCompleted: {
                                     if (reporter.isAdmin) {
                                         addAction(simulate);
-                                        deviceUtils.attachTopBottomKeys(notesPage, simulationList, true);
                                     }
                                 }
                                 
@@ -127,7 +126,7 @@ Page
                                         }
                                         
                                         onCreationCompleted: {
-                                            reporter.simulationComplete.connect(onSimulationComplete);
+                                            reporter.simulationFilesAvailable.connect(onSimulationComplete);
                                         }
                                     }
                                 ]
@@ -219,7 +218,7 @@ Page
                                         
                                         Label {
                                             id: includeLabel
-                                            text: qsTr("Include Most Recent Captured Screenshot") + Retranslate.onLanguageChanged
+                                            text: qsTr("Include Most Recent Captured Photo") + Retranslate.onLanguageChanged
                                             verticalAlignment: VerticalAlignment.Center
                                             
                                             layoutProperties: StackLayoutProperties {
@@ -238,7 +237,7 @@ Page
                                         ToggleButton
                                         {
                                             id: includeScreenshot
-                                            checked: true
+                                            checked: false
                                         }
                                     }
                                     
@@ -260,28 +259,32 @@ Page
                                         listItemComponents: [
                                             ListItemComponent
                                             {
-                                                Container
+                                                StandardListItem
                                                 {
-                                                    horizontalAlignment: HorizontalAlignment.Fill
-                                                    verticalAlignment: VerticalAlignment.Fill
+                                                    title: ListItemData.substring( ListItemData.lastIndexOf("/")+1 )
                                                     
-                                                    layout: StackLayout {
-                                                        orientation: LayoutOrientation.LeftToRight
+                                                    function endsWith(str, suffix) {
+                                                        return str.indexOf(suffix, str.length - suffix.length) !== -1;
                                                     }
                                                     
-                                                    Label {
-                                                        horizontalAlignment: HorizontalAlignment.Fill
-                                                        verticalAlignment: VerticalAlignment.Fill
-                                                        multiline: true
-                                                        text: ListItemData
-                                                        
-                                                        layoutProperties: StackLayoutProperties {
-                                                            spaceQuota: 1
+                                                    imageSource: {
+                                                        if ( endsWith(ListItemData, "txt") ) {
+                                                            return "images/ic_bugs.png";
+                                                        } else if ( endsWith(ListItemData, "log") ) {
+                                                            return "images/bugs/ic_bugs_cancel.png";
+                                                        } else if ( endsWith(ListItemData, "conf") ) {
+                                                            return "images/bugs/ic_bugs_submit.png";
+                                                        } else {
+                                                            return "images/bugs/ic_open_browser.png";
                                                         }
                                                     }
                                                 }
                                             }
                                         ]
+                                        
+                                        onTriggered: {
+                                            persist.donate("file://"+dataModel.data(indexPath));
+                                        }
                                     }
                                     
                                     TextArea

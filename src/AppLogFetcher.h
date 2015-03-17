@@ -59,7 +59,7 @@ signals:
     void adminEnabledChanged();
     void onlineChanged();
     void progress(QVariant const& cookie, qint64 bytesSent, qint64 bytesTotal);
-    void simulationComplete(QStringList const& data);
+    void simulationFilesAvailable(QStringList const& files);
     void submitted(QString const& message);
     void latestAppVersionFound(QString const& version);
 
