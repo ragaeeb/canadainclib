@@ -40,6 +40,7 @@ public:
     Q_INVOKABLE static QString toTitleCase(QString const& s);
     Q_INVOKABLE static QString removeBrackets(QString& input);
     Q_INVOKABLE static QString optimize(QString input);
+    Q_INVOKABLE static bool isSimilar(QString a, QString b, qreal percentage=80, int n=2, Qt::CaseSensitivity caseSense=Qt::CaseInsensitive);
 };
 
 } /* namespace canadainc */

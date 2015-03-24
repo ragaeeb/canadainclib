@@ -208,6 +208,26 @@ QString TextUtils::optimize(QString input)
 }
 
 
+bool isSimilar(QString a, QString b, qreal percentage, int n, Qt::CaseSensitivity caseSense)
+{
+    if (a.isEmpty()||b.isEmpty()) return false;
+    qreal hits=0;
+    const QString spaces = QString(" ").repeated(n-1);
+    a = spaces + a + spaces;
+    b= spaces + b + spaces;
+
+    QString part;
+    for (int i = 0; i < a.count()-(n-1); i++)
+    {
+        part=a.mid(i,n);
+        if (b.contains(part,caseSense)) hits++;
+    }
+
+    if (a.length()<b.length()) return (percentage < (100*hits/(a.length()-(n-1))));
+    else return (percentage < (100*hits/(b.length()-(n-1))));
+}
+
+
 TextUtils::~TextUtils()
 {
 }
