@@ -208,7 +208,7 @@ QString TextUtils::optimize(QString input)
 }
 
 
-bool isSimilar(QString a, QString b, qreal percentage, int n, Qt::CaseSensitivity caseSense)
+bool TextUtils::isSimilar(QString a, QString b, qreal percentage, int n, Qt::CaseSensitivity caseSense)
 {
     if (a.isEmpty()||b.isEmpty()) return false;
     qreal hits=0;
