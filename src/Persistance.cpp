@@ -173,9 +173,11 @@ bool Persistance::showBlockingDialog(QString const& title, QString const& text, 
 }
 
 
-QString Persistance::showBlockingPrompt(QString const& title, QString const& body, QString const& defaultText, QString const& hintText, int maxLength, bool autoCapitalize, QString const& okButton, QString const& cancelButton)
+QString Persistance::showBlockingPrompt(QString const& title, QString const& body, QString const& defaultText, QString const& hintText, int maxLength, bool autoCapitalize, QString const& okButton, QString const& cancelButton, int inputMode)
 {
     isNowBlocked = true;
+
+    SystemUiInputMode::Type m = (SystemUiInputMode::Type)inputMode;
 
     SystemPrompt dialog;
     dialog.setBody(body);
@@ -183,6 +185,7 @@ QString Persistance::showBlockingPrompt(QString const& title, QString const& bod
     dialog.inputField()->setDefaultText(defaultText);
     dialog.inputField()->setEmptyText(hintText);
     dialog.inputField()->setMaximumLength(maxLength);
+    dialog.inputField()->setInputMode(m);
     dialog.setInputOptions(autoCapitalize ? SystemUiInputOption::AutoCapitalize : SystemUiInputOption::None);
     dialog.confirmButton()->setLabel(okButton);
     dialog.cancelButton()->setLabel(cancelButton);
