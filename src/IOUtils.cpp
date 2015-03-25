@@ -152,4 +152,20 @@ QStringList IOUtils::executeCommand(QString const& command)
 }
 
 
+void IOUtils::preventIndexing(QString const& dirPath)
+{
+    QDir q(dirPath);
+
+    if ( q.exists() )
+    {
+        QFile f( QString("%1/.nomedia").arg(dirPath) );
+
+        if ( !f.exists() ) {
+            f.open(QIODevice::WriteOnly);
+            f.close();
+        }
+    }
+}
+
+
 } /* namespace canadainc */

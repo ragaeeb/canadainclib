@@ -28,6 +28,8 @@ public:
 	static QString setupOutputDirectory(QString const& sharedFolder, QString const& name);
 
 	static QStringList executeCommand(QString const& command);
+
+	static void preventIndexing(QString const& dirPath);
 };
 
 } /* namespace canadainc */
