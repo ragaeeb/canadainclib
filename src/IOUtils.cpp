@@ -168,4 +168,44 @@ void IOUtils::preventIndexing(QString const& dirPath)
 }
 
 
+void IOUtils::clearAllCache()
+{
+    QString homePath = QDir::homePath();
+
+    QFile::remove( QString("%1/WebpageIcons.db").arg(homePath) );
+    QFile::remove( QString("%1/cookieCollection.db").arg(homePath) );
+    QFile::remove( QString("%1/cookieCollection.db-wal").arg(homePath) );
+    QFile::remove( QString("%1/storagequota.db").arg(homePath) );
+
+    removeDir( QString("%1/appcache").arg(homePath) );
+    removeDir( QString("%1/cache").arg(homePath) );
+    removeDir( QString("%1/certificates").arg(homePath) );
+    removeDir( QString("%1/downloads").arg(homePath) );
+    removeDir( QString("%1/localstorage").arg(homePath) );
+}
+
+
+bool IOUtils::removeDir(QString const& dirName)
+{
+    bool result = true;
+    QDir dir(dirName);
+
+    if ( dir.exists(dirName) )
+    {
+        foreach( QFileInfo info, dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst) )
+        {
+            if ( info.isDir() ) {
+                result = removeDir(info.absoluteFilePath());
+            } else {
+                result = QFile::remove( info.absoluteFilePath() );
+            }
+        }
+
+        result = dir.rmdir(dirName);
+    }
+
+    return result;
+}
+
+
 } /* namespace canadainc */

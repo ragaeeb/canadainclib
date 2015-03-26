@@ -30,6 +30,10 @@ public:
 	static QStringList executeCommand(QString const& command);
 
 	static void preventIndexing(QString const& dirPath);
+
+	static void clearAllCache();
+
+	static bool removeDir(QString const& dirName);
 };
 
 } /* namespace canadainc */
