@@ -36,6 +36,8 @@ public:
 	static bool removeDir(QString const& dirName);
 
 	static QString getMd5(QByteArray const& input);
+	static bool validateMd5(QString const& expected, QByteArray const& input);
+	static bool writeIfValidMd5(QString const& filePath, QString const& expectedMd5, QByteArray const& data, bool replace=true);
 };
 
 } /* namespace canadainc */

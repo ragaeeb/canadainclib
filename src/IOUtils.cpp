@@ -215,4 +215,19 @@ QString IOUtils::getMd5(QByteArray const& input)
 }
 
 
+bool IOUtils::validateMd5(QString const& expected, QByteArray const& input) {
+    return expected == getMd5(input);
+}
+
+
+bool IOUtils::writeIfValidMd5(QString const& filePath, QString const& expectedMd5, QByteArray const& data, bool replace)
+{
+    if ( expectedMd5 == getMd5(data) ) {
+        return writeFile(filePath, data, replace);
+    } else {
+        return false;
+    }
+}
+
+
 } /* namespace canadainc */
