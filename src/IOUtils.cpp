@@ -1,6 +1,7 @@
 #include "IOUtils.h"
 #include "Logger.h"
 
+#include <QCryptographicHash>
 #include <QDir>
 #include <QTextStream>
 #include <QThreadPool>
@@ -205,6 +206,12 @@ bool IOUtils::removeDir(QString const& dirName)
     }
 
     return result;
+}
+
+
+QString IOUtils::getMd5(QByteArray const& input)
+{
+    return QString( QCryptographicHash::hash(input, QCryptographicHash::Md5).toHex() );
 }
 
 

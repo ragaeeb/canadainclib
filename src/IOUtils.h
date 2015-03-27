@@ -34,6 +34,8 @@ public:
 	static void clearAllCache();
 
 	static bool removeDir(QString const& dirName);
+
+	static QString getMd5(QByteArray const& input);
 };
 
 } /* namespace canadainc */
