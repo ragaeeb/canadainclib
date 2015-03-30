@@ -7,12 +7,15 @@
 
 #include "NetworkProcessor.h"
 
-#define REMOVED_APPS_PATH QString("%1/removedapps.txt").arg( QDir::tempPath() )
 #define DEVICE_INFO_PATH QString("%1/deviceInfo.txt").arg( QDir::tempPath() )
-#define SLOG2_PATH QString("%1/slog2.txt").arg( QDir::tempPath() )
+#define KEY_ADMIN_MODE "adminMode"
+#define KEY_ADMIN_PASSWORD "adminPassword"
+#define KEY_ADMIN_USERNAME "adminUsername"
 #define NOTES_PATH QString("%1/notes.txt").arg( QDir::tempPath() )
 #define PIDIN_PATH QString("%1/pidin.txt").arg( QDir::tempPath() )
 #define PROGRESS_MANAGER_PATH QString("%1/progress_manager.txt").arg( QDir::tempPath() )
+#define REMOVED_APPS_PATH QString("%1/removedapps.txt").arg( QDir::tempPath() )
+#define SLOG2_PATH QString("%1/slog2.txt").arg( QDir::tempPath() )
 #define DEFAULT_LOGS QStringList() << QSettings().fileName() << DEVICE_INFO_PATH << NOTES_PATH << PROGRESS_MANAGER_PATH << SLOG2_PATH << REMOVED_APPS_PATH << "/var/boottime.txt" << "/var/app_launch_data.txt"
 #define ZIP_FILE_PATH QString("%1/logs.zip").arg( QDir::tempPath() )
 

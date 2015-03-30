@@ -21,6 +21,9 @@
 #include <bb/cascades/DevelopmentSupport>
 #endif
 
+#define KEY_PROMOTED "promoted"
+#define KEY_TOAST_SHOWING "showing"
+
 namespace {
 
 bool isNowBlocked = false;
@@ -67,7 +70,7 @@ void Persistance::showToast(QString const& text, QString const& buttonLabel, QSt
 	m_toast->button()->setLabel(buttonLabel);
 	m_toast->setBody(text);
 	m_toast->setIcon(icon);
-	m_toast->setProperty("showing", true);
+	m_toast->setProperty(KEY_TOAST_SHOWING, true);
 	m_toast->setPosition(pos);
 	m_toast->show();
 }
@@ -76,7 +79,7 @@ void Persistance::showToast(QString const& text, QString const& buttonLabel, QSt
 void Persistance::finished(bb::system::SystemUiResult::Type value)
 {
     Q_UNUSED(value);
-    sender()->setProperty("showing", false);
+    sender()->setProperty(KEY_TOAST_SHOWING, false);
 }
 
 
@@ -266,7 +269,7 @@ bool Persistance::tutorial(QString const& key, QString const& message, QString c
 {
     if ( !contains(key) )
     {
-        if ( !m_toast || !m_toast->property("showing").toBool() )
+        if ( !m_toast || !m_toast->property(KEY_TOAST_SHOWING).toBool() )
         {
             showToast( message, tr("OK"), icon, SystemUiPosition::BottomCenter );
             saveValueFor(key, 1, false);
@@ -352,11 +355,11 @@ void Persistance::openChannel(bool promote)
 {
     if (promote)
     {
-        if ( contains("promoted") ) {
+        if ( contains(KEY_PROMOTED) ) {
             return;
         }
 
-        saveValueFor("promoted", 1, false);
+        saveValueFor(KEY_PROMOTED, 1, false);
     }
 
     InvokeRequest request;
