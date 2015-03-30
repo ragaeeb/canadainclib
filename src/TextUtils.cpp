@@ -16,9 +16,6 @@
 
 namespace {
 
-const QString s_MATCH_A_WORD( "\\b([\\w']+)\\b" );
-const QString s_LITTLE_WORDS( "\\b(a|an|and|as|at|by|for|if|in|of|on|or|to|the)\\b" );
-
 /*
 *  Refer to Microsoft Knowledge Base Q120138; valid SFN
 *  characters are: A-Z 0-9 $ % ' ` - @ { } ~ ! # ( ) & _ ^
@@ -169,14 +166,16 @@ QString TextUtils::getPlaceHolders(int n, bool multi, QString const& symbol)
 
 QString TextUtils::toTitleCase(QString const& s)
 {
+    static const QString matchWords = QString("\\b([\\w'%1%2]+)\\b").arg( QChar(8217) ).arg( QChar(8216) );
+    static const QString littleWords = "\\b(a|an|and|as|at|by|for|if|in|of|on|or|to|the)\\b";
     QString result = s.toLower();
 
-    QRegExp wordRegExp( s_MATCH_A_WORD );
+    QRegExp wordRegExp(matchWords);
     int i = wordRegExp.indexIn( result );
-    QString match = wordRegExp.cap( 1 );
+    QString match = wordRegExp.cap(1);
     bool first = true;
 
-    QRegExp littleWordRegExp( s_LITTLE_WORDS );
+    QRegExp littleWordRegExp(littleWords);
     while (i > -1)
     {
         if ( match == match.toLower() && ( first || !littleWordRegExp.exactMatch( match ) ) )

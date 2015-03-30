@@ -18,6 +18,7 @@
 #if BBNDK_VERSION_AT_LEAST(10,3,1)
 #include <bb/cascades/Control>
 #include <bb/cascades/DeviceShortcut>
+#include <bb/cascades/DevelopmentSupport>
 #endif
 
 namespace {
@@ -39,6 +40,10 @@ Persistance::Persistance(QObject* parent) : QObject(parent), m_toast(NULL)
     connect( Application::instance(), SIGNAL( aboutToQuit() ), this, SLOT( commit() ) );
 
     isNowBlocked = false;
+
+#if BBNDK_VERSION_AT_LEAST(10,3,1)
+    DevelopmentSupport::install();
+#endif
 }
 
 
@@ -193,7 +198,7 @@ void Persistance::forceSync() {
 
 QVariant Persistance::getValueFor(QString const& objectName)
 {
-    QVariant value = m_settings.value(objectName);
+    QVariant value = m_pending.contains(objectName) ? m_pending.value(objectName) : m_settings.value(objectName);
 
     if ( !m_logMap.contains(objectName) )
     {

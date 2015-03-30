@@ -54,6 +54,7 @@ private slots:
     void onFinished();
     void onKeyReleasedHandler(bb::cascades::KeyEvent* event);
     void onRequestComplete(QVariant const& cookie, QByteArray const& data, bool error);
+    void securityCheck();
 
 signals:
     void adminEnabledChanged();
