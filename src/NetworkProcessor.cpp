@@ -6,6 +6,8 @@
 #include "NetworkProcessor.h"
 #include "Logger.h"
 
+#define KEY_COOKIE "cookie"
+
 namespace canadainc {
 
 NetworkProcessor::NetworkProcessor(QObject* parent) :
@@ -58,7 +60,7 @@ void NetworkProcessor::doRequest(QString const& uri, QVariant const& cookie, QVa
     QNetworkReply* reply = m_networkManager->post(qnr, data);
     connect( reply, SIGNAL( downloadProgress(qint64,qint64) ), this, SLOT( downloadProgress(qint64,qint64) ) );
     connect( reply, SIGNAL( finished() ), this, SLOT( onNetworkReply() ) );
-    reply->setProperty("cookie", cookie);
+    reply->setProperty(KEY_COOKIE, cookie);
 
     m_currentRequests << reply;
 }
@@ -72,7 +74,7 @@ void NetworkProcessor::init()
 }
 
 
-void NetworkProcessor::doGet(QString const& uri, QVariant const& cookie)
+void NetworkProcessor::doGet(QUrl const& uri, QVariant const& cookie)
 {
     if ( uri.isEmpty() )
     {
@@ -80,14 +82,14 @@ void NetworkProcessor::doGet(QString const& uri, QVariant const& cookie)
         return;
     }
 
-	LOGGER( uri.right( uri.lastIndexOf("/") ) << cookie );
+	LOGGER( uri.host() << cookie );
 
 	init();
 
-    QNetworkReply* reply = m_networkManager->get( QNetworkRequest( QUrl(uri) ) );
+    QNetworkReply* reply = m_networkManager->get( QNetworkRequest(uri) );
     connect( reply, SIGNAL( downloadProgress(qint64,qint64) ), this, SLOT( downloadProgress(qint64,qint64) ) );
     connect( reply, SIGNAL( finished() ), this, SLOT( onNetworkReply() ) );
-    reply->setProperty("cookie", cookie);
+    reply->setProperty(KEY_COOKIE, cookie);
 
     m_currentRequests << reply;
 }
@@ -95,14 +97,14 @@ void NetworkProcessor::doGet(QString const& uri, QVariant const& cookie)
 
 void NetworkProcessor::downloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 {
-	QVariant cookie = sender()->property("cookie");
+	QVariant cookie = sender()->property(KEY_COOKIE);
 	emit downloadProgress(cookie, bytesReceived, bytesTotal);
 }
 
 
 void NetworkProcessor::uploadProgress(qint64 bytesSent, qint64 bytesTotal)
 {
-    QVariant cookie = sender()->property("cookie");
+    QVariant cookie = sender()->property(KEY_COOKIE);
     emit uploadProgress(cookie, bytesSent, bytesTotal);
 }
 
@@ -111,7 +113,7 @@ void NetworkProcessor::onNetworkReply()
 {
     QNetworkReply* reply = static_cast<QNetworkReply*>( sender() );
 
-    QVariant cookie = reply->property("cookie");
+    QVariant cookie = reply->property(KEY_COOKIE);
     QByteArray result;
     bool error = true;
 
@@ -136,9 +138,9 @@ void NetworkProcessor::onNetworkReply()
 }
 
 
-void NetworkProcessor::upload(QString const& uri, QString const& name, QByteArray const& contents, QVariant const& cookie)
+void NetworkProcessor::upload(QUrl const& url, QString const& name, QByteArray const& contents, QVariant const& cookie)
 {
-    if ( uri.isEmpty() )
+    if ( url.isEmpty() )
     {
         LOGGER("EmptyURIGiven");
         return;
@@ -160,12 +162,11 @@ void NetworkProcessor::upload(QString const& uri, QString const& name, QByteArra
     dataToSend.append(contents);
     dataToSend.append(crlf + "--" + bound + "--" + crlf);
 
-    QUrl url = QUrl(uri);
     QNetworkRequest request(url); // DON'T TRY TO OPTIMIZE THIS BY MERGING WITH ABOVE LINE, IT DOESN'T WORK!
     request.setHeader(QNetworkRequest::ContentTypeHeader, tr("multipart/form-data; boundary=") + bound);
 
     QNetworkReply* reply = m_networkManager->post( request, dataToSend );
-    reply->setProperty("cookie", cookie);
+    reply->setProperty(KEY_COOKIE, cookie);
 
     connect( reply, SIGNAL( uploadProgress(qint64,qint64) ), this, SLOT( uploadProgress(qint64,qint64) ) );
     connect( reply, SIGNAL( finished() ), this, SLOT( onNetworkReply() ) );
@@ -197,7 +198,7 @@ void NetworkProcessor::getFileSize(QString const& uri, QVariant const& cookie)
     QNetworkReply* reply = m_networkManager->head( QNetworkRequest( QUrl(uri) ) );
     connect( reply, SIGNAL( finished() ), this, SLOT( onSizeFetched() ) );
 
-    reply->setProperty("cookie", cookie);
+    reply->setProperty(KEY_COOKIE, cookie);
 }
 
 
@@ -205,7 +206,7 @@ void NetworkProcessor::onSizeFetched()
 {
     QNetworkReply* reply = static_cast<QNetworkReply*>( sender() );
     qint64 result = reply->header(QNetworkRequest::ContentLengthHeader).toLongLong();
-    QVariant cookie = sender()->property("cookie");
+    QVariant cookie = sender()->property(KEY_COOKIE);
 
     LOGGER(cookie << result);
 

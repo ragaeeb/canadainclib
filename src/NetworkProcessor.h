@@ -43,8 +43,8 @@ public:
 	virtual ~NetworkProcessor();
 
 	Q_INVOKABLE void doRequest(QString const& uri, QVariant const& cookie=QVariant(), QVariantMap const& parameters=QVariantMap());
-    Q_INVOKABLE void doGet(QString const& uri, QVariant const& cookie=QVariant());
-    Q_INVOKABLE void upload(QString const& uri, QString const& name, QByteArray const& qba, QVariant const& cookie=QVariant());
+    Q_INVOKABLE void doGet(QUrl const& uri, QVariant const& cookie=QVariant());
+    Q_INVOKABLE void upload(QUrl const& uri, QString const& name, QByteArray const& qba, QVariant const& cookie=QVariant());
     Q_INVOKABLE void getFileSize(QString const& uri, QVariant const& cookie);
     Q_SLOT void abort();
 	void setHeaders(QHash<QString,QString> const& headers);
