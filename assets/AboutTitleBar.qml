@@ -3,8 +3,9 @@ import bb.cascades 1.0
 TitleBar
 {
     id: titleControl
-    property string channelTitle: qsTr("Our BBM Channel") + Retranslate.onLanguageChanged
     property bool initialized: false
+    property string videoTutorialUri
+    property alias expandedContent: expandedContainer.controls
     kind: TitleBarKind.FreeForm
     scrollBehavior: TitleBarScrollBehavior.NonSticky
     kindProperties: FreeFormTitleBarKindProperties
@@ -52,12 +53,21 @@ TitleBar
         {
             content: Container
             {
+                horizontalAlignment: HorizontalAlignment.Fill
                 leftPadding: 10; rightPadding: 10; topPadding: 10
                 
                 PersistCheckBox
                 {
                     text: qsTr("Suppress Tutorials") + Retranslate.onLanguageChanged
                     key: "suppressTutorials"
+                }
+                
+                Container
+                {
+                    id: expandedContainer
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    visible: controls.length > 0
+                    bottomPadding: 10
                 }
                 
                 Divider {
@@ -77,9 +87,43 @@ TitleBar
                 if (!initialized)
                 {
                     reporter.initPage(titleControl.parent);
+                    titleControl.parent.addAction(channelAction);
+                    
+                    if (videoTutorialUri.length > 0) {
+                        titleControl.parent.addAction(videoTutorialAction);
+                    }
+                    
                     initialized = true;
                 }
             }
         }
     }
+    
+    attachedObjects: [
+        ActionItem
+        {
+            id: channelAction
+            imageSource: "images/menu/ic_channel.png"
+            title: qsTr("Our BBM Channel") + Retranslate.onLanguageChanged
+            ActionBar.placement: 'Signature' in ActionBarPlacement && videoTutorialUri.length == 0 ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
+            
+            onTriggered: {
+                console.log("UserEvent: OpenChannel");
+                persist.openChannel();
+            }
+        },
+        
+        ActionItem
+        {
+            id: videoTutorialAction
+            imageSource: "images/menu/ic_video_tutorial.png"
+            title: qsTr("Video Tutorial") + Retranslate.onLanguageChanged
+            ActionBar.placement: 'Signature' in ActionBarPlacement && videoTutorialUri.length > 0 ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
+            
+            onTriggered: {
+                console.log("UserEvent: VideoTutorial");
+                persist.tutorialVideo(videoTutorialUri, false);
+            }
+        }
+    ]
 }
