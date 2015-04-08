@@ -59,7 +59,7 @@ Page
             function onSubmitted(message)
             {
                 progressIndicator.visible = false;
-                persist.showBlockingDialog( qsTr("Submission Status"), message, qsTr("OK"), "" );
+                persist.showDialog( qsTr("Submission Status"), message );
                 enabled = true;
             }
             
@@ -87,7 +87,7 @@ Page
                             }
                             
                             onOpened: {
-                                persist.showToast( qsTr("Enter the notes you wish to add.\n\nPlease include as much detail as possible about the issue you are having and how to reproduce it."), "", "asset:///images/bugs/ic_bugs_info.png" );
+                                persist.showToast( qsTr("Enter the notes you wish to add.\n\nPlease include as much detail as possible about the issue you are having and how to reproduce it."), "asset:///images/bugs/ic_bugs_info.png" );
                                 body.editor.cursorPosition = 6; // right after the name field
                                 body.requestFocus();
                                 

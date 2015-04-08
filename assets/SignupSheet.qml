@@ -37,7 +37,7 @@ Sheet
                     if (minCharValidator.valid && equalityValidator.valid)
                     {
                         security.savePassword(passwordField.text);
-                        persist.showToast( qsTr("Successfully set password!\n\nMake sure you remember it!"), "", "asset:///images/dropdown/set_password.png" );
+                        persist.showToast( qsTr("Successfully set password!\n\nMake sure you remember it!"), "asset:///images/dropdown/set_password.png" );
                         sheet.close();
                     }
                 }

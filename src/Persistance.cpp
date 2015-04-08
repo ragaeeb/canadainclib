@@ -63,14 +63,13 @@ void Persistance::commit()
 }
 
 
-void Persistance::showToast(QString const& text, QString const& buttonLabel, QString const& icon, bb::system::SystemUiPosition::Type pos)
+void Persistance::showToast(QString const& text, QString const& icon, bb::system::SystemUiPosition::Type pos)
 {
 	if (m_toast == NULL) {
 		m_toast = new SystemToast(this);
         connect( m_toast, SIGNAL( finished(bb::system::SystemUiResult::Type) ), this, SLOT( finished(bb::system::SystemUiResult::Type) ) );
 	}
 
-	m_toast->button()->setLabel(buttonLabel);
 	m_toast->setBody(text);
 	m_toast->setIcon(icon);
 	m_toast->setProperty(KEY_TOAST_SHOWING, true);
@@ -86,11 +85,10 @@ void Persistance::finished(bb::system::SystemUiResult::Type value)
 }
 
 
-bool Persistance::showBlockingToast(QString const& text, QString const& buttonLabel, QString const& icon)
+bool Persistance::showBlockingToast(QString const& text, QString const& icon)
 {
     isNowBlocked = true;
 	SystemToast toast;
-	toast.button()->setLabel(buttonLabel);
 	toast.setBody(text);
 	toast.setIcon(icon);
 	bool result = toast.exec() == SystemUiResult::ButtonSelection;
@@ -123,6 +121,16 @@ void Persistance::onDestroyed(QObject* obj)
     if (obj == m_dialog) {
         m_dialog = NULL;
     }
+}
+
+
+void Persistance::showDialog(QString const& title, QString const& text, QString okButton) {
+    showDialog(NULL, QVariant(), title, text, okButton, "");
+}
+
+
+void Persistance::showDialog(QObject* caller, QString const& title, QString const& text, QString const& okButton, QString const& cancelButton, QString const& rememberMeText, bool rememberMeValue) {
+    showDialog(caller, QVariant(), title, text, okButton, cancelButton, true, rememberMeText, rememberMeValue);
 }
 
 
@@ -252,7 +260,7 @@ void Persistance::copyToClipboard(QString const& text, bool showToastMessage)
 	clipboard.insert( "text/plain", convertToUtf8(text) );
 
 	if (showToastMessage) {
-		showToast( tr("Copied: %1 to clipboard").arg(text), "", "asset:///images/menu/ic_copy.png" );
+		showToast( tr("Copied: %1 to clipboard").arg(text), "asset:///images/menu/ic_copy.png" );
 	}
 }
 
@@ -347,7 +355,7 @@ bool Persistance::tutorial(QString const& key, QString const& message, QString c
     {
         if ( !m_toast || !m_toast->property(KEY_TOAST_SHOWING).toBool() )
         {
-            showToast( message, tr("OK"), icon, SystemUiPosition::BottomCenter );
+            showToast(message, icon);
             saveValueFor(key, 1, false);
         }
 
@@ -464,7 +472,7 @@ bool Persistance::clearCache()
 
 
 void Persistance::cacheCleared() {
-    showToast( tr("Cache was successfully cleared!"), "", "file:///usr/share/icons/bb_action_delete.png" );
+    showToast( tr("Cache was successfully cleared!"), "file:///usr/share/icons/bb_action_delete.png" );
 }
 
 

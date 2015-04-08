@@ -57,8 +57,14 @@ public:
     Q_INVOKABLE static bool hasPhoneControlAccess();
     Q_INVOKABLE static bool hasSharedFolderAccess();
     Q_INVOKABLE static bool showBlockingDialog(QString const& title, QString const& text, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"), bool okEnabled=true);
-    Q_INVOKABLE void showDialog(QObject* caller, QVariant const& data, QString const& title, QString const& text, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"), bool okEnabled=true, QString const& rememberMeText=QString(), bool rememberMeValue=false);
-    Q_INVOKABLE static bool showBlockingToast(QString const& text, QString const& buttonLabel=QString(), QString const& icon=QString());
+
+
+    Q_INVOKABLE void showDialog(QObject* caller, QVariant const& data, QString const& title, QString const& text, QString const& okButton, QString const& cancelButton, bool okEnabled=true, QString const& rememberMeText=QString(), bool rememberMeValue=false);
+    Q_INVOKABLE void showDialog(QString const& title, QString const& text, QString okButton=tr("OK"));
+    Q_INVOKABLE void showDialog(QObject* caller, QString const& title, QString const& text, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"), QString const& rememberMeText=QString(), bool rememberMeValue=false);
+
+
+    Q_INVOKABLE static bool showBlockingToast(QString const& text, QString const& icon=QString());
     Q_INVOKABLE static QByteArray convertToUtf8(QString const& text);
     Q_INVOKABLE static QString showBlockingPrompt(QString const& title, QString const& body, QString const& defaultText, QString const& hintText, int maxLength, bool autoCapitalize=true, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"), int inputMode=0);
     Q_INVOKABLE static void launchAppPermissionSettings();
@@ -67,7 +73,7 @@ public:
     Q_INVOKABLE void copyToClipboard(QString const& text, bool showToastMessage=true);
     Q_INVOKABLE void invoke(QString const& targetId, QString const& action="", QString const& mime="", QString const& uri="", QString const& data="");
     Q_INVOKABLE void remove(QString const& key, bool fireEvent=true);
-    Q_INVOKABLE void showToast(QString const& text, QString const& buttonLabel=QString(), QString const& icon=QString(), bb::system::SystemUiPosition::Type pos=bb::system::SystemUiPosition::MiddleCenter);
+    Q_INVOKABLE void showToast(QString const& text, QString const& icon=QString(), bb::system::SystemUiPosition::Type pos=bb::system::SystemUiPosition::BottomCenter);
     Q_SLOT bool clearCache();
     Q_SLOT bool reviewed();
     Q_SLOT void clear();

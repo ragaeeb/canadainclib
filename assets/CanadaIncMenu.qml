@@ -2,6 +2,7 @@ import bb.cascades 1.0
 
 MenuDefinition
 {
+    id: menuDef
     property bool allowDonations: false
     property string bbWorldID
     property string projectName
@@ -19,27 +20,29 @@ MenuDefinition
         }
     }
     
+    function onFinished(confirm, remember)
+    {
+        if (confirm) {
+            persist.openBlackBerryWorld(bbWorldID);
+        }
+        
+        if (remember) {
+            persist.saveValueFor("appLastUpdateCheck", -1);
+        } else {
+            persist.saveValueFor("appLastUpdateCheck", new Date().getTime());
+        }
+    }
+    
     function onLatestVersionFound(latestVersion)
     {
         var currentVersion = Application.applicationVersion;
         var isOlder = currentVersion.localeCompare(latestVersion) < 0;
         console.log("latestVersionFound", latestVersion, currentVersion, isOlder);
 
-        if (isOlder && !persist.isBlocked) // if it's an older client, and we are not blocked
-        {
-            var result = persist.showBlockingDialogWithRemember( qsTr("Update Available"), qsTr("%1 %2 is available (you have %3). Would you like to visit BlackBerry World to download the latest version?").arg(Application.applicationName).arg(latestVersion).arg(currentVersion), qsTr("Don't Show Again") );
-            
-            if (result[0]) {
-                persist.openBlackBerryWorld(bbWorldID);
-            }
-            
-            if (result[1]) {
-                persist.saveValueFor("appLastUpdateCheck", -1);
-            } else {
-                persist.saveValueFor("appLastUpdateCheck", new Date().getTime());
-            }
+        if (isOlder && !persist.isBlocked) {// if it's an older client, and we are not blocked
+            persist.showDialog( menuDef, qsTr("Update Available"), qsTr("%1 %2 is available (you have %3). Would you like to visit BlackBerry World to download the latest version?").arg(Application.applicationName).arg(latestVersion).arg(currentVersion), qsTr("Yes"), qsTr("No"), qsTr("Don't Show Again") );
         } else if (!isOlder) { // if it's a newer client, then don't check for a while
-            persist.saveValueFor("appLastUpdateCheck", new Date().getTime());
+            persist.saveValueFor("appLastUpdateCheck", new Date().getTime() );
         }
     }
     

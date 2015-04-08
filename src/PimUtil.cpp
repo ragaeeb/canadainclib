@@ -13,28 +13,14 @@
 #include <bb/PpsObject>
 
 #include <bb/system/InvokeManager>
-#include <bb/system/SystemToast>
 
 #include <bb/data/JsonDataAccess>
-
-namespace {
-
-void showBlockingToast(QString const& text, QString const& buttonLabel, QString const& icon)
-{
-    bb::system::SystemToast toast;
-    toast.button()->setLabel(buttonLabel);
-    toast.setBody(text);
-    toast.setIcon(icon);
-    toast.exec();
-}
-
-}
 
 namespace canadainc {
 
 void PimUtil::openEmail(qint64 accountId, qint64 messageId)
 {
-	LOGGER("==========" << accountId << messageId);
+	LOGGER(accountId << messageId);
 	bb::system::InvokeManager invokeManager;
 
 	bb::system::InvokeRequest request;
@@ -48,7 +34,7 @@ void PimUtil::openEmail(qint64 accountId, qint64 messageId)
 
 void PimUtil::openSMSMessage(QString const& conversationKey, qint64 messageId)
 {
-	LOGGER("==========" << conversationKey << messageId);
+	LOGGER(conversationKey << messageId);
 	bb::system::InvokeManager invokeManager;
 
 	QVariantMap map;
@@ -143,7 +129,7 @@ qint64 PimUtil::sendMessage(MessageService* ms, Message const& m, QString text, 
 {
     QString ck = m.conversationId();
     qint64 accountKey = m.accountId();
-    LOGGER("==========" << m.sender().address() << ck << text << accountKey);
+    LOGGER( m.sender().address() << ck << text << accountKey);
 
     const MessageContact from = m.sender();
 
@@ -170,7 +156,7 @@ qint64 PimUtil::sendMessage(MessageService* ms, Message const& m, QString text, 
     LOGGER("Replying with" << m.sender().displayableName() << ck << text);
 
     Message reply = *mb;
-    LOGGER("======== USING ACCOUNT KEY" << accountKey );
+    LOGGER("USING ACCOUNT KEY" << accountKey );
     MessageKey mk = ms->send(accountKey, reply);
 
     LOGGER("Sent, now deleting messagebuilder" << mk );

@@ -15,10 +15,10 @@ void redirectedMessageOutput(QtMsgType type, const char *msg)
 {
     Q_UNUSED(type);
 
-#if !defined(QT_NO_DEBUG)
+//#if !defined(QT_NO_DEBUG)
     fprintf(f ? f : stdout, "%s\n", msg);
     fflush(f ? f : stdout);
-#endif
+//#endif
     _Uint8t severity = SLOG2_DEBUG1;
 
     switch ( type ) {
@@ -42,10 +42,10 @@ void redirectedMessageOutput(QtMsgType type, const char *msg)
 
 void registerLogging(QString const& key)
 {
-#if !defined(QT_NO_DEBUG)
+//#if !defined(QT_NO_DEBUG)
     const char* cached_file_name = QString("%1/logs/%2.log").arg( QDir::currentPath() ).arg(key).toUtf8().constData();
     f = fopen(cached_file_name, "w");
-#endif
+//#endif
     buffer_config.num_buffers = 1;
     buffer_config.verbosity_level = SLOG2_DEBUG1;
     buffer_config.buffer_set_name = QCoreApplication::applicationName().toUtf8().constData();

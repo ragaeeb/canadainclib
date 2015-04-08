@@ -2,20 +2,6 @@
 #include "Logger.h"
 
 #include <bb/PackageInfo>
-#include <bb/system/SystemToast>
-
-namespace {
-
-void showBlockingToast(QString const& text, QString const& buttonLabel, QString const& icon)
-{
-    bb::system::SystemToast toast;
-    toast.button()->setLabel(buttonLabel);
-    toast.setBody(text);
-    toast.setIcon(icon);
-    toast.exec();
-}
-
-}
 
 namespace canadainc {
 
