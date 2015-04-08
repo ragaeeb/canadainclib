@@ -11,15 +11,13 @@
 
 namespace bb {
 	namespace system {
+	    class SystemDialog;
 		class SystemToast;
 	}
 }
 
 namespace canadainc {
 
-/**
- * @version 1.00 System toast with OK button and signal emitted.
- */
 class Persistance : public QObject
 {
 	Q_OBJECT
@@ -28,12 +26,15 @@ class Persistance : public QObject
 	QSettings m_settings;
 	QMap<QString, QVariant> m_pending;
 	bb::system::SystemToast* m_toast;
+	bb::system::SystemDialog* m_dialog;
 	QMap<QString, bool> m_logMap;
 
 private slots:
     void cacheCleared();
     void commit();
+    void dialogFinished(bb::system::SystemUiResult::Type value);
     void finished(bb::system::SystemUiResult::Type value);
+    void onDestroyed(QObject* obj);
 
 signals:
     void isBlockedChanged();
@@ -56,6 +57,7 @@ public:
     Q_INVOKABLE static bool hasPhoneControlAccess();
     Q_INVOKABLE static bool hasSharedFolderAccess();
     Q_INVOKABLE static bool showBlockingDialog(QString const& title, QString const& text, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"), bool okEnabled=true);
+    Q_INVOKABLE void showDialog(QObject* caller, QVariant const& data, QString const& title, QString const& text, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"), bool okEnabled=true, QString const& rememberMeText=QString(), bool rememberMeValue=false);
     Q_INVOKABLE static bool showBlockingToast(QString const& text, QString const& buttonLabel=QString(), QString const& icon=QString());
     Q_INVOKABLE static QByteArray convertToUtf8(QString const& text);
     Q_INVOKABLE static QString showBlockingPrompt(QString const& title, QString const& body, QString const& defaultText, QString const& hintText, int maxLength, bool autoCapitalize=true, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"), int inputMode=0);

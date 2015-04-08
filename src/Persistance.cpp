@@ -23,6 +23,8 @@
 
 #define KEY_PROMOTED "promoted"
 #define KEY_TOAST_SHOWING "showing"
+#define KEY_ARGS "args"
+#define METHOD_NAME "onFinished"
 
 namespace {
 
@@ -35,7 +37,8 @@ namespace canadainc {
 using namespace bb::cascades;
 using namespace bb::system;
 
-Persistance::Persistance(QObject* parent) : QObject(parent), m_toast(NULL)
+Persistance::Persistance(QObject* parent) :
+        QObject(parent), m_toast(NULL), m_dialog(NULL)
 {
     QDeclarativeContext* rootContext = QmlDocument::defaultDeclarativeEngine()->rootContext();
     rootContext->setContextProperty("persist", this);
@@ -112,6 +115,79 @@ QVariantList Persistance::showBlockingDialogWithRemember(QString const& title, Q
 
     result << yesSelected << remember;
     return result;
+}
+
+
+void Persistance::onDestroyed(QObject* obj)
+{
+    if (obj == m_dialog) {
+        m_dialog = NULL;
+    }
+}
+
+
+void Persistance::showDialog(QObject* caller, QVariant const& data, QString const& title, QString const& text, QString const& okButton, QString const& cancelButton, bool okEnabled, QString const& rememberMeText, bool rememberMeValue)
+{
+    isNowBlocked = true;
+
+    if (m_dialog == NULL)
+    {
+        m_dialog = new SystemDialog(caller);
+        connect( m_dialog, SIGNAL( finished(bb::system::SystemUiResult::Type) ), this, SLOT( dialogFinished(bb::system::SystemUiResult::Type) ) );
+        connect( m_dialog, SIGNAL( destroyed(QObject*) ), this, SLOT( onDestroyed(QObject*) ) );
+    }
+
+    bool showRememberMe = !rememberMeText.isEmpty();
+
+    if (showRememberMe)
+    {
+        m_dialog->setIncludeRememberMe(true);
+        m_dialog->setRememberMeChecked(rememberMeValue);
+        m_dialog->setRememberMeText(rememberMeText);
+    }
+
+    m_dialog->setParent(caller);
+    m_dialog->setBody(text);
+    m_dialog->setTitle(title);
+    m_dialog->cancelButton()->setLabel(cancelButton);
+    m_dialog->confirmButton()->setLabel(okButton);
+    m_dialog->confirmButton()->setEnabled(okEnabled);
+    m_dialog->setProperty(KEY_ARGS, data);
+    m_dialog->show();
+}
+
+
+void Persistance::dialogFinished(bb::system::SystemUiResult::Type value)
+{
+    isNowBlocked = false;
+
+    QObject* caller = m_dialog->parent();
+
+    if (caller != NULL)
+    {
+        bool result = value == SystemUiResult::ConfirmButtonSelection;
+        QVariant data = m_dialog->property(KEY_ARGS);
+        m_dialog->setParent(this);
+
+        if ( m_dialog->includeRememberMe() )
+        {
+            bool rememberMe = m_dialog->rememberMeSelection();
+
+            if ( data.isValid() ) {
+                QMetaObject::invokeMethod( caller, "onFinished", Qt::QueuedConnection, Q_ARG(QVariant, result), Q_ARG(QVariant, rememberMe), Q_ARG(QVariant, data) );
+            } else {
+                QMetaObject::invokeMethod( caller, "onFinished", Qt::QueuedConnection, Q_ARG(QVariant, result), Q_ARG(QVariant, rememberMe) );
+            }
+        } else {
+            if ( data.isValid() ) {
+                QMetaObject::invokeMethod( caller, "onFinished", Qt::QueuedConnection, Q_ARG(QVariant, result), Q_ARG(QVariant, data) );
+            } else {
+                QMetaObject::invokeMethod( caller, "onFinished", Qt::QueuedConnection, Q_ARG(QVariant, result) );
+            }
+        }
+
+        m_dialog->setProperty(KEY_ARGS, QVariant());
+    }
 }
 
 

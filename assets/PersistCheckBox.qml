@@ -7,10 +7,13 @@ CheckBox
     property int value: 1
     signal valueChanged()
 
-    checked: {
+    function getValue()
+    {
         var actual = persist.getValueFor(key);
-        return isBool ? actual == true || actual == "true" : actual == value; 
+        return isBool ? actual == true || actual == "true" : actual == value;
     }
+
+    checked: getValue()
     
     onCheckedChanged: {
         var changed = false;
@@ -24,5 +27,16 @@ CheckBox
         if (changed) {
             valueChanged();
         }
+    }
+    
+    function onSettingChanged(settingKey)
+    {
+        if (settingKey == key) {
+            checked = getValue();
+        }
+    }
+    
+    onCreationCompleted: {
+        persist.settingChanged.connect(onSettingChanged);
     }
 }
