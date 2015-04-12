@@ -2,6 +2,7 @@
 
 #include <QRegExp>
 #include <QStringList>
+#include <QUrl>
 
 #include <math.h>
 #include <stdint.h>
@@ -224,6 +225,23 @@ bool TextUtils::isSimilar(QString a, QString b, qreal percentage, int n, Qt::Cas
 
     if (a.length()<b.length()) return (percentage < (100*hits/(a.length()-(n-1))));
     else return (percentage < (100*hits/(b.length()-(n-1))));
+}
+
+
+bool TextUtils::isEmail(QString const& input) {
+    return input.contains("@");
+}
+
+
+bool TextUtils::isPhoneNumber(QString const& input)
+{
+    static QRegExp phoneRex("\\+[\\d\\- ]+");
+    return phoneRex.exactMatch(input);
+}
+
+
+bool TextUtils::isUrl(QString const& input) {
+    return input.startsWith("http://") || input.startsWith("https://");
 }
 
 

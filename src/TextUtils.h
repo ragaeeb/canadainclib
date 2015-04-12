@@ -41,6 +41,10 @@ public:
     Q_INVOKABLE static QString removeBrackets(QString& input);
     Q_INVOKABLE static QString optimize(QString input);
     Q_INVOKABLE static bool isSimilar(QString a, QString b, qreal percentage=80, int n=2, Qt::CaseSensitivity caseSense=Qt::CaseInsensitive);
+
+    Q_INVOKABLE static bool isEmail(QString const& input);
+    Q_INVOKABLE static bool isPhoneNumber(QString const& input);
+    Q_INVOKABLE static bool isUrl(QString const& input);
 };
 
 } /* namespace canadainc */
