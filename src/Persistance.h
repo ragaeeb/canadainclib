@@ -22,12 +22,14 @@ class Persistance : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(bool isBlocked READ isBlocked NOTIFY isBlockedChanged)
+	Q_PROPERTY(bool suppressTutorials READ suppressTutorials WRITE setSuppressTutorials FINAL)
 
 	QSettings m_settings;
 	QMap<QString, QVariant> m_pending;
 	bb::system::SystemToast* m_toast;
 	bb::system::SystemDialog* m_dialog;
 	QMap<QString, bool> m_logMap;
+	bool m_suppress;
 
 private slots:
     void cacheCleared();
@@ -45,6 +47,8 @@ public:
 	virtual ~Persistance();
 
     bool isBlocked() const;
+    bool suppressTutorials() const;
+    void setSuppressTutorials(bool value);
     Q_INVOKABLE bool contains(QString const& key) const;
     Q_INVOKABLE bool saveValueFor(QString const& objectName, QVariant const& inputValue, bool fireEvent=true);
     Q_INVOKABLE bool tutorial(QString const& key, QString const& message, QString const& icon);

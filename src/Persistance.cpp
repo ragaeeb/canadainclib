@@ -23,6 +23,7 @@
 
 #define KEY_PROMOTED "promoted"
 #define KEY_TOAST_SHOWING "showing"
+#define KEY_SUPPRESS_TUTORIAL "suppressTutorials"
 #define KEY_ARGS "args"
 #define METHOD_NAME "onFinished"
 
@@ -38,7 +39,7 @@ using namespace bb::cascades;
 using namespace bb::system;
 
 Persistance::Persistance(QObject* parent) :
-        QObject(parent), m_toast(NULL), m_dialog(NULL)
+        QObject(parent), m_toast(NULL), m_dialog(NULL), m_suppress( getValueFor(KEY_SUPPRESS_TUTORIAL).toInt() == 1 )
 {
     QDeclarativeContext* rootContext = QmlDocument::defaultDeclarativeEngine()->rootContext();
     rootContext->setContextProperty("persist", this);
@@ -351,7 +352,7 @@ void Persistance::remove(QString const& key, bool fireEvent)
 
 bool Persistance::tutorial(QString const& key, QString const& message, QString const& icon)
 {
-    if ( !contains(key) )
+    if ( !m_suppress && !contains(key) )
     {
         if ( !m_toast || !m_toast->property(KEY_TOAST_SHOWING).toBool() )
         {
@@ -571,6 +572,21 @@ void Persistance::invoke(QString const& targetId, QString const& action, QString
 
 bool Persistance::isBlocked() const {
     return isNowBlocked;
+}
+
+
+bool Persistance::suppressTutorials() const {
+    return m_suppress;
+}
+
+
+void Persistance::setSuppressTutorials(bool value)
+{
+    if (m_suppress != value)
+    {
+        m_suppress = value;
+        saveValueFor(KEY_SUPPRESS_TUTORIAL, value ? 1 : 0, false);
+    }
 }
 
 

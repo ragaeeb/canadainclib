@@ -7,6 +7,8 @@ DeviceShortcut
     type: DeviceShortcuts.BackTap
     
     onParentControlChanged: {
-        parentControl.addShortcut(ds);
+        if (parentControl) {
+            parentControl.addShortcut(ds);
+        }
     }
 }

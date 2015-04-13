@@ -56,10 +56,14 @@ TitleBar
                 horizontalAlignment: HorizontalAlignment.Fill
                 leftPadding: 10; rightPadding: 10; topPadding: 10
                 
-                PersistCheckBox
+                CheckBox
                 {
+                    checked: persist.suppressTutorials
                     text: qsTr("Suppress Tutorials") + Retranslate.onLanguageChanged
-                    key: "suppressTutorials"
+                    
+                    onCheckedChanged: {
+                        persist.suppressTutorials = checked;
+                    }
                 }
                 
                 Container
