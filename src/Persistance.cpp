@@ -6,6 +6,8 @@
 #include <bb/cascades/Application>
 #include <bb/cascades/QmlDocument>
 
+#include <bb/PpsObject>
+
 #include <sys/utsname.h>
 
 #include "Persistance.h"
@@ -598,6 +600,22 @@ bool Persistance::isUpdateNeeded(QString const& key, int diffDaysMin)
 
     LOGGER("diffLastUpdateCheck" << diff);
     return diff > diffDaysMin;
+}
+
+
+void Persistance::call(QString const& number)
+{
+    LOGGER(number);
+    QVariantMap map;
+    map.insert("number", number);
+    QByteArray requestData = bb::PpsObject::encode(map, NULL);
+
+    bb::system::InvokeRequest request;
+    request.setAction("bb.action.DIAL");
+    request.setMimeType("application/vnd.blackberry.phone.startcall");
+    request.setData(requestData);
+
+    InvokeManager().invoke(request);
 }
 
 

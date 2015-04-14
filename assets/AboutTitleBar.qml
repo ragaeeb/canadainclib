@@ -36,7 +36,6 @@ TitleBar
                 id: body
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Fill
-                textStyle.color: appNameLabel.textStyle.color
                 textStyle.textAlign: TextAlign.Center
                 textStyle.base: SystemDefaults.TextStyles.SmallText
                 content.flags: TextContentFlag.ActiveText | TextContentFlag.EmoticonsOff
@@ -45,6 +44,7 @@ TitleBar
                 
                 onCreationCompleted: {
                     kindProperties.expandableArea.expandedChanged(kindProperties.expandableArea.expanded);
+                    textStyle.color = appNameLabel.textStyle.color;
                 }
             }
         }
@@ -70,8 +70,11 @@ TitleBar
                 {
                     id: expandedContainer
                     horizontalAlignment: HorizontalAlignment.Fill
-                    visible: controls.length > 0
                     bottomPadding: 10
+                    
+                    onCreationCompleted: {
+                        visible = controls.length > 0;
+                    }
                 }
                 
                 Divider {
