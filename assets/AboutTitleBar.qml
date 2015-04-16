@@ -98,7 +98,10 @@ TitleBar
                     
                     if (videoTutorialUri.length > 0) {
                         titleControl.parent.addAction(videoTutorialAction);
+                        tutorial.execActionBar("openVideo", qsTr("To see a live tutorial and demo of how to use this app, please tap on the '%1' action.").arg(videoTutorialAction.title));
                     }
+                    
+                    tutorial.execActionBar("openChannel", qsTr("To stay up to date on the latest news on our apps or to reach out to us for support regarding any of our apps, tap on the '%1' action.").arg(channelAction.title), videoTutorialUri.length > 0 ? "r" : undefined);
                     
                     initialized = true;
                 }

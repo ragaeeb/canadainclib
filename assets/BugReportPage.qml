@@ -378,4 +378,9 @@ Page
 	        }
 	    }
 	}
+	
+	onCreationCompleted: {
+        tutorial.execActionBar( "submitLogs", qsTr("If you were instructed by our staff to submit a bug report, please use the '%1' action at the bottom. Then fill out the form, and send the representative the Bug Report ID generated.").arg(submitLogs.title) );
+        tutorial.execActionBar( "openBugsInBrowser", qsTr("To open this page in the web browser, please use the '%1' action at the bottom.").arg(browserAction.title) );
+	}
 }
