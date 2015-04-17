@@ -39,7 +39,7 @@ Page
             
             onTriggered: {
                 console.log("UserEvent: OpenInBrowser");
-                persist.donate( "http://code.google.com/p/%1/issues/list".arg(projectName) );
+                persist.openUri( "http://code.google.com/p/%1/issues/list".arg(projectName) );
             }
         },
         
@@ -283,7 +283,7 @@ Page
                                         ]
                                         
                                         onTriggered: {
-                                            persist.donate("file://"+dataModel.data(indexPath));
+                                            persist.openUri("file://"+dataModel.data(indexPath));
                                         }
                                     }
                                     

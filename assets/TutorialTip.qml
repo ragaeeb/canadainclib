@@ -3,6 +3,7 @@ import bb.cascades 1.3
 Delegate
 {
     id: tutorialDelegate
+    property bool suppressTutorials: persist.getFlag("suppressTutorials") == 1
     property variant data: []
     property variant keys: {}
     property int currentIndex: -1
@@ -10,6 +11,18 @@ Delegate
     
     function count() {
         return data.length;
+    }
+    
+    function onSettingChanged(key) {
+        suppressTutorials = persist.getFlag("suppressTutorials") == 1;
+    }
+    
+    onSuppressTutorialsChanged: {
+        persist.setFlag("suppressTutorials", suppressTutorials ? 1 : 0);
+    }
+    
+    onCreationCompleted: {
+        persist.settingChanged.connect(onSettingChanged);
     }
     
     function showNext()
@@ -63,7 +76,7 @@ Delegate
             key = "tutorial" + key.charAt(0).toUpperCase() + key.slice(1);
         }
         
-        if ( text.length > 0 && !persist.suppressTutorials && ( !key || !persist.contains(key) ) )
+        if ( text.length > 0 && !persist.suppressTutorials && ( !key || !persist.containsFlag(key) ) )
         {
             var allKeys = keys;
             
@@ -95,16 +108,16 @@ Delegate
         if (data.cookie == "video")
         {
             if (confirmed) {
-                persist.donate(data);
+                persist.openUri(data);
             }
             
-            persist.saveFlag("tutorialVideo", Application.applicationVersion);
+            persist.setFlag("tutorialVideo", Application.applicationVersion);
         } else if (data.cookie == "review") {
             if (confirmed) {
                 persist.reviewApp();
             }
             
-            persist.saveFlag("alreadyReviewed", Application.applicationVersion);
+            persist.setFlag("alreadyReviewed", Application.applicationVersion);
         }
     }
     
@@ -175,7 +188,7 @@ Delegate
                 
                 if (key && key.length > 0)
                 {
-                    persist.saveValueFor(key, 1, false);
+                    persist.setFlag(key, 1);
                     
                     key = key.substring("tutorial".length);
                     key = key.charAt(0).toLowerCase() + key.slice(1);

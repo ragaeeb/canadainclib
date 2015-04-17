@@ -83,7 +83,7 @@ PimContactPickerSheet::~PimContactPickerSheet()
 void PimContactPickerSheet::open()
 {
     if ( !PimUtil::hasContactsAccess() ) {
-        Persistance::showBlockingToast("Warning: It seems like the app does not have access to your contacts. If you leave this permission off, some features may not work properly. Select OK to launch the Application Permissions screen where you can turn these settings on.");
+        Persistance::showBlockingDialog( tr("Warning: It seems like the app does not have access to your contacts. If you leave this permission off, some features may not work properly. Select OK to launch the Application Permissions screen where you can turn these settings on."), tr("OK"), "" );
     }
 
     ContactPicker* picker = new ContactPicker(this);

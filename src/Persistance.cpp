@@ -6,6 +6,7 @@
 #include <bb/cascades/Application>
 #include <bb/cascades/QmlDocument>
 
+#include <bb/PackageInfo>
 #include <bb/PpsObject>
 
 #include <sys/utsname.h>
@@ -22,9 +23,7 @@
 #include <bb/cascades/DeviceShortcut>
 #endif
 
-#define KEY_PROMOTED "promoted"
 #define KEY_TOAST_SHOWING "showing"
-#define KEY_SUPPRESS_TUTORIAL "suppressTutorials"
 #define KEY_ARGS "args"
 #define METHOD_NAME "onFinished"
 
@@ -40,8 +39,7 @@ using namespace bb::cascades;
 using namespace bb::system;
 
 Persistance::Persistance(QObject* parent) :
-        QObject(parent), m_toast(NULL), m_dialog(NULL),
-        m_suppress( getValueFor(KEY_SUPPRESS_TUTORIAL).toInt() == 1 ), m_flags("flags.conf")
+        QObject(parent), m_dialog(NULL), m_toast(NULL), m_flags(FLAGS_FILE_NAME)
 {
     QDeclarativeContext* rootContext = QmlDocument::defaultDeclarativeEngine()->rootContext();
     rootContext->setContextProperty("persist", this);
@@ -84,19 +82,6 @@ void Persistance::finished(bb::system::SystemUiResult::Type value)
 }
 
 
-bool Persistance::showBlockingToast(QString const& text, QString const& icon)
-{
-    isNowBlocked = true;
-	SystemToast toast;
-	toast.setBody(text);
-	toast.setIcon(icon);
-	bool result = toast.exec() == SystemUiResult::ButtonSelection;
-	isNowBlocked = false;
-
-	return result;
-}
-
-
 bool Persistance::showBlockingDialog(QString const& title, QString const& text, QString const& okButton, QString const& cancelButton, bool okEnabled)
 {
 	bool remember = false;
@@ -134,10 +119,10 @@ void Persistance::showDialog(QObject* caller, QVariant const& data, QString cons
     }
 
     bool showRememberMe = !rememberMeText.isEmpty();
+    m_dialog->setIncludeRememberMe(showRememberMe);
 
     if (showRememberMe)
     {
-        m_dialog->setIncludeRememberMe(true);
         m_dialog->setRememberMeChecked(rememberMeValue);
         m_dialog->setRememberMeText(rememberMeText);
     }
@@ -349,57 +334,49 @@ QVariant Persistance::getFlag(QString const& key)
 }
 
 
-void Persistance::setFlag(QString const& key, QVariant const& value) {
-    m_flags.setValue(key, value);
+void Persistance::setFlag(QString const& key, QVariant const& value)
+{
+    if ( value.isNull() ) {
+        m_flags.remove(key);
+    } else {
+        m_flags.setValue(key, value);
+    }
 }
 
 
-void Persistance::donate(QString const& uri) {
-    InvocationUtils::launchBrowser(uri);
+void Persistance::openUri(QString const& uri) {
+    invoke("sys.browser", "bb.action.OPEN", "", uri);
 }
 
 
-void Persistance::reviewApp()
+void Persistance::launchSettingsApp(QString const& key, QVariantMap const& metadata)
 {
     InvokeRequest request;
-    request.setTarget("sys.appworld.review");
+    request.setTarget("sys.settings.target");
     request.setAction("bb.action.OPEN");
-    request.setMimeType("text/html");
-    request.setUri("appworld://review");
+    request.setMimeType("settings/view");
+    request.setUri( QUrl("settings://"+key) );
 
-    InvokeManager().invoke(request);
-}
-
-
-void Persistance::openBlackBerryWorld(QString const& appID)
-{
-    InvokeRequest request;
-    request.setTarget("sys.appworld");
-    request.setAction("bb.action.OPEN");
-    request.setMimeType("text/html");
-    request.setUri("appworld://content/"+appID);
-
-    InvokeManager().invoke(request);
-}
-
-
-void Persistance::openChannel(bool promote)
-{
-    if (promote)
-    {
-        if ( contains(KEY_PROMOTED) ) {
-            return;
-        }
-
-        saveValueFor(KEY_PROMOTED, 1, false);
+    if ( !metadata.isEmpty() ) {
+        request.setMetadata(metadata);
     }
 
-    InvokeRequest request;
-    request.setTarget("sys.bbm.channels.card.previewer");
-    request.setAction("bb.action.OPENBBMCHANNEL");
-    request.setUri("bbmc:C0034D28B");
+    m_invokeManager.invoke(request);
+}
 
-    InvokeManager().invoke(request);
+
+void Persistance::reviewApp() {
+    invoke("sys.appworld.review", "bb.action.OPEN", "text/html", "appworld://review");
+}
+
+
+void Persistance::openBlackBerryWorld(QString const& appID) {
+    invoke("sys.appworld", "bb.action.OPEN", "text/html", "appworld://content/"+appID);
+}
+
+
+void Persistance::openChannel() {
+    invoke("sys.bbm.channels.card.previewer", "bb.action.OPENBBMCHANNEL", "", "bbmc:C0034D28B");
 }
 
 
@@ -429,8 +406,12 @@ void Persistance::clear() {
 }
 
 
-void Persistance::launchAppPermissionSettings() {
-    InvocationUtils::launchAppPermissionSettings();
+void Persistance::launchAppPermissionSettings()
+{
+    QVariantMap qvm;
+    qvm["appId"] = bb::PackageInfo().installId();
+
+    launchSettingsApp("permissions", qvm);
 }
 
 
@@ -513,7 +494,7 @@ void Persistance::invoke(QString const& targetId, QString const& action, QString
     request.setMimeType(mime);
     request.setData( data.toUtf8() );
 
-    InvokeManager().invoke(request);
+    m_invokeManager.invoke(request);
 }
 
 
@@ -522,25 +503,10 @@ bool Persistance::isBlocked() const {
 }
 
 
-bool Persistance::suppressTutorials() const {
-    return m_suppress;
-}
-
-
-void Persistance::setSuppressTutorials(bool value)
-{
-    if (m_suppress != value)
-    {
-        m_suppress = value;
-        saveValueFor(KEY_SUPPRESS_TUTORIAL, value ? 1 : 0, false);
-    }
-}
-
-
 bool Persistance::isUpdateNeeded(QString const& key, int diffDaysMin)
 {
     QDateTime now = QDateTime::currentDateTime();
-    QDateTime lastUpdateCheck = QDateTime::fromMSecsSinceEpoch( getValueFor(key).toLongLong() );
+    QDateTime lastUpdateCheck = QDateTime::fromMSecsSinceEpoch( getFlag(key).toLongLong() );
     int diff = lastUpdateCheck.daysTo(now);
 
     LOGGER("diffLastUpdateCheck" << diff);
@@ -560,7 +526,12 @@ void Persistance::call(QString const& number)
     request.setMimeType("application/vnd.blackberry.phone.startcall");
     request.setData(requestData);
 
-    InvokeManager().invoke(request);
+    m_invokeManager.invoke(request);
+}
+
+
+InvokeManager* Persistance::invokeManager() {
+    return &m_invokeManager;
 }
 
 

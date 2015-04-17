@@ -58,11 +58,11 @@ TitleBar
                 
                 CheckBox
                 {
-                    checked: persist.suppressTutorials
+                    checked: tutorial.suppressTutorials
                     text: qsTr("Suppress Tutorials") + Retranslate.onLanguageChanged
                     
                     onCheckedChanged: {
-                        persist.suppressTutorials = checked;
+                        tutorial.suppressTutorials = checked;
                     }
                 }
                 
@@ -132,7 +132,7 @@ TitleBar
             
             onTriggered: {
                 console.log("UserEvent: VideoTutorial");
-                persist.donate(videoTutorialUri);
+                persist.openUri(videoTutorialUri);
             }
         }
     ]

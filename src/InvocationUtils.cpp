@@ -1,8 +1,6 @@
 #include "InvocationUtils.h"
 #include "Logger.h"
 
-#include <bb/PackageInfo>
-
 namespace canadainc {
 
 InvocationUtils::InvocationUtils(QObject* parent) : QObject(parent)
@@ -15,21 +13,6 @@ InvocationUtils::~InvocationUtils()
 }
 
 
-void InvocationUtils::launchSettingsApp(QString const& key, QVariantMap const& metadata)
-{
-	bb::system::InvokeRequest request;
-	request.setTarget("sys.settings.target");
-	request.setAction("bb.action.OPEN");
-	request.setMimeType("settings/view");
-	request.setUri( QUrl("settings://"+key) );
-
-	if ( !metadata.isEmpty() ) {
-	    request.setMetadata(metadata);
-	}
-
-	bb::system::InvokeManager().invoke(request);
-}
-
 
 void InvocationUtils::replyToMessage(qint64 accountId, QString const& messageId, InvokeManager& invokeManager)
 {
@@ -41,11 +24,6 @@ void InvocationUtils::replyToMessage(qint64 accountId, QString const& messageId,
 	request.setUri( QString("pim:message/rfc822:%1:%2").arg(accountId).arg(messageId) );
 
 	invokeManager.invoke(request);
-}
-
-
-void InvocationUtils::launchLocationServices() {
-	launchSettingsApp("location");
 }
 
 
@@ -152,15 +130,6 @@ void InvocationUtils::launchBrowser(QString const& uri)
     request.setUri(uri);
 
     invoker.invoke(request);
-}
-
-
-void InvocationUtils::launchAppPermissionSettings()
-{
-    QVariantMap qvm;
-    qvm["appId"] = bb::PackageInfo().installId();
-
-    launchSettingsApp("permissions", qvm);
 }
 
 

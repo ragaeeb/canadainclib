@@ -13,7 +13,7 @@ using namespace bb::platform;
 PaymentHelper::PaymentHelper(Persistance* persist, QObject* parent) :
         QObject(parent), m_persistance(persist), m_payment(NULL)
 {
-    if ( !persist->contains("purchasesRefreshed") )
+    if ( !persist->containsFlag("purchasesRefreshed") )
     {
         connect( this, SIGNAL( initialize() ), this, SLOT( refreshPurchases() ), Qt::QueuedConnection ); // async startup
         emit initialize();
@@ -53,7 +53,7 @@ void PaymentHelper::existingPurchasesFinished(bb::platform::ExistingPurchasesRep
     }
 
     reply->deleteLater();
-    m_persistance->saveValueFor("purchasesRefreshed", 1);
+    m_persistance->setFlag("purchasesRefreshed", 1);
 }
 
 

@@ -27,9 +27,9 @@ MenuDefinition
         }
         
         if (remember) {
-            persist.saveValueFor("appLastUpdateCheck", -1);
+            persist.setFlag("appLastUpdateCheck", -1);
         } else {
-            persist.saveValueFor("appLastUpdateCheck", new Date().getTime());
+            persist.setFlag("appLastUpdateCheck", new Date().getTime());
         }
     }
     
@@ -42,14 +42,17 @@ MenuDefinition
         if (isOlder && !persist.isBlocked) {// if it's an older client, and we are not blocked
             persist.showDialog( menuDef, qsTr("Update Available"), qsTr("%1 %2 is available (you have %3). Would you like to visit BlackBerry World to download the latest version?").arg(Application.applicationName).arg(latestVersion).arg(currentVersion), qsTr("Yes"), qsTr("No"), qsTr("Don't Show Again") );
         } else if (!isOlder) { // if it's a newer client, then don't check for a while
-            persist.saveValueFor("appLastUpdateCheck", new Date().getTime() );
+            persist.setFlag("appLastUpdateCheck", new Date().getTime() );
         }
     }
     
     function asyncWork()
     {
-        persist.openChannel(true);
-        
+        if ( !persist.getFlag("promoted") ) {
+            persist.openChannel();
+            persist.setFlag("promoted", 1);
+        }
+
         if (allowDonations) {
             var donator = donateDefinition.createObject();
             addAction(donator);
@@ -149,7 +152,7 @@ MenuDefinition
                 
                 onTriggered: {
                     console.log("UserEvent: Donate");
-                    persist.donate();
+                    persist.openUri("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=dar.as.sahaba@hotmail.com&currency_code=CAD&no_shipping=1&tax=0&lc=CA&bn=PP-DonationsBF&item_name=Da'wah Activities, Rent and Utility Expenses for the Musalla (please do not use credit cards)");
                 }
             }
         }
