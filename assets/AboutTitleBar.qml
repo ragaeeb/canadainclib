@@ -132,7 +132,7 @@ TitleBar
             
             onTriggered: {
                 console.log("UserEvent: VideoTutorial");
-                persist.tutorialVideo(videoTutorialUri, false);
+                persist.donate(videoTutorialUri);
             }
         }
     ]

@@ -30,6 +30,7 @@ class Persistance : public QObject
 	bb::system::SystemDialog* m_dialog;
 	QMap<QString, bool> m_logMap;
 	bool m_suppress;
+	QSettings m_flags;
 
 private slots:
     void cacheCleared();
@@ -51,11 +52,11 @@ public:
     void setSuppressTutorials(bool value);
     Q_INVOKABLE bool contains(QString const& key) const;
     Q_INVOKABLE bool saveValueFor(QString const& objectName, QVariant const& inputValue, bool fireEvent=true);
-    Q_INVOKABLE bool tutorial(QString const& key, QString const& message, QString const& icon);
-    Q_INVOKABLE bool tutorialVideo(QString const& uri, bool prompt=true, QString const& key="tutorialVideo", QString const& message=tr("Would you like to see a video tutorial on how to use the app?"));
+    Q_INVOKABLE bool containsFlag(QString const& key);
+    Q_INVOKABLE QVariant getFlag(QString const& key);
+    Q_INVOKABLE void setFlag(QString const& key, QVariant const& value);
     Q_INVOKABLE QString getClipboardText() const;
     Q_INVOKABLE QVariant getValueFor(QString const& objectName);
-    Q_INVOKABLE QVariantList showBlockingDialogWithRemember(QString const& title, QString const& text, QString const& rememberMeText, bool rememberMeValue=false, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"));
     Q_INVOKABLE static bool hasEmailSmsAccess();
     Q_INVOKABLE static bool hasLocationAccess();
     Q_INVOKABLE static bool hasPhoneControlAccess();
@@ -79,7 +80,6 @@ public:
     Q_INVOKABLE void remove(QString const& key, bool fireEvent=true);
     Q_INVOKABLE void showToast(QString const& text, QString const& icon=QString(), bb::system::SystemUiPosition::Type pos=bb::system::SystemUiPosition::BottomCenter);
     Q_SLOT bool clearCache();
-    Q_SLOT bool reviewed();
     Q_SLOT void clear();
     Q_SLOT void donate(QString const& uri="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=dar.as.sahaba@hotmail.com&currency_code=CAD&no_shipping=1&tax=0&lc=CA&bn=PP-DonationsBF&item_name=Da'wah Activities, Rent and Utility Expenses for the Musalla (please do not use credit cards)");
     Q_SLOT void forceSync();

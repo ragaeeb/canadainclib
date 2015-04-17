@@ -20,7 +20,6 @@
 #if BBNDK_VERSION_AT_LEAST(10,3,1)
 #include <bb/cascades/Control>
 #include <bb/cascades/DeviceShortcut>
-#include <bb/cascades/DevelopmentSupport>
 #endif
 
 #define KEY_PROMOTED "promoted"
@@ -41,7 +40,8 @@ using namespace bb::cascades;
 using namespace bb::system;
 
 Persistance::Persistance(QObject* parent) :
-        QObject(parent), m_toast(NULL), m_dialog(NULL), m_suppress( getValueFor(KEY_SUPPRESS_TUTORIAL).toInt() == 1 )
+        QObject(parent), m_toast(NULL), m_dialog(NULL),
+        m_suppress( getValueFor(KEY_SUPPRESS_TUTORIAL).toInt() == 1 ), m_flags("flags.conf")
 {
     QDeclarativeContext* rootContext = QmlDocument::defaultDeclarativeEngine()->rootContext();
     rootContext->setContextProperty("persist", this);
@@ -49,10 +49,6 @@ Persistance::Persistance(QObject* parent) :
     connect( Application::instance(), SIGNAL( aboutToQuit() ), this, SLOT( commit() ) );
 
     isNowBlocked = false;
-
-#if BBNDK_VERSION_AT_LEAST(10,3,1)
-    DevelopmentSupport::install();
-#endif
 }
 
 
@@ -105,17 +101,6 @@ bool Persistance::showBlockingDialog(QString const& title, QString const& text, 
 {
 	bool remember = false;
 	return showBlockingDialog(title, text, QString(), remember, okButton, cancelButton, okEnabled);
-}
-
-
-QVariantList Persistance::showBlockingDialogWithRemember(QString const& title, QString const& text, QString const& rememberMeText, bool rememberMeValue, QString const& okButton, QString const& cancelButton)
-{
-    QVariantList result;
-    bool remember = rememberMeValue;
-    bool yesSelected = showBlockingDialog(title, text, rememberMeText, remember, okButton, cancelButton);
-
-    result << yesSelected << remember;
-    return result;
 }
 
 
@@ -352,42 +337,20 @@ void Persistance::remove(QString const& key, bool fireEvent)
 }
 
 
-bool Persistance::tutorial(QString const& key, QString const& message, QString const& icon)
+bool Persistance::containsFlag(QString const& key)
 {
-    if ( !m_suppress && !contains(key) )
-    {
-        if ( !m_toast || !m_toast->property(KEY_TOAST_SHOWING).toBool() )
-        {
-            showToast(message, icon);
-            saveValueFor(key, 1, false);
-        }
-
-        return true;
-    }
-
-    return false;
+    return m_flags.contains(key);
 }
 
 
-bool Persistance::tutorialVideo(QString const& uri, bool prompt, QString const& key, QString const& message)
+QVariant Persistance::getFlag(QString const& key)
 {
-    if (!prompt) {
-        InvocationUtils::launchBrowser(uri);
-        return true;
-    }
+    return m_flags.value(key);
+}
 
-    if ( !contains(key) && !isNowBlocked )
-    {
-        bool result = showBlockingDialog( tr("Tutorial"), message, tr("Yes"), tr("No") );
 
-        if (result) {
-            InvocationUtils::launchBrowser(uri);
-        }
-
-        saveValueFor(key, 1, false);
-    }
-
-    return false;
+void Persistance::setFlag(QString const& key, QVariant const& value) {
+    m_flags.setValue(key, value);
 }
 
 
@@ -417,24 +380,6 @@ void Persistance::openBlackBerryWorld(QString const& appID)
     request.setUri("appworld://content/"+appID);
 
     InvokeManager().invoke(request);
-}
-
-
-bool Persistance::reviewed()
-{
-    if ( !contains("alreadyReviewed") && !isNowBlocked )
-    {
-        bool yes = showBlockingDialog( tr("Review"), tr("If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?"), tr("Yes"), tr("No") );
-        saveValueFor("alreadyReviewed", 1, false);
-
-        if (yes) {
-            reviewApp();
-        }
-
-        return true;
-    }
-
-    return false;
 }
 
 

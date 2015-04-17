@@ -89,6 +89,48 @@ Delegate
         return false;
     }
     
+    
+    function onFinished(confirmed, data)
+    {
+        if (data.cookie == "video")
+        {
+            if (confirmed) {
+                persist.donate(data);
+            }
+            
+            persist.saveFlag("tutorialVideo", Application.applicationVersion);
+        } else if (data.cookie == "review") {
+            if (confirmed) {
+                persist.reviewApp();
+            }
+            
+            persist.saveFlag("alreadyReviewed", Application.applicationVersion);
+        }
+    }
+    
+    
+    function promptVideo(uri)
+    {
+        if ( !persist.suppressTutorials && ( persist.getFlag("tutorialVideo") != Application.applicationVersion ) )
+        {
+            persist.showDialog( tutorialDelegate, {'cookie': 'video', 'value': uri}, qsTr("Video Tutorial"), qsTr("Would you like to see a video tutorial on how to use the app?"), qsTr("Yes"), qsTr("No") );
+            return true;
+        }
+        
+        return false;
+    }
+    
+    function promptReview()
+    {
+        if ( !persist.getFlag("alreadyReviewed") != Application.applicationVersion )
+        {
+            persist.showDialog( tutorialDelegate, {'cookie': 'review'}, qsTr("Review"), qsTr("If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?"), qsTr("Yes"), qsTr("No") );
+            return true;
+        }
+        
+        return false;
+    }
+    
     sourceComponent: ComponentDefinition
     {
         Dialog
