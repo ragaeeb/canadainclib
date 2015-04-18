@@ -4,6 +4,7 @@ Page
 {
     id: root
     property string projectName
+    actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
     
     onProjectNameChanged: {
         webView.url = "http://code.google.com/p/%1/issues/list".arg(projectName);

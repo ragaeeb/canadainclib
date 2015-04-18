@@ -309,6 +309,10 @@ bool Persistance::saveValueFor(const QString &objectName, const QVariant &inputV
 
 void Persistance::remove(QString const& key, bool fireEvent)
 {
+    if ( m_pending.contains(key) ) {
+        m_pending.remove(key);
+    }
+
 	if ( contains(key) )
 	{
 	    LOGGER(key);

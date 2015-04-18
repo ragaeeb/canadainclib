@@ -36,9 +36,7 @@ Delegate
     }
     
     onObjectChanged: {
-        if (object)
-        {
-            showNext();
+        if (object) {
             object.open();
         }
     }
@@ -260,17 +258,7 @@ Delegate
                         onTapped: {
                             console.log("UserEvent: TutorialTapped");
                             
-                            if ( mainAnim.isPlaying() )
-                            {
-                                mainAnim.stop();
-                                dialogContainer.opacity = dialogFt.toOpacity;
-                                assetContainer.opacity = toastIconFt.toOpacity;
-                                assetContainer.scaleX = assetContainer.scaleX;
-                                assetContainer.scaleY = assetContainer.scaleY;
-                                bodyLabel.opacity = bodyLabelFt.toOpacity;
-                                bodyLabel.scaleX = bodyLabelSt.toX;
-                                bodyLabel.scaleY = bodyLabelSt.toY;
-                            } else {
+                            if ( !mainAnim.isPlaying() ) {
                                 fsd.dismiss();
                             }
                         }
@@ -307,6 +295,7 @@ Delegate
                         horizontalAlignment: HorizontalAlignment.Fill
                         verticalAlignment: assetContainer.verticalAlignment
                         minHeight: 125
+                        visible: false
                     }
                     
                     Container
@@ -470,6 +459,7 @@ Delegate
                     
                     onEnded: {
                         breathe.play();
+                        showNext();
                     }
                 }
             ]
