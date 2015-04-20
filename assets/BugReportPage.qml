@@ -52,8 +52,8 @@ Page
             imageSource: "images/ic_bugs.png"
             
             onTriggered: {
-                enabled = false;
                 console.log("UserEvent: SubmitLogs");
+                enabled = false;
                 sheetDelegate.active = true;
             }
             
@@ -143,11 +143,22 @@ Page
                                         title: qsTr("Submit") + Retranslate.onLanguageChanged
                                         
                                         onTriggered: {
-                                            reporter.submitLogs(body.text, true, includeScreenshot.checked);
-                                            progressIndicator.value = 0;
-                                            progressIndicator.state = ProgressIndicatorState.Progress;
-                                            progressIndicator.visible = true;
-                                            sheet.close();
+                                            nameField.validator.validate();
+                                            emailField.validator.validate();
+                                            
+                                            if ( body.text.trim() == body.template ) {
+                                                persist.showToast( qsTr("Please enter detailed notes about the bug you observed!"), "images/bugs/ic_bugs_cancel.png" );
+                                                return;
+                                            }
+                                            
+                                            if (nameField.validator.valid && emailField.validator.valid)
+                                            {
+                                                reporter.submitLogs( nameField.text.trim()+"\n"+emailField.text.trim()+"\n\n"+body.text.trim(), true, includeScreenshot.checked);
+                                                progressIndicator.value = 0;
+                                                progressIndicator.state = ProgressIndicatorState.Progress;
+                                                progressIndicator.visible = true;
+                                                sheet.close();
+                                            }
                                         }
                                     }
                                     
@@ -168,50 +179,10 @@ Page
                                     horizontalAlignment: HorizontalAlignment.Fill
                                     verticalAlignment: VerticalAlignment.Fill
                                     
-                                    animations: [
-                                        SequentialAnimation
-                                        {
-                                            id: anim
-                                            
-                                            ParallelAnimation
-                                            {
-                                                RotateTransition
-                                                {
-                                                    target: includeScreenshot
-                                                    delay: 500
-                                                    fromAngleZ: 0
-                                                    toAngleZ: 360
-                                                    easingCurve: StockCurve.ElasticOut
-                                                    duration: 1000
-                                                }
-                                                
-                                                TranslateTransition
-                                                {
-                                                    target: includeContainer
-                                                    delay: 250
-                                                    fromX: 500
-                                                    toX: 0
-                                                    easingCurve: StockCurve.BackOut
-                                                    duration: 1000
-                                                }
-                                            }
-                                            
-                                            TranslateTransition
-                                            {
-                                                target: body
-                                                fromY: 500
-                                                toY: 0
-                                                easingCurve: StockCurve.SineOut
-                                                duration: 500
-                                            }
-                                        }
-                                    ]
-                                    
                                     Container
                                     {
                                         id: includeContainer
                                         topPadding: 10; bottomPadding: 10; leftPadding: 20; rightPadding: 20
-                                        translationX: 500
                                         
                                         layout: StackLayout {
                                             orientation: LayoutOrientation.LeftToRight
@@ -288,20 +259,70 @@ Page
                                         }
                                     }
                                     
+                                    TextField
+                                    {
+                                        id: nameField
+                                        horizontalAlignment: HorizontalAlignment.Fill
+                                        hintText: qsTr("Name:") + Retranslate.onLanguageChanged
+                                        topMargin: 0; bottomMargin: 0
+                                        content.flags: TextContentFlag.ActiveTextOff | TextContentFlag.EmoticonsOff
+                                        backgroundVisible: false
+                                        inputMode: TextFieldInputMode.Text
+                                        visible: body.visible
+                                        maximumLength: 25
+                                        
+                                        validator: Validator
+                                        {
+                                            errorMessage: qsTr("Name cannot be empty!") + Retranslate.onLanguageChanged
+                                            
+                                            onValidate: {
+                                                valid = nameField.text.trim().length > 0;
+                                            }
+                                        }
+                                    }
+                                    
+                                    TextField
+                                    {
+                                        id: emailField
+                                        horizontalAlignment: HorizontalAlignment.Fill
+                                        hintText: qsTr("Email Address:") + Retranslate.onLanguageChanged
+                                        topMargin: 0; bottomMargin: 0
+                                        content.flags: TextContentFlag.ActiveTextOff | TextContentFlag.EmoticonsOff
+                                        inputMode: TextFieldInputMode.EmailAddress
+                                        backgroundVisible: false
+                                        maximumLength: 40
+                                        visible: body.visible
+                                        
+                                        validator: Validator
+                                        {
+                                            errorMessage: qsTr("Invalid email address!") + Retranslate.onLanguageChanged
+                                            
+                                            onValidate: {
+                                                var t = emailField.text.trim();
+                                                var firstAtSign = t.indexOf("@");
+                                                var lastAtSign = t.lastIndexOf("@");
+                                                var dotExists = t.indexOf(".") > 0;
+                                                
+                                                valid = t.length > 8 && firstAtSign >= 0 && lastAtSign >= 0 && firstAtSign == lastAtSign && dotExists;
+                                            }
+                                        }
+                                    }
+                                    
+                                    Divider {
+                                        topMargin: 0; bottomMargin: 0
+                                        visible: emailField.visible
+                                    }
+                                    
                                     TextArea
                                     {
                                         id: body
-                                        property string template: qsTr("Name:\n\n\nEmail Address:\n\n\nSummary of Bug:\n\n\nSteps To Reproduce:\n\n\nHow often can you reproduce this?") + Retranslate.onLanguageChanged
+                                        property string template: qsTr("Summary of Bug:\n\n\nSteps To Reproduce:\n\n\nHow often can you reproduce this?") + Retranslate.onLanguageChanged
                                         topMargin: 0; topPadding: 0
                                         backgroundVisible: false
-                                        hintText: qsTr("Enter the notes you wish to add\n\nPlease start with your name and email address...") + Retranslate.onLanguageChanged
+                                        hintText: qsTr("Enter the notes you wish to add...") + Retranslate.onLanguageChanged
                                         text: template
                                         content.flags: TextContentFlag.ActiveTextOff | TextContentFlag.EmoticonsOff
-                                        translationY: 500
-                                        
-                                        onTextChanging: {
-                                            submit.enabled = text != template;
-                                        }
+                                        verticalAlignment: VerticalAlignment.Fill
                                     }
                                 }
                             }

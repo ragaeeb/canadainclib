@@ -16,7 +16,7 @@
 #define PROGRESS_MANAGER_PATH QString("%1/progress_manager.txt").arg( QDir::tempPath() )
 #define REMOVED_APPS_PATH QString("%1/removedapps.txt").arg( QDir::tempPath() )
 #define SLOG2_PATH QString("%1/slog2.txt").arg( QDir::tempPath() )
-#define DEFAULT_LOGS QStringList() << QSettings().fileName() << QSettings(FLAGS_FILE_NAME).fileName() << DEVICE_INFO_PATH << NOTES_PATH << PROGRESS_MANAGER_PATH << SLOG2_PATH << REMOVED_APPS_PATH << "/var/boottime.txt" << "/var/app_launch_data.txt"
+#define DEFAULT_LOGS QStringList() << QSettings().fileName() << QSettings(FLAGS_FILE_NAME).fileName() << DEVICE_INFO_PATH << NOTES_PATH << PROGRESS_MANAGER_PATH << SLOG2_PATH << PIDIN_PATH << REMOVED_APPS_PATH << "/var/boottime.txt" << "/var/app_launch_data.txt"
 #define ZIP_FILE_PATH QString("%1/logs.zip").arg( QDir::tempPath() )
 
 namespace bb {
