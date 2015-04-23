@@ -7,7 +7,7 @@ Page
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
     
     onProjectNameChanged: {
-        webView.url = "http://code.google.com/p/%1/issues/list".arg(projectName);
+        webView.url = "https://github.com/canadainc/%1/issues".arg(projectName);
     }
     
     titleBar: TitleBar
@@ -40,7 +40,7 @@ Page
             
             onTriggered: {
                 console.log("UserEvent: OpenInBrowser");
-                persist.openUri( "http://code.google.com/p/%1/issues/list".arg(projectName) );
+                persist.openUri( webView.url.toString() );
             }
         },
         

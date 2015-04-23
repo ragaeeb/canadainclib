@@ -221,6 +221,13 @@ Delegate
                 layout: DockLayout {}
                 opacity: 0
                 
+                onCreationCompleted: {
+                    if ( "navigation" in dialogContainer ) {
+                        var nav = dialogContainer.navigation;
+                        nav.defaultHighlightEnabled = false;
+                    }
+                }
+                
                 contextActions: [
                     ActionSet
                     {
