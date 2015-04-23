@@ -284,8 +284,14 @@ bool Persistance::contains(QString const& key) const {
 }
 
 
-bool Persistance::saveValueFor(const QString &objectName, const QVariant &inputValue, bool fireEvent)
+bool Persistance::saveValueFor(QString const& objectName, QVariant const& inputValue, bool fireEvent)
 {
+    bool isPending = m_pending.contains(objectName);
+
+    if ( isPending && ( m_pending.value(objectName) == inputValue ) ) {
+        return false;
+    }
+
 	if ( m_settings.value(objectName) != inputValue )
 	{
 	    LOGGER(objectName << inputValue);
@@ -296,7 +302,9 @@ bool Persistance::saveValueFor(const QString &objectName, const QVariant &inputV
 	    if (fireEvent) {
 	        m_settings.setValue(objectName, inputValue);
 	        emit settingChanged(objectName);
-	    } else {
+	    }
+
+	    if (isPending) {
 	        m_pending[objectName] = inputValue;
 	    }
 
