@@ -348,6 +348,7 @@ Page
 	        scrollViewProperties.scrollMode: ScrollMode.Both
 	        scrollViewProperties.pinchToZoomEnabled: true
 	        scrollViewProperties.initialScalingMethod: ScalingMethod.AspectFill
+	        scrollRole: ScrollRole.Main
 	        
 	        WebView
 	        {

@@ -8,6 +8,11 @@
 #include <bb/cascades/ScrollPosition>
 
 namespace bb {
+    namespace cascades {
+        class ListView;
+        class Page;
+    }
+
     namespace device {
         class DisplayInfo;
         class HardwareInfo;
@@ -42,9 +47,15 @@ public:
     static DeviceUtils* create(QObject* parent=NULL);
     virtual ~DeviceUtils();
 
-    Q_INVOKABLE void attachTopBottomKeys(QObject* page, QObject* listView, bool onBar=false);
+    Q_INVOKABLE void attachTopBottomKeys(bb::cascades::Page* page, bb::cascades::ListView* listView, bool onBar=false);
     QSize pixelSize();
     bool isPhysicalKeyboardDevice();
+
+    /**
+     * This method is needed because QML sometimes has issues comparing Page objects since one of them happens to be a QVariant(QMLPage)
+     * and the other is an actual Page instance. This should usually be used when comparing popTransitionEnded(page) with an existing page.
+     */
+    Q_INVOKABLE bool isEqual(bb::cascades::Page* p1, bb::cascades::Page* p2);
 };
 
 } /* namespace canadainc */

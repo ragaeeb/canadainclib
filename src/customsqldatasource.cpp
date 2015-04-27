@@ -96,7 +96,7 @@ DataAccessReply CustomSqlDataSource::executeAndWait(QVariant const& criteria, in
 void CustomSqlDataSource::execute(QVariant const& criteria, int id)
 {
     if ( checkConnection() ) {
-    	LOGGER(id << criteria);
+    	//LOGGER(id << criteria);
     	m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
         m_sqlConnector->execute(criteria, id);
     }
@@ -106,7 +106,7 @@ void CustomSqlDataSource::execute(QVariant const& criteria, int id)
 void CustomSqlDataSource::executePrepared(QVariantList const& values, int id)
 {
     if ( checkConnection() ) {
-    	LOGGER(m_query << values << id);
+    	//LOGGER(m_query << values << id);
     	m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
         m_sqlConnector->execute(m_query, values, id);
     }
@@ -151,7 +151,7 @@ void CustomSqlDataSource::onLoadAsyncResultData(bb::data::DataAccessReply const&
 
 bool CustomSqlDataSource::initSetup(QStringList const& setupStatements, int id, int settingUpId)
 {
-    LOGGER(setupStatements << id);
+    //LOGGER(setupStatements << id);
 	bool result = IOUtils::writeFile(m_source);
 
     m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
