@@ -74,7 +74,7 @@ Delegate
             key = "tutorial" + key.charAt(0).toUpperCase() + key.slice(1);
         }
         
-        if ( text.length > 0 && !persist.suppressTutorials && ( !key || !persist.containsFlag(key) ) )
+        if ( text.length > 0 && !suppressTutorials && ( !key || !persist.containsFlag(key) ) )
         {
             var allKeys = keys;
             
@@ -122,7 +122,7 @@ Delegate
     
     function promptVideo(uri)
     {
-        if ( !persist.suppressTutorials && ( persist.getFlag("tutorialVideo") != Application.applicationVersion ) )
+        if ( !suppressTutorials && ( persist.getFlag("tutorialVideo") != Application.applicationVersion ) )
         {
             persist.showDialog( tutorialDelegate, {'cookie': 'video', 'value': uri}, qsTr("Video Tutorial"), qsTr("Would you like to see a video tutorial on how to use the app?"), qsTr("Yes"), qsTr("No") );
             return true;
@@ -244,7 +244,7 @@ Delegate
                             {
                                 if (confirmed)
                                 {
-                                    persist.suppressTutorials = true;
+                                    suppressTutorials = true;
                                     data = [];
                                     keys = {};
                                     fsd.dismiss();
