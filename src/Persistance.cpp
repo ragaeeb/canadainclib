@@ -25,6 +25,7 @@
 
 #define KEY_TOAST_SHOWING "showing"
 #define KEY_ARGS "args"
+#define KEY_CALLBACK "callback"
 #define METHOD_NAME "onFinished"
 
 namespace {
@@ -39,7 +40,7 @@ using namespace bb::cascades;
 using namespace bb::system;
 
 Persistance::Persistance(QObject* parent) :
-        QObject(parent), m_dialog(NULL), m_toast(NULL), m_flags(FLAGS_FILE_NAME)
+        QObject(parent), m_dialog(NULL), m_toast(NULL), m_prompt(NULL), m_flags(FLAGS_FILE_NAME)
 {
     QDeclarativeContext* rootContext = QmlDocument::defaultDeclarativeEngine()->rootContext();
     rootContext->setContextProperty("persist", this);
@@ -93,6 +94,8 @@ void Persistance::onDestroyed(QObject* obj)
 {
     if (obj == m_dialog) {
         m_dialog = NULL;
+    } else if (obj == m_prompt) {
+        m_prompt = NULL;
     }
 }
 
@@ -172,6 +175,65 @@ void Persistance::dialogFinished(bb::system::SystemUiResult::Type value)
 }
 
 
+void Persistance::showPrompt(QObject* caller, QString const& title, QString const& body, QString const& defaultText, QString const& hintText, int maxLength, bool autoCapitalize, QString const& okButton, QString const& cancelButton, int inputMode, QString const& funcName, QVariant const& data)
+{
+    isNowBlocked = true;
+
+    SystemUiInputMode::Type m = (SystemUiInputMode::Type)inputMode;
+
+    if (m_prompt == NULL)
+    {
+        m_prompt = new SystemPrompt(caller);
+        connect( m_prompt, SIGNAL( finished(bb::system::SystemUiResult::Type) ), this, SLOT( promptFinished(bb::system::SystemUiResult::Type) ) );
+        connect( m_prompt, SIGNAL( destroyed(QObject*) ), this, SLOT( onDestroyed(QObject*) ) );
+    }
+
+    m_prompt->setParent(caller);
+    m_prompt->setBody(body);
+    m_prompt->setTitle(title);
+    m_prompt->cancelButton()->setLabel(cancelButton);
+    m_prompt->confirmButton()->setLabel(okButton);
+    m_prompt->inputField()->setDefaultText(defaultText);
+    m_prompt->inputField()->setEmptyText(hintText);
+    m_prompt->inputField()->setMaximumLength(maxLength);
+    m_prompt->inputField()->setInputMode(m);
+    m_prompt->setInputOptions(autoCapitalize ? SystemUiInputOption::AutoCapitalize : SystemUiInputOption::None);
+    m_prompt->setProperty(KEY_ARGS, data);
+    m_prompt->setProperty(KEY_CALLBACK, funcName);
+    m_prompt->show();
+}
+
+
+void Persistance::showPrompt(QObject* caller, QString const& title, QString const& body, QString const& defaultText, QString const& hintText, int maxLength, QString const& funcName, QVariant const& data) {
+    showPrompt(caller, title, body, defaultText, hintText, maxLength, true, tr("Save"), tr("Cancel"), 0, funcName, data);
+}
+
+
+void Persistance::promptFinished(bb::system::SystemUiResult::Type value)
+{
+    isNowBlocked = false;
+
+    QObject* caller = m_prompt->parent();
+
+    if (caller != NULL)
+    {
+        QVariant data = m_prompt->property(KEY_ARGS);
+        m_prompt->setParent(this);
+
+        QString result = value == SystemUiResult::ConfirmButtonSelection ? m_prompt->inputFieldTextEntry().trimmed() : "";
+        const char* callback = m_prompt->property(KEY_CALLBACK).toString().toUtf8().constData();
+
+        if ( data.isValid() ) {
+            QMetaObject::invokeMethod( caller, callback, Qt::QueuedConnection, Q_ARG(QVariant, result), Q_ARG(QVariant, data) );
+        } else {
+            QMetaObject::invokeMethod( caller, callback, Qt::QueuedConnection, Q_ARG(QVariant, result) );
+        }
+
+        m_prompt->setProperty(KEY_ARGS, QVariant());
+    }
+}
+
+
 bool Persistance::showBlockingDialog(QString const& title, QString const& text, QString const& rememberMeText, bool &rememberMeValue, QString const& okButton, QString const& cancelButton, bool okEnabled)
 {
     isNowBlocked = true;
@@ -198,31 +260,6 @@ bool Persistance::showBlockingDialog(QString const& title, QString const& text, 
     isNowBlocked = false;
 
     return result;
-}
-
-
-QString Persistance::showBlockingPrompt(QString const& title, QString const& body, QString const& defaultText, QString const& hintText, int maxLength, bool autoCapitalize, QString const& okButton, QString const& cancelButton, int inputMode)
-{
-    isNowBlocked = true;
-
-    SystemUiInputMode::Type m = (SystemUiInputMode::Type)inputMode;
-
-    SystemPrompt dialog;
-    dialog.setBody(body);
-    dialog.setTitle(title);
-    dialog.inputField()->setDefaultText(defaultText);
-    dialog.inputField()->setEmptyText(hintText);
-    dialog.inputField()->setMaximumLength(maxLength);
-    dialog.inputField()->setInputMode(m);
-    dialog.setInputOptions(autoCapitalize ? SystemUiInputOption::AutoCapitalize : SystemUiInputOption::None);
-    dialog.confirmButton()->setLabel(okButton);
-    dialog.cancelButton()->setLabel(cancelButton);
-
-    bool result = dialog.exec() == SystemUiResult::ConfirmButtonSelection;
-
-    isNowBlocked = false;
-
-    return result ? dialog.inputFieldTextEntry() : QString();
 }
 
 

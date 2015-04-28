@@ -13,6 +13,7 @@
 namespace bb {
 	namespace system {
 	    class SystemDialog;
+	    class SystemPrompt;
 		class SystemToast;
 	}
 }
@@ -27,6 +28,7 @@ class Persistance : public QObject
     bb::system::InvokeManager m_invokeManager;
     bb::system::SystemDialog* m_dialog;
     bb::system::SystemToast* m_toast;
+    bb::system::SystemPrompt* m_prompt;
     QMap<QString, bool> m_logMap;
     QMap<QString, QVariant> m_pending;
     QSettings m_flags;
@@ -38,6 +40,7 @@ private slots:
     void dialogFinished(bb::system::SystemUiResult::Type value);
     void finished(bb::system::SystemUiResult::Type value);
     void onDestroyed(QObject* obj);
+    void promptFinished(bb::system::SystemUiResult::Type value);
 
 signals:
     void isBlockedChanged();
@@ -62,7 +65,6 @@ public:
     Q_INVOKABLE static bool hasSharedFolderAccess();
     Q_INVOKABLE static bool showBlockingDialog(QString const& title, QString const& text, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"), bool okEnabled=true);
     Q_INVOKABLE static QByteArray convertToUtf8(QString const& text);
-    Q_INVOKABLE static QString showBlockingPrompt(QString const& title, QString const& body, QString const& defaultText, QString const& hintText, int maxLength, bool autoCapitalize=true, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"), int inputMode=0);
     Q_INVOKABLE void attachBackKeyToClickedSignal(QObject* abstractButton, QObject* rootControl);
     Q_INVOKABLE void call(QString const& number);
     Q_INVOKABLE void copyToClipboard(QString const& text, bool showToastMessage=true);
@@ -75,6 +77,8 @@ public:
     Q_INVOKABLE void showDialog(QObject* caller, QString const& title, QString const& text, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"), QString const& rememberMeText=QString(), bool rememberMeValue=false);
     Q_INVOKABLE void showDialog(QObject* caller, QVariant const& data, QString const& title, QString const& text, QString const& okButton, QString const& cancelButton, bool okEnabled=true, QString const& rememberMeText=QString(), bool rememberMeValue=false);
     Q_INVOKABLE void showDialog(QString const& title, QString const& text, QString okButton=tr("OK"));
+    Q_INVOKABLE void showPrompt(QObject* caller, QString const& title, QString const& body, QString const& defaultText, QString const& hintText, int maxLength, bool autoCapitalize=true, QString const& okButton=tr("Save"), QString const& cancelButton=tr("Cancel"), int inputMode=0, QString const& funcName="onFinished", QVariant const& data=QVariant());
+    Q_INVOKABLE void showPrompt(QObject* caller, QString const& title, QString const& body, QString const& defaultText, QString const& hintText, int maxLength, QString const& funcName, QVariant const& data=QVariant());
     Q_INVOKABLE void showToast(QString const& text, QString const& icon=QString(), bb::system::SystemUiPosition::Type pos=bb::system::SystemUiPosition::BottomCenter);
     Q_SLOT bool clearCache();
     Q_SLOT void clear();
