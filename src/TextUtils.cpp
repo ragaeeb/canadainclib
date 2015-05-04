@@ -65,7 +65,7 @@ QString TextUtils::formatTime(unsigned int duration)
 	QString minutes = QString::number(mins).rightJustified(2,'0');
 	QString hours = hrs > 0 ? QString("%1:").arg(hrs) : "";
 
-	return tr("%1%2:%3").arg(hours).arg(minutes).arg(seconds);
+	return QString("%1%2:%3").arg(hours).arg(minutes).arg(seconds);
 }
 
 
