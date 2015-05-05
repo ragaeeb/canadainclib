@@ -162,9 +162,14 @@ void IOUtils::preventIndexing(QString const& dirPath)
         QFile f( QString("%1/.nomedia").arg(dirPath) );
 
         if ( !f.exists() ) {
-            f.open(QIODevice::WriteOnly);
+            bool written = f.open(QIODevice::WriteOnly);
             f.close();
+            LOGGER(f.fileName() << "written");
+        } else {
+            LOGGER(".nomediaExists");
         }
+    } else {
+        LOGGER(dirPath << "noexists");
     }
 }
 
