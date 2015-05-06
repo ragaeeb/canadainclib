@@ -1,5 +1,4 @@
 #include "DatabaseHelper.h"
-#include "Logger.h"
 
 #include <QCoreApplication>
 #include <QDir>
@@ -11,6 +10,30 @@ DatabaseHelper::DatabaseHelper(QString const& dbase, QObject* parent) :
 {
     m_sql.setSource(dbase);
     connect( &m_sql, SIGNAL( dataLoaded(int, QVariant const&) ), this, SLOT( dataLoaded(int, QVariant const&) ), Qt::QueuedConnection );
+
+    connect( QCoreApplication::instance(), SIGNAL( aboutToQuit() ), this, SLOT( commitStats() ) );
+}
+
+
+void DatabaseHelper::commitStats()
+{
+    if ( !m_counters.isEmpty() )
+    {
+        QList< QPair<QString, QString> > keys = m_counters.keys();
+
+        m_sql.startTransaction(COMMITTING_ANALYTICS);
+        m_sql.setQuery("CREATE TABLE IF NOT EXISTS analytics.events (id INTEGER PRIMARY KEY, event TEXT, context TEXT, count INTEGER, UNIQUE(event,context) ON CONFLICT REPLACE CHECK(event <> '' AND context <> ''))");
+        m_sql.load(COMMITTING_ANALYTICS);
+
+        for (int i = keys.size()-1; i >= 0; i--)
+        {
+            QPair<QString, QString> pair = keys[i];
+            m_sql.setQuery("INSERT INTO analytics.events (event,context,count) VALUES (?,?,?)");
+            m_sql.executePrepared( QVariantList() << pair.first << pair.second << m_counters.value(pair), COMMITTING_ANALYTICS );
+        }
+
+        m_sql.endTransaction(COMMIT_ANALYTICS);
+    }
 }
 
 
@@ -150,6 +173,18 @@ void DatabaseHelper::endTransaction(QObject* caller, int id)
     }
 
     m_sql.endTransaction(m_currentId);
+}
+
+
+void DatabaseHelper::record(QString const& event, QString const& context)
+{
+    attachIfNecessary("analytics", true);
+
+    QPair<QString, QString> pair = qMakePair<QString, QString>(event, context);
+    int count = m_counters.value(pair);
+    ++count;
+
+    m_counters[pair] = count;
 }
 
 

@@ -3,13 +3,14 @@
 #include <bb/system/SystemPrompt>
 #include <bb/system/SystemToast>
 
-#include <bb/cascades/Application>
 #include <bb/cascades/QmlDocument>
 
 #include <bb/PackageInfo>
 #include <bb/PpsObject>
 
 #include <sys/utsname.h>
+
+#include <QCoreApplication>
 
 #include "Persistance.h"
 #include "InvocationUtils.h"
@@ -45,7 +46,7 @@ Persistance::Persistance(QObject* parent) :
     QDeclarativeContext* rootContext = QmlDocument::defaultDeclarativeEngine()->rootContext();
     rootContext->setContextProperty("persist", this);
 
-    connect( Application::instance(), SIGNAL( aboutToQuit() ), this, SLOT( commit() ) );
+    connect( QCoreApplication::instance(), SIGNAL( aboutToQuit() ), this, SLOT( commit() ) );
 
     isNowBlocked = false;
 }

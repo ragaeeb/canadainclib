@@ -1,7 +1,7 @@
 #include "LazyMediaPlayer.h"
 #include "Logger.h"
 
-#include <bb/Application>
+#include <QCoreApplication>
 
 #include <bb/multimedia/MediaPlayer>
 #include <bb/multimedia/NowPlayingConnection>
@@ -13,7 +13,7 @@ using namespace bb::multimedia;
 LazyMediaPlayer::LazyMediaPlayer(QObject* parent) :
         QObject(parent), m_mp(NULL), m_npc(NULL), m_repeat(false), m_volume(1)
 {
-    connect( bb::Application::instance(), SIGNAL( aboutToQuit() ), this, SLOT( pause() ) );
+    connect( QCoreApplication::instance(), SIGNAL( aboutToQuit() ), this, SLOT( pause() ) );
 }
 
 
