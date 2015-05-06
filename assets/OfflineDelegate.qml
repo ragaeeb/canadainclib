@@ -32,6 +32,8 @@ ControlDelegate
                         onTapped: {
                             console.log("UserEvent: OfflineDelegateTapped");
                             imageTapped();
+                            
+                            analytics.record("OfflineDelegateTapped");
                         }
                     }
                 ]

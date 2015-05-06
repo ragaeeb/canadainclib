@@ -89,8 +89,6 @@ TitleBar
                     body.text = qsTr("(c) %1 %2. All Rights Reserved.").arg( new Date().getFullYear() ).arg(Application.organizationName);
                 }
 
-                console.log("UserEvent: AboutTitleExpanded", expanded);
-                
                 if (!initialized)
                 {
                     reporter.initPage(titleControl.parent);
@@ -120,6 +118,7 @@ TitleBar
             onTriggered: {
                 console.log("UserEvent: OpenChannel");
                 persist.openChannel();
+                analytics.record("OpenChannelTriggered");
             }
         },
         
@@ -133,6 +132,7 @@ TitleBar
             onTriggered: {
                 console.log("UserEvent: VideoTutorial");
                 persist.openUri(videoTutorialUri);
+                analytics.record("VideoTutorialTriggered");
             }
         }
     ]

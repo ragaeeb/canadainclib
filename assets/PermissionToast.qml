@@ -114,6 +114,8 @@ ControlDelegate
                             persist.launchAppPermissionSettings();
                             dth.doubleTapped(undefined);
                         }
+                        
+                        analytics.record("WarningTapped");
                     }
                 },
                 
@@ -127,6 +129,8 @@ ControlDelegate
                         tt.toX = 500;
                         tt.duration = 500;
                         tt.play();
+                        
+                        analytics.record("WarningDoubleTapped");
                     }
                 }
             ]

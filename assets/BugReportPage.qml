@@ -41,6 +41,7 @@ Page
             onTriggered: {
                 console.log("UserEvent: OpenInBrowser");
                 persist.openUri( webView.url.toString() );
+                analytics.record("OpenInBrowser");
             }
         },
         
@@ -55,6 +56,7 @@ Page
                 console.log("UserEvent: SubmitLogs");
                 enabled = false;
                 sheetDelegate.active = true;
+                analytics.record("SubmitLogs");
             }
             
             function onSubmitted(message)

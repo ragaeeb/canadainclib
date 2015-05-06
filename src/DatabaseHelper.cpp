@@ -22,14 +22,14 @@ void DatabaseHelper::commitStats()
         QList< QPair<QString, QString> > keys = m_counters.keys();
 
         m_sql.startTransaction(COMMITTING_ANALYTICS);
-        m_sql.setQuery("CREATE TABLE IF NOT EXISTS analytics.events (id INTEGER PRIMARY KEY, event TEXT, context TEXT, count INTEGER, UNIQUE(event,context) ON CONFLICT REPLACE CHECK(event <> '' AND context <> ''))");
+        m_sql.setQuery("CREATE TABLE IF NOT EXISTS analytics.events (id INTEGER PRIMARY KEY, event TEXT NOT NULL, context TEXT NOT NULL DEFAULT '', count INTEGER DEFAULT 0, UNIQUE(event,context) ON CONFLICT REPLACE CHECK(event <> ''))");
         m_sql.load(COMMITTING_ANALYTICS);
 
         for (int i = keys.size()-1; i >= 0; i--)
         {
             QPair<QString, QString> pair = keys[i];
-            m_sql.setQuery("INSERT INTO analytics.events (event,context,count) VALUES (?,?,?)");
-            m_sql.executePrepared( QVariantList() << pair.first << pair.second << m_counters.value(pair), COMMITTING_ANALYTICS );
+            m_sql.setQuery( QString("INSERT INTO analytics.events (event,context,count) VALUES (?,?,COALESCE((SELECT count FROM analytics.events WHERE event=? AND context=?)+%1,%1))").arg( m_counters.value(pair) ) );
+            m_sql.executePrepared( QVariantList() << pair.first << pair.second << pair.first << pair.second, COMMITTING_ANALYTICS );
         }
 
         m_sql.endTransaction(COMMIT_ANALYTICS);

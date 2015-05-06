@@ -53,7 +53,7 @@ public:
     void executeQuery(QObject* caller, QString const& query, int t, QVariantList const& args=QVariantList());
     void initSetup(QObject* caller, QStringList const& setupStatements, int id=INIT_SETUP_ID);
     void startTransaction(QObject* caller, int id);
-    Q_INVOKABLE void record(QString const& event, QString const& context=QString());
+    Q_INVOKABLE void record(QString const& event, QString const& context="");
 };
 
 } /* namespace canadainc */

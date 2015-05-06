@@ -117,6 +117,8 @@ Delegate
             
             persist.setFlag("alreadyReviewed", Application.applicationVersion);
         }
+        
+        analytics.record( "TutorialPromptResult", data.cookie+":"+confirmed.toString() );
     }
     
     
@@ -249,11 +251,15 @@ Delegate
                                     keys = {};
                                     fsd.dismiss();
                                 }
+                                
+                                analytics.record( "SuppressTutorialConfirm", confirmed.toString() );
                             }
                             
                             onTriggered: {
                                 console.log("UserEvent: SuppressTutorials");
                                 persist.showDialog( dai, qsTr("Suppress Tutorials"), qsTr("Are you sure you want to prevent all further tutorials? If you ever want to enable them again, swipe-down from the top-bezel, go to Help, tap on the title bar and uncheck the 'Suppress Tutorials' checkmark.") );
+                                
+                                analytics.record("SuppressTutorials");
                             }
                         }
                     }
@@ -268,6 +274,8 @@ Delegate
                             if ( !mainAnim.isPlaying() ) {
                                 fsd.dismiss();
                             }
+                            
+                            analytics.record("TutorialTapped");
                         }
                     }
                 ]

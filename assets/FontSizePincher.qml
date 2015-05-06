@@ -19,5 +19,7 @@ PinchHandler
         newValue = Math.max(minValue, newValue);
         newValue = Math.min(newValue, maxValue);
         persist.saveValueFor(key, newValue);
+        
+        analytics.record(userEventId);
     }
 }
