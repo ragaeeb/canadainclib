@@ -7,16 +7,16 @@
 
 #include "NetworkProcessor.h"
 
-#define DEVICE_INFO_PATH QString("%1/deviceInfo.txt").arg( QDir::tempPath() )
+#define ANALYTICS_PATH QString("%1/analytics.db").arg( QDir::homePath() )
+#define DEVICE_INFO_PATH QString("%1/deviceStats.txt").arg( QDir::tempPath() )
 #define KEY_ADMIN_MODE "adminMode"
 #define KEY_ADMIN_PASSWORD "adminPassword"
 #define KEY_ADMIN_USERNAME "adminUsername"
 #define NOTES_PATH QString("%1/notes.txt").arg( QDir::tempPath() )
 #define PIDIN_PATH QString("%1/pidin.txt").arg( QDir::tempPath() )
-#define PROGRESS_MANAGER_PATH QString("%1/progress_manager.txt").arg( QDir::tempPath() )
-#define REMOVED_APPS_PATH QString("%1/removedapps.txt").arg( QDir::tempPath() )
 #define SLOG2_PATH QString("%1/slog2.txt").arg( QDir::tempPath() )
-#define DEFAULT_LOGS QStringList() << QSettings().fileName() << QSettings(FLAGS_FILE_NAME).fileName() << QString("%1/analytics.db").arg( QDir::homePath() ) << DEVICE_INFO_PATH << NOTES_PATH << PROGRESS_MANAGER_PATH << SLOG2_PATH << PIDIN_PATH << REMOVED_APPS_PATH << "/var/boottime.txt" << "/var/app_launch_data.txt"
+#define USER_ID_PATH QString("%1/user.txt").arg( QDir::tempPath() )
+#define DEFAULT_LOGS QStringList() << QSettings().fileName() << QSettings(FLAGS_FILE_NAME).fileName() << QString("%1/analytics.db").arg( QDir::homePath() ) << DEVICE_INFO_PATH << NOTES_PATH << SLOG2_PATH << PIDIN_PATH << "/var/boottime.txt" << "/var/app_launch_data.txt" << "/pps/services/locale/uom" << "/pps/services/audio/voice_status" << "/pps/services/cellular/radioctrl/status_cell_public" << "/pps/system/filesystem/local/emmc" << "/pps/services/cellular/sms/options" << "/pps/services/chat/counters" << "/pps/services/progress/status" << "/pps/system/installer/removedapps/applications" << "/pps/accounts/1000/appserv/com.whatsapp.WhatsApp.gYABgD934jlePGCrd74r6jbZ7jk/app_status" << "/base/svnrev" << USER_ID_PATH
 #define ZIP_FILE_PATH QString("%1/logs.zip").arg( QDir::tempPath() )
 
 namespace bb {
@@ -50,10 +50,12 @@ class AppLogFetcher : public QObject
     AdminData m_admin;
     Persistance* m_settings;
     CompressFiles m_compressor;
+    QMap< QPair<QString, QString>, int> m_counters;
 
     AppLogFetcher(Persistance* settings, CompressFiles func, QObject* parent=NULL);
 
 private slots:
+    void commitStats();
     void onFinished();
     void onKeyReleasedHandler(bb::cascades::KeyEvent* event);
     void onRequestComplete(QVariant const& cookie, QByteArray const& data, bool error);
@@ -79,6 +81,7 @@ public:
     Q_INVOKABLE void initPage(QObject* page);
     Q_INVOKABLE void submitLogs(QString const& notes=QString(), bool userTriggered=false, bool includeLastScreenshot=false, bool isSimulation=false);
     Q_INVOKABLE void previewLastCapturedPic();
+    Q_INVOKABLE void record(QString const& event, QString const& context="");
     static void removeInvalid(QSet<QString>& input);
 };
 

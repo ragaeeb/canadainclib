@@ -33,7 +33,7 @@ ControlDelegate
                             console.log("UserEvent: OfflineDelegateTapped");
                             imageTapped();
                             
-                            analytics.record("OfflineDelegateTapped");
+                            reporter.record("OfflineDelegateTapped");
                         }
                     }
                 ]

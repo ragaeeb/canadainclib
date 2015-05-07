@@ -118,7 +118,7 @@ TitleBar
             onTriggered: {
                 console.log("UserEvent: OpenChannel");
                 persist.openChannel();
-                analytics.record("OpenChannelTriggered");
+                reporter.record("OpenChannelTriggered");
             }
         },
         
@@ -132,7 +132,7 @@ TitleBar
             onTriggered: {
                 console.log("UserEvent: VideoTutorial");
                 persist.openUri(videoTutorialUri);
-                analytics.record("VideoTutorialTriggered");
+                reporter.record("VideoTutorialTriggered");
             }
         }
     ]

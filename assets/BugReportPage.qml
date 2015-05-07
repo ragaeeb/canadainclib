@@ -41,7 +41,7 @@ Page
             onTriggered: {
                 console.log("UserEvent: OpenInBrowser");
                 persist.openUri( webView.url.toString() );
-                analytics.record("OpenInBrowser");
+                reporter.record("OpenInBrowser");
             }
         },
         
@@ -56,7 +56,7 @@ Page
                 console.log("UserEvent: SubmitLogs");
                 enabled = false;
                 sheetDelegate.active = true;
-                analytics.record("SubmitLogs");
+                reporter.record("SubmitLogs");
             }
             
             function onSubmitted(message)
@@ -90,11 +90,8 @@ Page
                             }
                             
                             onOpened: {
-                                persist.showToast( qsTr("Enter the notes you wish to add.\n\nPlease include as much detail as possible about the issue you are having and how to reproduce it."), "asset:///images/bugs/ic_bugs_info.png" );
                                 body.editor.cursorPosition = 6; // right after the name field
                                 body.requestFocus();
-                                
-                                anim.play();
                             }
                             
                             Page
@@ -149,7 +146,7 @@ Page
                                             emailField.validator.validate();
                                             
                                             if ( body.text.trim() == body.template ) {
-                                                persist.showToast( qsTr("Please enter detailed notes about the bug you observed!"), "images/bugs/ic_bugs_cancel.png" );
+                                                persist.showToast( qsTr("Please enter detailed notes about the bug you observed!"), "images/bugs/ic_bugs_info.png" );
                                                 return;
                                             }
                                             
@@ -211,7 +208,7 @@ Page
                                         ToggleButton
                                         {
                                             id: includeScreenshot
-                                            checked: false
+                                            checked: true
                                         }
                                     }
                                     

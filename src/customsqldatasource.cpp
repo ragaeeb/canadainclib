@@ -97,7 +97,7 @@ void CustomSqlDataSource::execute(QVariant const& criteria, int id)
 {
     if ( checkConnection() ) {
     	//LOGGER(id << criteria);
-    	m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
+    	//m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
         m_sqlConnector->execute(criteria, id);
     }
 }
@@ -107,7 +107,7 @@ void CustomSqlDataSource::executePrepared(QVariantList const& values, int id)
 {
     if ( checkConnection() ) {
     	//LOGGER(m_query << values << id);
-    	m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
+    	//m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
         m_sqlConnector->execute(m_query, values, id);
     }
 }
@@ -143,7 +143,7 @@ void CustomSqlDataSource::onLoadAsyncResultData(bb::data::DataAccessReply const&
         emit error( replyData.errorMessage() );
     } else {
         QVariantList resultList = replyData.result().toList();
-        LOGGER( replyData.id() << "took" << QDateTime::currentMSecsSinceEpoch()-m_execTimestamp << "elements" << resultList.size() );
+        LOGGER( replyData.id() << /*"took" << QDateTime::currentMSecsSinceEpoch()-m_execTimestamp << */"elements" << resultList.size() );
         emit dataLoaded( replyData.id(), resultList );
     }
 }
@@ -154,7 +154,7 @@ bool CustomSqlDataSource::initSetup(QStringList const& setupStatements, int id, 
     //LOGGER(setupStatements << id);
 	bool result = IOUtils::writeFile(m_source);
 
-    m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
+    //m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
 
     if ( checkConnection() )
     {

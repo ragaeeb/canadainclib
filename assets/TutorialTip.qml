@@ -77,7 +77,7 @@ Delegate
         if ( text.length > 0 && !suppressTutorials && ( !key || !persist.containsFlag(key) ) )
         {
             var allKeys = keys;
-            
+
             if ( key && !(key in allKeys) )
             {
                 var allData = data;
@@ -91,6 +91,8 @@ Delegate
                 
                 if (!active) {
                     active = true;
+                } else if (active && object) {
+                    object.open();
                 }
             }
             
@@ -118,7 +120,7 @@ Delegate
             persist.setFlag("alreadyReviewed", Application.applicationVersion);
         }
         
-        analytics.record( "TutorialPromptResult", data.cookie+":"+confirmed.toString() );
+        reporter.record( "TutorialPromptResult", data.cookie+":"+confirmed.toString() );
     }
     
     
@@ -197,8 +199,8 @@ Delegate
                 
                 if (currentIndex < data.length-1) {
                     showNext();
-                } else if ( !fadeOut.isPlaying() ) {
-                    fadeOut.play();
+                } else {
+                    fsd.close();
                 }
             }
             
@@ -207,7 +209,9 @@ Delegate
             }
             
             onClosed: {
-                active = false;
+                swipeBar.visible = false;
+                icon.resetImageSource();
+                bodyControl.resetText();
             }
             
             onCreationCompleted: {
@@ -252,14 +256,14 @@ Delegate
                                     fsd.dismiss();
                                 }
                                 
-                                analytics.record( "SuppressTutorialConfirm", confirmed.toString() );
+                                reporter.record( "SuppressTutorialConfirm", confirmed.toString() );
                             }
                             
                             onTriggered: {
                                 console.log("UserEvent: SuppressTutorials");
                                 persist.showDialog( dai, qsTr("Suppress Tutorials"), qsTr("Are you sure you want to prevent all further tutorials? If you ever want to enable them again, swipe-down from the top-bezel, go to Help, tap on the title bar and uncheck the 'Suppress Tutorials' checkmark.") );
                                 
-                                analytics.record("SuppressTutorials");
+                                reporter.record("SuppressTutorials");
                             }
                         }
                     }
@@ -275,23 +279,7 @@ Delegate
                                 fsd.dismiss();
                             }
                             
-                            analytics.record("TutorialTapped");
-                        }
-                    }
-                ]
-                
-                animations: [
-                    FadeTransition
-                    {
-                        id: fadeOut
-                        fromOpacity: 1
-                        toOpacity: 0
-                        duration: 500
-                        easingCurve: StockCurve.QuinticIn
-                        target: dialogContainer
-                        
-                        onEnded: {
-                            fsd.close();
+                            reporter.record("TutorialTapped");
                         }
                     }
                 ]

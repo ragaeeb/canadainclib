@@ -32,7 +32,7 @@ MenuDefinition
             persist.setFlag("appLastUpdateCheck", new Date().getTime());
         }
         
-        analytics.record( "PerformAppUpdate", confirm.toString() );
+        reporter.record( "PerformAppUpdate", confirm.toString() );
     }
     
     function onLatestVersionFound(latestVersion)
@@ -87,7 +87,7 @@ MenuDefinition
             
             launchPage(settingsPage);
             
-            analytics.record("SettingsPage");
+            reporter.record("SettingsPage");
         }
     }
     
@@ -108,7 +108,7 @@ MenuDefinition
                 bugReportPage.projectName = projectName;
                 launchPage(bugReportPage);
                 
-                analytics.record("BugReportPage");
+                reporter.record("BugReportPage");
             }
         },
         
@@ -121,7 +121,7 @@ MenuDefinition
                 console.log("UserEvent: ReviewApp");
                 persist.reviewApp();
                 
-                analytics.record("ReviewApp");
+                reporter.record("ReviewApp");
             }
         }
     ]
@@ -142,7 +142,7 @@ MenuDefinition
             
             launchPage(helpPage);
             
-            analytics.record("HelpPage");
+            reporter.record("HelpPage");
         }
     }
     
@@ -164,7 +164,7 @@ MenuDefinition
                     console.log("UserEvent: Donate");
                     persist.openUri("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=dar.as.sahaba@hotmail.com&currency_code=CAD&no_shipping=1&tax=0&lc=CA&bn=PP-DonationsBF&item_name=Da'wah Activities, Rent and Utility Expenses for the Musalla (please do not use credit cards)");
                     
-                    analytics.record("DonateTriggered");
+                    reporter.record("DonateTriggered");
                 }
             }
         }

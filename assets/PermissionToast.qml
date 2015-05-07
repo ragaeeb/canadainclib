@@ -115,7 +115,7 @@ ControlDelegate
                             dth.doubleTapped(undefined);
                         }
                         
-                        analytics.record("WarningTapped");
+                        reporter.record("WarningTapped");
                     }
                 },
                 
@@ -130,7 +130,7 @@ ControlDelegate
                         tt.duration = 500;
                         tt.play();
                         
-                        analytics.record("WarningDoubleTapped");
+                        reporter.record("WarningDoubleTapped");
                     }
                 }
             ]
