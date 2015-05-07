@@ -164,7 +164,7 @@ void IOUtils::preventIndexing(QString const& dirPath)
         if ( !f.exists() ) {
             bool written = f.open(QIODevice::WriteOnly);
             f.close();
-            LOGGER(f.fileName() << "written");
+            LOGGER(f.fileName() << "written" << written);
         } else {
             LOGGER(".nomediaExists");
         }
