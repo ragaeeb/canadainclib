@@ -584,7 +584,7 @@ bool Persistance::isUpdateNeeded(QString const& key, int diffDaysMin)
     QDateTime lastUpdateCheck = QDateTime::fromMSecsSinceEpoch( getFlag(key).toLongLong() );
     int diff = lastUpdateCheck.daysTo(now);
 
-    LOGGER("diffLastUpdateCheck" << diff);
+    LOGGER(diff);
     return diff > diffDaysMin;
 }
 
