@@ -82,7 +82,7 @@ void NetworkProcessor::doGet(QUrl const& uri, QVariant const& cookie)
         return;
     }
 
-	LOGGER( uri.host() << cookie );
+	LOGGER( uri.host()+"/"+uri.path() );
 
 	init();
 
@@ -163,7 +163,7 @@ void NetworkProcessor::upload(QUrl const& url, QString const& name, QByteArray c
     dataToSend.append(crlf + "--" + bound + "--" + crlf);
 
     QNetworkRequest request(url); // DON'T TRY TO OPTIMIZE THIS BY MERGING WITH ABOVE LINE, IT DOESN'T WORK!
-    request.setHeader(QNetworkRequest::ContentTypeHeader, tr("multipart/form-data; boundary=") + bound);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, QString("multipart/form-data; boundary=%1").arg(bound));
 
     QNetworkReply* reply = m_networkManager->post( request, dataToSend );
     reply->setProperty(KEY_COOKIE, cookie);

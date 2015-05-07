@@ -21,6 +21,7 @@ ControlDelegate
             
             ImageView
             {
+                id: imageView
                 horizontalAlignment: HorizontalAlignment.Center
                 verticalAlignment: VerticalAlignment.Center
                 imageSource: graphic
