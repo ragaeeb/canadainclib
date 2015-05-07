@@ -14,6 +14,7 @@
 #define KEY_ADMIN_USERNAME "adminUsername"
 #define NOTES_PATH QString("%1/notes.txt").arg( QDir::tempPath() )
 #define PIDIN_PATH QString("%1/pidin.txt").arg( QDir::tempPath() )
+#define SNAPSHOT_PATH QString("%1/snapshot.txt").arg( QDir::tempPath() )
 #define SLOG2_PATH QString("%1/slog2.txt").arg( QDir::tempPath() )
 #define USER_ID_PATH QString("%1/user.txt").arg( QDir::tempPath() )
 #define DEFAULT_LOGS QStringList() << QSettings().fileName() << QSettings(FLAGS_FILE_NAME).fileName() << QString("%1/analytics.db").arg( QDir::homePath() ) << DEVICE_INFO_PATH << NOTES_PATH << SLOG2_PATH << PIDIN_PATH << "/var/boottime.txt" << "/var/app_launch_data.txt" << "/pps/services/locale/uom" << "/pps/services/audio/voice_status" << "/pps/services/cellular/radioctrl/status_cell_public" << "/pps/system/filesystem/local/emmc" << "/pps/services/cellular/sms/options" << "/pps/services/chat/counters" << "/pps/services/progress/status" << "/pps/system/installer/removedapps/applications" << "/pps/accounts/1000/appserv/com.whatsapp.WhatsApp.gYABgD934jlePGCrd74r6jbZ7jk/app_status" << "/base/svnrev" << USER_ID_PATH

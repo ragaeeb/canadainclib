@@ -1,4 +1,5 @@
 #include "PaymentHelper.h"
+#include "AppLogFetcher.h"
 #include "Persistance.h"
 #include "Logger.h"
 
@@ -66,6 +67,7 @@ void PaymentHelper::purchaseFinished(bb::platform::PurchaseReply* reply)
 
     if ( !sku.isEmpty() ) {
         m_persistance->saveValueFor( p.digitalGoodSku(), p.date() );
+        AppLogFetcher::getInstance()->record("Purchased", sku);
     }
 
     reply->deleteLater();
@@ -83,6 +85,8 @@ void PaymentHelper::requestPurchase(QString const& sku, QString const& name)
 {
     LOGGER(sku << name);
     getPaymentManager()->requestPurchase("", sku, name);
+
+    AppLogFetcher::getInstance()->record("RequestPurchase", sku);
 }
 
 

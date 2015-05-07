@@ -278,8 +278,6 @@ Delegate
                             if ( !mainAnim.isPlaying() ) {
                                 fsd.dismiss();
                             }
-                            
-                            reporter.record("TutorialTapped");
                         }
                     }
                 ]

@@ -90,8 +90,7 @@ Page
                             }
                             
                             onOpened: {
-                                body.editor.cursorPosition = 6; // right after the name field
-                                body.requestFocus();
+                                nameField.requestFocus();
                             }
                             
                             Page
@@ -269,6 +268,8 @@ Page
                                         inputMode: TextFieldInputMode.Text
                                         visible: body.visible
                                         maximumLength: 25
+                                        input.submitKey: SubmitKey.Next
+                                        input.submitKeyFocusBehavior: SubmitKeyFocusBehavior.Next
                                         
                                         validator: Validator
                                         {
@@ -291,6 +292,14 @@ Page
                                         backgroundVisible: false
                                         maximumLength: 40
                                         visible: body.visible
+                                        input.submitKey: SubmitKey.Next
+                                        input.submitKeyFocusBehavior: SubmitKeyFocusBehavior.Next
+                                        
+                                        input.onSubmitted: {
+                                            if (body.text == body.template) {
+                                                body.editor.cursorPosition = body.text.indexOf(":")+2;
+                                            }
+                                        }
                                         
                                         validator: Validator
                                         {
@@ -403,6 +412,6 @@ Page
 	
 	onCreationCompleted: {
         tutorial.execActionBar( "submitLogs", qsTr("If you were instructed by our staff to submit a bug report, please use the '%1' action at the bottom. Then fill out the form, and send the representative the Bug Report ID generated.").arg(submitLogs.title) );
-        tutorial.execActionBar( "openBugsInBrowser", qsTr("To open this page in the web browser, please use the '%1' action at the bottom.").arg(browserAction.title) );
+        tutorial.execActionBar( "openBugsInBrowser", qsTr("To open this page in the web browser, please use the '%1' action at the bottom.").arg(browserAction.title), "r" );
 	}
 }

@@ -1,4 +1,5 @@
 #include "DeviceUtils.h"
+#include "AppLogFetcher.h"
 #include "Logger.h"
 
 #include <bb/cascades/ActionItem>
@@ -86,6 +87,8 @@ void DeviceUtils::onBottomTriggered()
 {
     LOGGER("UserEvent: BottomTriggered");
     processDirection(ScrollPosition::End);
+
+    AppLogFetcher::getInstance()->record("BottomTriggered");
 }
 
 
@@ -93,6 +96,8 @@ void DeviceUtils::onTopTriggered()
 {
     LOGGER("UserEvent: TopTriggered");
     processDirection(ScrollPosition::Beginning);
+
+    AppLogFetcher::getInstance()->record("TopTriggered");
 }
 
 
