@@ -40,15 +40,15 @@ public:
     DatabaseHelper(QString const& dbase, QObject* parent=NULL);
     virtual ~DatabaseHelper();
 
-    void attachIfNecessary(QString const& dbase, bool homePath=false, int id=ATTACH_DATABASE_ID);
-    void attachIfNecessary(QString const& dbase, QString const& path, int id=ATTACH_DATABASE_ID);
-    void detach(QString const& dbase, int id=DETACH_DATABASE_ID);
-    void enableForeignKeys(int id=FOREIGN_KEY_SETUP);
-    void endTransaction(QObject* caller, int id);
-    void executeInternal(QString const& query, int t, QVariantList const& args=QVariantList());
-    void executeQuery(QObject* caller, QString const& query, int t, QVariantList const& args=QVariantList());
-    void initSetup(QObject* caller, QStringList const& setupStatements, int id=INIT_SETUP_ID);
-    void startTransaction(QObject* caller, int id);
+    Q_INVOKABLE void attachIfNecessary(QString const& dbase, bool homePath=false, int id=ATTACH_DATABASE_ID);
+    Q_INVOKABLE void attachIfNecessary(QString const& dbase, QString const& path, int id=ATTACH_DATABASE_ID);
+    Q_INVOKABLE void detach(QString const& dbase, int id=DETACH_DATABASE_ID);
+    Q_SLOT void enableForeignKeys(int id=FOREIGN_KEY_SETUP);
+    Q_INVOKABLE void endTransaction(QObject* caller, int id);
+    Q_INVOKABLE void executeInternal(QString const& query, int t, QVariantList const& args=QVariantList());
+    Q_INVOKABLE void executeQuery(QObject* caller, QString const& query, int t, QVariantList const& args=QVariantList());
+    Q_INVOKABLE void initSetup(QObject* caller, QStringList const& setupStatements, int id=INIT_SETUP_ID);
+    Q_INVOKABLE void startTransaction(QObject* caller, int id);
 };
 
 } /* namespace canadainc */

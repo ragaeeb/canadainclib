@@ -1,17 +1,22 @@
 #ifndef CANADINCTESTER_H_
 #define CANADINCTESTER_H_
 
+#include <bb/cascades/ActionItem>
+#include <bb/cascades/ArrayDataModel>
 #include <bb/cascades/ListItemProvider>
 #include <bb/cascades/ListView>
 #include <bb/cascades/Page>
+#include <bb/cascades/QmlDocument>
 #include <bb/cascades/Sheet>
 #include <bb/cascades/StandardListItem>
 #include <bb/cascades/TitleBar>
 
 #include "Logger.h"
 
-#define KEY_PASSED "passed"
+#define KEY_ELAPSED_TIME "t"
 #define KEY_EXPIRED "expired"
+#define KEY_FAILURE_CONTEXT "reason"
+#define KEY_PASSED "passed"
 #define KEY_RUNNING "running"
 
 namespace canadainc {
@@ -45,7 +50,7 @@ class TestResultListItemProvider : public ListItemProvider
             bool passed = data.value(KEY_PASSED).toBool();
             bool expired = data.value(KEY_EXPIRED).toBool();
             h->setImageSource(passed ? QUrl("asset:///images/bugs/ic_bugs_submit.png") : expired ? QUrl("asset:///images/bugs/ic_bugs_info.png") : QUrl("asset:///images/bugs/ic_bugs_cancel.png"));
-            h->setStatus(passed ? "Passed" : "Failed!");
+            h->setStatus(passed ? "Passed" : QString("Failed: %1").arg( data.value(KEY_FAILURE_CONTEXT).toString() ) );
         } else {
             bool running = data.value(KEY_RUNNING).toBool();
 
@@ -59,8 +64,8 @@ class TestResultListItemProvider : public ListItemProvider
             }
         }
 
-        if ( data.contains("t") ) {
-            h->setDescription( QString("%1 ms").arg( data.value("t").toLongLong() ) );
+        if ( data.contains(KEY_ELAPSED_TIME) ) {
+            h->setDescription( QString("%1 ms").arg( data.value(KEY_ELAPSED_TIME).toLongLong() ) );
         } else {
             h->resetDescription();
         }
@@ -77,6 +82,7 @@ class CanadaIncTester : public QObject
     QObject* m_root;
     int m_currentIndex;
     QTimer m_monitor;
+    ListView* m_lv;
 
     CanadaIncTester(QMap<QString, QObject*> context) : m_adm( new ArrayDataModel() ), m_currentIndex(0)
     {
@@ -103,14 +109,14 @@ class CanadaIncTester : public QObject
             m_adm->append(current);
         }
 
-        ListView* lv = ListView::create();
-        lv->setListItemProvider( new TestResultListItemProvider() );
-        lv->setDataModel(m_adm);
+        m_lv = ListView::create();
+        m_lv->setListItemProvider( new TestResultListItemProvider() );
+        m_lv->setDataModel(m_adm);
 
         Sheet* s = Sheet::create().parent(this);
 
-        Page* p = Page::create().titleBar( TitleBar::create().dismissAction( ActionItem::create().title("Close").onTriggered( s, SLOT( close() ) ) ).acceptAction( ActionItem::create().title("Run").onTriggered( this, SLOT( run() ) ) ) );
-        p->setContent(lv);
+        Page* p = Page::create().titleBar( TitleBar::create().dismissAction( ActionItem::create().title("Close").imageSource( QUrl("asset:///images/bugs/ic_bugs_cancel.png") ).onTriggered( s, SLOT( close() ) ) ).acceptAction( ActionItem::create().title("Run").imageSource( QUrl("asset:///images/bugs/ic_bugs_submit.png") ).onTriggered( this, SLOT( run() ) ) ) );
+        p->setContent(m_lv);
         s->setContent(p);
 
         s->open();
@@ -126,7 +132,11 @@ class CanadaIncTester : public QObject
         QObjectList all = m_root->children();
 
         QObject* q = all[m_currentIndex];
-        update(q, false, true);
+        QVariantMap current = m_adm->value(m_currentIndex).toMap();
+        current[KEY_EXPIRED] = true;
+        m_adm->replace(m_currentIndex, current);
+
+        assert(q, false);
     }
 
 
@@ -139,7 +149,38 @@ class CanadaIncTester : public QObject
             QObject* q = all[m_currentIndex];
             attachTimer(q);
             QMetaObject::invokeMethod(q, "run", Qt::QueuedConnection);
+
+            m_lv->scrollToItem( QVariantList() << m_currentIndex, ScrollAnimation::Smooth );
         }
+    }
+
+    void applyResult(QObject* q, bool passed, QString const& reason=QString())
+    {
+        m_monitor.stop();
+
+        QString name = q->objectName();
+        int i = m_testToIndex[name];
+
+        QVariantMap current = m_adm->value(i).toMap();
+        current[KEY_PASSED] = passed;
+
+        if ( m_timers.contains(name) )
+        {
+            QElapsedTimer* qet = m_timers.value(name);
+            current[KEY_ELAPSED_TIME] = qet->elapsed();
+
+            delete qet;
+            m_timers.remove(name);
+        }
+
+        if (!passed) {
+            current[KEY_FAILURE_CONTEXT] = reason;
+        }
+
+        m_adm->replace(i, current);
+        ++m_currentIndex;
+
+        run();
     }
 
 public:
@@ -157,30 +198,49 @@ public:
     }
 
 
-    Q_INVOKABLE void update(QObject* q, bool passed, bool timedOut=false)
+    Q_INVOKABLE void dump(QVariant const& q) {
+        LOGGER(q);
+    }
+
+
+    Q_INVOKABLE void assert(QObject* q, QVariant const& expected, QVariant const& actual=QVariant())
     {
-        m_monitor.stop();
+        bool passed = actual.isNull() ? expected.toBool() : expected == actual;
 
-        QString name = q->objectName();
-        int i = m_testToIndex[name];
-
-        QVariantMap current = m_adm->value(i).toMap();
-        current[KEY_PASSED] = passed;
-        current[KEY_EXPIRED] = timedOut;
-
-        if ( m_timers.contains(name) )
-        {
-            QElapsedTimer* qet = m_timers.value(name);
-            current["t"] = qet->elapsed();
-
-            delete qet;
-            m_timers.remove(name);
+        if (!passed) {
+            LOGGER( q->objectName() << expected.toString() << actual.toString() );
         }
 
-        m_adm->replace(i, current);
-        ++m_currentIndex;
+        applyResult( q, passed, QString("%1 != %2").arg( expected.toString() ).arg( actual.toString() ) );
+    }
 
-        run();
+
+    Q_INVOKABLE void assert(QObject* q, QVariantList const& pairs)
+    {
+        if ( pairs.size()%2 == 0 )
+        {
+            bool passed = false;
+            QStringList reasons;
+            int i = 0;
+
+            for (i = 0; i < pairs.size(); i += 2)
+            {
+                QVariant expected = pairs[i];
+                QVariant actual = pairs[i+1];
+
+                if (expected != actual) {
+                    reasons << QString("%1 != %2").arg( expected.toString() ).arg( actual.toString() );
+                }
+            }
+
+            if ( i == pairs.size() ) { // went through entire loop
+                passed = true;
+            }
+
+            applyResult( q, passed, reasons.join("; ") );
+        } else {
+            applyResult(q, false, QString("OddPair!: %1").arg( pairs.size() ) );
+        }
     }
 
 
