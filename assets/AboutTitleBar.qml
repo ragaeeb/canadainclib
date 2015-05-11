@@ -6,6 +6,7 @@ TitleBar
     property bool initialized: false
     property string videoTutorialUri
     property alias expandedContent: expandedContainer.controls
+    signal contentExpanded();
     kind: TitleBarKind.FreeForm
     scrollBehavior: TitleBarScrollBehavior.NonSticky
     kindProperties: FreeFormTitleBarKindProperties
@@ -85,6 +86,7 @@ TitleBar
             onExpandedChanged: {
                 if (expanded) {
                     body.text = qsTr("Please report all bugs to: support@canadainc.org");
+                    contentExpanded();
                 } else {
                     body.text = qsTr("(c) %1 %2. All Rights Reserved.").arg( new Date().getFullYear() ).arg(Application.organizationName);
                 }

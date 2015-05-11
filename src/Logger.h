@@ -5,7 +5,8 @@
 #include <QDebug>
 
 #define LOGGER(a) qDebug() << "===" << __FILE__ << __LINE__ << __FUNCTION__ << a
+typedef void (*ErrorMessageHandler)(const char* errorMessage);
 
-extern void registerLogging(QString const& key);
+extern void registerLogging(QString const& key, ErrorMessageHandler errorHandler);
 
 #endif /* LOGGER_H_ */
