@@ -10,33 +10,13 @@ namespace canadainc {
 
 using namespace bb::cascades;
 
-LazySceneCover::LazySceneCover(QString const& sceneCoverQml, bool cycle)
+LazySceneCover::LazySceneCover(bool appLaunch)
 {
-	setProperty("qml", sceneCoverQml);
-
-	Application* app = Application::instance();
-
-	connect( app, SIGNAL( thumbnail() ), this, SLOT( onThumbnail() ) );
-
-	if (cycle)
-	{
-		connect( app, SIGNAL( fullscreen() ), this, SLOT( tearDown() ) );
-		connect( app, SIGNAL( invisible() ), this, SLOT( tearDown() ) );
-	}
-
-}
-
-
-void LazySceneCover::tearDown()
-{
-	LOGGER("Tearing down scene cover");
-	QObject* cover = Application::instance()->cover();
-
-	if (cover)
-	{
-		cover->deleteLater();
-		Application::instance()->resetCover();
-	}
+    if (appLaunch)
+    {
+        Application* app = Application::instance();
+        connect( app, SIGNAL( thumbnail() ), this, SLOT( onThumbnail() ) );
+    }
 }
 
 
@@ -51,9 +31,8 @@ void LazySceneCover::onThumbnail()
 
 	if ( Application::instance()->cover() == NULL )
 	{
-		LOGGER("Creating thumbnail scene cover for first time!");
-
-		QmlDocument* qmlCover = QmlDocument::create( "asset:///"+property("qml").toString() );
+		LOGGER("CreatingThumbnail!");
+		QmlDocument* qmlCover = QmlDocument::create("asset:///Cover.qml");
 
 		QStringList keys = m_context.keys();
 

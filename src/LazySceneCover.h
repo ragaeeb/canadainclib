@@ -15,10 +15,9 @@ class LazySceneCover : public QObject
 
 private slots:
 	void onThumbnail();
-	void tearDown();
 
 public:
-	LazySceneCover(QString const& sceneCoverQml="Cover.qml", bool cycle=false);
+	LazySceneCover(bool appLaunch);
 	virtual ~LazySceneCover();
 
 	void setContext(QString const& key, QObject* value);
