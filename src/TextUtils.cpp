@@ -100,12 +100,12 @@ QString TextUtils::longestCommonSubstring(QString const& s1, QString const& s2)
     int longest = 0;
 
     int **n = (int **) calloc (str1.length() + 1,  sizeof(int *));
-    for(int i = 0; i <= str1.length(); i++) {
+    for(uint i = 0; i <= str1.length(); i++) {
         n[i] = (int *) calloc (str2.length() + 1, sizeof(int));
     }
 
-    for(int i = 0; i < str1.length(); i ++) {
-        for(int j = 0; j < str2.length(); j++) {
+    for(uint i = 0; i < str1.length(); i ++) {
+        for(uint j = 0; j < str2.length(); j++) {
             if( toupper(str1[i]) == toupper(str2[j]) )
             {
                 n[i+1][j+1] = n[i][j] + 1;
@@ -114,7 +114,7 @@ QString TextUtils::longestCommonSubstring(QString const& s1, QString const& s2)
                     res.clear();
                 }
                 if(n[i+1][j+1] == longest)
-                    for(int it = i-longest+1; it <= i; it++){
+                    for(uint it = i-longest+1; it <= i; it++){
                         res.insert((char *) &str1[it]);
                     }
             }
@@ -125,7 +125,7 @@ QString TextUtils::longestCommonSubstring(QString const& s1, QString const& s2)
     {
         res_str.append(1,**it);
     }
-    for(int i = 0; i <= str1.length(); i++)
+    for(uint i = 0; i <= str1.length(); i++)
         free(n[i]);
     free(n);
 
