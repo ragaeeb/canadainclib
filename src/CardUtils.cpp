@@ -11,6 +11,7 @@ using namespace bb::cascades;
 
 QObject* CardUtils::initAppropriate(QString const& qmlDoc, QMap<QString, QObject*> const& context, QObject* parent)
 {
+    bool invoked = qmlDoc != "main.qml";
     QmlDocument* qml = QmlDocument::create( QString("asset:///%1").arg(qmlDoc) ).parent(parent);
     qml->setContextProperty("app", parent);
 
@@ -18,23 +19,23 @@ QObject* CardUtils::initAppropriate(QString const& qmlDoc, QMap<QString, QObject
         qml->setContextProperty( key, context.value(key) );
     }
 
-    AbstractPane* root = qml->createRootObject<AbstractPane>();
+    NavigationPane* np = NavigationPane::create().backButtons(true);
+    qml->setContextProperty("navigationPane", np);
 
-    if (qmlDoc != "main.qml")
+    AbstractPane* root = NULL;
+
+    if (invoked)
     {
-        Page* page = qobject_cast<Page*>(root);
+        NavigationPane* np = NavigationPane::create().backButtons(true);
+        qml->setContextProperty("navigationPane", np);
 
-        if (page) {
-            NavigationPane* np = NavigationPane::create().backButtons(true);
-            qml->setContextProperty("navigationPane", np);
+        Page* page = qml->createRootObject<Page>();
+        root = page;
+        np->push(page);
 
-            np->push(page);
-
-            Application::instance()->setScene(np);
-        } else {
-            Application::instance()->setScene(root);
-        }
+        Application::instance()->setScene(np);
     } else {
+        root = qml->createRootObject<AbstractPane>();
         Application::instance()->setScene(root);
     }
 
