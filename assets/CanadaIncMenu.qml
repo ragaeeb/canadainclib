@@ -48,6 +48,17 @@ MenuDefinition
         }
     }
     
+    function onSwipeDown() {
+        reporter.record("SwipeDown");
+    }
+    
+    function getNowString()
+    {
+        var now = new Date();
+        return "%1/%2/%3:%4".arg( now.getFullYear() ).arg( now.getMonth() ).arg( now.getDate() ).arg( now.getHours() );
+    }
+    
+    
     function asyncWork()
     {
         if ( !persist.getFlag("promoted") ) {
@@ -65,6 +76,9 @@ MenuDefinition
             reporter.latestAppVersionFound.connect(onLatestVersionFound);
             reporter.checkForUpdate(projectName);
         }
+        
+        Application.swipeDown.connect(onSwipeDown);
+        reporter.record( "AppLaunch", getNowString() );
     }
     
     onCreationCompleted: {
@@ -166,6 +180,13 @@ MenuDefinition
                     
                     reporter.record("DonateTriggered");
                 }
+            }
+        },
+        
+        OrientationHandler
+        {
+            onOrientationChanged: {
+                reporter.record( "Orientation", orientation.toString() );
             }
         }
     ]
