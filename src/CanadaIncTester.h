@@ -154,6 +154,19 @@ class CanadaIncTester : public QObject
         }
     }
 
+    void attachTimer(QObject* q)
+    {
+        QElapsedTimer* qet = new QElapsedTimer();
+        qet->start();
+
+        m_timers[ q->objectName() ] = qet;
+        m_monitor.start();
+
+        QVariantMap current = m_adm->value(m_currentIndex).toMap();
+        current[KEY_RUNNING] = true;
+        m_adm->replace(m_currentIndex, current);
+    }
+
     void applyResult(QObject* q, bool passed, QString const& reason=QString())
     {
         m_monitor.stop();
@@ -184,20 +197,6 @@ class CanadaIncTester : public QObject
     }
 
 public:
-    Q_INVOKABLE void attachTimer(QObject* q)
-    {
-        QElapsedTimer* qet = new QElapsedTimer();
-        qet->start();
-
-        m_timers[ q->objectName() ] = qet;
-        m_monitor.start();
-
-        QVariantMap current = m_adm->value(m_currentIndex).toMap();
-        current[KEY_RUNNING] = true;
-        m_adm->replace(m_currentIndex, current);
-    }
-
-
     Q_INVOKABLE void dump(QVariant const& q) {
         LOGGER(q);
     }
@@ -241,6 +240,39 @@ public:
         } else {
             applyResult(q, false, QString("OddPair!: %1").arg( pairs.size() ) );
         }
+    }
+
+
+    Q_INVOKABLE bool copy(QString const& src, QString const& dest, bool fromHome=false, bool fromAppDir=false, bool toHome=false)
+    {
+        if (fromHome || fromAppDir)
+        {
+            if (toHome) {
+                return QFile::copy( QString("%1/%2").arg( fromHome ? QDir::homePath() : QApplication::applicationDirPath() ).arg(src), QString("%1/%2").arg( QDir::homePath() ).arg(dest) );
+            } else {
+                return QFile::copy( QString("%1/%2").arg( fromHome ? QDir::homePath() : QApplication::applicationDirPath() ).arg(src), dest );
+            }
+        } else {
+            if (toHome) {
+                return QFile::copy( src, QString("%1/%2").arg( QDir::homePath() ).arg(dest) );
+            } else {
+                return QFile::copy(src, dest);
+            }
+        }
+    }
+
+
+    Q_INVOKABLE bool remove(QString const& f, bool homeDir=false)
+    {
+        bool result = false;
+
+        if (homeDir) {
+            result = QFile::remove( QString("%1/%2").arg( QDir::homePath() ).arg(f) );
+        } else {
+            result = QFile::remove(f);
+        }
+
+        return result;
     }
 
 
