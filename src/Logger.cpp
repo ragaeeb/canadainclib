@@ -19,10 +19,6 @@ slog2_buffer_t buffer_handle[1];
 void redirectedMessageOutput(QtMsgType type, const char* msg)
 {
 //#if defined(QT_DEBUG)
-    if ( (type == QtWarningMsg || type == QtCriticalMsg) && errorHandler && strstr(msg, "ReferenceError") ) {
-        errorHandler(msg);
-    }
-
     fprintf(f ? f : stdout, "%s\n", msg);
     fflush(f ? f : stdout);
 //#endif
@@ -44,6 +40,10 @@ void redirectedMessageOutput(QtMsgType type, const char* msg)
     }
 
     slog2c(buffer_handle[0], 0, severity, msg);
+
+    if ( (type == QtWarningMsg || type == QtCriticalMsg) && errorHandler && strstr(msg, "ReferenceError") ) {
+        errorHandler(msg);
+    }
 }
 
 }
