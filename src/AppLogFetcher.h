@@ -57,6 +57,7 @@ class AppLogFetcher : public QObject
 
 private slots:
     void commitStats();
+    void onDestroyed(QObject* obj);
     void onFinished();
     void onKeyReleasedHandler(bb::cascades::KeyEvent* event);
     void onRequestComplete(QVariant const& cookie, QByteArray const& data, bool error);
@@ -83,6 +84,8 @@ public:
     Q_INVOKABLE void submitLogs(QString const& notes=QString(), bool userTriggered=false, bool includeLastScreenshot=false, bool isSimulation=false);
     Q_INVOKABLE void previewLastCapturedPic();
     Q_INVOKABLE void record(QString const& event, QString const& context="");
+    Q_INVOKABLE void listenToDestroyed(QObject* q);
+    Q_INVOKABLE void log(QVariant const& message, QObject* q=NULL);
     static void removeInvalid(QSet<QString>& input);
 };
 

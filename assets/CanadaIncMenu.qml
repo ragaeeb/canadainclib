@@ -79,6 +79,10 @@ MenuDefinition
         
         Application.swipeDown.connect(onSwipeDown);
         reporter.record( "AppLaunch", getNowString() );
+        
+        if ( !persist.containsFlag("firstInstall") ) {
+            persist.setFlag( "firstInstall", new Date().getTime() );
+        }
     }
     
     onCreationCompleted: {

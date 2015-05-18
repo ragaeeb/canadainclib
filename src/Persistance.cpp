@@ -97,6 +97,39 @@ void Persistance::onDestroyed(QObject* obj)
         m_dialog = NULL;
     } else if (obj == m_prompt) {
         m_prompt = NULL;
+    } else {
+        QStringList keys = m_listenerToSettings.value(obj); // all the keys this object was listening to
+
+        foreach (QString const& key, keys)
+        {
+            if ( !key.isEmpty() )
+            {
+                QObjectList l = m_settingToListeners.value(key);
+                l.removeAll(obj);
+
+                m_settingToListeners.insert(key, l);
+                m_listenerToSettings.remove(obj);
+            }
+        }
+    }
+}
+
+
+void Persistance::registerForSetting(QObject* q, QString const& key, bool immediate)
+{
+    QObjectList all = m_settingToListeners.value(key);
+    all << q;
+
+    QStringList keys = m_listenerToSettings.value(q);
+    keys << key;
+
+    m_settingToListeners.insert(key, all);
+    m_listenerToSettings.insert(q, keys);
+
+    connect( q, SIGNAL( destroyed(QObject*) ), this, SLOT( onDestroyed(QObject*) ) );
+
+    if (immediate) {
+        QMetaObject::invokeMethod( q, "onSettingChanged", Qt::QueuedConnection, Q_ARG(QVariant, getValueFor(key) ) );
     }
 }
 
@@ -347,28 +380,34 @@ bool Persistance::contains(QString const& key) const {
 }
 
 
-bool Persistance::saveValueFor(QString const& objectName, QVariant const& inputValue, bool fireEvent)
+bool Persistance::saveValueFor(QString const& key, QVariant const& value, bool fireEvent)
 {
-    bool isPending = m_pending.contains(objectName);
+    bool isPending = m_pending.contains(key);
 
-    if ( isPending && ( m_pending.value(objectName) == inputValue ) ) {
+    if ( isPending && ( m_pending.value(key) == value ) ) {
         return false;
     }
 
-	if ( m_settings.value(objectName) != inputValue )
+	if ( m_settings.value(key) != value )
 	{
-	    LOGGER(objectName << inputValue);
+	    LOGGER(key << value);
 
-        m_settings.setValue(objectName, inputValue);
-        m_logMap.remove(objectName);
+        m_settings.setValue(key, value);
+        m_logMap.remove(key);
 
 	    if (fireEvent) {
-	        m_settings.setValue(objectName, inputValue);
-	        emit settingChanged(objectName);
+	        m_settings.setValue(key, value);
+	        emit settingChanged(key);
+
+	        QObjectList l = m_settingToListeners.value(key);
+
+	        foreach (QObject* q, l) {
+	            QMetaObject::invokeMethod( q, "onSettingChanged", Qt::QueuedConnection, Q_ARG(QVariant, value), Q_ARG(QVariant, key) );
+	        }
 	    }
 
 	    if (isPending) {
-	        m_pending[objectName] = inputValue;
+	        m_pending[key] = value;
 	    }
 
 		return true;
@@ -415,6 +454,12 @@ void Persistance::setFlag(QString const& key, QVariant const& value)
         m_flags.remove(key);
     } else {
         m_flags.setValue(key, value);
+
+        QObjectList l = m_settingToListeners.value(key);
+
+        foreach (QObject* q, l) {
+            QMetaObject::invokeMethod( q, "onSettingChanged", Qt::QueuedConnection, Q_ARG(QVariant, value), Q_ARG(QVariant, key) );
+        }
     }
 }
 

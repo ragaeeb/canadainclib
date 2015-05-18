@@ -3,7 +3,7 @@ import bb.cascades 1.3
 Delegate
 {
     id: tutorialDelegate
-    property bool suppressTutorials: persist.getFlag("suppressTutorials") == 1
+    property bool suppressTutorials
     property variant data: []
     property variant keys: {}
     property int currentIndex: -1
@@ -13,8 +13,8 @@ Delegate
         return data.length;
     }
     
-    function onSettingChanged(key) {
-        suppressTutorials = persist.getFlag("suppressTutorials") == 1;
+    function onSettingChanged(newValue) {
+        suppressTutorials = newValue == 1;
     }
     
     onSuppressTutorialsChanged: {
@@ -22,7 +22,7 @@ Delegate
     }
     
     onCreationCompleted: {
-        persist.settingChanged.connect(onSettingChanged);
+        persist.registerForSetting(tutorialDelegate, "suppressTutorials");
     }
     
     function showNext()
