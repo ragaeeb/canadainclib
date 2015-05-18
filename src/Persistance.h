@@ -89,7 +89,7 @@ public:
     Q_SLOT void openChannel();
     Q_SLOT void openUri(QString const& uri);
     Q_SLOT void reviewApp();
-    Q_INVOKABLE void registerForSetting(QObject* q, QString const& key, bool immediate=true);
+    Q_INVOKABLE void registerForSetting(QObject* q, QString const& key, bool isFlag=false, bool immediate=true);
     static bool showBlockingDialog(QString const& title, QString const& text, QString const& rememberMeText, bool &rememberMeValue, QString const& okButton, QString const& cancelButton, bool okEnabled=true);
 };
 

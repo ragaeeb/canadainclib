@@ -22,7 +22,7 @@ Delegate
     }
     
     onCreationCompleted: {
-        persist.registerForSetting(tutorialDelegate, "suppressTutorials");
+        persist.registerForSetting(tutorialDelegate, "suppressTutorials", true);
     }
     
     function showNext()
