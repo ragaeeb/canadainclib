@@ -129,7 +129,7 @@ void Persistance::registerForSetting(QObject* q, QString const& key, bool isFlag
     connect( q, SIGNAL( destroyed(QObject*) ), this, SLOT( onDestroyed(QObject*) ) );
 
     if (immediate) {
-        QMetaObject::invokeMethod( q, "onSettingChanged", Qt::QueuedConnection, Q_ARG(QVariant, isFlag ? getFlag(key) : getValueFor(key) ) );
+        QMetaObject::invokeMethod( q, "onSettingChanged", Qt::QueuedConnection, Q_ARG(QVariant, isFlag ? getFlag(key) : getValueFor(key) ), Q_ARG(QVariant, key) );
     }
 }
 

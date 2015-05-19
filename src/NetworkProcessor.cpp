@@ -82,7 +82,7 @@ void NetworkProcessor::doGet(QUrl const& uri, QVariant const& cookie)
         return;
     }
 
-	LOGGER( uri.host()+"/"+uri.path() );
+	LOGGER( uri.toString(QUrl::RemoveUserInfo | QUrl::RemovePassword) );
 
 	init();
 

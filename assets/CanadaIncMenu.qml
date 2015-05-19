@@ -52,13 +52,6 @@ MenuDefinition
         reporter.record("SwipeDown");
     }
     
-    function getNowString()
-    {
-        var now = new Date();
-        return "%1/%2/%3:%4".arg( now.getFullYear() ).arg( now.getMonth() ).arg( now.getDate() ).arg( now.getHours() );
-    }
-    
-    
     function asyncWork()
     {
         if ( !persist.getFlag("promoted") ) {
@@ -78,10 +71,12 @@ MenuDefinition
         }
         
         Application.swipeDown.connect(onSwipeDown);
-        reporter.record( "AppLaunch", getNowString() );
+        
+        var now = new Date().getTime();
+        reporter.record("AppLaunch", now);
         
         if ( !persist.containsFlag("firstInstall") ) {
-            persist.setFlag( "firstInstall", new Date().getTime() );
+            persist.setFlag("firstInstall", now);
         }
     }
     

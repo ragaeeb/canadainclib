@@ -56,7 +56,9 @@ class AppLogFetcher : public QObject
     AppLogFetcher(Persistance* settings, CompressFiles func, QObject* parent=NULL);
 
 private slots:
+    void onAboutToQuit();
     void commitStats();
+    void onDataLoaded(int id, QVariant const& data);
     void onDestroyed(QObject* obj);
     void onFinished();
     void onKeyReleasedHandler(bb::cascades::KeyEvent* event);

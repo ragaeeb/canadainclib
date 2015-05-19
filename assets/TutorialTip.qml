@@ -13,7 +13,7 @@ Delegate
         return data.length;
     }
     
-    function onSettingChanged(newValue) {
+    function onSettingChanged(newValue, key) {
         suppressTutorials = newValue == 1;
     }
     

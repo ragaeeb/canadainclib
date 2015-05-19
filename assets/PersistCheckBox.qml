@@ -14,7 +14,7 @@ CheckBox
         }
     }
     
-    function onSettingChanged(newValue) {
+    function onSettingChanged(newValue, key) {
         checked = newValue == 1;
     }
     
