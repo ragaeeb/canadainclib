@@ -71,7 +71,7 @@ bool CustomSqlDataSource::checkConnection()
             return true;
 
         } else {
-            LOGGER("Failed to load data base, file does not exist.");
+            LOGGER("Failed to load data base, file does not exist." << m_source);
             emit error( "Failed to load data base, file does not exist: "+m_source+". If this is in your SD Card, make sure your USB Mass Storage Mode is set to Off." );
         }
     }

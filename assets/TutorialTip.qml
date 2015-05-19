@@ -108,7 +108,7 @@ Delegate
         if (data.cookie == "video")
         {
             if (confirmed) {
-                persist.openUri(data);
+                persist.openUri(data.value);
             }
             
             persist.setFlag("tutorialVideo", Application.applicationVersion);
