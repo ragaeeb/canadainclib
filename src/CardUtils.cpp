@@ -23,9 +23,6 @@ QObject* CardUtils::initAppropriate(QString const& qmlDoc, QMap<QString, QObject
         qml->setContextProperty( key, context.value(key) );
     }
 
-    NavigationPane* np = NavigationPane::create().backButtons(true);
-    qml->setContextProperty("navigationPane", np);
-
     AbstractPane* root = NULL;
 
     if (invoked)
@@ -34,9 +31,9 @@ QObject* CardUtils::initAppropriate(QString const& qmlDoc, QMap<QString, QObject
         qml->setContextProperty("navigationPane", np);
 
         Page* page = qml->createRootObject<Page>();
-        root = page;
         np->push(page);
 
+        root = page;
         Application::instance()->setScene(np);
     } else {
         root = qml->createRootObject<AbstractPane>();

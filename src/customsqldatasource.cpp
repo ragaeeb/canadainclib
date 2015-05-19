@@ -6,6 +6,8 @@
 #include <QFile>
 #include <QDateTime>
 
+//#define VERBOSE 1
+
 namespace canadainc {
 
 using namespace bb::data;
@@ -96,7 +98,9 @@ DataAccessReply CustomSqlDataSource::executeAndWait(QVariant const& criteria, in
 void CustomSqlDataSource::execute(QVariant const& criteria, int id)
 {
     if ( checkConnection() ) {
-    	//LOGGER(id << criteria);
+#ifdef VERBOSE
+    	LOGGER(id << criteria);
+#endif
     	//m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
         m_sqlConnector->execute(criteria, id);
     }
@@ -106,7 +110,9 @@ void CustomSqlDataSource::execute(QVariant const& criteria, int id)
 void CustomSqlDataSource::executePrepared(QVariantList const& values, int id)
 {
     if ( checkConnection() ) {
-    	//LOGGER(m_query << values << id);
+#ifdef VERBOSE
+    	LOGGER(m_query << values << id);
+#endif
     	//m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
         m_sqlConnector->execute(m_query, values, id);
     }
@@ -151,7 +157,9 @@ void CustomSqlDataSource::onLoadAsyncResultData(bb::data::DataAccessReply const&
 
 bool CustomSqlDataSource::initSetup(QStringList const& setupStatements, int id, int settingUpId)
 {
-    //LOGGER(setupStatements << id);
+#ifdef VERBOSE
+    LOGGER(setupStatements << id);
+#endif
 	bool result = IOUtils::writeFile(m_source);
 
     //m_execTimestamp = QDateTime::currentMSecsSinceEpoch();

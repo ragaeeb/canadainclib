@@ -56,6 +56,8 @@ public:
      * and the other is an actual Page instance. This should usually be used when comparing popTransitionEnded(page) with an existing page.
      */
     Q_INVOKABLE bool isEqual(bb::cascades::Page* p1, bb::cascades::Page* p2);
+
+    Q_INVOKABLE void cleanUpAndDestroy(QObject* q);
 };
 
 } /* namespace canadainc */

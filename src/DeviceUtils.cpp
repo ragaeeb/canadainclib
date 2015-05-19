@@ -10,6 +10,8 @@
 #include <bb/device/DisplayInfo>
 #include <bb/device/HardwareInfo>
 
+#define CLEANUP_FUNC "cleanUp"
+
 namespace canadainc {
 
 using namespace bb::cascades;
@@ -113,6 +115,13 @@ DeviceUtils* DeviceUtils::create(QObject* parent)
 
 bool DeviceUtils::isEqual(bb::cascades::Page* p1, bb::cascades::Page* p2) {
     return p1 == p2;
+}
+
+
+void DeviceUtils::cleanUpAndDestroy(QObject* q)
+{
+    QMetaObject::invokeMethod(q, CLEANUP_FUNC, Qt::QueuedConnection);
+    q->deleteLater();
 }
 
 

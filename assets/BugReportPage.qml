@@ -86,6 +86,7 @@ Page
                             }
                             
                             onClosed: {
+                                reporter.simulationFilesAvailable.disconnect(simulate.onSimulationComplete);
                                 sheetDelegate.active = false;
                             }
                             
@@ -408,6 +409,12 @@ Page
 	            reporter.progress.connect(onNetworkProgressChanged);
 	        }
 	    }
+	}
+	
+	function cleanUp()
+	{
+        reporter.progress.disconnect(onNetworkProgressChanged);
+        reporter.submitted.connect(submitLogs.onSubmitted);
 	}
 	
 	onCreationCompleted: {
