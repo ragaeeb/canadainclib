@@ -152,6 +152,7 @@ signals:
     void dataLoaded(int id, QVariant const& data);
 
     void error(QString const& message);
+    void setupError(QString const& message);
 };
 
 }

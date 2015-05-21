@@ -31,6 +31,8 @@ signals:
      * @id The query ID executed.
      */
     void finished(int id);
+    void error(QString const& message);
+    void setupError(QString const& message);
 
 private slots:
     void dataLoaded(int id, QVariant const& data);

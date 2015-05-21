@@ -4,7 +4,6 @@
 
 #include <bb/data/SqlConnection>
 #include <QFile>
-#include <QDateTime>
 
 //#define VERBOSE 1
 
@@ -72,7 +71,7 @@ bool CustomSqlDataSource::checkConnection()
 
         } else {
             LOGGER("Failed to load data base, file does not exist." << m_source);
-            emit error( "Failed to load data base, file does not exist: "+m_source+". If this is in your SD Card, make sure your USB Mass Storage Mode is set to Off." );
+            emit setupError( "Failed to load data base, file does not exist: "+m_source+". If this is in your SD Card, make sure your USB Mass Storage Mode is set to Off." );
         }
     }
 

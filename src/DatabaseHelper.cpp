@@ -10,6 +10,8 @@ DatabaseHelper::DatabaseHelper(QString const& dbase, QObject* parent) :
 {
     m_sql.setSource(dbase);
     connect( &m_sql, SIGNAL( dataLoaded(int, QVariant const&) ), this, SLOT( dataLoaded(int, QVariant const&) ), Qt::QueuedConnection );
+    connect( &m_sql, SIGNAL( error(QString const&) ), this, SIGNAL( error(QString const&) ), Qt::QueuedConnection );
+    connect( &m_sql, SIGNAL( setupError(QString const&) ), this, SIGNAL( setupError(QString const&) ), Qt::QueuedConnection );
 }
 
 
