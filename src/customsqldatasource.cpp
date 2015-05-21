@@ -98,7 +98,9 @@ void CustomSqlDataSource::execute(QVariant const& criteria, int id)
 {
     if ( checkConnection() ) {
 #ifdef VERBOSE
-    	LOGGER(id << criteria);
+    	LOGGER( id << criteria.toString() );
+#else
+    	LOGGER(id);
 #endif
     	//m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
         m_sqlConnector->execute(criteria, id);
@@ -111,6 +113,8 @@ void CustomSqlDataSource::executePrepared(QVariantList const& values, int id)
     if ( checkConnection() ) {
 #ifdef VERBOSE
     	LOGGER(m_query << values << id);
+#else
+    	LOGGER(id);
 #endif
     	//m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
         m_sqlConnector->execute(m_query, values, id);
