@@ -17,13 +17,6 @@
 #include "IOUtils.h"
 #include "Logger.h"
 
-#include "bbndk.h"
-
-#if BBNDK_VERSION_AT_LEAST(10,3,1)
-#include <bb/cascades/Control>
-#include <bb/cascades/DeviceShortcut>
-#endif
-
 #define KEY_TOAST_SHOWING "showing"
 #define KEY_ARGS "args"
 #define KEY_CALLBACK "callback"
@@ -589,19 +582,6 @@ bool Persistance::hasPhoneControlAccess()
 
     LOGGER("NoPhoneControlAccess");
     return false;
-}
-
-
-void Persistance::attachBackKeyToClickedSignal(QObject* abstractButton, QObject* rootControl)
-{
-#if BBNDK_VERSION_AT_LEAST(10,3,1)
-    Control* c = static_cast<Control*>(rootControl);
-    DeviceShortcut* ds = DeviceShortcut::create(DeviceShortcuts::BackTap).onTriggered( abstractButton, SIGNAL( clicked() ) );
-    c->addShortcut(ds);
-#else
-    Q_UNUSED(abstractButton);
-    Q_UNUSED(rootControl);
-#endif
 }
 
 
