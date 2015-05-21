@@ -63,6 +63,10 @@ Delegate
     
     function execActionBar(key, text, pos)
     {
+        if (!Application.scene) {
+            return false;
+        }
+        
         var ui = Application.scene.ui;
         
         return exec( key, text, pos == "x" ? HorizontalAlignment.Right : HorizontalAlignment.Center, VerticalAlignment.Bottom, pos == "r" ? ui.du(31) : 0, pos == "l" ? ui.du(31) : 0, 0, ui.du(2) );
