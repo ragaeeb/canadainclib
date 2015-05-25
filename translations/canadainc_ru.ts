@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0">
+<TS version="2.0" language="ru_RU">
 <context>
     <name>AboutTitleBar</name>
     <message>
         <location filename="../assets/AboutTitleBar.qml" line="63"/>
         <source>Suppress Tutorials</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрыть Подсказки</translation>
     </message>
     <message>
         <location filename="../assets/AboutTitleBar.qml" line="88"/>
         <source>Please report all bugs to: support@canadainc.org</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, сообщите о всех обнаруженных ошибках по адресу: support@canadainc.org</translation>
     </message>
     <message>
         <location filename="../assets/AboutTitleBar.qml" line="91"/>
         <source>(c) %1 %2. All Rights Reserved.</source>
-        <translation type="unfinished"></translation>
+        <translation>(c) %1 %2. Все права защищены.</translation>
     </message>
     <message>
         <location filename="../assets/AboutTitleBar.qml" line="101"/>
         <source>To see a live tutorial and demo of how to use this app, please tap on the &apos;%1&apos; action.</source>
-        <translation type="unfinished"></translation>
+        <translation>Чтобы увидеть подсказки и демовидео о том, как пользоваться этим приложением, пожалуйста, нажмите на &apos;%1&apos; action.</translation>
     </message>
     <message>
         <location filename="../assets/AboutTitleBar.qml" line="104"/>
         <source>To stay up to date on the latest news on our apps or to reach out to us for support regarding any of our apps, tap on the &apos;%1&apos; action.</source>
-        <translation type="unfinished"></translation>
+        <translation>Чтобы быть в курсе последних новостей о наших приложениях или получить поддержку относительно каких-либо наших приложений, нажмите на &apos;%1&apos; action.</translation>
     </message>
     <message>
         <location filename="../assets/AboutTitleBar.qml" line="117"/>
         <source>Our BBM Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Наш BBM канал</translation>
     </message>
     <message>
         <location filename="../assets/AboutTitleBar.qml" line="131"/>
         <source>Video Tutorial</source>
-        <translation type="unfinished"></translation>
+        <translation>Видео учебник</translation>
     </message>
 </context>
 <context>
@@ -44,7 +44,7 @@
     <message>
         <location filename="../assets/AccountsDropDown.qml" line="9"/>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Аккаунт</translation>
     </message>
 </context>
 <context>
@@ -321,37 +321,37 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="240"/>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Логин</translation>
     </message>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="241"/>
         <source>Please enter the credentials provided to you by Canada Inc:</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, введите учетные данные, предоставленные Canada Inc:</translation>
     </message>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="296"/>
         <source>Could not submit report! Please try again...</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось отправить отчет! Пожалуйста, попробуйте еще раз...</translation>
     </message>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="301"/>
         <source>Report could not be submitted because you are offline! Please reconnect to the network and try again...</source>
-        <translation type="unfinished"></translation>
+        <translation>Отчет не может быть отправлен, так как Вы не в сети (оффлайн)! Пожалуйста, подключитесь к сети и попробуйте еще раз...</translation>
     </message>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="348"/>
         <source>Admin Access Granted for: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступ администратора предоставлен для: %1</translation>
     </message>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="363"/>
         <source>Could not submit logs! Please try again...</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось отправить журналы! Пожалуйста, попробуйте еще раз...</translation>
     </message>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="363"/>
         <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Журналы отправлены. Пожалуйста, представьте в службу поддержки следующий ID (скопировано в буфер обмена): %1</translation>
     </message>
 </context>
 <context>
@@ -359,12 +359,12 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/DeviceUtils.cpp" line="44"/>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Начало</translation>
     </message>
     <message>
         <location filename="../src/DeviceUtils.cpp" line="47"/>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Конец</translation>
     </message>
 </context>
 <context>
@@ -372,82 +372,82 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="76"/>
         <source>A DRM related error was encountered.</source>
-        <translation type="unfinished"></translation>
+        <translation>Произошла ошибка, связанная с DRM.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="81"/>
         <source>An unexpected internal error has occured!</source>
-        <translation type="unfinished"></translation>
+        <translation>Непредвиденная внутренняя ошибка!</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="84"/>
         <source>An invalid parameter was specified!</source>
-        <translation type="unfinished"></translation>
+        <translation>Был указан неверный параметр!</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="87"/>
         <source>An illegal operation given the context state.</source>
-        <translation type="unfinished"></translation>
+        <translation>Введено запрещенное действие в текущей позиции.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="90"/>
         <source>An unrecognized input or output type or an out-of-range speed setting encountered.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нераспознанные входящие или исходящие данные или настройки скорости находятся вне диапазона.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="93"/>
         <source>A data format not recognized by any plugin encountered.</source>
-        <translation type="unfinished"></translation>
+        <translation>Формат данных не распознан ни одним плагином.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="96"/>
         <source>A DRM protected input was specified.</source>
-        <translation type="unfinished"></translation>
+        <translation>Был указан ввод защищенного DRM.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="99"/>
         <source>An illegal operation was encountered by the playback process.</source>
-        <translation type="unfinished"></translation>
+        <translation>В процессе воспроизведения произошло запрещенное действие.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="102"/>
         <source>An I/O error has been encountered at the source!</source>
-        <translation type="unfinished"></translation>
+        <translation>Обнаружена ошибка I/O в источнике данных!</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="105"/>
         <source>An I/O error has been encountered at the sink!</source>
-        <translation type="unfinished"></translation>
+        <translation>Обнаружена ошибка I/O в приемнике данных!</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="108"/>
         <source>The source is currently unavailable.</source>
-        <translation type="unfinished"></translation>
+        <translation>В настоящее время источник данных недоступен.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="111"/>
         <source>The resource was corrupted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Источник данных был поврежден.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="114"/>
         <source>Cannot open the sink (possibly because no plugin recognizes it).</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно открыть приемник данных (возможно, потому что нет плагина для его распознания).</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="117"/>
         <source>Insufficient memory to perform the requested operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Недостаточно памяти для выполнения запрошенной операции.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="120"/>
         <source>A required resource such as an encoder or an output feed is presently unavailable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Запрашиваемые ресурсы такие, как кодер или исходящая подача, в настоящее время недоступны.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="123"/>
         <source>A playback permission error (e.g., user prohibition, region mismatch) error was encountered.</source>
-        <translation type="unfinished"></translation>
+        <translation>Обнаружена ошибка разрешения на воспроизведение (например, блокировка пользователя, несовпадение региона).</translation>
     </message>
 </context>
 <context>
@@ -475,7 +475,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/Persistance.cpp" line="325"/>
         <source>Copied: %1 to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Скопировано: %1 в буфер обмена</translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="498"/>
@@ -485,12 +485,12 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/Persistance.cpp" line="498"/>
         <source>Are you sure you want to clear the cache?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы уверены, что хотите очистить буфер обмена (кэш)?</translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="513"/>
         <source>Cache was successfully cleared!</source>
-        <translation type="unfinished"></translation>
+        <translation>Буфер обмена (кэш) был успешно очищен!</translation>
     </message>
     <message>
         <location filename="../src/Persistance.h" line="68"/>
@@ -538,32 +538,32 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/TextUtils.cpp" line="138"/>
         <source>Bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>Байты</translation>
     </message>
     <message>
         <location filename="../src/TextUtils.cpp" line="138"/>
         <source>KB</source>
-        <translation type="unfinished"></translation>
+        <translation>КБ</translation>
     </message>
     <message>
         <location filename="../src/TextUtils.cpp" line="138"/>
         <source>MB</source>
-        <translation type="unfinished"></translation>
+        <translation>МБ</translation>
     </message>
     <message>
         <location filename="../src/TextUtils.cpp" line="138"/>
         <source>GB</source>
-        <translation type="unfinished"></translation>
+        <translation>ГБ</translation>
     </message>
     <message>
         <location filename="../src/TextUtils.cpp" line="138"/>
         <source>TB</source>
-        <translation type="unfinished"></translation>
+        <translation>ТБ</translation>
     </message>
     <message>
         <location filename="../src/TextUtils.cpp" line="141"/>
         <source>0 Bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>0 Байт</translation>
     </message>
 </context>
 </TS>

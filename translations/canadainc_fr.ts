@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0">
+<TS version="2.0" language="fr_FR">
 <context>
     <name>AboutTitleBar</name>
     <message>
         <location filename="../assets/AboutTitleBar.qml" line="63"/>
         <source>Suppress Tutorials</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer les Tutoriels</translation>
     </message>
     <message>
         <location filename="../assets/AboutTitleBar.qml" line="88"/>
         <source>Please report all bugs to: support@canadainc.org</source>
-        <translation type="unfinished"></translation>
+        <translation>S'il vous plaît veuillez rapporter tous les bugs à: support@canadainc.org</translation>
     </message>
     <message>
         <location filename="../assets/AboutTitleBar.qml" line="91"/>
         <source>(c) %1 %2. All Rights Reserved.</source>
-        <translation type="unfinished"></translation>
+        <translation>(c) %1 %2.Tous Droits Réservés.</translation>
     </message>
     <message>
         <location filename="../assets/AboutTitleBar.qml" line="101"/>
         <source>To see a live tutorial and demo of how to use this app, please tap on the &apos;%1&apos; action.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pour voir le manuel d’utilisation et une démonstration de la maniere d' utiliser cette application, s'il vous plaît veuillez appuyez sur le &apos;%1&apos; action</translation>
     </message>
     <message>
         <location filename="../assets/AboutTitleBar.qml" line="104"/>
         <source>To stay up to date on the latest news on our apps or to reach out to us for support regarding any of our apps, tap on the &apos;%1&apos; action.</source>
-        <translation type="unfinished"></translation>
+        <translation>"Pour rester à jour sur les dernières nouvelles sur nos applications ou à s’adressez à nous pour une assistance concernant l'une de nos applications,tap on the &apos;%1&apos; action.</translation>
     </message>
     <message>
         <location filename="../assets/AboutTitleBar.qml" line="117"/>
         <source>Our BBM Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Notre BBM Channel</translation>
     </message>
     <message>
         <location filename="../assets/AboutTitleBar.qml" line="131"/>
         <source>Video Tutorial</source>
-        <translation type="unfinished"></translation>
+        <translation>Video Tutoriel</translation>
     </message>
 </context>
 <context>
@@ -52,72 +52,72 @@
     <message>
         <location filename="../assets/BugReportPage.qml" line="24"/>
         <source>Bug Reports</source>
-        <translation type="unfinished"></translation>
+        <translation>Rapports de Bug</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="39"/>
         <source>Open in Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir dans un navigateur</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="52"/>
         <source>Submit Logs</source>
-        <translation type="unfinished"></translation>
+        <translation>Soumettre votre registres</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="65"/>
         <source>Submission Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Soumettre vos Status</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="112"/>
         <source>Simulate</source>
-        <translation type="unfinished"></translation>
+        <translation>Simuler</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="136"/>
         <source>Add Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter des notes</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="142"/>
         <source>Submit</source>
-        <translation type="unfinished"></translation>
+        <translation>Envoyer</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="149"/>
         <source>Please enter detailed notes about the bug you observed!</source>
-        <translation type="unfinished"></translation>
+        <translation>S'il vous plaît entrer des notes détaillées sur le bug que vous avez observé!</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="167"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="192"/>
         <source>Include Most Recent Captured Photo</source>
-        <translation type="unfinished"></translation>
+        <translation>Inclure les plus récentes photos Capturé</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="265"/>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom:</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="277"/>
         <source>Name cannot be empty!</source>
-        <translation type="unfinished"></translation>
+        <translation>Le nom ne peut pas être vide</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="289"/>
         <source>Email Address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresse e-mail:</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="307"/>
         <source>Invalid email address!</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresse e-mail invalide!</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="328"/>
@@ -128,22 +128,28 @@ Steps To Reproduce:
 
 
 How often can you reproduce this?</source>
-        <translation type="unfinished"></translation>
+        <translation>Résumé de Bug :
+
+
+Étapes pour reproduire :
+
+
+Combien de fois pouvez-vous le reproduire?</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="331"/>
         <source>Enter the notes you wish to add...</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrez les notes que vous souhaitez ajouter...</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="421"/>
         <source>If you were instructed by our staff to submit a bug report, please use the &apos;%1&apos; action at the bottom. Then fill out the form, and send the representative the Bug Report ID generated.</source>
-        <translation type="unfinished"></translation>
+        <translation>"Si vous étiez chargé par notre personnel pour soumettre un rapport de bug , s'il vous plaît utiliser le &apos;%1&apos; une action vers le bas. Ensuite, remplissez le formulaire et envoyez le représentant du Bug Report ID généré.</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="422"/>
         <source>To open this page in the web browser, please use the &apos;%1&apos; action at the bottom.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pour ouvrir cette page dans le navigateur Web , s'il vous plaît utiliser &apos;%1&apos; l’option ci-dessous.</translation>
     </message>
 </context>
 <context>
@@ -151,42 +157,42 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="45"/>
         <source>Update Available</source>
-        <translation type="unfinished"></translation>
+        <translation>Mise à jour disponible</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="45"/>
         <source>%1 %2 is available (you have %3). Would you like to visit BlackBerry World to download the latest version?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 est disponible (vous avez %3). Voulez-vous visiter BlackBerry World pour télécharger la dernière version?</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="45"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="45"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Non</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="45"/>
         <source>Don&apos;t Show Again</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne pas montrer de nouveau</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="110"/>
         <source>Bug Reports</source>
-        <translation type="unfinished"></translation>
+        <translation>Rapports de bug</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="130"/>
         <source>Review</source>
-        <translation type="unfinished"></translation>
+        <translation>Compte rendu</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="173"/>
         <source>Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>Faire un don</translation>
     </message>
 </context>
 <context>
@@ -321,37 +327,37 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="240"/>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Connexion</translation>
     </message>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="241"/>
         <source>Please enter the credentials provided to you by Canada Inc:</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez entrez les informations qui vous sont fournis par Canada Inc:</translation>
     </message>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="296"/>
         <source>Could not submit report! Please try again...</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de soumettre le rapport! S'il vous plaît veuillez essayez à nouveau...</translation>
     </message>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="301"/>
         <source>Report could not be submitted because you are offline! Please reconnect to the network and try again...</source>
-        <translation type="unfinished"></translation>
+        <translation>Votre demande ne pouvait être soumise parce que vous êtes déconnecté! S'il vous plaît veuillez vous connecter au réseau et essayez à nouveau...</translation>
     </message>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="348"/>
         <source>Admin Access Granted for: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Accès Administrateur accordée pour: %1</translation>
     </message>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="363"/>
         <source>Could not submit logs! Please try again...</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de soumettre votre registres! S'il vous plaît essayez à nouveau...</translation>
     </message>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="363"/>
         <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Les registres ont été soumis . S'il vous plaît fournir à l'équipe de maintenance  l'information (ID) suivante: %1</translation>
     </message>
 </context>
 <context>
@@ -359,12 +365,12 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/DeviceUtils.cpp" line="44"/>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Haut</translation>
     </message>
     <message>
         <location filename="../src/DeviceUtils.cpp" line="47"/>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Bas</translation>
     </message>
 </context>
 <context>
@@ -372,82 +378,82 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="76"/>
         <source>A DRM related error was encountered.</source>
-        <translation type="unfinished"></translation>
+        <translation>Une erreur lié au DRM est survenue</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="81"/>
         <source>An unexpected internal error has occured!</source>
-        <translation type="unfinished"></translation>
+        <translation>Une erreur interne inattendue est survenue!</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="84"/>
         <source>An invalid parameter was specified!</source>
-        <translation type="unfinished"></translation>
+        <translation>Un paramètre non valide a été spécifié!</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="87"/>
         <source>An illegal operation given the context state.</source>
-        <translation type="unfinished"></translation>
+        <translation>Une opération illégale étant donné l'état du contexte a été détecté</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="90"/>
         <source>An unrecognized input or output type or an out-of-range speed setting encountered.</source>
-        <translation type="unfinished"></translation>
+        <translation>Une eurreure est survenue sur une entrée de media ou une sortie de type non reconnu ou en dehors du cadre de reglage</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="93"/>
         <source>A data format not recognized by any plugin encountered.</source>
-        <translation type="unfinished"></translation>
+        <translation>Un format de données non reconnu par aucun plugin est survenue</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="96"/>
         <source>A DRM protected input was specified.</source>
-        <translation type="unfinished"></translation>
+        <translation>Une entrée DRM protégée a été spécifié</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="99"/>
         <source>An illegal operation was encountered by the playback process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Une opération non authorisée a été survenue par le processus de lecture audio.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="102"/>
         <source>An I/O error has been encountered at the source!</source>
-        <translation type="unfinished"></translation>
+        <translation>Une erreur d' E/S a été survenue à la source!</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="105"/>
         <source>An I/O error has been encountered at the sink!</source>
-        <translation type="unfinished"></translation>
+        <translation>Une erreur d'E / S a été rencontré à la source media</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="108"/>
         <source>The source is currently unavailable.</source>
-        <translation type="unfinished"></translation>
+        <translation>La source media ou fichier media est actuellement indisponible.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="111"/>
         <source>The resource was corrupted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Une erreur est survenue sur l’un des supports media.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="114"/>
         <source>Cannot open the sink (possibly because no plugin recognizes it).</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d'ouvrir la source du media (erreur survenue du a la non reconnaissance d’aucun plugin.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="117"/>
         <source>Insufficient memory to perform the requested operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mémoire insuffisante pour effectuer l'opération demandée.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="120"/>
         <source>A required resource such as an encoder or an output feed is presently unavailable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Une source media requise comme un codeur ou un flux de sortie est actuellement indisponible.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="123"/>
         <source>A playback permission error (e.g., user prohibition, region mismatch) error was encountered.</source>
-        <translation type="unfinished"></translation>
+        <translation>Une erreur de permission de lecture (par exemple , l'utilisateur interdiction , région décalage) erreur a été détectée.</translation>
     </message>
 </context>
 <context>
@@ -455,7 +461,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/MessageImporter.cpp" line="36"/>
         <source>You</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous</translation>
     </message>
 </context>
 <context>
@@ -464,52 +470,52 @@ Make sure you remember it!</source>
         <location filename="../src/Persistance.cpp" line="235"/>
         <location filename="../src/Persistance.h" line="82"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarde</translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="235"/>
         <location filename="../src/Persistance.h" line="82"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="325"/>
         <source>Copied: %1 to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Copié %1 dans le presse-papiers</translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="498"/>
         <source>Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirmer</translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="498"/>
         <source>Are you sure you want to clear the cache?</source>
-        <translation type="unfinished"></translation>
+        <translation>Êtes-vous sûr de vouloir vider le cache?</translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="513"/>
         <source>Cache was successfully cleared!</source>
-        <translation type="unfinished"></translation>
+        <translation>Le cache a été effacé avec succès!</translation>
     </message>
     <message>
         <location filename="../src/Persistance.h" line="68"/>
         <location filename="../src/Persistance.h" line="70"/>
         <location filename="../src/Persistance.h" line="79"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <location filename="../src/Persistance.h" line="68"/>
         <location filename="../src/Persistance.h" line="70"/>
         <location filename="../src/Persistance.h" line="79"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Non</translation>
     </message>
     <message>
         <location filename="../src/Persistance.h" line="81"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -538,32 +544,32 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/TextUtils.cpp" line="138"/>
         <source>Bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>Octets</translation>
     </message>
     <message>
         <location filename="../src/TextUtils.cpp" line="138"/>
         <source>KB</source>
-        <translation type="unfinished"></translation>
+        <translation>Ko</translation>
     </message>
     <message>
         <location filename="../src/TextUtils.cpp" line="138"/>
         <source>MB</source>
-        <translation type="unfinished"></translation>
+        <translation>Mo</translation>
     </message>
     <message>
         <location filename="../src/TextUtils.cpp" line="138"/>
         <source>GB</source>
-        <translation type="unfinished"></translation>
+        <translation>Go</translation>
     </message>
     <message>
         <location filename="../src/TextUtils.cpp" line="138"/>
         <source>TB</source>
-        <translation type="unfinished"></translation>
+        <translation>To</translation>
     </message>
     <message>
         <location filename="../src/TextUtils.cpp" line="141"/>
         <source>0 Bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>0 octets</translation>
     </message>
 </context>
 </TS>

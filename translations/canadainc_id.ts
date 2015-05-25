@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0">
+<TS version="2.0" language="id_ID">
 <context>
     <name>AboutTitleBar</name>
     <message>
@@ -92,7 +92,7 @@
     <message>
         <location filename="../assets/BugReportPage.qml" line="167"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Batal</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="192"/>
@@ -212,7 +212,7 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/SignupSheet.qml" line="29"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Simpan</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="40"/>
@@ -234,7 +234,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../assets/SignupSheet.qml" line="112"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Batal</translation>
     </message>
 </context>
 <context>
@@ -321,22 +321,22 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="240"/>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Masuk</translation>
     </message>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="241"/>
         <source>Please enter the credentials provided to you by Canada Inc:</source>
-        <translation type="unfinished"></translation>
+        <translation>Masukkan Kredensial anda yang disediakan oleh Inc:</translation>
     </message>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="296"/>
         <source>Could not submit report! Please try again...</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak bisa menyampaikan laporan! Silahkan coba lagi...</translation>
     </message>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="301"/>
         <source>Report could not be submitted because you are offline! Please reconnect to the network and try again...</source>
-        <translation type="unfinished"></translation>
+        <translation>Laporan tidak bisa disampaikan karena anda sedang offline! Silahkan sambung kembali ke jaringan dan coba lagi...</translation>
     </message>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="348"/>
@@ -464,23 +464,23 @@ Make sure you remember it!</source>
         <location filename="../src/Persistance.cpp" line="235"/>
         <location filename="../src/Persistance.h" line="82"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Simpan</translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="235"/>
         <location filename="../src/Persistance.h" line="82"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Batal</translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="325"/>
         <source>Copied: %1 to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Disalin %1 ke clipboard</translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="498"/>
         <source>Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfirmasi</translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="498"/>
@@ -497,19 +497,19 @@ Make sure you remember it!</source>
         <location filename="../src/Persistance.h" line="70"/>
         <location filename="../src/Persistance.h" line="79"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ya</translation>
     </message>
     <message>
         <location filename="../src/Persistance.h" line="68"/>
         <location filename="../src/Persistance.h" line="70"/>
         <location filename="../src/Persistance.h" line="79"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak</translation>
     </message>
     <message>
         <location filename="../src/Persistance.h" line="81"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>

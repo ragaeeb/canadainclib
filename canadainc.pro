@@ -7,6 +7,12 @@ INCLUDEPATH += $$quote($$BASEDIR/src)
 SOURCES += ../src/*.cpp
 HEADERS += ../src/*.hpp ../src/*.h
 
+lupdate_inclusion {
+    SOURCES = ../assets/*.qml
+}
+
+
+
 device {
 	CONFIG(release, debug|release) {
 		DESTDIR = o.le-v7
@@ -36,5 +42,8 @@ suredelete.depends = distclean
 
 QMAKE_EXTRA_TARGETS += suredelete
 
-TRANSLATIONS = \
-    $${TARGET}.ts
+TRANSLATIONS = $$quote($${TARGET}_ar.ts) \
+    $$quote($${TARGET}_fr.ts) \
+    $$quote($${TARGET}_id.ts) \
+    $$quote($${TARGET}_ru.ts) \
+    $$quote($${TARGET}.ts)
