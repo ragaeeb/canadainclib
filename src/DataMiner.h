@@ -189,16 +189,12 @@ QStringList captureDeviceInfo(utsname const& udata)
     return deviceInfo;
 }
 
-void checkSigningHash(QString const& analyticsPath)
+void checkSigningHash()
 {
     QString signingHash = bb::PackageInfo().authorSigningHash();
 
     if ( /*!signingHash.startsWith("test") && */signingHash != "gYAAgL4hrHsGI4tljUxgYhylQfs" ) {
         bb::Application::instance()->requestExit();
-    }
-
-    if ( !QFile::exists(analyticsPath) ) {
-        IOUtils::writeFile(analyticsPath);
     }
 }
 
