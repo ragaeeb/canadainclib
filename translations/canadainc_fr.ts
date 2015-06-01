@@ -11,7 +11,7 @@
     <message>
         <location filename="../assets/AboutTitleBar.qml" line="88"/>
         <source>Please report all bugs to: support@canadainc.org</source>
-        <translation>S'il vous plaît veuillez rapporter tous les bugs à: support@canadainc.org</translation>
+        <translation>S&apos;il vous plaît veuillez rapporter tous les bugs à: support@canadainc.org</translation>
     </message>
     <message>
         <location filename="../assets/AboutTitleBar.qml" line="91"/>
@@ -21,12 +21,12 @@
     <message>
         <location filename="../assets/AboutTitleBar.qml" line="101"/>
         <source>To see a live tutorial and demo of how to use this app, please tap on the &apos;%1&apos; action.</source>
-        <translation>Pour voir le manuel d’utilisation et une démonstration de la maniere d' utiliser cette application, s'il vous plaît veuillez appuyez sur le &apos;%1&apos; action</translation>
+        <translation>Pour voir le manuel d’utilisation et une démonstration de la maniere d&apos; utiliser cette application, s&apos;il vous plaît veuillez appuyez sur le &apos;%1&apos; action</translation>
     </message>
     <message>
         <location filename="../assets/AboutTitleBar.qml" line="104"/>
         <source>To stay up to date on the latest news on our apps or to reach out to us for support regarding any of our apps, tap on the &apos;%1&apos; action.</source>
-        <translation>"Pour rester à jour sur les dernières nouvelles sur nos applications ou à s’adressez à nous pour une assistance concernant l'une de nos applications,tap on the &apos;%1&apos; action.</translation>
+        <translation>&quot;Pour rester à jour sur les dernières nouvelles sur nos applications ou à s’adressez à nous pour une assistance concernant l&apos;une de nos applications,tap on the &apos;%1&apos; action.</translation>
     </message>
     <message>
         <location filename="../assets/AboutTitleBar.qml" line="117"/>
@@ -87,7 +87,7 @@
     <message>
         <location filename="../assets/BugReportPage.qml" line="149"/>
         <source>Please enter detailed notes about the bug you observed!</source>
-        <translation>S'il vous plaît entrer des notes détaillées sur le bug que vous avez observé!</translation>
+        <translation>S&apos;il vous plaît entrer des notes détaillées sur le bug que vous avez observé!</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="167"/>
@@ -144,12 +144,12 @@ Combien de fois pouvez-vous le reproduire?</translation>
     <message>
         <location filename="../assets/BugReportPage.qml" line="421"/>
         <source>If you were instructed by our staff to submit a bug report, please use the &apos;%1&apos; action at the bottom. Then fill out the form, and send the representative the Bug Report ID generated.</source>
-        <translation>"Si vous étiez chargé par notre personnel pour soumettre un rapport de bug , s'il vous plaît utiliser le &apos;%1&apos; une action vers le bas. Ensuite, remplissez le formulaire et envoyez le représentant du Bug Report ID généré.</translation>
+        <translation>&quot;Si vous étiez chargé par notre personnel pour soumettre un rapport de bug , s&apos;il vous plaît utiliser le &apos;%1&apos; une action vers le bas. Ensuite, remplissez le formulaire et envoyez le représentant du Bug Report ID généré.</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="422"/>
         <source>To open this page in the web browser, please use the &apos;%1&apos; action at the bottom.</source>
-        <translation>Pour ouvrir cette page dans le navigateur Web , s'il vous plaît utiliser &apos;%1&apos; l’option ci-dessous.</translation>
+        <translation>Pour ouvrir cette page dans le navigateur Web , s&apos;il vous plaît utiliser &apos;%1&apos; l’option ci-dessous.</translation>
     </message>
 </context>
 <context>
@@ -200,7 +200,7 @@ Combien de fois pouvez-vous le reproduire?</translation>
     <message>
         <location filename="../assets/OfflineDelegate.qml" line="55"/>
         <source>You are currently offline. Please check your network connection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous êtes actuellement déconnecté. S&apos;il vous plaît vérifier votre connexion réseau.</translation>
     </message>
 </context>
 <context>
@@ -218,7 +218,7 @@ Combien de fois pouvez-vous le reproduire?</translation>
     <message>
         <location filename="../assets/SignupSheet.qml" line="29"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sauvegarde</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="40"/>
@@ -240,7 +240,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../assets/SignupSheet.qml" line="112"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Annuler</translation>
     </message>
 </context>
 <context>
@@ -248,7 +248,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../assets/TutorialTip.qml" line="135"/>
         <source>Video Tutorial</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Video Tutoriel</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="135"/>
@@ -259,18 +259,18 @@ Make sure you remember it!</source>
         <location filename="../assets/TutorialTip.qml" line="135"/>
         <location filename="../assets/TutorialTip.qml" line="146"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Oui</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="135"/>
         <location filename="../assets/TutorialTip.qml" line="146"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Non</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="146"/>
         <source>Review</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Compte rendu</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="146"/>
@@ -291,7 +291,7 @@ Make sure you remember it!</source>
         <location filename="../assets/TutorialTip.qml" line="251"/>
         <location filename="../assets/TutorialTip.qml" line="268"/>
         <source>Suppress Tutorials</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Supprimer les Tutoriels</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="268"/>
@@ -337,12 +337,12 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="296"/>
         <source>Could not submit report! Please try again...</source>
-        <translation>Impossible de soumettre le rapport! S'il vous plaît veuillez essayez à nouveau...</translation>
+        <translation>Impossible de soumettre le rapport! S&apos;il vous plaît veuillez essayez à nouveau...</translation>
     </message>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="301"/>
         <source>Report could not be submitted because you are offline! Please reconnect to the network and try again...</source>
-        <translation>Votre demande ne pouvait être soumise parce que vous êtes déconnecté! S'il vous plaît veuillez vous connecter au réseau et essayez à nouveau...</translation>
+        <translation>Votre demande ne pouvait être soumise parce que vous êtes déconnecté! S&apos;il vous plaît veuillez vous connecter au réseau et essayez à nouveau...</translation>
     </message>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="348"/>
@@ -352,12 +352,12 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="363"/>
         <source>Could not submit logs! Please try again...</source>
-        <translation>Impossible de soumettre votre registres! S'il vous plaît essayez à nouveau...</translation>
+        <translation>Impossible de soumettre votre registres! S&apos;il vous plaît essayez à nouveau...</translation>
     </message>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="363"/>
         <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
-        <translation>Les registres ont été soumis . S'il vous plaît fournir à l'équipe de maintenance  l'information (ID) suivante: %1</translation>
+        <translation>Les registres ont été soumis . S&apos;il vous plaît fournir à l&apos;équipe de maintenance  l&apos;information (ID) suivante: %1</translation>
     </message>
 </context>
 <context>
@@ -393,7 +393,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="87"/>
         <source>An illegal operation given the context state.</source>
-        <translation>Une opération illégale étant donné l'état du contexte a été détecté</translation>
+        <translation>Une opération illégale étant donné l&apos;état du contexte a été détecté</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="90"/>
@@ -418,12 +418,12 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="102"/>
         <source>An I/O error has been encountered at the source!</source>
-        <translation>Une erreur d' E/S a été survenue à la source!</translation>
+        <translation>Une erreur d&apos; E/S a été survenue à la source!</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="105"/>
         <source>An I/O error has been encountered at the sink!</source>
-        <translation>Une erreur d'E / S a été rencontré à la source media</translation>
+        <translation>Une erreur d&apos;E / S a été rencontré à la source media</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="108"/>
@@ -438,12 +438,12 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="114"/>
         <source>Cannot open the sink (possibly because no plugin recognizes it).</source>
-        <translation>Impossible d'ouvrir la source du media (erreur survenue du a la non reconnaissance d’aucun plugin.</translation>
+        <translation>Impossible d&apos;ouvrir la source du media (erreur survenue du a la non reconnaissance d’aucun plugin.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="117"/>
         <source>Insufficient memory to perform the requested operation.</source>
-        <translation>Mémoire insuffisante pour effectuer l'opération demandée.</translation>
+        <translation>Mémoire insuffisante pour effectuer l&apos;opération demandée.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="120"/>
@@ -453,7 +453,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="123"/>
         <source>A playback permission error (e.g., user prohibition, region mismatch) error was encountered.</source>
-        <translation>Une erreur de permission de lecture (par exemple , l'utilisateur interdiction , région décalage) erreur a été détectée.</translation>
+        <translation>Une erreur de permission de lecture (par exemple , l&apos;utilisateur interdiction , région décalage) erreur a été détectée.</translation>
     </message>
 </context>
 <context>
@@ -528,7 +528,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/PimContactPickerSheet.cpp" line="86"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">OK</translation>
     </message>
 </context>
 <context>

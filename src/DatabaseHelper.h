@@ -51,6 +51,7 @@ public:
     Q_INVOKABLE void executeQuery(QObject* caller, QString const& query, int t, QVariantList const& args=QVariantList());
     Q_INVOKABLE void initSetup(QObject* caller, QStringList const& setupStatements, int id=INIT_SETUP_ID);
     Q_INVOKABLE void startTransaction(QObject* caller, int id);
+    void createDatabaseIfNotExists(bool sameThread=false) const;
 };
 
 } /* namespace canadainc */

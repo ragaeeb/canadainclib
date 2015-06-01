@@ -1,7 +1,9 @@
 #include "DatabaseHelper.h"
+#include "IOUtils.h"
 
 #include <QCoreApplication>
 #include <QDir>
+#include <QtCore>
 
 namespace canadainc {
 
@@ -151,6 +153,19 @@ void DatabaseHelper::endTransaction(QObject* caller, int id)
     }
 
     m_sql.endTransaction(m_currentId);
+}
+
+
+void DatabaseHelper::createDatabaseIfNotExists(bool sameThread) const
+{
+    if ( !QFile::exists( m_sql.source() ) )
+    {
+        if (sameThread) {
+            IOUtils::writeFile( m_sql.source() );
+        } else {
+            QtConcurrent::run(IOUtils::writeFile, m_sql.source(), QByteArray(), false);
+        }
+    }
 }
 
 

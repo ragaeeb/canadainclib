@@ -161,12 +161,12 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="45"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ya</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="45"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tidak</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="45"/>
@@ -253,13 +253,13 @@ Make sure you remember it!</source>
         <location filename="../assets/TutorialTip.qml" line="135"/>
         <location filename="../assets/TutorialTip.qml" line="146"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ya</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="135"/>
         <location filename="../assets/TutorialTip.qml" line="146"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tidak</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="146"/>
@@ -522,7 +522,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/PimContactPickerSheet.cpp" line="86"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">OK</translation>
     </message>
 </context>
 <context>

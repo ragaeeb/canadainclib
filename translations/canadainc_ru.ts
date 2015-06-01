@@ -242,7 +242,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../assets/TutorialTip.qml" line="135"/>
         <source>Video Tutorial</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Видео учебник</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="135"/>
@@ -285,7 +285,7 @@ Make sure you remember it!</source>
         <location filename="../assets/TutorialTip.qml" line="251"/>
         <location filename="../assets/TutorialTip.qml" line="268"/>
         <source>Suppress Tutorials</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Скрыть Подсказки</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="268"/>

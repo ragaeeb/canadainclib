@@ -6,7 +6,7 @@
     <message>
         <location filename="../assets/AboutTitleBar.qml" line="63"/>
         <source>Suppress Tutorials</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../assets/AboutTitleBar.qml" line="88"/>
@@ -359,12 +359,12 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/DeviceUtils.cpp" line="44"/>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>أعلى</translation>
     </message>
     <message>
         <location filename="../src/DeviceUtils.cpp" line="47"/>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>أسفل</translation>
     </message>
 </context>
 <context>
@@ -499,7 +499,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/Persistance.cpp" line="498"/>
         <source>Are you sure you want to clear the cache?</source>
-        <translation type="unfinished"></translation>
+        <translation>هل أنت متأكد أنك تريد مسح ذاكرة التخزين المؤقت؟</translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="498"/>
@@ -509,7 +509,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/Persistance.cpp" line="513"/>
         <source>Cache was successfully cleared!</source>
-        <translation type="unfinished"></translation>
+        <translation>تم مسح ذاكرة التخزين المؤقت بنجاح!</translation>
     </message>
 </context>
 <context>
@@ -517,12 +517,12 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/PimContactPickerSheet.cpp" line="86"/>
         <source>Warning: It seems like the app does not have access to your contacts. If you leave this permission off, some features may not work properly. Select OK to launch the Application Permissions screen where you can turn these settings on.</source>
-        <translation type="unfinished"></translation>
+        <translation>تحذير: يبدو أن التطبيق لم يكن لديك الوصول إلى جهات الاتصال الخاصة بك. إذا تركت هذا الإذن من بعض الميزات قد لا تعمل بشكل صحيح. اختر موافق لإطلاق شاشة ضوابط التطبيق حيث يمكنك تحويل هذه الإعدادات على.</translation>
     </message>
     <message>
         <location filename="../src/PimContactPickerSheet.cpp" line="86"/>
         <source>OK</source>
-        <translation type="unfinished">موافق</translation>
+        <translation>موافق</translation>
     </message>
 </context>
 <context>
