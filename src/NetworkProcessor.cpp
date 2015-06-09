@@ -146,6 +146,8 @@ void NetworkProcessor::upload(QUrl const& url, QString const& name, QByteArray c
         return;
     }
 
+    LOGGER( url.toString(QUrl::RemoveUserInfo | QUrl::RemovePassword) );
+
     init();
 
     QString bound;
