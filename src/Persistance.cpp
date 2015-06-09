@@ -33,8 +33,8 @@ namespace canadainc {
 using namespace bb::cascades;
 using namespace bb::system;
 
-Persistance::Persistance(QObject* parent) :
-        QObject(parent), m_dialog(NULL), m_toast(NULL), m_prompt(NULL), m_flags(FLAGS_FILE_NAME)
+Persistance::Persistance(bb::system::InvokeManager* im) :
+        m_invokeManager(im), m_dialog(NULL), m_toast(NULL), m_prompt(NULL), m_flags(FLAGS_FILE_NAME)
 {
     QDeclarativeContext* rootContext = QmlDocument::defaultDeclarativeEngine()->rootContext();
     rootContext->setContextProperty("persist", this);
@@ -474,7 +474,7 @@ void Persistance::launchSettingsApp(QString const& key, QVariantMap const& metad
         request.setMetadata(metadata);
     }
 
-    m_invokeManager.invoke(request);
+    m_invokeManager->invoke(request);
 }
 
 
@@ -594,7 +594,7 @@ void Persistance::invoke(QString const& targetId, QString const& action, QString
     request.setMimeType(mime);
     request.setData( data.toUtf8() );
 
-    m_invokeManager.invoke(request);
+    m_invokeManager->invoke(request);
 }
 
 
@@ -626,12 +626,12 @@ void Persistance::call(QString const& number)
     request.setMimeType("application/vnd.blackberry.phone.startcall");
     request.setData(requestData);
 
-    m_invokeManager.invoke(request);
+    m_invokeManager->invoke(request);
 }
 
 
 InvokeManager* Persistance::invokeManager() {
-    return &m_invokeManager;
+    return m_invokeManager;
 }
 
 

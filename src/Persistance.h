@@ -25,7 +25,7 @@ class Persistance : public QObject
 	Q_OBJECT
 	Q_PROPERTY(bool isBlocked READ isBlocked NOTIFY isBlockedChanged)
 
-    bb::system::InvokeManager m_invokeManager;
+    bb::system::InvokeManager* m_invokeManager;
     bb::system::SystemDialog* m_dialog;
     bb::system::SystemToast* m_toast;
     bb::system::SystemPrompt* m_prompt;
@@ -49,7 +49,7 @@ signals:
 	void settingChanged(QString const& key);
 
 public:
-	Persistance(QObject* parent=NULL);
+	Persistance(bb::system::InvokeManager* im);
 	virtual ~Persistance();
 
     bb::system::InvokeManager* invokeManager();

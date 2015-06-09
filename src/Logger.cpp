@@ -65,7 +65,7 @@ void registerLogging(QString const& key, ErrorMessageHandler handler)
     buffer_config.num_buffers = 1;
     buffer_config.verbosity_level = SLOG2_DEBUG1;
     buffer_config.buffer_set_name = QCoreApplication::applicationName().toUtf8().constData();
-    //buffer_config.buffer_config[0].buffer_name = key.toUtf8().constData();
+    buffer_config.buffer_config[0].buffer_name = key.toUtf8().constData();
     buffer_config.buffer_config[0].num_pages = 7;
     slog2_register(&buffer_config, buffer_handle, 0);
 
