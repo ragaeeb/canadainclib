@@ -90,6 +90,8 @@ public:
     Q_SLOT void reviewApp();
     Q_INVOKABLE void registerForSetting(QObject* q, QString const& key, bool isFlag=false, bool immediate=true);
     static bool showBlockingDialog(QString const& title, QString const& text, QString const& rememberMeText, bool &rememberMeValue, QString const& okButton, QString const& cancelButton, bool okEnabled=true);
+    Q_INVOKABLE static QString homePath();
+    Q_INVOKABLE static QString tempPath();
 };
 
 } /* namespace canadainc */

@@ -635,6 +635,16 @@ InvokeManager* Persistance::invokeManager() {
 }
 
 
+QString Persistance::homePath() {
+    return QDir::homePath();
+}
+
+
+QString Persistance::tempPath() {
+    return QDir::tempPath();
+}
+
+
 Persistance::~Persistance()
 {
 }

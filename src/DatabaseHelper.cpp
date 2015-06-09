@@ -5,10 +5,12 @@
 #include <QDir>
 #include <QtCore>
 
+#define CHECK_ENABLED if (!m_enabled) return
+
 namespace canadainc {
 
 DatabaseHelper::DatabaseHelper(QString const& dbase, QObject* parent) :
-        QObject(parent), m_currentId(0)
+        QObject(parent), m_currentId(0), m_enabled(true)
 {
     m_sql.setSource(dbase);
     connect( &m_sql, SIGNAL( dataLoaded(int, QVariant const&) ), this, SLOT( dataLoaded(int, QVariant const&) ), Qt::QueuedConnection );
@@ -24,6 +26,8 @@ void DatabaseHelper::attachIfNecessary(QString const& dbase, bool homePath, int 
 
 void DatabaseHelper::attachIfNecessary(QString const& dbase, QString const& path, int id)
 {
+    CHECK_ENABLED;
+
     if ( !dbase.isEmpty() && !m_attached.contains(dbase) )
     {
         m_sql.setQuery( QString("ATTACH DATABASE '%1' AS %2").arg( QString("%1/%2.db") ).arg(path).arg(dbase) );
@@ -35,6 +39,8 @@ void DatabaseHelper::attachIfNecessary(QString const& dbase, QString const& path
 
 void DatabaseHelper::detach(QString const& dbase, int id)
 {
+    CHECK_ENABLED;
+
     if ( m_attached.contains(dbase) )
     {
         m_sql.setQuery( QString("DETACH DATABASE %1").arg(dbase) );
@@ -46,6 +52,8 @@ void DatabaseHelper::detach(QString const& dbase, int id)
 
 void DatabaseHelper::enableForeignKeys(int id)
 {
+    CHECK_ENABLED;
+
     m_sql.setQuery("PRAGMA foreign_keys = ON");
     m_sql.load(id);
 }
@@ -105,6 +113,8 @@ void DatabaseHelper::executeQuery(QObject* caller, QString const& query, int t, 
 
 void DatabaseHelper::executeInternal(QString const& query, int t, QVariantList const& args)
 {
+    CHECK_ENABLED;
+
     m_sql.setQuery(query);
 
     if ( args.isEmpty() ) {
@@ -118,6 +128,8 @@ void DatabaseHelper::executeInternal(QString const& query, int t, QVariantList c
 void DatabaseHelper::initSetup(QObject* caller, QStringList const& setupStatements, int t)
 {
     stash(caller, t);
+
+    CHECK_ENABLED;
 
     m_sql.initSetup(setupStatements, m_currentId);
 }
@@ -142,6 +154,8 @@ void DatabaseHelper::startTransaction(QObject* caller, int id)
         stash(caller, id);
     }
 
+    CHECK_ENABLED;
+
     m_sql.startTransaction(m_currentId);
 }
 
@@ -152,12 +166,16 @@ void DatabaseHelper::endTransaction(QObject* caller, int id)
         stash(caller, id);
     }
 
+    CHECK_ENABLED;
+
     m_sql.endTransaction(m_currentId);
 }
 
 
 void DatabaseHelper::createDatabaseIfNotExists(bool sameThread) const
 {
+    CHECK_ENABLED;
+
     if ( !QFile::exists( m_sql.source() ) )
     {
         if (sameThread) {
@@ -166,6 +184,11 @@ void DatabaseHelper::createDatabaseIfNotExists(bool sameThread) const
             QtConcurrent::run(IOUtils::writeFile, m_sql.source(), QByteArray(), false);
         }
     }
+}
+
+
+void DatabaseHelper::setEnabled(bool enabled) {
+    m_enabled = enabled;
 }
 
 

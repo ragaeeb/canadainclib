@@ -21,6 +21,7 @@ class DatabaseHelper : public QObject
     QMap< QObject*, QMap<int,bool> > m_objectToIds;
     QMap<int, QPair<QObject*,int> > m_idToObjectQueryType;
     QMap<QString, bool> m_attached;
+    bool m_enabled;
 
     void stash(QObject* caller, int t);
 
@@ -52,6 +53,7 @@ public:
     Q_INVOKABLE void initSetup(QObject* caller, QStringList const& setupStatements, int id=INIT_SETUP_ID);
     Q_INVOKABLE void startTransaction(QObject* caller, int id);
     void createDatabaseIfNotExists(bool sameThread=false) const;
+    void setEnabled(bool enabled);
 };
 
 } /* namespace canadainc */
