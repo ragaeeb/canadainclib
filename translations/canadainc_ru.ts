@@ -52,22 +52,22 @@
     <message>
         <location filename="../assets/BugReportPage.qml" line="24"/>
         <source>Bug Reports</source>
-        <translation type="unfinished"></translation>
+        <translation>Жук</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="39"/>
         <source>Open in Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть в браузере</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="52"/>
         <source>Submit Logs</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать отчет</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="65"/>
         <source>Submission Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Статус</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="112"/>
@@ -77,12 +77,12 @@
     <message>
         <location filename="../assets/BugReportPage.qml" line="136"/>
         <source>Add Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="142"/>
         <source>Submit</source>
-        <translation type="unfinished"></translation>
+        <translation>Отправить</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="149"/>
@@ -92,7 +92,7 @@
     <message>
         <location filename="../assets/BugReportPage.qml" line="167"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="192"/>
@@ -102,22 +102,22 @@
     <message>
         <location filename="../assets/BugReportPage.qml" line="265"/>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="277"/>
         <source>Name cannot be empty!</source>
-        <translation type="unfinished"></translation>
+        <translation>Необходимо ввести отображаемое имя</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="289"/>
         <source>Email Address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Адрес эл. почты</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="307"/>
         <source>Invalid email address!</source>
-        <translation type="unfinished"></translation>
+        <translation>Адрес эл. почты недействителен</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="328"/>
@@ -133,7 +133,7 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/BugReportPage.qml" line="331"/>
         <source>Enter the notes you wish to add...</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметки</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="421"/>
@@ -161,27 +161,27 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="45"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="45"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="45"/>
         <source>Don&apos;t Show Again</source>
-        <translation type="unfinished"></translation>
+        <translation>Больше не показывать</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="110"/>
         <source>Bug Reports</source>
-        <translation type="unfinished"></translation>
+        <translation>Жук</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="130"/>
         <source>Review</source>
-        <translation type="unfinished"></translation>
+        <translation>Обзор</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="173"/>
@@ -194,7 +194,7 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/OfflineDelegate.qml" line="55"/>
         <source>You are currently offline. Please check your network connection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Подключение к сети отсутствует.</translation>
     </message>
 </context>
 <context>
@@ -202,17 +202,17 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/SignupSheet.qml" line="19"/>
         <source>Change Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить пароль</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="21"/>
         <source>Create Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите новый пароль</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="29"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="40"/>
@@ -224,17 +224,17 @@ Make sure you remember it!</source>
     <message>
         <location filename="../assets/SignupSheet.qml" line="62"/>
         <source>The password must be at least 3 characters!</source>
-        <translation type="unfinished"></translation>
+        <translation>Минимум 3 символа</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="83"/>
         <source>Passwords do not match!</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароли не совпадают</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="112"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмена</translation>
     </message>
 </context>
 <context>
@@ -242,7 +242,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../assets/TutorialTip.qml" line="135"/>
         <source>Video Tutorial</source>
-        <translation type="unfinished">Видео учебник</translation>
+        <translation>Видео учебник</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="135"/>
@@ -253,23 +253,23 @@ Make sure you remember it!</source>
         <location filename="../assets/TutorialTip.qml" line="135"/>
         <location filename="../assets/TutorialTip.qml" line="146"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="135"/>
         <location filename="../assets/TutorialTip.qml" line="146"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="146"/>
         <source>Review</source>
-        <translation type="unfinished"></translation>
+        <translation>Обзор</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="146"/>
         <source>If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?</source>
-        <translation type="unfinished"></translation>
+        <translation>Если вам нравится приложение, оцените это приложение. Благодарим за поддержку!</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="244"/>
@@ -313,7 +313,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/AccountImporter.cpp" line="68"/>
         <source>Cellular</source>
-        <translation type="unfinished"></translation>
+        <translation>Сотовая связь</translation>
     </message>
 </context>
 <context>
@@ -329,27 +329,27 @@ Make sure you remember it!</source>
         <translation>Пожалуйста, введите учетные данные, предоставленные Canada Inc:</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="296"/>
+        <location filename="../src/AppLogFetcher.cpp" line="299"/>
         <source>Could not submit report! Please try again...</source>
         <translation>Не удалось отправить отчет! Пожалуйста, попробуйте еще раз...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="301"/>
+        <location filename="../src/AppLogFetcher.cpp" line="304"/>
         <source>Report could not be submitted because you are offline! Please reconnect to the network and try again...</source>
         <translation>Отчет не может быть отправлен, так как Вы не в сети (оффлайн)! Пожалуйста, подключитесь к сети и попробуйте еще раз...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="348"/>
+        <location filename="../src/AppLogFetcher.cpp" line="351"/>
         <source>Admin Access Granted for: %1</source>
         <translation>Доступ администратора предоставлен для: %1</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="363"/>
+        <location filename="../src/AppLogFetcher.cpp" line="366"/>
         <source>Could not submit logs! Please try again...</source>
         <translation>Не удалось отправить журналы! Пожалуйста, попробуйте еще раз...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="363"/>
+        <location filename="../src/AppLogFetcher.cpp" line="366"/>
         <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
         <translation>Журналы отправлены. Пожалуйста, представьте в службу поддержки следующий ID (скопировано в буфер обмена): %1</translation>
     </message>
@@ -372,12 +372,12 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="76"/>
         <source>A DRM related error was encountered.</source>
-        <translation>Произошла ошибка, связанная с DRM.</translation>
+        <translation>Файл защищен неподдерживаемым DRM.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="81"/>
         <source>An unexpected internal error has occured!</source>
-        <translation>Непредвиденная внутренняя ошибка!</translation>
+        <translation>Не удалось воспроизвести файл из-за непредвиденной ошибки.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="84"/>
@@ -387,7 +387,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="87"/>
         <source>An illegal operation given the context state.</source>
-        <translation>Введено запрещенное действие в текущей позиции.</translation>
+        <translation>Не удается воспроизвести файл из-за неизвестной ошибки подсистемы медиафайлов.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="90"/>
@@ -402,12 +402,12 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="96"/>
         <source>A DRM protected input was specified.</source>
-        <translation>Был указан ввод защищенного DRM.</translation>
+        <translation>Файл защищен неподдерживаемым DRM.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="99"/>
         <source>An illegal operation was encountered by the playback process.</source>
-        <translation>В процессе воспроизведения произошло запрещенное действие.</translation>
+        <translation>Не удается воспроизвести файл из-за неизвестной ошибки подсистемы медиафайлов.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="102"/>
@@ -427,7 +427,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="111"/>
         <source>The resource was corrupted.</source>
-        <translation>Источник данных был поврежден.</translation>
+        <translation>Файл поврежден. Загрузите неповрежденную версию файла и повторите попытку.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="114"/>
@@ -437,7 +437,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="117"/>
         <source>Insufficient memory to perform the requested operation.</source>
-        <translation>Недостаточно памяти для выполнения запрошенной операции.</translation>
+        <translation>Недостаточно памяти. Закройте несколько приложений и повторите попытку.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="120"/>
@@ -455,7 +455,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/MessageImporter.cpp" line="36"/>
         <source>You</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы</translation>
     </message>
 </context>
 <context>
@@ -464,13 +464,13 @@ Make sure you remember it!</source>
         <location filename="../src/Persistance.cpp" line="235"/>
         <location filename="../src/Persistance.h" line="82"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить</translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="235"/>
         <location filename="../src/Persistance.h" line="82"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="325"/>
@@ -480,7 +480,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/Persistance.cpp" line="498"/>
         <source>Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Подтвердить</translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="498"/>
@@ -490,26 +490,26 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/Persistance.cpp" line="513"/>
         <source>Cache was successfully cleared!</source>
-        <translation>Буфер обмена (кэш) был успешно очищен!</translation>
+        <translation>Кэш очищен.</translation>
     </message>
     <message>
         <location filename="../src/Persistance.h" line="68"/>
         <location filename="../src/Persistance.h" line="70"/>
         <location filename="../src/Persistance.h" line="79"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
     <message>
         <location filename="../src/Persistance.h" line="68"/>
         <location filename="../src/Persistance.h" line="70"/>
         <location filename="../src/Persistance.h" line="79"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <location filename="../src/Persistance.h" line="81"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>ОК</translation>
     </message>
 </context>
 <context>
@@ -522,7 +522,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/PimContactPickerSheet.cpp" line="86"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>ОК</translation>
     </message>
 </context>
 <context>

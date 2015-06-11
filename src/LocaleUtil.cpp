@@ -10,6 +10,7 @@ namespace canadainc {
 
 LocaleUtil::LocaleUtil(QString const& appName, QObject* parent) : QObject(parent), m_appName(appName)
 {
+    LOGGER("********* X");
     if ( !connect( &m_pLocaleHandler, SIGNAL( systemLanguageChanged() ), this, SLOT( onSystemLanguageChanged() ) ) ) {
         LOGGER("Recovering from a failed connect()");
     } else {
@@ -31,10 +32,22 @@ void LocaleUtil::onSystemLanguageChanged()
 
     QString fileName = QString("%1_%2").arg(m_appName).arg(localeString);
 
-    LOGGER("Locale file name: " << fileName);
+    LOGGER("LocaleFileName: " << fileName);
 
     if ( m_pTranslator.load(fileName, "app/native/qm") ) {
         QCoreApplication::instance()->installTranslator(&m_pTranslator);
+    } else {
+        LOGGER("LoadFailed" << fileName);
+    }
+
+    fileName = QString("canadainc_%2").arg(localeString);
+
+    LOGGER("LocaleFileName: " << fileName);
+
+    if ( m_libTranslator.load(fileName, "app/native/qm") ) {
+        QCoreApplication::instance()->installTranslator(&m_libTranslator);
+    } else {
+        LOGGER("LoadFailed" << fileName);
     }
 }
 
@@ -43,13 +56,5 @@ LocaleUtil::~LocaleUtil()
 {
 }
 
-
-QString LocaleUtil::renderStandardTime(QDateTime const& theTime)
-{
-    static QString format = bb::utility::i18n::timeFormat(bb::utility::i18n::DateFormat::Short);
-    bb::system::LocaleHandler region(bb::system::LocaleType::Region);
-
-    return region.locale().toString(theTime, format);
-}
 
 } /* namespace canadainc */

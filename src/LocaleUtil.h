@@ -12,6 +12,7 @@ class LocaleUtil : public QObject
 	Q_OBJECT
 
     QTranslator m_pTranslator;
+	QTranslator m_libTranslator;
     bb::cascades::LocaleHandler m_pLocaleHandler;
     QString m_appName;
 
@@ -21,7 +22,6 @@ private slots:
 public:
 	LocaleUtil(QString const& appName=QString(), QObject* parent=NULL);
 	~LocaleUtil();
-	Q_INVOKABLE static QString renderStandardTime(QDateTime const& theTime);
 };
 
 } /* namespace canadainc */

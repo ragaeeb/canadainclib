@@ -36,7 +36,7 @@
     <message>
         <location filename="../assets/AboutTitleBar.qml" line="131"/>
         <source>Video Tutorial</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tutorial</translation>
     </message>
 </context>
 <context>
@@ -44,7 +44,7 @@
     <message>
         <location filename="../assets/AccountsDropDown.qml" line="9"/>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Akun</translation>
     </message>
 </context>
 <context>
@@ -52,22 +52,22 @@
     <message>
         <location filename="../assets/BugReportPage.qml" line="24"/>
         <source>Bug Reports</source>
-        <translation type="unfinished"></translation>
+        <translation>Serangga</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="39"/>
         <source>Open in Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Buka di Browser</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="52"/>
         <source>Submit Logs</source>
-        <translation type="unfinished"></translation>
+        <translation>Buat Laporan</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="65"/>
         <source>Submission Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="112"/>
@@ -77,12 +77,12 @@
     <message>
         <location filename="../assets/BugReportPage.qml" line="136"/>
         <source>Add Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Catatan</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="142"/>
         <source>Submit</source>
-        <translation type="unfinished"></translation>
+        <translation>Kirim</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="149"/>
@@ -102,22 +102,22 @@
     <message>
         <location filename="../assets/BugReportPage.qml" line="265"/>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama:</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="277"/>
         <source>Name cannot be empty!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nama tampilan tidak boleh kosong</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="289"/>
         <source>Email Address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alamat Email</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="307"/>
         <source>Invalid email address!</source>
-        <translation type="unfinished"></translation>
+        <translation>Email Tidak Sah</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="328"/>
@@ -161,27 +161,27 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="45"/>
         <source>Yes</source>
-        <translation type="unfinished">Ya</translation>
+        <translation>Ya</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="45"/>
         <source>No</source>
-        <translation type="unfinished">Tidak</translation>
+        <translation>Tidak</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="45"/>
         <source>Don&apos;t Show Again</source>
-        <translation type="unfinished"></translation>
+        <translation>Jangan tampilkan lagi</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="110"/>
         <source>Bug Reports</source>
-        <translation type="unfinished"></translation>
+        <translation>Serangga</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="130"/>
         <source>Review</source>
-        <translation type="unfinished"></translation>
+        <translation>Tinjauan</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="173"/>
@@ -194,7 +194,7 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/OfflineDelegate.qml" line="55"/>
         <source>You are currently offline. Please check your network connection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak Ada Koneksi Jaringan</translation>
     </message>
 </context>
 <context>
@@ -202,12 +202,12 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/SignupSheet.qml" line="19"/>
         <source>Change Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Ganti Kata Sandi</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="21"/>
         <source>Create Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Masukkan kata sandi baru</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="29"/>
@@ -224,12 +224,12 @@ Make sure you remember it!</source>
     <message>
         <location filename="../assets/SignupSheet.qml" line="62"/>
         <source>The password must be at least 3 characters!</source>
-        <translation type="unfinished"></translation>
+        <translation>Sedikitnya harus 3 karakter</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="83"/>
         <source>Passwords do not match!</source>
-        <translation type="unfinished"></translation>
+        <translation>Kata sandi yang Anda ketikkan tidak sama</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="112"/>
@@ -242,7 +242,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../assets/TutorialTip.qml" line="135"/>
         <source>Video Tutorial</source>
-        <translation type="unfinished"></translation>
+        <translation>Tutorial</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="135"/>
@@ -253,23 +253,23 @@ Make sure you remember it!</source>
         <location filename="../assets/TutorialTip.qml" line="135"/>
         <location filename="../assets/TutorialTip.qml" line="146"/>
         <source>Yes</source>
-        <translation type="unfinished">Ya</translation>
+        <translation>Ya</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="135"/>
         <location filename="../assets/TutorialTip.qml" line="146"/>
         <source>No</source>
-        <translation type="unfinished">Tidak</translation>
+        <translation>Tidak</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="146"/>
         <source>Review</source>
-        <translation type="unfinished"></translation>
+        <translation>Tinjauan</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="146"/>
         <source>If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?</source>
-        <translation type="unfinished"></translation>
+        <translation>Jika suka menggunakan app, harap luangkan waktu sejenak untuk menilai aplikasi ini. Terima kasih!</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="244"/>
@@ -303,7 +303,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/AccountImporter.cpp" line="46"/>
         <source>Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokal</translation>
     </message>
     <message>
         <location filename="../src/AccountImporter.cpp" line="48"/>
@@ -313,7 +313,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/AccountImporter.cpp" line="68"/>
         <source>Cellular</source>
-        <translation type="unfinished"></translation>
+        <translation>Seluler</translation>
     </message>
 </context>
 <context>
@@ -329,27 +329,27 @@ Make sure you remember it!</source>
         <translation>Masukkan Kredensial anda yang disediakan oleh Inc:</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="296"/>
+        <location filename="../src/AppLogFetcher.cpp" line="299"/>
         <source>Could not submit report! Please try again...</source>
         <translation>Tidak bisa menyampaikan laporan! Silahkan coba lagi...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="301"/>
+        <location filename="../src/AppLogFetcher.cpp" line="304"/>
         <source>Report could not be submitted because you are offline! Please reconnect to the network and try again...</source>
         <translation>Laporan tidak bisa disampaikan karena anda sedang offline! Silahkan sambung kembali ke jaringan dan coba lagi...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="348"/>
+        <location filename="../src/AppLogFetcher.cpp" line="351"/>
         <source>Admin Access Granted for: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="363"/>
+        <location filename="../src/AppLogFetcher.cpp" line="366"/>
         <source>Could not submit logs! Please try again...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="363"/>
+        <location filename="../src/AppLogFetcher.cpp" line="366"/>
         <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -359,12 +359,12 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/DeviceUtils.cpp" line="44"/>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Gulir ke atas</translation>
     </message>
     <message>
         <location filename="../src/DeviceUtils.cpp" line="47"/>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Gulir ke bawah</translation>
     </message>
 </context>
 <context>
@@ -372,82 +372,82 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="76"/>
         <source>A DRM related error was encountered.</source>
-        <translation type="unfinished"></translation>
+        <translation>File ini dilindungi oleh DRM yang tidak didukung.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="81"/>
         <source>An unexpected internal error has occured!</source>
-        <translation type="unfinished"></translation>
+        <translation>File tidak bisa diputar karena kesalahan subsistem media tak terdefinisi.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="84"/>
         <source>An invalid parameter was specified!</source>
-        <translation type="unfinished"></translation>
+        <translation>File tidak bisa diputar karena kesalahan tak terduga.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="87"/>
         <source>An illegal operation given the context state.</source>
-        <translation type="unfinished"></translation>
+        <translation>File tidak bisa diputar karena kesalahan tak terduga.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="90"/>
         <source>An unrecognized input or output type or an out-of-range speed setting encountered.</source>
-        <translation type="unfinished"></translation>
+        <translation>File ini rusak. Muatlah versi yang tidak rusak dan coba lagi.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="93"/>
         <source>A data format not recognized by any plugin encountered.</source>
-        <translation type="unfinished"></translation>
+        <translation>File ini mengandung format media yang tidak didukung.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="96"/>
         <source>A DRM protected input was specified.</source>
-        <translation type="unfinished"></translation>
+        <translation>File ini dilindungi oleh DRM yang tidak didukung.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="99"/>
         <source>An illegal operation was encountered by the playback process.</source>
-        <translation type="unfinished"></translation>
+        <translation>File tidak bisa diputar karena kesalahan tak terduga.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="102"/>
         <source>An I/O error has been encountered at the source!</source>
-        <translation type="unfinished"></translation>
+        <translation>File tidak bisa diputar karena kesalahan tak terduga.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="105"/>
         <source>An I/O error has been encountered at the sink!</source>
-        <translation type="unfinished"></translation>
+        <translation>File tidak bisa diputar karena kesalahan tak terduga.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="108"/>
         <source>The source is currently unavailable.</source>
-        <translation type="unfinished"></translation>
+        <translation>File tidak bisa diputar karena kesalahan tak terduga.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="111"/>
         <source>The resource was corrupted.</source>
-        <translation type="unfinished"></translation>
+        <translation>File ini rusak. Muatlah versi yang tidak rusak dan coba lagi.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="114"/>
         <source>Cannot open the sink (possibly because no plugin recognizes it).</source>
-        <translation type="unfinished"></translation>
+        <translation>File tidak bisa diputar karena kesalahan tak terduga.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="117"/>
         <source>Insufficient memory to perform the requested operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Memori tidak cukup. Tutup beberapa aplikasi dan coba lagi.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="120"/>
         <source>A required resource such as an encoder or an output feed is presently unavailable.</source>
-        <translation type="unfinished"></translation>
+        <translation>File tidak bisa diputar karena kesalahan tak terduga.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="123"/>
         <source>A playback permission error (e.g., user prohibition, region mismatch) error was encountered.</source>
-        <translation type="unfinished"></translation>
+        <translation>File tidak bisa diputar karena kesalahan tak terduga.</translation>
     </message>
 </context>
 <context>
@@ -455,7 +455,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/MessageImporter.cpp" line="36"/>
         <source>You</source>
-        <translation type="unfinished"></translation>
+        <translation>Anda</translation>
     </message>
 </context>
 <context>
@@ -490,7 +490,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/Persistance.cpp" line="513"/>
         <source>Cache was successfully cleared!</source>
-        <translation type="unfinished"></translation>
+        <translation>Cache Anda telah dikosongkan.</translation>
     </message>
     <message>
         <location filename="../src/Persistance.h" line="68"/>
@@ -522,7 +522,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/PimContactPickerSheet.cpp" line="86"/>
         <source>OK</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -538,7 +538,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/TextUtils.cpp" line="138"/>
         <source>Bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>Byte</translation>
     </message>
     <message>
         <location filename="../src/TextUtils.cpp" line="138"/>
@@ -563,7 +563,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/TextUtils.cpp" line="141"/>
         <source>0 Bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>0 byte</translation>
     </message>
 </context>
 </TS>

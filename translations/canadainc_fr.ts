@@ -44,7 +44,7 @@
     <message>
         <location filename="../assets/AccountsDropDown.qml" line="9"/>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Compte</translation>
     </message>
 </context>
 <context>
@@ -57,17 +57,17 @@
     <message>
         <location filename="../assets/BugReportPage.qml" line="39"/>
         <source>Open in Browser</source>
-        <translation>Ouvrir dans un navigateur</translation>
+        <translation>Ouvrir dans le navigateur</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="52"/>
         <source>Submit Logs</source>
-        <translation>Soumettre votre registres</translation>
+        <translation>Génération de rapports</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="65"/>
         <source>Submission Status</source>
-        <translation>Soumettre vos Status</translation>
+        <translation>État</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="112"/>
@@ -117,7 +117,7 @@
     <message>
         <location filename="../assets/BugReportPage.qml" line="307"/>
         <source>Invalid email address!</source>
-        <translation>Adresse e-mail invalide!</translation>
+        <translation>Adresse non valide</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="328"/>
@@ -208,7 +208,7 @@ Combien de fois pouvez-vous le reproduire?</translation>
     <message>
         <location filename="../assets/SignupSheet.qml" line="19"/>
         <source>Change Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Changer le mot de passe</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="21"/>
@@ -218,7 +218,7 @@ Combien de fois pouvez-vous le reproduire?</translation>
     <message>
         <location filename="../assets/SignupSheet.qml" line="29"/>
         <source>Save</source>
-        <translation type="unfinished">Sauvegarde</translation>
+        <translation>Sauvegarde</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="40"/>
@@ -230,17 +230,17 @@ Make sure you remember it!</source>
     <message>
         <location filename="../assets/SignupSheet.qml" line="62"/>
         <source>The password must be at least 3 characters!</source>
-        <translation type="unfinished"></translation>
+        <translation>Doit contenir au moins trois caractères.</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="83"/>
         <source>Passwords do not match!</source>
-        <translation type="unfinished"></translation>
+        <translation>Les mots de passe saisis ne sont pas identiques!</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="112"/>
         <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
 </context>
 <context>
@@ -248,7 +248,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../assets/TutorialTip.qml" line="135"/>
         <source>Video Tutorial</source>
-        <translation type="unfinished">Video Tutoriel</translation>
+        <translation>Didacticiel</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="135"/>
@@ -259,23 +259,23 @@ Make sure you remember it!</source>
         <location filename="../assets/TutorialTip.qml" line="135"/>
         <location filename="../assets/TutorialTip.qml" line="146"/>
         <source>Yes</source>
-        <translation type="unfinished">Oui</translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="135"/>
         <location filename="../assets/TutorialTip.qml" line="146"/>
         <source>No</source>
-        <translation type="unfinished">Non</translation>
+        <translation>Non</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="146"/>
         <source>Review</source>
-        <translation type="unfinished">Compte rendu</translation>
+        <translation>Commenter</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="146"/>
         <source>If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?</source>
-        <translation type="unfinished"></translation>
+        <translation>Si l&apos;utilisation de l&apos;application vous satisfait, merci de prendre un instant pour noter l&apos;application. Merci de votre contribution.</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="244"/>
@@ -291,7 +291,7 @@ Make sure you remember it!</source>
         <location filename="../assets/TutorialTip.qml" line="251"/>
         <location filename="../assets/TutorialTip.qml" line="268"/>
         <source>Suppress Tutorials</source>
-        <translation type="unfinished">Supprimer les Tutoriels</translation>
+        <translation>Supprimer les Tutoriels</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="268"/>
@@ -309,7 +309,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/AccountImporter.cpp" line="46"/>
         <source>Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Locale</translation>
     </message>
     <message>
         <location filename="../src/AccountImporter.cpp" line="48"/>
@@ -319,7 +319,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/AccountImporter.cpp" line="68"/>
         <source>Cellular</source>
-        <translation type="unfinished"></translation>
+        <translation>Cellulaire</translation>
     </message>
 </context>
 <context>
@@ -335,27 +335,27 @@ Make sure you remember it!</source>
         <translation>Veuillez entrez les informations qui vous sont fournis par Canada Inc:</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="296"/>
+        <location filename="../src/AppLogFetcher.cpp" line="299"/>
         <source>Could not submit report! Please try again...</source>
         <translation>Impossible de soumettre le rapport! S&apos;il vous plaît veuillez essayez à nouveau...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="301"/>
+        <location filename="../src/AppLogFetcher.cpp" line="304"/>
         <source>Report could not be submitted because you are offline! Please reconnect to the network and try again...</source>
         <translation>Votre demande ne pouvait être soumise parce que vous êtes déconnecté! S&apos;il vous plaît veuillez vous connecter au réseau et essayez à nouveau...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="348"/>
+        <location filename="../src/AppLogFetcher.cpp" line="351"/>
         <source>Admin Access Granted for: %1</source>
         <translation>Accès Administrateur accordée pour: %1</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="363"/>
+        <location filename="../src/AppLogFetcher.cpp" line="366"/>
         <source>Could not submit logs! Please try again...</source>
         <translation>Impossible de soumettre votre registres! S&apos;il vous plaît essayez à nouveau...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="363"/>
+        <location filename="../src/AppLogFetcher.cpp" line="366"/>
         <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
         <translation>Les registres ont été soumis . S&apos;il vous plaît fournir à l&apos;équipe de maintenance  l&apos;information (ID) suivante: %1</translation>
     </message>
@@ -378,7 +378,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="76"/>
         <source>A DRM related error was encountered.</source>
-        <translation>Une erreur lié au DRM est survenue</translation>
+        <translation>Ce fichier est protégé par un système de DRM non pris en charge.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="81"/>
@@ -403,7 +403,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="93"/>
         <source>A data format not recognized by any plugin encountered.</source>
-        <translation>Un format de données non reconnu par aucun plugin est survenue</translation>
+        <translation>Ce fichier contient un format multimédia non pris en charge.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="96"/>
@@ -413,17 +413,17 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="99"/>
         <source>An illegal operation was encountered by the playback process.</source>
-        <translation>Une opération non authorisée a été survenue par le processus de lecture audio.</translation>
+        <translation>Ce fichier est corrompu. Chargez une version non corrompue et réessayez.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="102"/>
         <source>An I/O error has been encountered at the source!</source>
-        <translation>Une erreur d&apos; E/S a été survenue à la source!</translation>
+        <translation>Impossible de lire le fichier en raison d&apos;une erreur inattendue.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="105"/>
         <source>An I/O error has been encountered at the sink!</source>
-        <translation>Une erreur d&apos;E / S a été rencontré à la source media</translation>
+        <translation>Impossible de lire le fichier en raison d&apos;une erreur inattendue.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="108"/>
@@ -433,27 +433,27 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="111"/>
         <source>The resource was corrupted.</source>
-        <translation>Une erreur est survenue sur l’un des supports media.</translation>
+        <translation>Ce fichier est corrompu. Chargez une version non corrompue et réessayez.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="114"/>
         <source>Cannot open the sink (possibly because no plugin recognizes it).</source>
-        <translation>Impossible d&apos;ouvrir la source du media (erreur survenue du a la non reconnaissance d’aucun plugin.</translation>
+        <translation>Impossible de lire le fichier en raison d&apos;une erreur inattendue.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="117"/>
         <source>Insufficient memory to perform the requested operation.</source>
-        <translation>Mémoire insuffisante pour effectuer l&apos;opération demandée.</translation>
+        <translation>Mémoire disponible insuffisante. Fermez des applications et réessayez.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="120"/>
         <source>A required resource such as an encoder or an output feed is presently unavailable.</source>
-        <translation>Une source media requise comme un codeur ou un flux de sortie est actuellement indisponible.</translation>
+        <translation>Le fichier ne peut être lu en raison d&apos;une erreur non définie du sous-système multimédia.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="123"/>
         <source>A playback permission error (e.g., user prohibition, region mismatch) error was encountered.</source>
-        <translation>Une erreur de permission de lecture (par exemple , l&apos;utilisateur interdiction , région décalage) erreur a été détectée.</translation>
+        <translation>Impossible de lire le fichier en raison d&apos;une erreur inattendue.</translation>
     </message>
 </context>
 <context>
@@ -496,7 +496,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/Persistance.cpp" line="513"/>
         <source>Cache was successfully cleared!</source>
-        <translation>Le cache a été effacé avec succès!</translation>
+        <translation>La mémoire cache a été effacée.</translation>
     </message>
     <message>
         <location filename="../src/Persistance.h" line="68"/>
@@ -528,7 +528,7 @@ Make sure you remember it!</source>
     <message>
         <location filename="../src/PimContactPickerSheet.cpp" line="86"/>
         <source>OK</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
