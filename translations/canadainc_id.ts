@@ -151,7 +151,7 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="45"/>
         <source>Update Available</source>
-        <translation type="unfinished"></translation>
+        <translation>Update Tersedia</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="45"/>

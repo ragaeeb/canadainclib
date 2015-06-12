@@ -213,7 +213,7 @@ Combien de fois pouvez-vous le reproduire?</translation>
     <message>
         <location filename="../assets/SignupSheet.qml" line="21"/>
         <source>Create Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Saisissez un nouveau mot de passe</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="29"/>
