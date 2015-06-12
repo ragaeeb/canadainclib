@@ -514,7 +514,9 @@ void Persistance::cacheCleared() {
 }
 
 
-void Persistance::clear() {
+void Persistance::clear()
+{
+    m_flags.clear();
 	m_settings.clear();
 }
 
