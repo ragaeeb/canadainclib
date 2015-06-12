@@ -177,7 +177,7 @@ Combien de fois pouvez-vous le reproduire?</translation>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="45"/>
         <source>Don&apos;t Show Again</source>
-        <translation>Ne pas montrer de nouveau</translation>
+        <translation>Ne plus afficher</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="110"/>

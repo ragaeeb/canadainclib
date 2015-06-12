@@ -107,6 +107,25 @@ Delegate
     }
     
     
+    function removeAll(toRemove)
+    {
+        var allKeys = keys;
+        var allData = data;
+        
+        for (var i = toRemove.length-1; i >= 0; i--)
+        {
+            var key = toRemove[i];
+            var k = allKeys.indexOf(key);
+            
+            if (k > -1) {
+                allKeys.splice(k, 1);
+            }
+            
+            delete allData[key];
+        }
+    }
+    
+    
     function onFinished(confirmed, data)
     {
         if (data.cookie == "video")
