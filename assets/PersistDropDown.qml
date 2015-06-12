@@ -3,14 +3,17 @@ import bb.cascades 1.0
 DropDown
 {
     property string key
+    property bool isFlag: false
     signal valueChanged(bool diff);
     horizontalAlignment: HorizontalAlignment.Fill
     
     onKeyChanged: {
-        var primary = persist.getValueFor(key)
+        var primary = isFlag ? persist.getFlag(key) : persist.getValueFor(key);
         
-        for (var i = 0; i < options.length; i ++) {
-            if (options[i].value == primary) {
+        for (var i = 0; i < options.length; i ++)
+        {
+            if (options[i].value == primary)
+            {
                 options[i].selected = true
                 break;
             }
@@ -26,8 +29,12 @@ DropDown
     onSelectedValueChanged: {
         if (key.length > 0)
         {
-            var diff = persist.saveValueFor(key, selectedValue);
-            valueChanged(diff);
+            if (isFlag) {
+                persist.setFlag(key, selectedValue);
+            } else {
+                var diff = persist.saveValueFor(key, selectedValue);
+                valueChanged(diff);
+            }
         }
     }
 }

@@ -67,6 +67,19 @@ TitleBar
                     }
                 }
                 
+                CheckBox
+                {
+                    text: qsTr("Disable Update Checking") + Retranslate.onLanguageChanged
+                    
+                    onCheckedChanged: {
+                        persist.setFlag("appLastUpdateCheck", new Date().getTime());
+                    }
+                    
+                    onCreationCompleted: {
+                        checked = persist.getFlag("appLastUpdateCheck") == -1;
+                    }
+                }
+                
                 Container
                 {
                     id: expandedContainer
