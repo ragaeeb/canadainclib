@@ -13,6 +13,17 @@ Delegate
         return data.length;
     }
     
+    function reset()
+    {
+        data = [];
+        keys = {};
+        
+        if (active) {
+            object.close();
+            active = false;
+        }
+    }
+    
     function onSettingChanged(newValue, key) {
         suppressTutorials = newValue == 1;
     }
@@ -105,26 +116,6 @@ Delegate
         
         return false;
     }
-    
-    
-    function removeAll(toRemove)
-    {
-        var allKeys = keys;
-        var allData = data;
-        
-        for (var i = toRemove.length-1; i >= 0; i--)
-        {
-            var key = toRemove[i];
-            var k = allKeys.indexOf(key);
-            
-            if (k > -1) {
-                allKeys.splice(k, 1);
-            }
-            
-            delete allData[key];
-        }
-    }
-    
     
     function onFinished(confirmed, data)
     {
@@ -296,7 +287,7 @@ Delegate
                     TapHandler
                     {
                         onTapped: {
-                            console.log("UserEvent: TutorialTapped");
+                            console.log("UserEvent: TutorialTapped", current.key);
                             
                             if ( !mainAnim.isPlaying() ) {
                                 fsd.dismiss();
