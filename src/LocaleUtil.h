@@ -15,6 +15,7 @@ class LocaleUtil : public QObject
 	QTranslator m_libTranslator;
     bb::cascades::LocaleHandler m_pLocaleHandler;
     QString m_appName;
+    QString m_currentLocale;
 
 private slots:
     void onSystemLanguageChanged();
@@ -22,6 +23,8 @@ private slots:
 public:
 	LocaleUtil(QString const& appName=QString(), QObject* parent=NULL);
 	~LocaleUtil();
+
+	QString locale() const;
 };
 
 } /* namespace canadainc */

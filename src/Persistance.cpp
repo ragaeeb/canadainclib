@@ -340,7 +340,9 @@ QByteArray Persistance::convertToUtf8(QString const& text) {
 }
 
 
-void Persistance::forceSync() {
+void Persistance::forceSync()
+{
+    m_flags.sync();
     m_settings.sync();
 }
 

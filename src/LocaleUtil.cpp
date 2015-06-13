@@ -10,12 +10,8 @@ namespace canadainc {
 
 LocaleUtil::LocaleUtil(QString const& appName, QObject* parent) : QObject(parent), m_appName(appName)
 {
-    LOGGER("********* X");
-    if ( !connect( &m_pLocaleHandler, SIGNAL( systemLanguageChanged() ), this, SLOT( onSystemLanguageChanged() ) ) ) {
-        LOGGER("Recovering from a failed connect()");
-    } else {
-        onSystemLanguageChanged();
-    }
+    connect( &m_pLocaleHandler, SIGNAL( systemLanguageChanged() ), this, SLOT( onSystemLanguageChanged() ) );
+    onSystemLanguageChanged();
 }
 
 
@@ -49,6 +45,11 @@ void LocaleUtil::onSystemLanguageChanged()
     } else {
         LOGGER("LoadFailed" << fileName);
     }
+}
+
+
+QString LocaleUtil::locale() const {
+    return m_currentLocale;
 }
 
 
