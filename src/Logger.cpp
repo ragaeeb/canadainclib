@@ -6,7 +6,7 @@
 #include <slog2.h>
 #include <cstring>
 
-//#define DEBUG_RELEASE 1
+#define DEBUG_RELEASE 1
 
 namespace {
 

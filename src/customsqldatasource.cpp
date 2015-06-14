@@ -5,7 +5,7 @@
 #include <bb/data/SqlConnection>
 #include <QFile>
 
-//#define VERBOSE 1
+#define VERBOSE 1
 
 namespace canadainc {
 
@@ -84,7 +84,7 @@ DataAccessReply CustomSqlDataSource::executeAndWait(QVariant const& criteria, in
 
     if ( checkConnection() )
     {
-        reply = m_sqlConnector->executeAndWait(criteria, id);
+        reply = m_sqlConnector->executeAndWait(m_query, criteria.toList(), id);
 
         if ( reply.hasError() ) {
             LOGGER("error " << reply);

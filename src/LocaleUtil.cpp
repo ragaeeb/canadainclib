@@ -17,16 +17,17 @@ LocaleUtil::LocaleUtil(QString const& appName, QObject* parent) : QObject(parent
 
 void LocaleUtil::onSystemLanguageChanged()
 {
+    QCoreApplication::instance()->removeTranslator(&m_libTranslator);
     QCoreApplication::instance()->removeTranslator(&m_pTranslator);
 
     // Initiate, load and install the application translation files.
-    QString localeString = QLocale().name();
+    m_currentLocale = QLocale().name();
 
     if ( m_appName.isNull() ) {
     	m_appName = QCoreApplication::applicationName();
     }
 
-    QString fileName = QString("%1_%2").arg(m_appName).arg(localeString);
+    QString fileName = QString("%1_%2").arg(m_appName).arg(m_currentLocale);
 
     LOGGER("LocaleFileName: " << fileName);
 
@@ -36,7 +37,7 @@ void LocaleUtil::onSystemLanguageChanged()
         LOGGER("LoadFailed" << fileName);
     }
 
-    fileName = QString("canadainc_%2").arg(localeString);
+    fileName = QString("canadainc_%2").arg(m_currentLocale);
 
     LOGGER("LocaleFileName: " << fileName);
 
