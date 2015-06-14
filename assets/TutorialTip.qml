@@ -52,6 +52,10 @@ Delegate
         }
     }
     
+    function deferredCheck(key, diff) {
+        return !persist.containsFlag(key) && persist.isUpdateNeeded("firstInstall", diff);
+    }
+    
     function isTopPane(navPane, p) {
         return navPane.parent.parent.activePane == navPane && navPane.top == p;
     }

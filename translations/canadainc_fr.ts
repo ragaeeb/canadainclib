@@ -53,6 +53,44 @@
     </message>
 </context>
 <context>
+    <name>AlFurqanAdvertisement</name>
+    <message>
+        <location filename="../assets/AlFurqanAdvertisement.qml" line="17"/>
+        <source>Twitter</source>
+        <translation>Twitter</translation>
+    </message>
+    <message>
+        <location filename="../assets/AlFurqanAdvertisement.qml" line="31"/>
+        <source>Facebook</source>
+        <translation>Facebook</translation>
+    </message>
+    <message>
+        <location filename="../assets/AlFurqanAdvertisement.qml" line="45"/>
+        <source>Email</source>
+        <translation>E-mail</translation>
+    </message>
+    <message>
+        <location filename="../assets/AlFurqanAdvertisement.qml" line="58"/>
+        <source>Learn Arabic!</source>
+        <translation>Apprendre l’Arabe!</translation>
+    </message>
+    <message>
+        <location filename="../assets/AlFurqanAdvertisement.qml" line="58"/>
+        <source>Learn Qu&apos;ran</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/AlFurqanAdvertisement.qml" line="63"/>
+        <source>BBM</source>
+        <translation>BBM</translation>
+    </message>
+    <message>
+        <location filename="../assets/AlFurqanAdvertisement.qml" line="75"/>
+        <source>Back</source>
+        <translation>Précédent</translation>
+    </message>
+</context>
+<context>
     <name>BugReportPage</name>
     <message>
         <location filename="../assets/BugReportPage.qml" line="24"/>
@@ -251,55 +289,55 @@ Make sure you remember it!</source>
 <context>
     <name>TutorialTip</name>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="145"/>
+        <location filename="../assets/TutorialTip.qml" line="149"/>
         <source>Video Tutorial</source>
         <translation>Didacticiel</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="145"/>
+        <location filename="../assets/TutorialTip.qml" line="149"/>
         <source>Would you like to see a video tutorial on how to use the app?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="145"/>
-        <location filename="../assets/TutorialTip.qml" line="156"/>
+        <location filename="../assets/TutorialTip.qml" line="149"/>
+        <location filename="../assets/TutorialTip.qml" line="160"/>
         <source>Yes</source>
         <translation>Oui</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="145"/>
-        <location filename="../assets/TutorialTip.qml" line="156"/>
+        <location filename="../assets/TutorialTip.qml" line="149"/>
+        <location filename="../assets/TutorialTip.qml" line="160"/>
         <source>No</source>
         <translation>Non</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="156"/>
+        <location filename="../assets/TutorialTip.qml" line="160"/>
         <source>Review</source>
         <translation>Commenter</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="156"/>
+        <location filename="../assets/TutorialTip.qml" line="160"/>
         <source>If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?</source>
         <translation>Si l&apos;utilisation de l&apos;application vous satisfait, merci de prendre un instant pour noter l&apos;application. Merci de votre contribution.</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="254"/>
+        <location filename="../assets/TutorialTip.qml" line="258"/>
         <source>Stop all Tutorials</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="255"/>
+        <location filename="../assets/TutorialTip.qml" line="259"/>
         <source>Prevent any tutorials from showing...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="261"/>
-        <location filename="../assets/TutorialTip.qml" line="278"/>
+        <location filename="../assets/TutorialTip.qml" line="265"/>
+        <location filename="../assets/TutorialTip.qml" line="282"/>
         <source>Suppress Tutorials</source>
         <translation>Supprimer les Tutoriels</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="278"/>
+        <location filename="../assets/TutorialTip.qml" line="282"/>
         <source>Are you sure you want to prevent all further tutorials? If you ever want to enable them again, swipe-down from the top-bezel, go to Help, tap on the title bar and uncheck the &apos;Suppress Tutorials&apos; checkmark.</source>
         <translation type="unfinished"></translation>
     </message>
