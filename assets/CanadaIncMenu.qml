@@ -8,6 +8,7 @@ MenuDefinition
     property string projectName
     property alias help: helpActionItem
     property alias settings: settingsActionItem
+    signal finished()
     
     function launchPage(page)
     {
@@ -78,6 +79,8 @@ MenuDefinition
         if ( !persist.containsFlag("firstInstall") ) {
             persist.setFlag("firstInstall", now);
         }
+        
+        finished();
     }
     
     onCreationCompleted: {
@@ -105,7 +108,8 @@ MenuDefinition
     }
     
     actions: [
-        ActionItem {
+        ActionItem
+        {
             property variant bugReportPage
             title: qsTr("Bug Reports") + Retranslate.onLanguageChanged
             imageSource: "images/ic_bugs.png"

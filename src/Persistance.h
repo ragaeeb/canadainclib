@@ -42,6 +42,7 @@ private slots:
     void dialogFinished(bb::system::SystemUiResult::Type value);
     void finished(bb::system::SystemUiResult::Type value);
     void onDestroyed(QObject* obj);
+    void onLookupFinished();
     void promptFinished(bb::system::SystemUiResult::Type value);
 
 signals:
@@ -92,6 +93,7 @@ public:
     static bool showBlockingDialog(QString const& title, QString const& text, QString const& rememberMeText, bool &rememberMeValue, QString const& okButton, QString const& cancelButton, bool okEnabled=true);
     Q_INVOKABLE static QString homePath();
     Q_INVOKABLE static QString tempPath();
+    Q_INVOKABLE void findTarget(QString const& uri, QString const& target, QObject* caller);
 };
 
 } /* namespace canadainc */

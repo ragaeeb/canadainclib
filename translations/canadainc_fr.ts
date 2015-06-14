@@ -9,32 +9,37 @@
         <translation>Supprimer les Tutoriels</translation>
     </message>
     <message>
-        <location filename="../assets/AboutTitleBar.qml" line="88"/>
+        <location filename="../assets/AboutTitleBar.qml" line="72"/>
+        <source>Disable Update Checking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/AboutTitleBar.qml" line="101"/>
         <source>Please report all bugs to: support@canadainc.org</source>
         <translation>S&apos;il vous plaît veuillez rapporter tous les bugs à: support@canadainc.org</translation>
     </message>
     <message>
-        <location filename="../assets/AboutTitleBar.qml" line="91"/>
+        <location filename="../assets/AboutTitleBar.qml" line="104"/>
         <source>(c) %1 %2. All Rights Reserved.</source>
         <translation>(c) %1 %2.Tous Droits Réservés.</translation>
     </message>
     <message>
-        <location filename="../assets/AboutTitleBar.qml" line="101"/>
+        <location filename="../assets/AboutTitleBar.qml" line="114"/>
         <source>To see a live tutorial and demo of how to use this app, please tap on the &apos;%1&apos; action.</source>
         <translation>Pour voir le manuel d’utilisation et une démonstration de la maniere d&apos; utiliser cette application, s&apos;il vous plaît veuillez appuyez sur le &apos;%1&apos; action</translation>
     </message>
     <message>
-        <location filename="../assets/AboutTitleBar.qml" line="104"/>
+        <location filename="../assets/AboutTitleBar.qml" line="117"/>
         <source>To stay up to date on the latest news on our apps or to reach out to us for support regarding any of our apps, tap on the &apos;%1&apos; action.</source>
         <translation>&quot;Pour rester à jour sur les dernières nouvelles sur nos applications ou à s’adressez à nous pour une assistance concernant l&apos;une de nos applications,tap on the &apos;%1&apos; action.</translation>
     </message>
     <message>
-        <location filename="../assets/AboutTitleBar.qml" line="117"/>
+        <location filename="../assets/AboutTitleBar.qml" line="130"/>
         <source>Our BBM Channel</source>
         <translation>Notre BBM Channel</translation>
     </message>
     <message>
-        <location filename="../assets/AboutTitleBar.qml" line="131"/>
+        <location filename="../assets/AboutTitleBar.qml" line="144"/>
         <source>Video Tutorial</source>
         <translation>Video Tutoriel</translation>
     </message>
@@ -155,42 +160,42 @@ Combien de fois pouvez-vous le reproduire?</translation>
 <context>
     <name>CanadaIncMenu</name>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="45"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="46"/>
         <source>Update Available</source>
         <translation>Mise à jour disponible</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="45"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="46"/>
         <source>%1 %2 is available (you have %3). Would you like to visit BlackBerry World to download the latest version?</source>
         <translation>%1 %2 est disponible (vous avez %3). Voulez-vous visiter BlackBerry World pour télécharger la dernière version?</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="45"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="46"/>
         <source>Yes</source>
         <translation>Oui</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="45"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="46"/>
         <source>No</source>
         <translation>Non</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="45"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="46"/>
         <source>Don&apos;t Show Again</source>
         <translation>Ne plus afficher</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="110"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="114"/>
         <source>Bug Reports</source>
         <translation>Rapports de bug</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="130"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="134"/>
         <source>Review</source>
         <translation>Compte rendu</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="173"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="177"/>
         <source>Donate</source>
         <translation>Faire un don</translation>
     </message>
@@ -246,55 +251,55 @@ Make sure you remember it!</source>
 <context>
     <name>TutorialTip</name>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="135"/>
+        <location filename="../assets/TutorialTip.qml" line="145"/>
         <source>Video Tutorial</source>
         <translation>Didacticiel</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="135"/>
+        <location filename="../assets/TutorialTip.qml" line="145"/>
         <source>Would you like to see a video tutorial on how to use the app?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="135"/>
-        <location filename="../assets/TutorialTip.qml" line="146"/>
+        <location filename="../assets/TutorialTip.qml" line="145"/>
+        <location filename="../assets/TutorialTip.qml" line="156"/>
         <source>Yes</source>
         <translation>Oui</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="135"/>
-        <location filename="../assets/TutorialTip.qml" line="146"/>
+        <location filename="../assets/TutorialTip.qml" line="145"/>
+        <location filename="../assets/TutorialTip.qml" line="156"/>
         <source>No</source>
         <translation>Non</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="146"/>
+        <location filename="../assets/TutorialTip.qml" line="156"/>
         <source>Review</source>
         <translation>Commenter</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="146"/>
+        <location filename="../assets/TutorialTip.qml" line="156"/>
         <source>If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?</source>
         <translation>Si l&apos;utilisation de l&apos;application vous satisfait, merci de prendre un instant pour noter l&apos;application. Merci de votre contribution.</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="244"/>
+        <location filename="../assets/TutorialTip.qml" line="254"/>
         <source>Stop all Tutorials</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="245"/>
+        <location filename="../assets/TutorialTip.qml" line="255"/>
         <source>Prevent any tutorials from showing...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="251"/>
-        <location filename="../assets/TutorialTip.qml" line="268"/>
+        <location filename="../assets/TutorialTip.qml" line="261"/>
+        <location filename="../assets/TutorialTip.qml" line="278"/>
         <source>Suppress Tutorials</source>
         <translation>Supprimer les Tutoriels</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="268"/>
+        <location filename="../assets/TutorialTip.qml" line="278"/>
         <source>Are you sure you want to prevent all further tutorials? If you ever want to enable them again, swipe-down from the top-bezel, go to Help, tap on the title bar and uncheck the &apos;Suppress Tutorials&apos; checkmark.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -467,53 +472,53 @@ Make sure you remember it!</source>
 <context>
     <name>canadainc::Persistance</name>
     <message>
-        <location filename="../src/Persistance.cpp" line="235"/>
-        <location filename="../src/Persistance.h" line="82"/>
+        <location filename="../src/Persistance.cpp" line="280"/>
+        <location filename="../src/Persistance.h" line="83"/>
         <source>Save</source>
         <translation>Sauvegarde</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="235"/>
-        <location filename="../src/Persistance.h" line="82"/>
+        <location filename="../src/Persistance.cpp" line="280"/>
+        <location filename="../src/Persistance.h" line="83"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="325"/>
+        <location filename="../src/Persistance.cpp" line="370"/>
         <source>Copied: %1 to clipboard</source>
         <translation>Copié %1 dans le presse-papiers</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="498"/>
+        <location filename="../src/Persistance.cpp" line="545"/>
         <source>Confirmation</source>
         <translation>Confirmer</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="498"/>
+        <location filename="../src/Persistance.cpp" line="545"/>
         <source>Are you sure you want to clear the cache?</source>
         <translation>Êtes-vous sûr de vouloir vider le cache?</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="513"/>
+        <location filename="../src/Persistance.cpp" line="560"/>
         <source>Cache was successfully cleared!</source>
         <translation>La mémoire cache a été effacée.</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.h" line="68"/>
-        <location filename="../src/Persistance.h" line="70"/>
-        <location filename="../src/Persistance.h" line="79"/>
+        <location filename="../src/Persistance.h" line="69"/>
+        <location filename="../src/Persistance.h" line="71"/>
+        <location filename="../src/Persistance.h" line="80"/>
         <source>Yes</source>
         <translation>Oui</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.h" line="68"/>
-        <location filename="../src/Persistance.h" line="70"/>
-        <location filename="../src/Persistance.h" line="79"/>
+        <location filename="../src/Persistance.h" line="69"/>
+        <location filename="../src/Persistance.h" line="71"/>
+        <location filename="../src/Persistance.h" line="80"/>
         <source>No</source>
         <translation>Non</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.h" line="81"/>
+        <location filename="../src/Persistance.h" line="82"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>

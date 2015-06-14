@@ -1,4 +1,7 @@
 #include <bb/system/Clipboard>
+#include <bb/system/InvokeAction>
+#include <bb/system/InvokeQueryTargetsRequest>
+#include <bb/system/InvokeQueryTargetsReply>
 #include <bb/system/SystemDialog>
 #include <bb/system/SystemPrompt>
 #include <bb/system/SystemToast>
@@ -74,6 +77,48 @@ void Persistance::finished(bb::system::SystemUiResult::Type value)
 {
     Q_UNUSED(value);
     sender()->setProperty(KEY_TOAST_SHOWING, false);
+}
+
+
+void Persistance::findTarget(QString const& uri, QString const& target, QObject* caller)
+{
+    InvokeQueryTargetsRequest request;
+    request.setUri(uri);
+
+    InvokeQueryTargetsReply* itr = m_invokeManager->queryTargets(request);
+    connect( itr, SIGNAL( finished() ), this, SLOT( onLookupFinished() ) );
+    itr->setParent(caller);
+    itr->setProperty("target", target);
+}
+
+
+void Persistance::onLookupFinished()
+{
+    InvokeQueryTargetsReply* itr = static_cast<InvokeQueryTargetsReply*>( sender() );
+    QString target = itr->property("target").toString();
+    QObject* caller = itr->parent();
+    bool result = false;
+
+    QList<InvokeAction> actions = itr->actions();
+
+    for (int i = actions.size()-1; i >= 0; i--)
+    {
+        QList<InvokeTarget> targets = actions[i].targets();
+
+        foreach (InvokeTarget const& it, targets)
+        {
+            LOGGER( it.name() << target );
+            if ( it.name() == target )
+            {
+                result = true;
+                i = -1;
+                break;
+            }
+        }
+    }
+
+    QMetaObject::invokeMethod( caller, "onTargetLookupFinished", Qt::QueuedConnection, Q_ARG(QVariant, target), Q_ARG(QVariant, result) );
+    itr->deleteLater();
 }
 
 
@@ -613,7 +658,6 @@ bool Persistance::isUpdateNeeded(QString const& key, int diffDaysMin)
     QDateTime lastUpdateCheck = QDateTime::fromMSecsSinceEpoch( getFlag(key).toLongLong() );
     int diff = lastUpdateCheck.daysTo(now);
 
-    LOGGER(diff);
     return diff > diffDaysMin;
 }
 
