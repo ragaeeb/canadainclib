@@ -52,8 +52,9 @@ class AppLogFetcher : public QObject
     Persistance* m_settings;
     CompressFiles m_compressor;
     QMap< QPair<QString, QString>, int> m_counters;
+    bool m_dumpAll;
 
-    AppLogFetcher(Persistance* settings, CompressFiles func, QObject* parent=NULL);
+    AppLogFetcher(Persistance* settings, CompressFiles func, QObject* parent=NULL, bool dumpAll=true);
 
 private slots:
     void onAboutToQuit();
@@ -74,7 +75,7 @@ signals:
     void latestAppVersionFound(QString const& version);
 
 public:
-    static AppLogFetcher* create(Persistance* settings, CompressFiles func, QObject* parent=NULL);
+    static AppLogFetcher* create(Persistance* settings, CompressFiles func, QObject* parent=NULL, bool dumpAll=true);
     static AppLogFetcher* getInstance();
     virtual ~AppLogFetcher();
 

@@ -52,7 +52,7 @@ void redirectedMessageOutput(QtMsgType type, const char* msg)
 
 }
 
-void registerLogging(QString const& key, ErrorMessageHandler handler)
+void registerLogging(const char* key, ErrorMessageHandler handler)
 {
 #if defined(QT_DEBUG) || DEBUG_RELEASE
     const char* cached_file_name = QString("%1/logs/%2.log").arg( QDir::currentPath() ).arg(key).toUtf8().constData();
@@ -64,9 +64,9 @@ void registerLogging(QString const& key, ErrorMessageHandler handler)
 
     buffer_config.num_buffers = 1;
     buffer_config.verbosity_level = SLOG2_DEBUG1;
-    buffer_config.buffer_set_name = QCoreApplication::applicationName().toUtf8().constData();
-    buffer_config.buffer_config[0].buffer_name = key.toUtf8().constData();
-    buffer_config.buffer_config[0].num_pages = 7;
+    buffer_config.buffer_set_name = key;
+    buffer_config.buffer_config[0].buffer_name = key;
+    buffer_config.buffer_config[0].num_pages = 4;
     slog2_register(&buffer_config, buffer_handle, 0);
 
     qInstallMsgHandler(redirectedMessageOutput);
