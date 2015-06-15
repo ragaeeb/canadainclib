@@ -8,7 +8,8 @@
 
 namespace canadainc {
 
-LocaleUtil::LocaleUtil(QString const& appName, QObject* parent) : QObject(parent), m_appName(appName)
+LocaleUtil::LocaleUtil(QString const& appName, QObject* parent) :
+        QObject(parent), m_appName(appName), m_pTranslator( new QTranslator() ), m_libTranslator( new QTranslator )
 {
     connect( &m_pLocaleHandler, SIGNAL( systemLanguageChanged() ), this, SLOT( onSystemLanguageChanged() ) );
     onSystemLanguageChanged();
@@ -17,8 +18,8 @@ LocaleUtil::LocaleUtil(QString const& appName, QObject* parent) : QObject(parent
 
 void LocaleUtil::onSystemLanguageChanged()
 {
-    QCoreApplication::instance()->removeTranslator(&m_libTranslator);
-    QCoreApplication::instance()->removeTranslator(&m_pTranslator);
+    QCoreApplication::instance()->removeTranslator(m_libTranslator);
+    QCoreApplication::instance()->removeTranslator(m_pTranslator);
 
     // Initiate, load and install the application translation files.
     m_currentLocale = QLocale().name();
@@ -31,8 +32,8 @@ void LocaleUtil::onSystemLanguageChanged()
 
     LOGGER("LocaleFileName: " << fileName);
 
-    if ( m_pTranslator.load(fileName, "app/native/qm") ) {
-        QCoreApplication::instance()->installTranslator(&m_pTranslator);
+    if ( m_pTranslator->load(fileName, "app/native/qm") ) {
+        QCoreApplication::instance()->installTranslator(m_pTranslator);
     } else {
         LOGGER("LoadFailed" << fileName);
     }
@@ -41,8 +42,8 @@ void LocaleUtil::onSystemLanguageChanged()
 
     LOGGER("LocaleFileName: " << fileName);
 
-    if ( m_libTranslator.load(fileName, "app/native/qm") ) {
-        QCoreApplication::instance()->installTranslator(&m_libTranslator);
+    if ( m_libTranslator->load(fileName, "app/native/qm") ) {
+        QCoreApplication::instance()->installTranslator(m_libTranslator);
     } else {
         LOGGER("LoadFailed" << fileName);
     }

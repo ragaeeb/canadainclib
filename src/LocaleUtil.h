@@ -11,8 +11,8 @@ class LocaleUtil : public QObject
 {
 	Q_OBJECT
 
-    QTranslator m_pTranslator;
-	QTranslator m_libTranslator;
+    QTranslator* m_pTranslator;
+	QTranslator* m_libTranslator;
     bb::cascades::LocaleHandler m_pLocaleHandler;
     QString m_appName;
     QString m_currentLocale;

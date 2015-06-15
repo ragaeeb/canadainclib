@@ -187,6 +187,10 @@ void NetworkProcessor::abort()
 	while ( !m_currentRequests.isEmpty() )
 	{
 		QNetworkReply* current = m_currentRequests.dequeue();
+	    disconnect( current, SIGNAL( downloadProgress(qint64,qint64) ), this, SLOT( downloadProgress(qint64,qint64) ) );
+	    disconnect( current, SIGNAL( finished() ), this, SLOT( onNetworkReply() ) );
+	    //current->disconnect();
+	    //QObject::disconnect(current, 0, 0, 0);
 		current->abort();
 		current->deleteLater();
 	}

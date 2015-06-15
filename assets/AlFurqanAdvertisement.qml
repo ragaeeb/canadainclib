@@ -77,7 +77,7 @@ Sheet
                 
                 onTriggered: {
                     console.log("UserEvent: AlFurqanBack");
-                    persist.setFlag("alFurqanAdvertised", 1);
+                    persist.setFlag(quran ? "alFurqanQuranAdvertised" : "alFurqanAdvertised", 1);
                     
                     reporter.record("AlFurqanBack");
                     root.close();

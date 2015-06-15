@@ -21,6 +21,7 @@ class NetworkProcessor : public QObject
     QNetworkAccessManager* m_networkManager;
     QQueue<QNetworkReply*> m_currentRequests;
     QNetworkConfigurationManager m_config;
+    bool m_aborted;
 
     void init();
 
