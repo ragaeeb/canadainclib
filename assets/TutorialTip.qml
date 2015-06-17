@@ -53,7 +53,7 @@ Delegate
     }
     
     function deferredCheck(key, diff) {
-        return !persist.containsFlag(key) && persist.isUpdateNeeded("firstInstall", diff);
+        return !persist.containsFlag(key) && persist.isUpdateNeeded("firstInstall", diff) && reporter.online;
     }
     
     function isTopPane(navPane, p) {
@@ -136,6 +136,12 @@ Delegate
             }
             
             persist.setFlag("alreadyReviewed", Application.applicationVersion);
+        } else if (data.cookie == "donate") {
+            if (confirmed) {
+                persist.donate();
+            }
+            
+            persist.setFlag("alreadyDonated", Application.applicationVersion);
         }
         
         reporter.record( "TutorialPromptResult", data.cookie+":"+confirmed.toString() );
@@ -144,7 +150,7 @@ Delegate
     
     function promptVideo(uri)
     {
-        if ( !suppressTutorials && ( persist.getFlag("tutorialVideo") != Application.applicationVersion ) )
+        if ( !suppressTutorials && reporter.online && ( persist.getFlag("tutorialVideo") != Application.applicationVersion ) )
         {
             persist.showDialog( tutorialDelegate, {'cookie': 'video', 'value': uri}, qsTr("Video Tutorial"), qsTr("Would you like to see a video tutorial on how to use the app?"), qsTr("Yes"), qsTr("No") );
             return true;
@@ -155,9 +161,20 @@ Delegate
     
     function promptReview()
     {
-        if ( !persist.getFlag("alreadyReviewed") != Application.applicationVersion )
+        if ( !persist.getFlag("alreadyReviewed") != Application.applicationVersion && reporter.online && persist.isUpdateNeeded("firstInstall", 15) )
         {
             persist.showDialog( tutorialDelegate, {'cookie': 'review'}, qsTr("Review"), qsTr("If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?"), qsTr("Yes"), qsTr("No") );
+            return true;
+        }
+        
+        return false;
+    }
+    
+    function promptDonation()
+    {
+        if ( !persist.getFlag("alreadyDonated") != Application.applicationVersion && reporter.online && persist.isUpdateNeeded("firstInstall", 25) )
+        {
+            persist.showDialog( tutorialDelegate, {'cookie': 'donate'}, qsTr("Donate"), qsTr("While our apps will always remain free of charge for your benefit, we encourage you to please donate whatever you can in order to support development. This will motivate the developers to continue to update the app, add new features and bug fixes. To donate, simply swipe-down from the top-bezel and tap the 'Donate' button to send money via PayPal. Would you like to donate now?"), qsTr("Yes"), qsTr("No") );
             return true;
         }
         

@@ -85,6 +85,7 @@ public:
     Q_INVOKABLE void showToast(QString const& text, QString const& icon=QString(), bb::system::SystemUiPosition::Type pos=bb::system::SystemUiPosition::BottomCenter);
     Q_SLOT bool clearCache();
     Q_SLOT void clear();
+    Q_SLOT void donate();
     Q_SLOT void forceSync();
     Q_SLOT void openChannel();
     Q_SLOT void openUri(QString const& uri);

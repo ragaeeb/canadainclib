@@ -283,55 +283,67 @@ Make sure you remember it!</source>
 <context>
     <name>TutorialTip</name>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="149"/>
+        <location filename="../assets/TutorialTip.qml" line="155"/>
         <source>Video Tutorial</source>
         <translation>Tutorial</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="149"/>
+        <location filename="../assets/TutorialTip.qml" line="155"/>
         <source>Would you like to see a video tutorial on how to use the app?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="149"/>
-        <location filename="../assets/TutorialTip.qml" line="160"/>
+        <location filename="../assets/TutorialTip.qml" line="155"/>
+        <location filename="../assets/TutorialTip.qml" line="166"/>
+        <location filename="../assets/TutorialTip.qml" line="177"/>
         <source>Yes</source>
         <translation>Ya</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="149"/>
-        <location filename="../assets/TutorialTip.qml" line="160"/>
+        <location filename="../assets/TutorialTip.qml" line="155"/>
+        <location filename="../assets/TutorialTip.qml" line="166"/>
+        <location filename="../assets/TutorialTip.qml" line="177"/>
         <source>No</source>
         <translation>Tidak</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="160"/>
+        <location filename="../assets/TutorialTip.qml" line="166"/>
         <source>Review</source>
         <translation>Tinjauan</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="160"/>
+        <location filename="../assets/TutorialTip.qml" line="166"/>
         <source>If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?</source>
         <translation>Jika suka menggunakan app, harap luangkan waktu sejenak untuk menilai aplikasi ini. Terima kasih!</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="258"/>
+        <location filename="../assets/TutorialTip.qml" line="177"/>
+        <source>Donate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/TutorialTip.qml" line="177"/>
+        <source>While our apps will always remain free of charge for your benefit, we encourage you to please donate whatever you can in order to support development. This will motivate the developers to continue to update the app, add new features and bug fixes. To donate, simply swipe-down from the top-bezel and tap the &apos;Donate&apos; button to send money via PayPal. Would you like to donate now?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/TutorialTip.qml" line="275"/>
         <source>Stop all Tutorials</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="259"/>
+        <location filename="../assets/TutorialTip.qml" line="276"/>
         <source>Prevent any tutorials from showing...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="265"/>
         <location filename="../assets/TutorialTip.qml" line="282"/>
+        <location filename="../assets/TutorialTip.qml" line="299"/>
         <source>Suppress Tutorials</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="282"/>
+        <location filename="../assets/TutorialTip.qml" line="299"/>
         <source>Are you sure you want to prevent all further tutorials? If you ever want to enable them again, swipe-down from the top-bezel, go to Help, tap on the title bar and uncheck the &apos;Suppress Tutorials&apos; checkmark.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -362,37 +374,37 @@ Make sure you remember it!</source>
 <context>
     <name>canadainc::AppLogFetcher</name>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="240"/>
+        <location filename="../src/AppLogFetcher.cpp" line="242"/>
         <source>Login</source>
         <translation>Masuk</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="241"/>
+        <location filename="../src/AppLogFetcher.cpp" line="243"/>
         <source>Please enter the credentials provided to you by Canada Inc:</source>
         <translation>Masukkan Kredensial anda yang disediakan oleh Inc:</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="299"/>
+        <location filename="../src/AppLogFetcher.cpp" line="301"/>
         <source>Could not submit report! Please try again...</source>
         <translation>Tidak bisa menyampaikan laporan! Silahkan coba lagi...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="304"/>
+        <location filename="../src/AppLogFetcher.cpp" line="306"/>
         <source>Report could not be submitted because you are offline! Please reconnect to the network and try again...</source>
         <translation>Laporan tidak bisa disampaikan karena anda sedang offline! Silahkan sambung kembali ke jaringan dan coba lagi...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="351"/>
+        <location filename="../src/AppLogFetcher.cpp" line="353"/>
         <source>Admin Access Granted for: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="366"/>
+        <location filename="../src/AppLogFetcher.cpp" line="368"/>
         <source>Could not submit logs! Please try again...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="366"/>
+        <location filename="../src/AppLogFetcher.cpp" line="368"/>
         <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -521,17 +533,17 @@ Make sure you remember it!</source>
         <translation>Disalin %1 ke clipboard</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="545"/>
+        <location filename="../src/Persistance.cpp" line="550"/>
         <source>Confirmation</source>
         <translation>Konfirmasi</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="545"/>
+        <location filename="../src/Persistance.cpp" line="550"/>
         <source>Are you sure you want to clear the cache?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="560"/>
+        <location filename="../src/Persistance.cpp" line="565"/>
         <source>Cache was successfully cleared!</source>
         <translation>Cache Anda telah dikosongkan.</translation>
     </message>

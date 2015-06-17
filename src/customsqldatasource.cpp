@@ -5,7 +5,7 @@
 #include <bb/data/SqlConnection>
 #include <QFile>
 
-#define VERBOSE 1
+//#define VERBOSE 1
 
 namespace canadainc {
 

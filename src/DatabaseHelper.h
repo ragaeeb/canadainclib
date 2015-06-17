@@ -4,6 +4,7 @@
 #include "customsqldatasource.h"
 
 #include <QDir>
+#include <QFutureWatcher>
 
 #define ATTACH_DATABASE_ID -1
 #define INIT_SETUP_ID -2
@@ -22,6 +23,7 @@ class DatabaseHelper : public QObject
     QMap<int, QPair<QObject*,int> > m_idToObjectQueryType;
     QMap<QString, bool> m_attached;
     bool m_enabled;
+    QFutureWatcher<QStringList> m_creator;
 
     void stash(QObject* caller, int t);
 
@@ -37,6 +39,7 @@ signals:
 
 private slots:
     void dataLoaded(int id, QVariant const& data);
+    void onDatabaseCreated();
     void onDestroyed(QObject* obj);
 
 public:
@@ -52,7 +55,7 @@ public:
     Q_INVOKABLE void executeQuery(QObject* caller, QString const& query, int t, QVariantList const& args=QVariantList());
     Q_INVOKABLE void initSetup(QObject* caller, QStringList const& setupStatements, int id=INIT_SETUP_ID);
     Q_INVOKABLE void startTransaction(QObject* caller, int id);
-    void createDatabaseIfNotExists(bool sameThread=false) const;
+    void createDatabaseIfNotExists(bool sameThread=false, QStringList const& setupStatements=QStringList()) const;
     void setEnabled(bool enabled);
 };
 

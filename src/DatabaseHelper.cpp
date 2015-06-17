@@ -7,6 +7,16 @@
 
 #define CHECK_ENABLED if (!m_enabled) return
 
+namespace {
+
+QStringList createDB(QString const& dbPath, QStringList const& setupStatements)
+{
+    canadainc::IOUtils::writeFile(dbPath);
+    return setupStatements;
+}
+
+}
+
 namespace canadainc {
 
 DatabaseHelper::DatabaseHelper(QString const& dbase, QObject* parent) :
@@ -16,6 +26,13 @@ DatabaseHelper::DatabaseHelper(QString const& dbase, QObject* parent) :
     connect( &m_sql, SIGNAL( dataLoaded(int, QVariant const&) ), this, SLOT( dataLoaded(int, QVariant const&) ), Qt::QueuedConnection );
     connect( &m_sql, SIGNAL( error(QString const&) ), this, SIGNAL( error(QString const&) ), Qt::QueuedConnection );
     connect( &m_sql, SIGNAL( setupError(QString const&) ), this, SIGNAL( setupError(QString const&) ), Qt::QueuedConnection );
+    connect( &m_creator, SIGNAL( finished() ), this, SLOT( onDatabaseCreated() ) );
+}
+
+
+void DatabaseHelper::onDatabaseCreated()
+{
+
 }
 
 
@@ -172,16 +189,16 @@ void DatabaseHelper::endTransaction(QObject* caller, int id)
 }
 
 
-void DatabaseHelper::createDatabaseIfNotExists(bool sameThread) const
+void DatabaseHelper::createDatabaseIfNotExists(bool sameThread, QStringList const& setupStatements) const
 {
     CHECK_ENABLED;
 
     if ( !QFile::exists( m_sql.source() ) )
     {
         if (sameThread) {
-            IOUtils::writeFile( m_sql.source() );
+            createDB( m_sql.source(), setupStatements );
         } else {
-            QtConcurrent::run(IOUtils::writeFile, m_sql.source(), QByteArray(), false);
+            QtConcurrent::run( createDB, m_sql.source(), setupStatements );
         }
     }
 }
