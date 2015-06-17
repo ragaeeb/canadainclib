@@ -203,6 +203,7 @@ QString TextUtils::removeBrackets(QString& input)
 
 QString TextUtils::optimize(QString input)
 {
+    input.replace( QChar(253), "'" );
     input.replace( QRegExp("\n{2,}\\s*"), "\n\n" );
     return input.trimmed();
 }
