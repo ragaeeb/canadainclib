@@ -6,8 +6,6 @@
 #include <slog2.h>
 #include <cstring>
 
-//#define DEBUG_RELEASE 1
-
 namespace {
 
 #if defined(QT_DEBUG) || DEBUG_RELEASE

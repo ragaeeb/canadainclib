@@ -84,7 +84,7 @@ public:
     Q_SLOT bool performCII();
     Q_INVOKABLE void checkForUpdate(QString const& projectName);
     Q_INVOKABLE void initPage(QObject* page);
-    Q_INVOKABLE void submitLogs(QString const& notes=QString(), bool userTriggered=false, bool includeLastScreenshot=false, bool isSimulation=false);
+    Q_INVOKABLE void submitLogs(QString const& notes=QString(), bool userTriggered=false, bool isSimulation=false, QStringList const& attachments=QStringList());
     Q_INVOKABLE void previewLastCapturedPic();
     Q_INVOKABLE void record(QString const& event, QString const& context="");
     Q_INVOKABLE void listenToDestroyed(QObject* q);

@@ -128,7 +128,7 @@ void DatabaseHelper::executeQuery(QObject* caller, QString const& query, int t, 
 }
 
 
-void DatabaseHelper::executeInternal(QString const& query, int t, QVariantList const& args)
+void DatabaseHelper::executeInternal(QString const& query, int t, QVariantList args)
 {
     CHECK_ENABLED;
 
@@ -137,6 +137,17 @@ void DatabaseHelper::executeInternal(QString const& query, int t, QVariantList c
     if ( args.isEmpty() ) {
         m_sql.load(t);
     } else {
+        for (int i = args.size()-1; i >= 0; i--)
+        {
+            QVariant c = args[i];
+
+            if ( !c.isNull() && ( ( c.type() == QVariant::String && c.toString().isEmpty() ) || ( c.type() == QVariant::Double && !c.toDouble() ) || ( c.type() == QVariant::Int && !c.toInt() ) || ( c.type() == QVariant::LongLong && !c.toLongLong() ) ) )
+            {
+                c.clear();
+                args[i] = c;
+            }
+        }
+
         m_sql.executePrepared(args, t);
     }
 }

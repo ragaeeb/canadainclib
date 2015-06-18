@@ -51,7 +51,7 @@ public:
     Q_INVOKABLE void detach(QString const& dbase, int id=DETACH_DATABASE_ID);
     Q_SLOT void enableForeignKeys(int id=FOREIGN_KEY_SETUP);
     Q_INVOKABLE void endTransaction(QObject* caller, int id);
-    Q_INVOKABLE void executeInternal(QString const& query, int t, QVariantList const& args=QVariantList());
+    Q_INVOKABLE void executeInternal(QString const& query, int t, QVariantList args=QVariantList());
     Q_INVOKABLE void executeQuery(QObject* caller, QString const& query, int t, QVariantList const& args=QVariantList());
     Q_INVOKABLE void initSetup(QObject* caller, QStringList const& setupStatements, int id=INIT_SETUP_ID);
     Q_INVOKABLE void startTransaction(QObject* caller, int id);

@@ -1,4 +1,5 @@
 import bb.cascades 1.2
+import bb.cascades.pickers 1.0
 
 Page
 {
@@ -104,6 +105,50 @@ Page
                                     }
                                 }
                                 
+                                actions: [
+                                    ActionItem
+                                    {
+                                        id: attach
+                                        imageSource: "images/menu/ic_copy.png"
+                                        title: qsTr("Attach") + Retranslate.onLanguageChanged
+                                        ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
+                                        onTriggered: {
+                                            console.log("UserEvent: Attach");
+                                            reporter.record("AttachFiles");
+                                            filePicker.open();
+                                        }
+                                        
+                                        attachedObjects: [
+                                            FilePicker {
+                                                id: filePicker
+                                                directories: ["/accounts/1000/shared/camera"]
+                                                type : FileType.Picture
+                                                title : qsTr("Select Files") + Retranslate.onLanguageChanged
+                                                mode: FilePickerMode.PickerMultiple
+                                                property variant attachments
+                                                
+                                                onFileSelected : {
+                                                    var n = selectedFiles.length;
+                                                    reporter.record("AttachmentCount", n);
+                                                    
+                                                    if (n > 5) {
+                                                        persist.showToast( qsTr("Only a maximum of 5 screenshots may be attached!"), "asset:///images/bugs/ic_bugs_cancel.png" );
+                                                        attachments = undefined;
+                                                    } else {
+                                                        attachments = selectedFiles;
+                                                    }
+                                                }
+                                                
+                                                onCanceled: {
+                                                    attachments = undefined;
+                                                    persist.showToast( qsTr("Attachments cleared!"), "asset:///images/bugs/ic_bugs_cancel.png" );
+                                                    reporter.record("AttachFilesCancel");
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                                
                                 attachedObjects: [
                                     ActionItem
                                     {
@@ -114,7 +159,7 @@ Page
 
                                         onTriggered: {
                                             console.log("UserEvent: Simulate");
-                                            reporter.submitLogs(body.text, true, includeScreenshot.checked, true);
+                                            reporter.submitLogs(body.text, true, true, filePicker.attachments);
                                         }
                                         
                                         function onSimulationComplete(result)
@@ -133,7 +178,7 @@ Page
                                 
                                 titleBar: TitleBar
                                 {
-                                    title: qsTr("Add Notes") + Retranslate.onLanguageChanged
+                                    title: filePicker.attachments ? qsTr("%n attachments", "", filePicker.attachments.length) + Retranslate.onLanguageChanged : qsTr("Add Notes") + Retranslate.onLanguageChanged
                                     
                                     acceptAction: ActionItem
                                     {
@@ -142,6 +187,7 @@ Page
                                         title: qsTr("Submit") + Retranslate.onLanguageChanged
                                         
                                         onTriggered: {
+                                            console.log("UserEvent: SubmitNotes");
                                             nameField.validator.validate();
                                             emailField.validator.validate();
                                             
@@ -152,7 +198,7 @@ Page
                                             
                                             if (nameField.validator.valid && emailField.validator.valid)
                                             {
-                                                reporter.submitLogs( nameField.text.trim()+"\n"+emailField.text.trim()+"\n\n"+body.text.trim(), true, includeScreenshot.checked);
+                                                reporter.submitLogs( nameField.text.trim()+"\n"+emailField.text.trim()+"\n\n"+body.text.trim(), true, filePicker.attachments);
                                                 progressIndicator.value = 0;
                                                 progressIndicator.state = ProgressIndicatorState.Progress;
                                                 progressIndicator.visible = true;
@@ -177,40 +223,6 @@ Page
                                 {
                                     horizontalAlignment: HorizontalAlignment.Fill
                                     verticalAlignment: VerticalAlignment.Fill
-                                    
-                                    Container
-                                    {
-                                        id: includeContainer
-                                        topPadding: 10; bottomPadding: 10; leftPadding: 20; rightPadding: 20
-                                        
-                                        layout: StackLayout {
-                                            orientation: LayoutOrientation.LeftToRight
-                                        }
-                                        
-                                        Label {
-                                            id: includeLabel
-                                            text: qsTr("Include Most Recent Captured Photo") + Retranslate.onLanguageChanged
-                                            verticalAlignment: VerticalAlignment.Center
-                                            
-                                            layoutProperties: StackLayoutProperties {
-                                                spaceQuota: 1
-                                            }
-                                            
-                                            gestureHandlers: [
-                                                TapHandler {
-                                                    onTapped: {
-                                                        reporter.previewLastCapturedPic();
-                                                    }
-                                                }
-                                            ]
-                                        }
-                                        
-                                        ToggleButton
-                                        {
-                                            id: includeScreenshot
-                                            checked: true
-                                        }
-                                    }
                                     
                                     Divider {
                                         id: divider

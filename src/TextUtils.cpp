@@ -168,7 +168,7 @@ QString TextUtils::getPlaceHolders(int n, bool multi, QString const& symbol)
 QString TextUtils::toTitleCase(QString const& s)
 {
     static const QString matchWords = QString("\\b([\\w'%1%2]+)\\b").arg( QChar(8217) ).arg( QChar(8216) );
-    static const QString littleWords = "\\b(a|an|and|as|at|by|for|if|in|of|on|or|to|the|ibn|bin|b\\.)\\b";
+    static const QString littleWords = "\\b(a|an|and|as|at|by|for|if|in|of|on|or|to|the|ibn|bin|bint|b\\.)\\b";
     QString result = s.toLower();
 
     QRegExp wordRegExp(matchWords);
