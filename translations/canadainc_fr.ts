@@ -93,77 +93,100 @@
 <context>
     <name>BugReportPage</name>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="24"/>
+        <location filename="../assets/BugReportPage.qml" line="25"/>
         <source>Bug Reports</source>
         <translation>Rapports de Bug</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="39"/>
+        <location filename="../assets/BugReportPage.qml" line="40"/>
         <source>Open in Browser</source>
         <translation>Ouvrir dans le navigateur</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="52"/>
+        <location filename="../assets/BugReportPage.qml" line="53"/>
         <source>Submit Logs</source>
         <translation>Génération de rapports</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="65"/>
+        <location filename="../assets/BugReportPage.qml" line="66"/>
         <source>Submission Status</source>
         <translation>État</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="112"/>
+        <location filename="../assets/BugReportPage.qml" line="113"/>
+        <source>Attach</source>
+        <translation>Joindre</translation>
+    </message>
+    <message>
+        <location filename="../assets/BugReportPage.qml" line="126"/>
+        <source>Select Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/BugReportPage.qml" line="135"/>
+        <source>Only a maximum of 5 screenshots may be attached!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/BugReportPage.qml" line="144"/>
+        <source>Attachments cleared!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/BugReportPage.qml" line="157"/>
         <source>Simulate</source>
         <translation>Simuler</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="136"/>
+        <location filename="../assets/BugReportPage.qml" line="181"/>
         <source>Add Notes</source>
         <translation>Ajouter des notes</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../assets/BugReportPage.qml" line="181"/>
+        <source>%n attachments</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="142"/>
+        <location filename="../assets/BugReportPage.qml" line="187"/>
         <source>Submit</source>
         <translation>Envoyer</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="149"/>
+        <location filename="../assets/BugReportPage.qml" line="195"/>
         <source>Please enter detailed notes about the bug you observed!</source>
         <translation>S&apos;il vous plaît entrer des notes détaillées sur le bug que vous avez observé!</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="167"/>
+        <location filename="../assets/BugReportPage.qml" line="213"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="192"/>
-        <source>Include Most Recent Captured Photo</source>
-        <translation>Inclure les plus récentes photos Capturé</translation>
-    </message>
-    <message>
-        <location filename="../assets/BugReportPage.qml" line="265"/>
+        <location filename="../assets/BugReportPage.qml" line="277"/>
         <source>Name:</source>
         <translation>Nom:</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="277"/>
+        <location filename="../assets/BugReportPage.qml" line="289"/>
         <source>Name cannot be empty!</source>
         <translation>Le nom ne peut pas être vide</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="289"/>
+        <location filename="../assets/BugReportPage.qml" line="301"/>
         <source>Email Address:</source>
         <translation>Adresse e-mail:</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="307"/>
+        <location filename="../assets/BugReportPage.qml" line="319"/>
         <source>Invalid email address!</source>
         <translation>Adresse non valide</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="328"/>
+        <location filename="../assets/BugReportPage.qml" line="340"/>
         <source>Summary of Bug:
 
 
@@ -180,17 +203,17 @@ How often can you reproduce this?</source>
 Combien de fois pouvez-vous le reproduire?</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="331"/>
+        <location filename="../assets/BugReportPage.qml" line="343"/>
         <source>Enter the notes you wish to add...</source>
         <translation>Entrez les notes que vous souhaitez ajouter...</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="421"/>
+        <location filename="../assets/BugReportPage.qml" line="433"/>
         <source>If you were instructed by our staff to submit a bug report, please use the &apos;%1&apos; action at the bottom. Then fill out the form, and send the representative the Bug Report ID generated.</source>
         <translation>&quot;Si vous étiez chargé par notre personnel pour soumettre un rapport de bug , s&apos;il vous plaît utiliser le &apos;%1&apos; une action vers le bas. Ensuite, remplissez le formulaire et envoyez le représentant du Bug Report ID généré.</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="422"/>
+        <location filename="../assets/BugReportPage.qml" line="434"/>
         <source>To open this page in the web browser, please use the &apos;%1&apos; action at the bottom.</source>
         <translation>Pour ouvrir cette page dans le navigateur Web , s&apos;il vous plaît utiliser &apos;%1&apos; l’option ci-dessous.</translation>
     </message>
@@ -380,37 +403,37 @@ Make sure you remember it!</source>
 <context>
     <name>canadainc::AppLogFetcher</name>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="242"/>
+        <location filename="../src/AppLogFetcher.cpp" line="245"/>
         <source>Login</source>
         <translation>Connexion</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="243"/>
+        <location filename="../src/AppLogFetcher.cpp" line="246"/>
         <source>Please enter the credentials provided to you by Canada Inc:</source>
         <translation>Veuillez entrez les informations qui vous sont fournis par Canada Inc:</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="301"/>
+        <location filename="../src/AppLogFetcher.cpp" line="303"/>
         <source>Could not submit report! Please try again...</source>
         <translation>Impossible de soumettre le rapport! S&apos;il vous plaît veuillez essayez à nouveau...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="306"/>
+        <location filename="../src/AppLogFetcher.cpp" line="308"/>
         <source>Report could not be submitted because you are offline! Please reconnect to the network and try again...</source>
         <translation>Votre demande ne pouvait être soumise parce que vous êtes déconnecté! S&apos;il vous plaît veuillez vous connecter au réseau et essayez à nouveau...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="353"/>
+        <location filename="../src/AppLogFetcher.cpp" line="355"/>
         <source>Admin Access Granted for: %1</source>
         <translation>Accès Administrateur accordée pour: %1</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="368"/>
+        <location filename="../src/AppLogFetcher.cpp" line="370"/>
         <source>Could not submit logs! Please try again...</source>
         <translation>Impossible de soumettre votre registres! S&apos;il vous plaît essayez à nouveau...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="368"/>
+        <location filename="../src/AppLogFetcher.cpp" line="370"/>
         <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
         <translation>Les registres ont été soumis . S&apos;il vous plaît fournir à l&apos;équipe de maintenance  l&apos;information (ID) suivante: %1</translation>
     </message>

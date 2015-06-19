@@ -109,7 +109,7 @@ Page
                                     ActionItem
                                     {
                                         id: attach
-                                        imageSource: "images/menu/ic_copy.png"
+                                        imageSource: "images/bugs/ic_attach.png"
                                         title: qsTr("Attach") + Retranslate.onLanguageChanged
                                         ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
                                         onTriggered: {
