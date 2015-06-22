@@ -58,7 +58,7 @@ void Persistance::commit()
 }
 
 
-void Persistance::showToast(QString const& text, QString const& icon, bb::system::SystemUiPosition::Type pos)
+void Persistance::showToast(QString const& text, QString const& icon, int pos)
 {
 	if (m_toast == NULL) {
 		m_toast = new SystemToast(this);
@@ -68,7 +68,7 @@ void Persistance::showToast(QString const& text, QString const& icon, bb::system
 	m_toast->setBody(text);
 	m_toast->setIcon( icon.startsWith("asset:///") || icon.startsWith("file:///") ? icon : "asset:///"+icon );
 	m_toast->setProperty(KEY_TOAST_SHOWING, true);
-	m_toast->setPosition(pos);
+	m_toast->setPosition( SystemUiPosition::Type(pos) );
 	m_toast->show();
 }
 
