@@ -5,14 +5,12 @@
 #include <bb/data/SqlConnection>
 #include <QFile>
 
-//#define VERBOSE 1
-
 namespace canadainc {
 
 using namespace bb::data;
 
 CustomSqlDataSource::CustomSqlDataSource(QObject *parent) : QObject(parent),
-        m_name("connect"), m_sqlConnector(NULL), m_execTimestamp(0)
+        m_name("connect"), m_sqlConnector(NULL), m_execTimestamp(0), m_verbose(false)
 {
 }
 
@@ -21,6 +19,11 @@ CustomSqlDataSource::~CustomSqlDataSource()
 	if (m_sqlConnector) {
 		m_sqlConnector->stop();
 	}
+}
+
+
+void CustomSqlDataSource::setVerbose(bool verbose) {
+    m_verbose = verbose;
 }
 
 
@@ -96,12 +99,14 @@ DataAccessReply CustomSqlDataSource::executeAndWait(QVariant const& criteria, in
 
 void CustomSqlDataSource::execute(QVariant const& criteria, int id)
 {
-    if ( checkConnection() ) {
-#ifdef VERBOSE
-    	LOGGER( id << criteria.toString() );
-#else
-    	LOGGER(id);
-#endif
+    if ( checkConnection() )
+    {
+        if (m_verbose) {
+            LOGGER( id << criteria.toString() );
+        } else {
+            LOGGER(id);
+        }
+
     	//m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
         m_sqlConnector->execute(criteria, id);
     }
@@ -110,12 +115,14 @@ void CustomSqlDataSource::execute(QVariant const& criteria, int id)
 
 void CustomSqlDataSource::executePrepared(QVariantList const& values, int id)
 {
-    if ( checkConnection() ) {
-#ifdef VERBOSE
-    	LOGGER(m_query << values << id);
-#else
-    	LOGGER(id);
-#endif
+    if ( checkConnection() )
+    {
+        if (m_verbose) {
+            LOGGER( m_query << values << id );
+        } else {
+            LOGGER(id);
+        }
+
     	//m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
         m_sqlConnector->execute(m_query, values, id);
     }
@@ -160,9 +167,10 @@ void CustomSqlDataSource::onLoadAsyncResultData(bb::data::DataAccessReply const&
 
 bool CustomSqlDataSource::initSetup(QStringList const& setupStatements, int id, int settingUpId)
 {
-#ifdef VERBOSE
-    LOGGER(setupStatements << id);
-#endif
+    if (m_verbose) {
+        LOGGER(setupStatements << id);
+    }
+
 	bool result = IOUtils::writeFile(m_source);
 
     //m_execTimestamp = QDateTime::currentMSecsSinceEpoch();

@@ -15,10 +15,6 @@ QObject* CardUtils::initAppropriate(QString const& qmlDoc, QMap<QString, QObject
     QmlDocument* qml = QmlDocument::create( QString("asset:///%1").arg(qmlDoc) ).parent(parent);
     qml->setContextProperty("app", parent);
 
-    if (parent) {
-        parent->setObjectName("app");
-    }
-
     foreach ( QString const& key, context.keys() ) {
         qml->setContextProperty( key, context.value(key) );
     }

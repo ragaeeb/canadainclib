@@ -35,6 +35,7 @@ class CustomSqlDataSource: public QObject
     QString m_source;
     SqlConnection* m_sqlConnector;
     qint64 m_execTimestamp;
+    bool m_verbose;
 
 private slots:
     /**
@@ -121,6 +122,8 @@ public:
      * @return <code>true</code> If setup was successfully completed, <code>false</code> if setup was not needed.
      */
     Q_INVOKABLE bool initSetup(QStringList const& setupStatements, int id=1, int settingUpId=-2);
+
+    void setVerbose(bool verbose=true);
 
 signals:
     /**

@@ -220,6 +220,11 @@ void DatabaseHelper::setEnabled(bool enabled) {
 }
 
 
+void DatabaseHelper::setVerboseLogging(bool enabled) {
+    m_sql.setVerbose(enabled);
+}
+
+
 DatabaseHelper::~DatabaseHelper()
 {
 }

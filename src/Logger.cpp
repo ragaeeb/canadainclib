@@ -50,6 +50,13 @@ void redirectedMessageOutput(QtMsgType type, const char* msg)
 
 }
 
+
+void setErrorHandler(ErrorMessageHandler handler)
+{
+    errorHandler = handler;
+}
+
+
 void registerLogging(const char* key, ErrorMessageHandler handler)
 {
 #if defined(QT_DEBUG) || DEBUG_RELEASE

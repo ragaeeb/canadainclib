@@ -11,5 +11,6 @@
 typedef void (*ErrorMessageHandler)(const char* errorMessage);
 
 extern void registerLogging(const char* key, ErrorMessageHandler errorHandler=NULL);
+extern void setErrorHandler(ErrorMessageHandler errorHandler=NULL);
 
 #endif /* LOGGER_H_ */

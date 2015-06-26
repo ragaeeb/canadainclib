@@ -57,6 +57,7 @@ public:
     Q_INVOKABLE void startTransaction(QObject* caller, int id);
     void createDatabaseIfNotExists(bool sameThread=false, QStringList const& setupStatements=QStringList()) const;
     void setEnabled(bool enabled);
+    void setVerboseLogging(bool enabled=true);
 };
 
 } /* namespace canadainc */
