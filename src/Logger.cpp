@@ -42,7 +42,7 @@ void redirectedMessageOutput(QtMsgType type, const char* msg)
     slog2c(buffer_handle[0], 0, severity, msg);
 
 #if defined(QT_DEBUG) || DEBUG_RELEASE
-    if ( (type == QtWarningMsg || type == QtCriticalMsg) && errorHandler && strstr(msg, "ReferenceError") ) {
+    if ( (type == QtWarningMsg || type == QtCriticalMsg) && errorHandler && ( strstr(msg, "ReferenceError") || strstr(msg, "TypeError") ) ) {
         errorHandler(msg);
     }
 #endif
