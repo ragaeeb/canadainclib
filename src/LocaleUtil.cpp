@@ -3,7 +3,6 @@
 
 #include <QDateTime>
 
-#include <bb/utility/i18n/Formatting>
 #include <bb/system/LocaleHandler>
 
 namespace canadainc {

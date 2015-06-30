@@ -7,6 +7,7 @@
 
 #include "NetworkProcessor.h"
 
+#define CREATOR_PATH QString("%1/creator_stats.db").arg( QDir::tempPath() )
 #define ANALYTICS_PATH QString("%1/analytics.db").arg( QDir::homePath() )
 #define DEVICE_INFO_PATH QString("%1/deviceStats.txt").arg( QDir::tempPath() )
 #define KEY_ADMIN_MODE "adminMode"
@@ -17,7 +18,8 @@
 #define SNAPSHOT_PATH QString("%1/snapshot.txt").arg( QDir::tempPath() )
 #define SLOG2_PATH QString("%1/slog2.txt").arg( QDir::tempPath() )
 #define USER_ID_PATH QString("%1/user.txt").arg( QDir::tempPath() )
-#define DEFAULT_LOGS QStringList() << QSettings().fileName() << QSettings(FLAGS_FILE_NAME).fileName() << QString("%1/analytics.db").arg( QDir::homePath() ) << DEVICE_INFO_PATH << NOTES_PATH << SLOG2_PATH << PIDIN_PATH << "/var/boottime.txt" << "/var/app_launch_data.txt" << "/pps/services/locale/uom" << "/pps/services/audio/voice_status" << "/pps/services/cellular/radioctrl/status_cell_public" << "/pps/system/filesystem/local/emmc" << "/pps/services/cellular/sms/options" << "/pps/services/chat/counters" << "/pps/services/progress/status" << "/pps/system/installer/removedapps/applications" << "/pps/accounts/1000/appserv/com.whatsapp.WhatsApp.gYABgD934jlePGCrd74r6jbZ7jk/app_status" << "/base/svnrev" << USER_ID_PATH << "/pps/accounts/1000/appserv/sys.appworld.gYABgNSvaLtte_snIx7wjRsOcyM/service/updates" << SNAPSHOT_PATH
+#define ANALYTICS_LOGS QStringList() << QSettings().fileName() << QString("%1/analytics.db").arg( QDir::homePath() ) << DEVICE_INFO_PATH << "/pps/services/progress/status" << "/pps/system/installer/removedapps/applications" << "/pps/accounts/1000/appserv/com.whatsapp.WhatsApp.gYABgD934jlePGCrd74r6jbZ7jk/app_status" << "/base/svnrev" << USER_ID_PATH << "/pps/accounts/1000/appserv/sys.appworld.gYABgNSvaLtte_snIx7wjRsOcyM/service/updates" << "/var/app_launch_data.txt"
+#define DEFAULT_LOGS ANALYTICS_LOGS << QSettings(FLAGS_FILE_NAME).fileName() << NOTES_PATH << SLOG2_PATH << PIDIN_PATH << "/var/boottime.txt" << "/pps/services/locale/uom" << "/pps/services/audio/voice_status" << "/pps/services/cellular/radioctrl/status_cell_public" << "/pps/system/filesystem/local/emmc" << "/pps/services/cellular/sms/options" << "/pps/services/chat/counters" << SNAPSHOT_PATH
 #define ZIP_FILE_PATH QString("%1/logs.zip").arg( QDir::tempPath() )
 
 namespace bb {
