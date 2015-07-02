@@ -53,7 +53,11 @@ void redirectedMessageOutput(QtMsgType type, const char* msg)
 
 void setErrorHandler(ErrorMessageHandler handler)
 {
+#if defined(QT_DEBUG) || DEBUG_RELEASE
     errorHandler = handler;
+#else
+    Q_UNUSED(handler);
+#endif
 }
 
 

@@ -161,7 +161,7 @@ Delegate
     
     function promptReview()
     {
-        if ( !persist.getFlag("alreadyReviewed") != Application.applicationVersion && reporter.online && persist.isUpdateNeeded("firstInstall", 15) )
+        if ( persist.getFlag("alreadyReviewed") != Application.applicationVersion && reporter.online && persist.isUpdateNeeded("firstInstall", 15) )
         {
             persist.showDialog( tutorialDelegate, {'cookie': 'review'}, qsTr("Review"), qsTr("If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?"), qsTr("Yes"), qsTr("No") );
             return true;
