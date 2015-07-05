@@ -90,18 +90,20 @@ MenuDefinition
     settingsAction: SettingsActionItem
     {
         id: settingsActionItem
-        property variant settingsPage
+        
+        function onDestroyed() {
+            enabled = true;
+        }
         
         onTriggered:
         {
             console.log("UserEvent: SettingsPage");
             
-            if (!settingsPage) {
-                definition.source = "SettingsPage.qml"
-                settingsPage = definition.createObject()
-            }
-            
-            launchPage(settingsPage);
+            definition.source = "SettingsPage.qml"
+            var p = definition.createObject();
+            persist.registerForDestroyed(p, settingsActionItem);
+            enabled = false;
+            launchPage(p);
             
             reporter.record("SettingsPage");
         }
@@ -110,20 +112,23 @@ MenuDefinition
     actions: [
         ActionItem
         {
-            property variant bugReportPage
+            id: bugReportActionItem
             title: qsTr("Bug Reports") + Retranslate.onLanguageChanged
             imageSource: "images/ic_bugs.png"
             
+            function onDestroyed() {
+                enabled = true;
+            }
+            
             onTriggered: {
                 console.log("UserEvent: BugReportPage");
-                
-                if (!bugReportPage) {
-                    definition.source = "BugReportPage.qml"
-                    bugReportPage = definition.createObject()
-                }
-                
-                bugReportPage.projectName = projectName;
-                launchPage(bugReportPage);
+
+                definition.source = "BugReportPage.qml"
+                var p = definition.createObject();
+                p.projectName = projectName;
+                persist.registerForDestroyed(p, bugReportActionItem);
+                launchPage(p);
+                enabled = false;
                 
                 reporter.record("BugReportPage");
             }
@@ -146,19 +151,21 @@ MenuDefinition
     helpAction: HelpActionItem
     {
         id: helpActionItem
-        property variant helpPage
+        
+        function onDestroyed() {
+            enabled = true;
+        }
         
         onTriggered:
         {
             console.log("UserEvent: HelpPage");
             
-            if (!helpPage) {
-                definition.source = "HelpPage.qml"
-                helpPage = definition.createObject()
-            }
-            
-            launchPage(helpPage);
-            
+            definition.source = "HelpPage.qml"
+            var p = definition.createObject();
+            persist.registerForDestroyed(p, helpActionItem);
+            launchPage(p);
+            enabled = false;
+
             reporter.record("HelpPage");
         }
     }

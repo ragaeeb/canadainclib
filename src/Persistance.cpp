@@ -172,6 +172,22 @@ void Persistance::registerForSetting(QObject* q, QString const& key, bool isFlag
 }
 
 
+void Persistance::registerForDestroyed(QObject* toWatch, QObject* caller)
+{
+    connect( toWatch, SIGNAL( destroyed(QObject*) ), this, SLOT( onTargetDestroyed(QObject*) ) );
+    m_destroyWatchers.insert(toWatch, caller);
+}
+
+
+void Persistance::onTargetDestroyed(QObject* obj)
+{
+    QObject* watcher = m_destroyWatchers.value(obj);
+    m_destroyWatchers.remove(obj);
+
+    QMetaObject::invokeMethod(watcher, "onDestroyed", Qt::QueuedConnection);
+}
+
+
 void Persistance::showDialog(QString const& title, QString const& text, QString okButton) {
     showDialog(NULL, QVariant(), title, text, okButton, "");
 }

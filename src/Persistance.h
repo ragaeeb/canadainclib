@@ -35,6 +35,7 @@ class Persistance : public QObject
     QSettings m_settings;
     QMap<QString, QObjectList> m_settingToListeners;
     QMap<QObject*, QStringList> m_listenerToSettings;
+    QMap<QObject*, QObject*> m_destroyWatchers;
 
 private slots:
     void cacheCleared();
@@ -42,6 +43,7 @@ private slots:
     void dialogFinished(bb::system::SystemUiResult::Type value);
     void finished(bb::system::SystemUiResult::Type value);
     void onDestroyed(QObject* obj);
+    void onTargetDestroyed(QObject* obj);
     void onLookupFinished();
     void promptFinished(bb::system::SystemUiResult::Type value);
 
@@ -91,6 +93,12 @@ public:
     Q_SLOT void openUri(QString const& uri);
     Q_SLOT void reviewApp();
     Q_INVOKABLE void registerForSetting(QObject* q, QString const& key, bool isFlag=false, bool immediate=true);
+
+    /**
+     *Note that we don't currently monitor when the caller is destroyed. So make sure the caller is alive forever otherwise there
+     *will be leaks.
+     */
+    Q_INVOKABLE void registerForDestroyed(QObject* toWatch, QObject* caller);
     static bool showBlockingDialog(QString const& title, QString const& text, QString const& rememberMeText, bool &rememberMeValue, QString const& okButton, QString const& cancelButton, bool okEnabled=true);
     Q_INVOKABLE static QString homePath();
     Q_INVOKABLE static QString tempPath();
