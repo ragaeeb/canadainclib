@@ -25,6 +25,13 @@ public:
     static void launchPhoto(QString const& uri, InvokeManager* invokeManager);
     static void launchSMSComposer(QString const& number, InvokeManager& invokeManager);
 	static void replyToMessage(qint64 accountId, QString const& messageId, InvokeManager& invokeManager);
+	static void call(QString const& number, InvokeManager* invokeManager);
+	static void invoke(QString const& targetId, QString const& action, QString const& mime, QString const& uri, QString const& data, InvokeManager* invokeManager);
+    static bool hasEmailSmsAccess();
+    static bool hasLocationAccess();
+    static bool hasPhoneControlAccess();
+    static bool hasSharedFolderAccess();
+    static void launchSettingsApp(QString const& key, QVariantMap const& metadata, InvokeManager* invokeManager);
 };
 
 } /* namespace canadainc */

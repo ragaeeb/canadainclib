@@ -17,8 +17,6 @@ namespace canadainc {
 using namespace bb::cascades;
 using namespace bb::device;
 
-DeviceUtils* DeviceUtils::instance = NULL;
-
 DeviceUtils::DeviceUtils(QObject* parent) :
         QObject(parent), m_hw(NULL), m_display(NULL)
 {
@@ -103,16 +101,6 @@ void DeviceUtils::onTopTriggered()
 }
 
 
-DeviceUtils* DeviceUtils::create(QObject* parent)
-{
-    if (!instance) {
-        instance = new DeviceUtils(parent);
-    }
-
-    return instance;
-}
-
-
 bool DeviceUtils::isEqual(bb::cascades::Page* p1, bb::cascades::Page* p2) {
     return p1 == p2;
 }
@@ -122,6 +110,13 @@ void DeviceUtils::cleanUpAndDestroy(QObject* q)
 {
     QMetaObject::invokeMethod(q, CLEANUP_FUNC, Qt::QueuedConnection);
     q->deleteLater();
+}
+
+
+void DeviceUtils::registerTutorialTips(QObject* parent)
+{
+    QmlDocument* qml = QmlDocument::create("asset:///TutorialTip.qml").parent(parent);
+    QmlDocument::defaultDeclarativeEngine()->rootContext()->setContextProperty( "tutorial", qml->createRootObject<QObject>() );
 }
 
 

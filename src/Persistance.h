@@ -7,8 +7,11 @@
 #include <bb/system/SystemUiPosition>
 #include <bb/system/SystemUiResult>
 
+#include "DialogUtils.h"
+
 #define INIT_SETTING(a,b) if ( !m_persistance.contains(a) ) m_persistance.saveValueFor(a,b,false);
 #define FLAGS_FILE_NAME "flags"
+#define KEY_SUPPRESS_TUTORIALS "suppressTutorials"
 
 namespace bb {
 	namespace system {
@@ -23,12 +26,9 @@ namespace canadainc {
 class Persistance : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(bool isBlocked READ isBlocked NOTIFY isBlockedChanged)
+	Q_PROPERTY(bool isBlocked READ isBlocked FINAL)
 
     bb::system::InvokeManager* m_invokeManager;
-    bb::system::SystemDialog* m_dialog;
-    bb::system::SystemToast* m_toast;
-    bb::system::SystemPrompt* m_prompt;
     QMap<QString, bool> m_logMap;
     QMap<QString, QVariant> m_pending;
     QSettings m_flags;
@@ -36,19 +36,14 @@ class Persistance : public QObject
     QMap<QString, QObjectList> m_settingToListeners;
     QMap<QObject*, QStringList> m_listenerToSettings;
     QMap<QObject*, QObject*> m_destroyWatchers;
+    DialogUtils m_dialogs;
 
 private slots:
-    void cacheCleared();
     void commit();
-    void dialogFinished(bb::system::SystemUiResult::Type value);
-    void finished(bb::system::SystemUiResult::Type value);
     void onDestroyed(QObject* obj);
     void onTargetDestroyed(QObject* obj);
-    void onLookupFinished();
-    void promptFinished(bb::system::SystemUiResult::Type value);
 
 signals:
-    void isBlockedChanged();
 	void settingChanged(QString const& key);
 
 public:
@@ -57,6 +52,7 @@ public:
 
     bb::system::InvokeManager* invokeManager();
     bool isBlocked() const;
+    void portLegacy(QStringList settingKeys);
     Q_INVOKABLE bool contains(QString const& key) const;
     Q_INVOKABLE bool containsFlag(QString const& key);
     Q_INVOKABLE bool isUpdateNeeded(QString const& key, int diffDaysMin=30);
@@ -70,13 +66,23 @@ public:
     Q_INVOKABLE static bool hasSharedFolderAccess();
     Q_INVOKABLE static bool showBlockingDialog(QString const& title, QString const& text, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"), bool okEnabled=true);
     Q_INVOKABLE static QByteArray convertToUtf8(QString const& text);
+    Q_INVOKABLE static QString homePath();
     Q_INVOKABLE static QString showBlockingPrompt(QString const& title, QString const& body, QString const& defaultText, QString const& hintText, int maxLength, bool autoCapitalize=true, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"), int inputMode=0);
+    Q_INVOKABLE static QString tempPath();
     Q_INVOKABLE void call(QString const& number);
     Q_INVOKABLE void copyToClipboard(QString const& text, bool showToastMessage=true);
+    Q_INVOKABLE void findTarget(QString const& uri, QString const& target, QObject* caller);
     Q_INVOKABLE void invoke(QString const& targetId, QString const& action="", QString const& mime="", QString const& uri="", QString const& data="");
     Q_INVOKABLE void launchAppPermissionSettings();
     Q_INVOKABLE void launchSettingsApp(QString const& key, QVariantMap const& metadata=QVariantMap());
     Q_INVOKABLE void openBlackBerryWorld(QString const& appID);
+
+    /**
+     *Note that we don't currently monitor when the caller is destroyed. So make sure the caller is alive forever otherwise there
+     *will be leaks.
+     */
+    Q_INVOKABLE void registerForDestroyed(QObject* toWatch, QObject* caller);
+    Q_INVOKABLE void registerForSetting(QObject* q, QString const& key, bool isFlag=false, bool immediate=true);
     Q_INVOKABLE void remove(QString const& key, bool fireEvent=true);
     Q_INVOKABLE void setFlag(QString const& key, QVariant const& value=QVariant());
     Q_INVOKABLE void showDialog(QObject* caller, QString const& title, QString const& text, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"), QString const& rememberMeText=QString(), bool rememberMeValue=false);
@@ -85,24 +91,13 @@ public:
     Q_INVOKABLE void showPrompt(QObject* caller, QString const& title, QString const& body, QString const& defaultText, QString const& hintText, int maxLength, bool autoCapitalize=true, QString const& okButton=tr("Save"), QString const& cancelButton=tr("Cancel"), int inputMode=0, QString const& funcName="onFinished", QVariant const& data=QVariant());
     Q_INVOKABLE void showPrompt(QObject* caller, QString const& title, QString const& body, QString const& defaultText, QString const& hintText, int maxLength, QString const& funcName, QVariant const& data=QVariant());
     Q_INVOKABLE void showToast(QString const& text, QString const& icon=QString(), int pos=2);
-    Q_SLOT bool clearCache();
     Q_SLOT void clear();
     Q_SLOT void donate();
     Q_SLOT void forceSync();
     Q_SLOT void openChannel();
     Q_SLOT void openUri(QString const& uri);
     Q_SLOT void reviewApp();
-    Q_INVOKABLE void registerForSetting(QObject* q, QString const& key, bool isFlag=false, bool immediate=true);
-
-    /**
-     *Note that we don't currently monitor when the caller is destroyed. So make sure the caller is alive forever otherwise there
-     *will be leaks.
-     */
-    Q_INVOKABLE void registerForDestroyed(QObject* toWatch, QObject* caller);
     static bool showBlockingDialog(QString const& title, QString const& text, QString const& rememberMeText, bool &rememberMeValue, QString const& okButton, QString const& cancelButton, bool okEnabled=true);
-    Q_INVOKABLE static QString homePath();
-    Q_INVOKABLE static QString tempPath();
-    Q_INVOKABLE void findTarget(QString const& uri, QString const& target, QObject* caller);
 };
 
 } /* namespace canadainc */

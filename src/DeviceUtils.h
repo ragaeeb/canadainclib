@@ -35,7 +35,6 @@ class DeviceUtils : public QObject
     DisplayInfo* m_display;
     QMap<QObject*, QObject*> m_actionToList;
 
-    DeviceUtils(QObject* parent);
     void processDirection(ScrollPosition::Type);
 
 private slots:
@@ -44,7 +43,7 @@ private slots:
     void onTopTriggered();
 
 public:
-    static DeviceUtils* create(QObject* parent=NULL);
+    DeviceUtils(QObject* parent=NULL);
     virtual ~DeviceUtils();
 
     Q_INVOKABLE void attachTopBottomKeys(bb::cascades::Page* page, bb::cascades::ListView* listView, bool onBar=false);
@@ -58,6 +57,8 @@ public:
     Q_INVOKABLE bool isEqual(bb::cascades::Page* p1, bb::cascades::Page* p2);
 
     Q_INVOKABLE void cleanUpAndDestroy(QObject* q);
+
+    static void registerTutorialTips(QObject* parent);
 };
 
 } /* namespace canadainc */
