@@ -224,7 +224,7 @@ bool InvocationUtils::hasPhoneControlAccess()
 }
 
 
-void InvocationUtils::invoke(QString const& targetId, QString const& action, QString const& mime, QString const& uri, QString const& data, InvokeManager* invokeManager)
+InvokeTargetReply* InvocationUtils::invoke(QString const& targetId, QString const& action, QString const& mime, QString const& uri, QString const& data, InvokeManager* invokeManager)
 {
     InvokeRequest request;
     request.setTarget(targetId);
@@ -233,7 +233,7 @@ void InvocationUtils::invoke(QString const& targetId, QString const& action, QSt
     request.setMimeType(mime);
     request.setData( data.toUtf8() );
 
-    invokeManager->invoke(request);
+    return invokeManager->invoke(request);
 }
 
 

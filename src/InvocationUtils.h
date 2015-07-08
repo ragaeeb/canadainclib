@@ -26,7 +26,7 @@ public:
     static void launchSMSComposer(QString const& number, InvokeManager& invokeManager);
 	static void replyToMessage(qint64 accountId, QString const& messageId, InvokeManager& invokeManager);
 	static void call(QString const& number, InvokeManager* invokeManager);
-	static void invoke(QString const& targetId, QString const& action, QString const& mime, QString const& uri, QString const& data, InvokeManager* invokeManager);
+	static InvokeTargetReply* invoke(QString const& targetId, QString const& action, QString const& mime, QString const& uri, QString const& data, InvokeManager* invokeManager);
     static bool hasEmailSmsAccess();
     static bool hasLocationAccess();
     static bool hasPhoneControlAccess();

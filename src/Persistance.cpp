@@ -5,6 +5,7 @@
 
 #include <bb/system/Clipboard>
 #include <bb/system/InvokeAction>
+#include <bb/system/InvokeTargetReply>
 #include <bb/system/SystemDialog>
 #include <bb/system/SystemPrompt>
 
@@ -382,8 +383,31 @@ void Persistance::portLegacy(QStringList settingKeys)
 }
 
 
-void Persistance::invoke(QString const& targetId, QString const& action, QString const& mime, QString const& uri, QString const& data) {
-    InvocationUtils::invoke(targetId, action, mime, uri, data, m_invokeManager);
+void Persistance::invoke(QString const& targetId, QString const& action, QString const& mime, QString const& uri, QString const& data, QObject* callback)
+{
+    InvokeTargetReply* itr = InvocationUtils::invoke(targetId, action, mime, uri, data, m_invokeManager);
+    itr->setProperty(INVOKE_TARGET_PROPERTY, targetId);
+
+    if (callback)
+    {
+        itr->setParent(callback);
+        connect( itr, SIGNAL( finished() ), this, SLOT( onInvokeFinished() ) );
+    }
+}
+
+
+void Persistance::onInvokeFinished()
+{
+    InvokeTargetReply* itr = static_cast<InvokeTargetReply*>( sender() );
+    InvokeReplyError::Type ire = itr->error();
+
+    LOGGER("InvokeFinished" << ire);
+
+    QString target = itr->property(INVOKE_TARGET_PROPERTY).toString();
+    QObject* caller = itr->parent();
+    QMetaObject::invokeMethod( caller, INVOKE_CALLBACK_FUNC, Qt::QueuedConnection, Q_ARG(QVariant, target), Q_ARG(QVariant, ire == InvokeReplyError::None) );
+
+    itr->deleteLater();
 }
 
 

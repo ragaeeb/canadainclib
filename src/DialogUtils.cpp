@@ -58,14 +58,14 @@ void DialogUtils::findTarget(QString const& uri, QString const& target, QObject*
     InvokeQueryTargetsReply* itr = im->queryTargets(request);
     connect( itr, SIGNAL( finished() ), this, SLOT( onLookupFinished() ) );
     itr->setParent(caller);
-    itr->setProperty("target", target);
+    itr->setProperty(INVOKE_TARGET_PROPERTY, target);
 }
 
 
 void DialogUtils::onLookupFinished()
 {
     InvokeQueryTargetsReply* itr = static_cast<InvokeQueryTargetsReply*>( sender() );
-    QString target = itr->property("target").toString();
+    QString target = itr->property(INVOKE_TARGET_PROPERTY).toString();
     QObject* caller = itr->parent();
     bool result = false;
 
@@ -87,7 +87,7 @@ void DialogUtils::onLookupFinished()
         }
     }
 
-    QMetaObject::invokeMethod( caller, "onTargetLookupFinished", Qt::QueuedConnection, Q_ARG(QVariant, target), Q_ARG(QVariant, result) );
+    QMetaObject::invokeMethod( caller, INVOKE_CALLBACK_FUNC, Qt::QueuedConnection, Q_ARG(QVariant, target), Q_ARG(QVariant, result) );
     itr->deleteLater();
 }
 

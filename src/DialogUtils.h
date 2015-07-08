@@ -15,6 +15,9 @@ namespace bb {
     }
 }
 
+#define INVOKE_TARGET_PROPERTY "target"
+#define INVOKE_CALLBACK_FUNC "onTargetLookupFinished"
+
 namespace canadainc {
 
 class DialogUtils : public QObject

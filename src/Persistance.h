@@ -41,6 +41,7 @@ class Persistance : public QObject
 private slots:
     void commit();
     void onDestroyed(QObject* obj);
+    void onInvokeFinished();
     void onTargetDestroyed(QObject* obj);
 
 signals:
@@ -72,7 +73,7 @@ public:
     Q_INVOKABLE void call(QString const& number);
     Q_INVOKABLE void copyToClipboard(QString const& text, bool showToastMessage=true);
     Q_INVOKABLE void findTarget(QString const& uri, QString const& target, QObject* caller);
-    Q_INVOKABLE void invoke(QString const& targetId, QString const& action="", QString const& mime="", QString const& uri="", QString const& data="");
+    Q_INVOKABLE void invoke(QString const& targetId, QString const& action="", QString const& mime="", QString const& uri="", QString const& data="", QObject* callback=NULL);
     Q_INVOKABLE void launchAppPermissionSettings();
     Q_INVOKABLE void launchSettingsApp(QString const& key, QVariantMap const& metadata=QVariantMap());
     Q_INVOKABLE void openBlackBerryWorld(QString const& appID);
