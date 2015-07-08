@@ -39,7 +39,7 @@ void LazySceneCover::onThumbnail()
 	if ( m_ready && Application::instance()->cover() == NULL )
 	{
 		LOGGER("CreatingThumbnail!");
-		QmlDocument* qmlCover = QmlDocument::create("asset:///Cover.qml");
+		QmlDocument* qmlCover = QmlDocument::create("asset:///Cover.qml").parent(this);
 
 		QStringList keys = m_context.keys();
 
@@ -51,8 +51,6 @@ void LazySceneCover::onThumbnail()
 		SceneCover* cover = SceneCover::create().content(sceneRoot);
 
 		Application::instance()->setCover(cover);
-
-		qmlCover->deleteLater();
 	}
 }
 

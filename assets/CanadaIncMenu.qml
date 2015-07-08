@@ -8,6 +8,7 @@ MenuDefinition
     property string projectName
     property alias help: helpActionItem
     property alias settings: settingsActionItem
+    property alias compDef: definition
     signal finished()
     
     function launchPage(page)

@@ -39,7 +39,6 @@ QObject* CardUtils::initAppropriate(QString const& qmlDoc, QMap<QString, QObject
     }
 
     QObject::connect( parent, SIGNAL( initialize() ), parent, SLOT( lazyInit() ), Qt::QueuedConnection ); // async startup
-    qml->deleteLater();
 
     return root;
 }
