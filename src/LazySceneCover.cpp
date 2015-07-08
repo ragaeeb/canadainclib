@@ -10,13 +10,20 @@ namespace canadainc {
 
 using namespace bb::cascades;
 
-LazySceneCover::LazySceneCover(bool appLaunch)
+LazySceneCover::LazySceneCover(bool appLaunch, QObject* ui) : m_ready(false)
 {
     if (appLaunch)
     {
         Application* app = Application::instance();
         connect( app, SIGNAL( thumbnail() ), this, SLOT( onThumbnail() ) );
+
+        QObject::connect( ui, SIGNAL( lazyInitComplete() ), this, SLOT( onReady() ), Qt::QueuedConnection ); // async startup
     }
+}
+
+
+void LazySceneCover::onReady() {
+    m_ready = true;
 }
 
 
@@ -29,7 +36,7 @@ void LazySceneCover::onThumbnail()
 {
 	LOGGER("Thumbnailed");
 
-	if ( Application::instance()->cover() == NULL )
+	if ( m_ready && Application::instance()->cover() == NULL )
 	{
 		LOGGER("CreatingThumbnail!");
 		QmlDocument* qmlCover = QmlDocument::create("asset:///Cover.qml");
@@ -42,8 +49,10 @@ void LazySceneCover::onThumbnail()
 
 		Control* sceneRoot = qmlCover->createRootObject<Control>();
 		SceneCover* cover = SceneCover::create().content(sceneRoot);
-		qmlCover->setParent(cover);
+
 		Application::instance()->setCover(cover);
+
+		qmlCover->deleteLater();
 	}
 }
 
