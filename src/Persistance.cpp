@@ -277,6 +277,11 @@ bool Persistance::containsFlag(QString const& key) {
 }
 
 
+void Persistance::expose(QString const& key, QObject* q) {
+    QmlDocument::defaultDeclarativeEngine()->rootContext()->setContextProperty(key, q);
+}
+
+
 QVariant Persistance::getFlag(QString const& key) {
     return m_flags.value(key);
 }

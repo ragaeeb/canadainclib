@@ -5,6 +5,7 @@ DropDown
     id: accountChoice
     property variant selectedAccountId
     property bool immediate: true
+    property variant controller: app
     signal accountsLoaded(int numAccounts);
     title: qsTr("Account") + Retranslate.onLanguageChanged
     horizontalAlignment: HorizontalAlignment.Fill
@@ -42,12 +43,11 @@ DropDown
     }
     
     function onReady() {
-        app.loadAccounts();
+        controller.accountsImported.connect(onAccountsImported);
+        controller.loadAccounts();
     }
     
     onCreationCompleted: {
-        app.accountsImported.connect(onAccountsImported);
-        
         if (!immediate) {
             app.lazyInitComplete.connect(onReady);
         } else {

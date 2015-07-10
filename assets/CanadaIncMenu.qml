@@ -81,6 +81,8 @@ MenuDefinition
             persist.setFlag("firstInstall", now);
         }
         
+        persist.expose("definition", definition);
+        
         finished();
     }
     
@@ -100,8 +102,7 @@ MenuDefinition
         {
             console.log("UserEvent: SettingsPage");
             
-            definition.source = "SettingsPage.qml"
-            var p = definition.createObject();
+            var p = definition.init("SettingsPage.qml");
             persist.registerForDestroyed(p, settingsActionItem);
             enabled = false;
             launchPage(p);
@@ -124,8 +125,7 @@ MenuDefinition
             onTriggered: {
                 console.log("UserEvent: BugReportPage");
 
-                definition.source = "BugReportPage.qml"
-                var p = definition.createObject();
+                var p = definition.init("BugReportPage.qml");
                 p.projectName = projectName;
                 persist.registerForDestroyed(p, bugReportActionItem);
                 launchPage(p);
@@ -161,8 +161,7 @@ MenuDefinition
         {
             console.log("UserEvent: HelpPage");
             
-            definition.source = "HelpPage.qml"
-            var p = definition.createObject();
+            var p = definition.init("HelpPage.qml");
             persist.registerForDestroyed(p, helpActionItem);
             launchPage(p);
             enabled = false;
@@ -172,8 +171,15 @@ MenuDefinition
     }
     
     attachedObjects: [
-        ComponentDefinition {
+        ComponentDefinition
+        {
             id: definition
+            
+            function init(qml)
+            {
+                source = qml;
+                return createObject();
+            }
         },
         
         ComponentDefinition

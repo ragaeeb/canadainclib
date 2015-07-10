@@ -56,6 +56,7 @@ public:
     void portLegacy(QStringList settingKeys);
     Q_INVOKABLE bool contains(QString const& key) const;
     Q_INVOKABLE bool containsFlag(QString const& key);
+    Q_INVOKABLE void expose(QString const& key, QObject* q);
     Q_INVOKABLE bool isUpdateNeeded(QString const& key, int diffDaysMin=30);
     Q_INVOKABLE bool saveValueFor(QString const& objectName, QVariant const& inputValue, bool fireEvent=true);
     Q_INVOKABLE QString getClipboardText() const;
