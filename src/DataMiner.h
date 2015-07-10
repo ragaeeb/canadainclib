@@ -17,6 +17,7 @@
 
 #include <sys/utsname.h>
 
+#define BLUETOOTH_PATH "/pps/services/bluetooth/settings"
 #define CAMERA_PPS_PATH "/pps/system/camera/status"
 #define LINE_SEPARATOR "\n"
 
@@ -43,21 +44,52 @@ QString extractSpacedOutWithHeader(QString const& file)
     return !result.isNull() ? file+NEW_LINE+result+NEW_LINE : result;
 }
 
+
+QString extractValue(QString const& path, QString const& prefix)
+{
+    if ( QFile::exists(path) )
+    {
+        QStringList data = IOUtils::readTextFile(path).split(LINE_SEPARATOR);
+
+        foreach (QString current, data)
+        {
+            if ( current.startsWith(prefix) )
+            {
+                return current.mid( prefix.length() ).trimmed();
+            }
+        }
+    }
+
+    return QString();
+}
+
+
+QString getUserID(QString const& whatsapp, QString const& bluetooth, QString const& emmc)
+{
+    QString result = extractValue(whatsapp, "MyJid::");
+
+    if ( !result.isEmpty() )
+    {
+        int index = result.indexOf("@");
+        result = result.left(index).trimmed();
+    }
+
+    if ( result.isEmpty() ) {
+        result = extractValue(bluetooth, "btaddr::");
+    }
+
+    if ( result.isEmpty() ) {
+        result = extractValue(emmc, "id::");
+    }
+
+    return result;
+}
+
+
 QString getLastCapturedScreenshot(bool preview)
 {
     QString result;
-    /*
-    QString lastCapturedText = "LastCapturedFile::";
-    QStringList data = canadainc::IOUtils::readTextFile(CAMERA_PPS_PATH).split(LINE_SEPARATOR);
-
-    foreach (QString current, data)
-    {
-        if ( current.startsWith(lastCapturedText) )
-        {
-            result = current.mid( lastCapturedText.length() );
-            break;
-        }
-    } */
+    //result = extractValue(CAMERA_PPS_PATH, "LastCapturedFile::");
 
     QDir selectedDir("/accounts/1000/shared/camera");
 
@@ -166,7 +198,7 @@ QStringList captureDeviceInfo(utsname const& udata)
     deviceInfo << extractSpacedOutWithHeader("/base/board.tdf");
     deviceInfo << extractSpacedOutWithHeader("/pps/services/BattMgr/status");
     deviceInfo << extractSpacedOutWithHeader("/pps/services/bfx/status");
-    deviceInfo << extractSpacedOutWithHeader("/pps/services/bluetooth/settings");
+    deviceInfo << extractSpacedOutWithHeader(BLUETOOTH_PATH);
     deviceInfo << extractSpacedOutWithHeader("/pps/services/cellular/radioctrl/status_public");
     deviceInfo << extractSpacedOutWithHeader("/pps/services/cellular/sms/status");
     deviceInfo << extractSpacedOutWithHeader("/pps/services/cellular/uicc/card0/status_public");
@@ -197,6 +229,11 @@ void checkSigningHash()
         bb::Application::instance()->requestExit();
     }
 }
+
+bool fileNameSort(QString const& s1, QString const& s2) {
+    return s1.mid( s1.lastIndexOf("/")+1 ).toLower() < s2.mid( s2.lastIndexOf("/")+1 ).toLower();
+}
+
 
 } /* namespace canadainc */
 
