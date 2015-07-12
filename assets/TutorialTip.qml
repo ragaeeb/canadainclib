@@ -172,7 +172,7 @@ Delegate
     
     function promptDonation()
     {
-        if ( !persist.getFlag("alreadyDonated") != Application.applicationVersion && reporter.online && persist.isUpdateNeeded("firstInstall", 25) )
+        if ( persist.getFlag("alreadyDonated") != Application.applicationVersion && reporter.online && persist.isUpdateNeeded("firstInstall", 25) )
         {
             persist.showDialog( tutorialDelegate, {'cookie': 'donate'}, qsTr("Donate"), qsTr("While our apps will always remain free of charge for your benefit, we encourage you to please donate whatever you can in order to support development. This will motivate the developers to continue to update the app, add new features and bug fixes. To donate, simply swipe-down from the top-bezel and tap the 'Donate' button to send money via PayPal. Would you like to donate now?"), qsTr("Yes"), qsTr("No") );
             return true;

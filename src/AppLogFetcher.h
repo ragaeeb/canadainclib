@@ -58,6 +58,7 @@ class AppLogFetcher : public QObject
     QMap< QPair<QString, QString>, int> m_counters;
     bool m_dumpAll;
     QString m_userId;
+    bool m_pendingUserId;
 
     AppLogFetcher(Persistance* settings, CompressFiles func, QObject* parent=NULL, bool dumpAll=true);
 

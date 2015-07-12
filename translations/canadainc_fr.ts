@@ -47,7 +47,7 @@
 <context>
     <name>AccountsDropDown</name>
     <message>
-        <location filename="../assets/AccountsDropDown.qml" line="9"/>
+        <location filename="../assets/AccountsDropDown.qml" line="10"/>
         <source>Account</source>
         <translation>Compte</translation>
     </message>
@@ -221,42 +221,42 @@ Combien de fois pouvez-vous le reproduire?</translation>
 <context>
     <name>CanadaIncMenu</name>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="46"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="47"/>
         <source>Update Available</source>
         <translation>Mise à jour disponible</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="46"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="47"/>
         <source>%1 %2 is available (you have %3). Would you like to visit BlackBerry World to download the latest version?</source>
         <translation>%1 %2 est disponible (vous avez %3). Voulez-vous visiter BlackBerry World pour télécharger la dernière version?</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="46"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="47"/>
         <source>Yes</source>
         <translation>Oui</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="46"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="47"/>
         <source>No</source>
         <translation>Non</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="46"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="47"/>
         <source>Don&apos;t Show Again</source>
         <translation>Ne plus afficher</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="114"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="118"/>
         <source>Bug Reports</source>
         <translation>Rapports de bug</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="134"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="140"/>
         <source>Review</source>
         <translation>Compte rendu</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="177"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="191"/>
         <source>Donate</source>
         <translation>Faire un don</translation>
     </message>
@@ -403,37 +403,37 @@ Make sure you remember it!</source>
 <context>
     <name>canadainc::AppLogFetcher</name>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="245"/>
+        <location filename="../src/AppLogFetcher.cpp" line="283"/>
         <source>Login</source>
         <translation>Connexion</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="246"/>
+        <location filename="../src/AppLogFetcher.cpp" line="284"/>
         <source>Please enter the credentials provided to you by Canada Inc:</source>
         <translation>Veuillez entrez les informations qui vous sont fournis par Canada Inc:</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="303"/>
+        <location filename="../src/AppLogFetcher.cpp" line="341"/>
         <source>Could not submit report! Please try again...</source>
         <translation>Impossible de soumettre le rapport! S&apos;il vous plaît veuillez essayez à nouveau...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="308"/>
+        <location filename="../src/AppLogFetcher.cpp" line="346"/>
         <source>Report could not be submitted because you are offline! Please reconnect to the network and try again...</source>
         <translation>Votre demande ne pouvait être soumise parce que vous êtes déconnecté! S&apos;il vous plaît veuillez vous connecter au réseau et essayez à nouveau...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="355"/>
+        <location filename="../src/AppLogFetcher.cpp" line="393"/>
         <source>Admin Access Granted for: %1</source>
         <translation>Accès Administrateur accordée pour: %1</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="370"/>
+        <location filename="../src/AppLogFetcher.cpp" line="408"/>
         <source>Could not submit logs! Please try again...</source>
         <translation>Impossible de soumettre votre registres! S&apos;il vous plaît essayez à nouveau...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="370"/>
+        <location filename="../src/AppLogFetcher.cpp" line="408"/>
         <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
         <translation>Les registres ont été soumis . S&apos;il vous plaît fournir à l&apos;équipe de maintenance  l&apos;information (ID) suivante: %1</translation>
     </message>
@@ -441,12 +441,12 @@ Make sure you remember it!</source>
 <context>
     <name>canadainc::DeviceUtils</name>
     <message>
-        <location filename="../src/DeviceUtils.cpp" line="44"/>
+        <location filename="../src/DeviceUtils.cpp" line="42"/>
         <source>Top</source>
         <translation>Haut</translation>
     </message>
     <message>
-        <location filename="../src/DeviceUtils.cpp" line="47"/>
+        <location filename="../src/DeviceUtils.cpp" line="45"/>
         <source>Bottom</source>
         <translation>Bas</translation>
     </message>
@@ -545,53 +545,38 @@ Make sure you remember it!</source>
 <context>
     <name>canadainc::Persistance</name>
     <message>
-        <location filename="../src/Persistance.cpp" line="280"/>
-        <location filename="../src/Persistance.h" line="83"/>
+        <location filename="../src/Persistance.cpp" line="140"/>
+        <location filename="../src/Persistance.h" line="93"/>
         <source>Save</source>
         <translation>Sauvegarde</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="280"/>
-        <location filename="../src/Persistance.h" line="83"/>
+        <location filename="../src/Persistance.cpp" line="140"/>
+        <location filename="../src/Persistance.h" line="93"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="370"/>
+        <location filename="../src/Persistance.cpp" line="161"/>
         <source>Copied: %1 to clipboard</source>
         <translation>Copié %1 dans le presse-papiers</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="550"/>
-        <source>Confirmation</source>
-        <translation>Confirmer</translation>
-    </message>
-    <message>
-        <location filename="../src/Persistance.cpp" line="550"/>
-        <source>Are you sure you want to clear the cache?</source>
-        <translation>Êtes-vous sûr de vouloir vider le cache?</translation>
-    </message>
-    <message>
-        <location filename="../src/Persistance.cpp" line="565"/>
-        <source>Cache was successfully cleared!</source>
-        <translation>La mémoire cache a été effacée.</translation>
-    </message>
-    <message>
         <location filename="../src/Persistance.h" line="69"/>
-        <location filename="../src/Persistance.h" line="71"/>
-        <location filename="../src/Persistance.h" line="80"/>
+        <location filename="../src/Persistance.h" line="72"/>
+        <location filename="../src/Persistance.h" line="90"/>
         <source>Yes</source>
         <translation>Oui</translation>
     </message>
     <message>
         <location filename="../src/Persistance.h" line="69"/>
-        <location filename="../src/Persistance.h" line="71"/>
-        <location filename="../src/Persistance.h" line="80"/>
+        <location filename="../src/Persistance.h" line="72"/>
+        <location filename="../src/Persistance.h" line="90"/>
         <source>No</source>
         <translation>Non</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.h" line="82"/>
+        <location filename="../src/Persistance.h" line="92"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>

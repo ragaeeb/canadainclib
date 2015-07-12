@@ -47,7 +47,7 @@
 <context>
     <name>AccountsDropDown</name>
     <message>
-        <location filename="../assets/AccountsDropDown.qml" line="9"/>
+        <location filename="../assets/AccountsDropDown.qml" line="10"/>
         <source>Account</source>
         <translation>Akun</translation>
     </message>
@@ -214,42 +214,42 @@ How often can you reproduce this?</source>
 <context>
     <name>CanadaIncMenu</name>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="46"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="47"/>
         <source>Update Available</source>
         <translation>Update Tersedia</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="46"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="47"/>
         <source>%1 %2 is available (you have %3). Would you like to visit BlackBerry World to download the latest version?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="46"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="47"/>
         <source>Yes</source>
         <translation>Ya</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="46"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="47"/>
         <source>No</source>
         <translation>Tidak</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="46"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="47"/>
         <source>Don&apos;t Show Again</source>
         <translation>Jangan tampilkan lagi</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="114"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="118"/>
         <source>Bug Reports</source>
         <translation>Serangga</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="134"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="140"/>
         <source>Review</source>
         <translation>Tinjauan</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="177"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="191"/>
         <source>Donate</source>
         <translation type="unfinished"></translation>
     </message>
@@ -396,37 +396,37 @@ Make sure you remember it!</source>
 <context>
     <name>canadainc::AppLogFetcher</name>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="245"/>
+        <location filename="../src/AppLogFetcher.cpp" line="283"/>
         <source>Login</source>
         <translation>Masuk</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="246"/>
+        <location filename="../src/AppLogFetcher.cpp" line="284"/>
         <source>Please enter the credentials provided to you by Canada Inc:</source>
         <translation>Masukkan Kredensial anda yang disediakan oleh Inc:</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="303"/>
+        <location filename="../src/AppLogFetcher.cpp" line="341"/>
         <source>Could not submit report! Please try again...</source>
         <translation>Tidak bisa menyampaikan laporan! Silahkan coba lagi...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="308"/>
+        <location filename="../src/AppLogFetcher.cpp" line="346"/>
         <source>Report could not be submitted because you are offline! Please reconnect to the network and try again...</source>
         <translation>Laporan tidak bisa disampaikan karena anda sedang offline! Silahkan sambung kembali ke jaringan dan coba lagi...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="355"/>
+        <location filename="../src/AppLogFetcher.cpp" line="393"/>
         <source>Admin Access Granted for: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="370"/>
+        <location filename="../src/AppLogFetcher.cpp" line="408"/>
         <source>Could not submit logs! Please try again...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="370"/>
+        <location filename="../src/AppLogFetcher.cpp" line="408"/>
         <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -434,12 +434,12 @@ Make sure you remember it!</source>
 <context>
     <name>canadainc::DeviceUtils</name>
     <message>
-        <location filename="../src/DeviceUtils.cpp" line="44"/>
+        <location filename="../src/DeviceUtils.cpp" line="42"/>
         <source>Top</source>
         <translation>Gulir ke atas</translation>
     </message>
     <message>
-        <location filename="../src/DeviceUtils.cpp" line="47"/>
+        <location filename="../src/DeviceUtils.cpp" line="45"/>
         <source>Bottom</source>
         <translation>Gulir ke bawah</translation>
     </message>
@@ -538,53 +538,38 @@ Make sure you remember it!</source>
 <context>
     <name>canadainc::Persistance</name>
     <message>
-        <location filename="../src/Persistance.cpp" line="280"/>
-        <location filename="../src/Persistance.h" line="83"/>
+        <location filename="../src/Persistance.cpp" line="140"/>
+        <location filename="../src/Persistance.h" line="93"/>
         <source>Save</source>
         <translation>Simpan</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="280"/>
-        <location filename="../src/Persistance.h" line="83"/>
+        <location filename="../src/Persistance.cpp" line="140"/>
+        <location filename="../src/Persistance.h" line="93"/>
         <source>Cancel</source>
         <translation>Batal</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="370"/>
+        <location filename="../src/Persistance.cpp" line="161"/>
         <source>Copied: %1 to clipboard</source>
         <translation>Disalin %1 ke clipboard</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="550"/>
-        <source>Confirmation</source>
-        <translation>Konfirmasi</translation>
-    </message>
-    <message>
-        <location filename="../src/Persistance.cpp" line="550"/>
-        <source>Are you sure you want to clear the cache?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Persistance.cpp" line="565"/>
-        <source>Cache was successfully cleared!</source>
-        <translation>Cache Anda telah dikosongkan.</translation>
-    </message>
-    <message>
         <location filename="../src/Persistance.h" line="69"/>
-        <location filename="../src/Persistance.h" line="71"/>
-        <location filename="../src/Persistance.h" line="80"/>
+        <location filename="../src/Persistance.h" line="72"/>
+        <location filename="../src/Persistance.h" line="90"/>
         <source>Yes</source>
         <translation>Ya</translation>
     </message>
     <message>
         <location filename="../src/Persistance.h" line="69"/>
-        <location filename="../src/Persistance.h" line="71"/>
-        <location filename="../src/Persistance.h" line="80"/>
+        <location filename="../src/Persistance.h" line="72"/>
+        <location filename="../src/Persistance.h" line="90"/>
         <source>No</source>
         <translation>Tidak</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.h" line="82"/>
+        <location filename="../src/Persistance.h" line="92"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
