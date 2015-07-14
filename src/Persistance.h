@@ -69,7 +69,7 @@ public:
     Q_INVOKABLE static bool showBlockingDialog(QString const& title, QString const& text, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"), bool okEnabled=true);
     Q_INVOKABLE static QByteArray convertToUtf8(QString const& text);
     Q_INVOKABLE static QString homePath();
-    Q_INVOKABLE static QString showBlockingPrompt(QString const& title, QString const& body, QString const& defaultText, QString const& hintText, int maxLength, bool autoCapitalize=true, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"), int inputMode=0);
+    Q_INVOKABLE static QString showBlockingPrompt(QString const& title, QString const& body, QString const& defaultText, QString const& hintText, int maxLength, bool autoCapitalize=true, QString const& okButton=tr("OK"), QString const& cancelButton=tr("Cancel"), int inputMode=0);
     Q_INVOKABLE static QString tempPath();
     Q_INVOKABLE void call(QString const& number);
     Q_INVOKABLE void copyToClipboard(QString const& text, bool showToastMessage=true);
