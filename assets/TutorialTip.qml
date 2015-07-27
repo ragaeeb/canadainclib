@@ -84,7 +84,7 @@ Delegate
         
         var ui = Application.scene.ui;
         
-        return exec( key, text, pos == "x" ? HorizontalAlignment.Right : HorizontalAlignment.Center, VerticalAlignment.Bottom, pos == "r" ? ui.du(31) : 0, pos == "l" ? ui.du(31) : 0, 0, ui.du(2) );
+        return exec( key, text, pos == "x" ? HorizontalAlignment.Right : pos == "b" ? HorizontalAlignment.Left : HorizontalAlignment.Center, VerticalAlignment.Bottom, pos == "r" ? ui.du(31) : pos == "b" ? ui.du(2) : 0, pos == "l" ? ui.du(31) : 0, 0, ui.du(2) );
     }
     
     function exec(key, text, h, v, left, right, top, bottom, imageUri, type)
