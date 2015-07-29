@@ -1,4 +1,4 @@
-import bb.cascades 1.0
+import bb.cascades 1.2
 
 Dialog
 {
@@ -10,6 +10,12 @@ Dialog
     
     onOpened: {
         dialogContainer.opacity = 1;
+    }
+    
+    function dismiss()
+    {
+        closing();
+        root.close();
     }
     
     Container
@@ -24,10 +30,25 @@ Dialog
         gestureHandlers: [
             TapHandler {
                 onTapped: {
-                    if (event.propagationPhase == PropagationPhase.AtTarget && canClose)
-                    {
-                        closing();
-                        root.close();
+                    if (event.propagationPhase == PropagationPhase.AtTarget && canClose) {
+                        dismiss();
+                    }
+                }
+            }
+        ]
+        
+        attachedObjects: [
+            Delegate {
+                source: "ClassicBackDelegate.qml"
+                
+                onCreationCompleted: {
+                    active = 'locallyFocused' in dialogContainer && canClose;
+                }
+                
+                onObjectChanged: {
+                    if (object) {
+                        object.parentControl = dialogContainer;
+                        object.triggered.connect(root.dismiss);
                     }
                 }
             }
