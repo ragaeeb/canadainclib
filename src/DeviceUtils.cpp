@@ -120,6 +120,32 @@ void DeviceUtils::registerTutorialTips(QObject* parent)
 }
 
 
+void DeviceUtils::log(QVariant const& message, QObject* q)
+{
+    if (!q) {
+        if ( message.type() == QVariant::String ) {
+            LOGGER( message.toString() );
+        } else if ( message.type() == QVariant::Double ) {
+            LOGGER( message.toReal() );
+        } else if ( message.type() == QVariant::Int ) {
+            LOGGER( message.toLongLong() );
+        } else {
+            LOGGER(message);
+        }
+    } else {
+        if ( message.type() == QVariant::String ) {
+            LOGGER( q << message.toString() );
+        } else if ( message.type() == QVariant::Double ) {
+            LOGGER( q << message.toReal() );
+        } else if ( message.type() == QVariant::Int ) {
+            LOGGER( q << message.toLongLong() );
+        } else {
+            LOGGER(q << message);
+        }
+    }
+}
+
+
 DeviceUtils::~DeviceUtils()
 {
 }

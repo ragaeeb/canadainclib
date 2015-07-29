@@ -64,7 +64,7 @@ class AppLogFetcher : public QObject
 
 private slots:
     void onAboutToQuit();
-    void commitStats();
+    bool commitStats(bool termination=false);
     void onDataLoaded(int id, QVariant const& data);
     void onFinished();
     void onKeyReleasedHandler(bb::cascades::KeyEvent* event);
@@ -94,9 +94,9 @@ public:
     Q_INVOKABLE void initPage(QObject* page);
     Q_INVOKABLE void submitLogs(QString const& notes=QString(), bool userTriggered=false, bool isSimulation=false, QStringList const& attachments=QStringList());
     Q_INVOKABLE void record(QString const& event, QString const& context="");
-    Q_INVOKABLE void log(QVariant const& message, QObject* q=NULL);
     static void removeInvalid(QSet<QString>& input);
     Q_INVOKABLE bool deferredCheck(QString const& key, qint64 diff, bool versionBased=false);
+    static void onErrorMessage(const char* msg);
 };
 
 } /* namespace canadainc */

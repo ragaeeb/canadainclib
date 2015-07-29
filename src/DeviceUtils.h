@@ -59,6 +59,7 @@ public:
     Q_INVOKABLE void cleanUpAndDestroy(QObject* q);
 
     static void registerTutorialTips(QObject* parent);
+    Q_INVOKABLE void log(QVariant const& message, QObject* q=NULL);
 };
 
 } /* namespace canadainc */
