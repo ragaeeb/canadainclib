@@ -32,6 +32,7 @@ namespace bb {
 
 namespace canadainc {
 
+class CustomSqlDataSource;
 class Persistance;
 
 typedef void (*CompressFiles)(QSet<QString>&);
@@ -61,6 +62,7 @@ class AppLogFetcher : public QObject
     bool m_pendingUserId;
 
     AppLogFetcher(Persistance* settings, CompressFiles func, QObject* parent=NULL, bool dumpAll=true);
+    CustomSqlDataSource* initAnalytics();
 
 private slots:
     void onAboutToQuit();
