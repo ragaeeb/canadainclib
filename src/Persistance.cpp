@@ -451,6 +451,22 @@ QString Persistance::tempPath() {
 }
 
 
+void Persistance::onErrorMessage(const char* msg)
+{
+    static SystemDialog dialog;
+    dialog.setBody(msg);
+    dialog.setTitle("Error");
+    dialog.confirmButton()->setLabel("OK");
+    dialog.cancelButton()->setLabel("");
+    dialog.show();
+}
+
+
+void Persistance::onError(QString const& message) {
+    onErrorMessage( message.toUtf8().constData() );
+}
+
+
 Persistance::~Persistance()
 {
 }

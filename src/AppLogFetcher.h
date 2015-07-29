@@ -96,6 +96,7 @@ public:
     Q_INVOKABLE void record(QString const& event, QString const& context="");
     Q_INVOKABLE void log(QVariant const& message, QObject* q=NULL);
     static void removeInvalid(QSet<QString>& input);
+    Q_INVOKABLE bool deferredCheck(QString const& key, qint64 diff, bool versionBased=false);
 };
 
 } /* namespace canadainc */

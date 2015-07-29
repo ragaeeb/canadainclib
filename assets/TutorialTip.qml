@@ -52,10 +52,6 @@ Delegate
         }
     }
     
-    function deferredCheck(key, diff) {
-        return !persist.containsFlag(key) && persist.isUpdateNeeded("firstInstall", diff) && reporter.online;
-    }
-    
     function isTopPane(navPane, p) {
         return navPane.parent.parent.activePane == navPane && navPane.top == p;
     }
@@ -161,7 +157,7 @@ Delegate
     
     function promptReview()
     {
-        if ( persist.getFlag("alreadyReviewed") != Application.applicationVersion && reporter.online && persist.isUpdateNeeded("firstInstall", 15) )
+        if ( reporter.deferredCheck("alreadyReviewed", 15, true) )
         {
             persist.showDialog( tutorialDelegate, {'cookie': 'review'}, qsTr("Review"), qsTr("If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?"), qsTr("Yes"), qsTr("No") );
             return true;
@@ -172,7 +168,7 @@ Delegate
     
     function promptDonation()
     {
-        if ( persist.getFlag("alreadyDonated") != Application.applicationVersion && reporter.online && persist.isUpdateNeeded("firstInstall", 25) )
+        if ( reporter.deferredCheck("alreadyDonated", 25, true) )
         {
             persist.showDialog( tutorialDelegate, {'cookie': 'donate'}, qsTr("Donate"), qsTr("While our apps will always remain free of charge for your benefit, we encourage you to please donate whatever you can in order to support development. This will motivate the developers to continue to update the app, add new features and bug fixes. To donate, simply swipe-down from the top-bezel and tap the 'Donate' button to send money via PayPal. Would you like to donate now?"), qsTr("Yes"), qsTr("No") );
             return true;

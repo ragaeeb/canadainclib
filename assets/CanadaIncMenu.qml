@@ -8,7 +8,6 @@ MenuDefinition
     property string projectName
     property alias help: helpActionItem
     property alias settings: settingsActionItem
-    property alias compDef: definition
     signal finished()
     
     function launchPage(page)
@@ -56,32 +55,22 @@ MenuDefinition
     
     function asyncWork()
     {
-        if ( !persist.getFlag("promoted") ) {
-            persist.openChannel();
-            persist.setFlag("promoted", 1);
-        }
-
         if (allowDonations) {
             var donator = donateDefinition.createObject();
             addAction(donator);
         }
         
-        if ( persist.isUpdateNeeded("appLastUpdateCheck") ) // 30 days have passed since last update check
-        {
-            reporter.latestAppVersionFound.connect(onLatestVersionFound);
-            reporter.checkForUpdate(projectName);
-        }
-        
         Application.swipeDown.connect(onSwipeDown);
         
         var now = new Date().getTime();
-        reporter.record("AppLaunch", now);
         
-        if ( !persist.containsFlag("firstInstall") ) {
-            persist.setFlag("firstInstall", now);
+        if ( reporter.deferredCheck("promoted", 1) ) {
+            persist.openChannel();
+            persist.setFlag("promoted", 1);
+        } else if ( reporter.deferredCheck("appLastUpdateCheck", 2) ) {
+            reporter.latestAppVersionFound.connect(onLatestVersionFound);
+            reporter.checkForUpdate(projectName);
         }
-        
-        persist.expose("definition", definition);
         
         finished();
     }
