@@ -64,7 +64,12 @@ void LazyMediaPlayer::play(QUrl const& uri)
     if ( m_npc->isAcquired() ) {
         playNow();
     } else {
-        m_npc->acquire();
+        MediaError::Type errType = m_npc->acquire();
+        LOGGER(errType);
+
+        if (errType != MediaError::None) {
+            error(errType, 0);
+        }
     }
 }
 

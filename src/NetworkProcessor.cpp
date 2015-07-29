@@ -11,7 +11,7 @@
 namespace canadainc {
 
 NetworkProcessor::NetworkProcessor(QObject* parent) :
-        QObject(parent), m_networkManager(NULL)
+        QObject(parent), m_networkManager(NULL), m_aborted(false)
 {
     connect( &m_config, SIGNAL( onlineStateChanged(bool) ), this, SLOT( onlineStateChanged(bool) ) );
 }
