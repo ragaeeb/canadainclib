@@ -6,6 +6,7 @@ Dialog
     property bool canClose: true
     property alias mainContainer: dialogContainer
     property alias dialogContent: dialogContainer.controls
+    property real darkness: 0.5
     signal closing();
     
     onOpened: {
@@ -23,7 +24,7 @@ Dialog
         id: dialogContainer
         preferredWidth: Infinity
         preferredHeight: Infinity
-        background: Color.create(0.0, 0.0, 0.0, 0.5)
+        background: Color.create(0.0, 0.0, 0.0, darkness)
         layout: DockLayout {}
         opacity: 0
         
