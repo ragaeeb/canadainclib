@@ -93,7 +93,7 @@ Delegate
         {
             var allKeys = keys;
 
-            if ( key && !(key in allKeys) )
+            if ( !(key in allKeys) )
             {
                 var allData = data;
                 allData.push( {'key': key, 'body': text, 'icon': imageUri, 'h': h, 'v': v, 'l': left, 'r': right, 't': top, 'b': bottom, 'type': type} );

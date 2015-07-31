@@ -2,7 +2,7 @@ import bb.cascades 1.0
 
 ControlDelegate
 {
-    delegateActive: false
+    delegateActive: !reporter.online
     signal imageTapped();
     visible: delegateActive
     property variant graphic: "images/ic_offline.png"
