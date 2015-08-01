@@ -1,6 +1,6 @@
 import bb.cascades 1.0
 
-QtObject
+Container
 {
     signal swipedUp();
     signal swipedDown();
@@ -13,7 +13,7 @@ QtObject
     property int downX;
     property int downY;
     
-    function onTouch(event)
+    onTouch:
     {
         if ( event.isDown() ) {
             downX = event.windowX;
@@ -54,9 +54,5 @@ QtObject
                 }
             }
         }
-    }
-    
-    onCreationCompleted: {
-        parent.touch.connect(onTouch);
     }
 }
