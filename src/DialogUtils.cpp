@@ -139,15 +139,15 @@ void DialogUtils::dialogFinished(bb::system::SystemUiResult::Type value)
             bool rememberMe = m_dialog->rememberMeSelection();
 
             if ( data.isValid() ) {
-                QMetaObject::invokeMethod( caller, "onFinished", Qt::QueuedConnection, Q_ARG(QVariant, result), Q_ARG(QVariant, rememberMe), Q_ARG(QVariant, data) );
+                QMetaObject::invokeMethod( caller, METHOD_NAME, Qt::QueuedConnection, Q_ARG(QVariant, result), Q_ARG(QVariant, rememberMe), Q_ARG(QVariant, data) );
             } else {
-                QMetaObject::invokeMethod( caller, "onFinished", Qt::QueuedConnection, Q_ARG(QVariant, result), Q_ARG(QVariant, rememberMe) );
+                QMetaObject::invokeMethod( caller, METHOD_NAME, Qt::QueuedConnection, Q_ARG(QVariant, result), Q_ARG(QVariant, rememberMe) );
             }
         } else {
             if ( data.isValid() ) {
-                QMetaObject::invokeMethod( caller, "onFinished", Qt::QueuedConnection, Q_ARG(QVariant, result), Q_ARG(QVariant, data) );
+                QMetaObject::invokeMethod( caller, METHOD_NAME, Qt::QueuedConnection, Q_ARG(QVariant, result), Q_ARG(QVariant, data) );
             } else {
-                QMetaObject::invokeMethod( caller, "onFinished", Qt::QueuedConnection, Q_ARG(QVariant, result) );
+                QMetaObject::invokeMethod( caller, METHOD_NAME, Qt::QueuedConnection, Q_ARG(QVariant, result) );
             }
         }
 
