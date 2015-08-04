@@ -11,8 +11,6 @@ lupdate_inclusion {
     SOURCES = ../assets/*.qml
 }
 
-
-
 device {
 	CONFIG(release, debug|release) {
 		DESTDIR = o.le-v7

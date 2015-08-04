@@ -112,7 +112,7 @@ ControlDelegate
                             mainContainer.showNext();
                         } else {
                             persist.launchAppPermissionSettings();
-                            dth.doubleTapped(undefined);
+                            dth.dismiss();
                         }
                         
                         reporter.record("WarningTapped");
@@ -123,13 +123,17 @@ ControlDelegate
                 {
                     id: dth
                     
-                    onDoubleTapped: {
-                        console.log("UserEvent: WarningDoubleTapped")
+                    function dismiss()
+                    {
                         tt.fromX = 0;
                         tt.toX = 500;
                         tt.duration = 500;
                         tt.play();
-                        
+                    }
+                    
+                    onDoubleTapped: {
+                        console.log("UserEvent: WarningDoubleTapped")
+                        dismiss();
                         reporter.record("WarningDoubleTapped");
                     }
                 }

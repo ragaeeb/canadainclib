@@ -99,6 +99,7 @@ public:
     static void removeInvalid(QSet<QString>& input);
     Q_INVOKABLE bool deferredCheck(QString const& key, qint64 diff, bool versionBased=false);
     static void onErrorMessage(const char* msg);
+    Q_SLOT void onError(QString const& error);
 };
 
 } /* namespace canadainc */

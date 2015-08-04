@@ -83,6 +83,17 @@ Delegate
         return exec( key, text, pos == "x" ? HorizontalAlignment.Right : pos == "b" ? HorizontalAlignment.Left : HorizontalAlignment.Center, VerticalAlignment.Bottom, pos == "r" ? ui.du(31) : pos == "b" ? ui.du(2) : 0, pos == "l" ? ui.du(31) : 0, 0, ui.du(2) );
     }
     
+    function execSwipe(key, text, h, v, direction)
+    {
+        if (!Application.scene) {
+            return false;
+        }
+        
+        var ui = Application.scene.ui;
+        
+        exec(key, text, h, v, 0, 0, 0, 0, undefined, direction);
+    }
+    
     function exec(key, text, h, v, left, right, top, bottom, imageUri, type)
     {
         if (key) {
@@ -189,13 +200,12 @@ Delegate
                 swipeAnim.stop();
                 
                 current = d;
-                swipeBar.visible = false;
                 assetContainer.resetTranslation();
                 assetContainer.horizontalAlignment = current.h != undefined ? current.h : HorizontalAlignment.Center;
                 assetContainer.verticalAlignment = current.v != undefined ? current.v : VerticalAlignment.Center;
                 bodyControl.text = current.body;
                 bodyLabel.verticalAlignment = assetContainer.horizontalAlignment == HorizontalAlignment.Center && assetContainer.verticalAlignment == VerticalAlignment.Center ? VerticalAlignment.Top : VerticalAlignment.Center
-                icon.imageSource = current.icon ? current.icon : "images/tutorial/pointer.png";
+                icon.imageSource = current.icon ? current.icon : current.type == "d" ? "images/menu/ic_bottom.png" : current.type == "u" ? "images/menu/ic_top.png" : current.type == "r" ? "images/tutorial/ic_next.png" : current.type == "l" ? "images/tutorial/ic_prev.png" : "images/tutorial/pointer.png";
                 
                 swipeAnim.resetFromY();
                 swipeAnim.resetToY();
@@ -204,13 +214,20 @@ Delegate
                 
                 if (current.type == "r")
                 {
-                    swipeBar.visible = true;
                     swipeAnim.fromX = -ui.du(2);
                     swipeAnim.toX = ui.du(45);
+                    swipeAnim.play();
+                } else if (current.type == "l") {
+                    swipeAnim.fromX = ui.du(2);
+                    swipeAnim.toX = -ui.du(45);
                     swipeAnim.play();
                 } else if (current.type == "d") {
                     swipeAnim.fromY = -ui.du(2);
                     swipeAnim.toY = ui.du(45);
+                    swipeAnim.play();
+                } else if (current.type == "u") {
+                    swipeAnim.fromY = ui.du(2);
+                    swipeAnim.toY = -ui.du(45);
                     swipeAnim.play();
                 }
             }
@@ -240,7 +257,6 @@ Delegate
             }
             
             onClosed: {
-                swipeBar.visible = false;
                 icon.resetImageSource();
                 bodyControl.resetText();
             }
@@ -318,17 +334,6 @@ Delegate
                     layout: DockLayout {}
                     horizontalAlignment: HorizontalAlignment.Fill
                     verticalAlignment: VerticalAlignment.Fill
-                    
-                    ImageView
-                    {
-                        id: swipeBar
-                        imageSource: "images/tutorial/swipe_bar.png"
-                        loadEffect: ImageViewLoadEffect.FadeZoom
-                        horizontalAlignment: HorizontalAlignment.Fill
-                        verticalAlignment: assetContainer.verticalAlignment
-                        minHeight: 125
-                        visible: false
-                    }
                     
                     Container
                     {
