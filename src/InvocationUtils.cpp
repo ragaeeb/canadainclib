@@ -172,6 +172,7 @@ bool InvocationUtils::hasLocationAccess()
     QFile target("/pps/services/geolocation/status");
 
     if ( !target.open(QIODevice::ReadOnly) ) {
+        LOGGER("NoLocationAccess");
         return false;
     }
 
