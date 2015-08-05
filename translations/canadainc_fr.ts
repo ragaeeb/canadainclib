@@ -221,44 +221,142 @@ Combien de fois pouvez-vous le reproduire?</translation>
 <context>
     <name>CanadaIncMenu</name>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="47"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="46"/>
         <source>Update Available</source>
         <translation>Mise à jour disponible</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="47"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="46"/>
         <source>%1 %2 is available (you have %3). Would you like to visit BlackBerry World to download the latest version?</source>
         <translation>%1 %2 est disponible (vous avez %3). Voulez-vous visiter BlackBerry World pour télécharger la dernière version?</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="47"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="46"/>
         <source>Yes</source>
         <translation>Oui</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="47"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="46"/>
         <source>No</source>
         <translation>Non</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="47"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="46"/>
         <source>Don&apos;t Show Again</source>
         <translation>Ne plus afficher</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="118"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="107"/>
         <source>Bug Reports</source>
         <translation>Rapports de bug</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="140"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="129"/>
         <source>Review</source>
         <translation>Compte rendu</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="191"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="180"/>
         <source>Donate</source>
         <translation>Faire un don</translation>
+    </message>
+</context>
+<context>
+    <name>HijriCalculator</name>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="99"/>
+        <source>Ahad</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="99"/>
+        <source>Ithnin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="99"/>
+        <source>Thulatha</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="99"/>
+        <source>Arbaa</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="99"/>
+        <source>Khams</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="99"/>
+        <source>Jumuah</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="99"/>
+        <source>Sabt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="100"/>
+        <source>Muharram</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="100"/>
+        <source>Safar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="100"/>
+        <source>Rabi&apos;ul Awwal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="100"/>
+        <source>Rabi&apos;ul Akhir</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="101"/>
+        <source>Jumadal Ula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="101"/>
+        <source>Jumadal Akhira</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="101"/>
+        <source>Rajab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="101"/>
+        <source>Sha&apos;ban</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="102"/>
+        <source>Ramadan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="102"/>
+        <source>Shawwal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="102"/>
+        <source>Dhul Qa&apos;ada</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HijriCalculator.qml" line="102"/>
+        <source>Dhul Hijja</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -312,67 +410,67 @@ Make sure you remember it!</source>
 <context>
     <name>TutorialTip</name>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="155"/>
+        <location filename="../assets/TutorialTip.qml" line="162"/>
         <source>Video Tutorial</source>
         <translation>Didacticiel</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="155"/>
+        <location filename="../assets/TutorialTip.qml" line="162"/>
         <source>Would you like to see a video tutorial on how to use the app?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="155"/>
-        <location filename="../assets/TutorialTip.qml" line="166"/>
-        <location filename="../assets/TutorialTip.qml" line="177"/>
+        <location filename="../assets/TutorialTip.qml" line="162"/>
+        <location filename="../assets/TutorialTip.qml" line="173"/>
+        <location filename="../assets/TutorialTip.qml" line="184"/>
         <source>Yes</source>
         <translation>Oui</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="155"/>
-        <location filename="../assets/TutorialTip.qml" line="166"/>
-        <location filename="../assets/TutorialTip.qml" line="177"/>
+        <location filename="../assets/TutorialTip.qml" line="162"/>
+        <location filename="../assets/TutorialTip.qml" line="173"/>
+        <location filename="../assets/TutorialTip.qml" line="184"/>
         <source>No</source>
         <translation>Non</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="166"/>
+        <location filename="../assets/TutorialTip.qml" line="173"/>
         <source>Review</source>
         <translation>Commenter</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="166"/>
+        <location filename="../assets/TutorialTip.qml" line="173"/>
         <source>If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?</source>
         <translation>Si l&apos;utilisation de l&apos;application vous satisfait, merci de prendre un instant pour noter l&apos;application. Merci de votre contribution.</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="177"/>
+        <location filename="../assets/TutorialTip.qml" line="184"/>
         <source>Donate</source>
         <translation type="unfinished">Faire un don</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="177"/>
+        <location filename="../assets/TutorialTip.qml" line="184"/>
         <source>While our apps will always remain free of charge for your benefit, we encourage you to please donate whatever you can in order to support development. This will motivate the developers to continue to update the app, add new features and bug fixes. To donate, simply swipe-down from the top-bezel and tap the &apos;Donate&apos; button to send money via PayPal. Would you like to donate now?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="275"/>
+        <location filename="../assets/TutorialTip.qml" line="287"/>
         <source>Stop all Tutorials</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="276"/>
+        <location filename="../assets/TutorialTip.qml" line="288"/>
         <source>Prevent any tutorials from showing...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="282"/>
-        <location filename="../assets/TutorialTip.qml" line="299"/>
+        <location filename="../assets/TutorialTip.qml" line="294"/>
+        <location filename="../assets/TutorialTip.qml" line="311"/>
         <source>Suppress Tutorials</source>
         <translation>Supprimer les Tutoriels</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="299"/>
+        <location filename="../assets/TutorialTip.qml" line="311"/>
         <source>Are you sure you want to prevent all further tutorials? If you ever want to enable them again, swipe-down from the top-bezel, go to Help, tap on the title bar and uncheck the &apos;Suppress Tutorials&apos; checkmark.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -403,37 +501,37 @@ Make sure you remember it!</source>
 <context>
     <name>canadainc::AppLogFetcher</name>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="283"/>
+        <location filename="../src/AppLogFetcher.cpp" line="338"/>
         <source>Login</source>
         <translation>Connexion</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="284"/>
+        <location filename="../src/AppLogFetcher.cpp" line="339"/>
         <source>Please enter the credentials provided to you by Canada Inc:</source>
         <translation>Veuillez entrez les informations qui vous sont fournis par Canada Inc:</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="341"/>
+        <location filename="../src/AppLogFetcher.cpp" line="404"/>
         <source>Could not submit report! Please try again...</source>
         <translation>Impossible de soumettre le rapport! S&apos;il vous plaît veuillez essayez à nouveau...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="346"/>
+        <location filename="../src/AppLogFetcher.cpp" line="411"/>
         <source>Report could not be submitted because you are offline! Please reconnect to the network and try again...</source>
         <translation>Votre demande ne pouvait être soumise parce que vous êtes déconnecté! S&apos;il vous plaît veuillez vous connecter au réseau et essayez à nouveau...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="393"/>
+        <location filename="../src/AppLogFetcher.cpp" line="458"/>
         <source>Admin Access Granted for: %1</source>
         <translation>Accès Administrateur accordée pour: %1</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="408"/>
+        <location filename="../src/AppLogFetcher.cpp" line="473"/>
         <source>Could not submit logs! Please try again...</source>
         <translation>Impossible de soumettre votre registres! S&apos;il vous plaît essayez à nouveau...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="408"/>
+        <location filename="../src/AppLogFetcher.cpp" line="473"/>
         <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
         <translation>Les registres ont été soumis . S&apos;il vous plaît fournir à l&apos;équipe de maintenance  l&apos;information (ID) suivante: %1</translation>
     </message>
@@ -454,82 +552,82 @@ Make sure you remember it!</source>
 <context>
     <name>canadainc::LazyMediaPlayer</name>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="76"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="81"/>
         <source>A DRM related error was encountered.</source>
         <translation>Ce fichier est protégé par un système de DRM non pris en charge.</translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="81"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="86"/>
         <source>An unexpected internal error has occured!</source>
         <translation>Une erreur interne inattendue est survenue!</translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="84"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="89"/>
         <source>An invalid parameter was specified!</source>
         <translation>Un paramètre non valide a été spécifié!</translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="87"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="92"/>
         <source>An illegal operation given the context state.</source>
         <translation>Une opération illégale étant donné l&apos;état du contexte a été détecté</translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="90"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="95"/>
         <source>An unrecognized input or output type or an out-of-range speed setting encountered.</source>
         <translation>Une eurreure est survenue sur une entrée de media ou une sortie de type non reconnu ou en dehors du cadre de reglage</translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="93"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="98"/>
         <source>A data format not recognized by any plugin encountered.</source>
         <translation>Ce fichier contient un format multimédia non pris en charge.</translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="96"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="101"/>
         <source>A DRM protected input was specified.</source>
         <translation>Une entrée DRM protégée a été spécifié</translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="99"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="104"/>
         <source>An illegal operation was encountered by the playback process.</source>
         <translation>Ce fichier est corrompu. Chargez une version non corrompue et réessayez.</translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="102"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="107"/>
         <source>An I/O error has been encountered at the source!</source>
         <translation>Impossible de lire le fichier en raison d&apos;une erreur inattendue.</translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="105"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="110"/>
         <source>An I/O error has been encountered at the sink!</source>
         <translation>Impossible de lire le fichier en raison d&apos;une erreur inattendue.</translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="108"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="113"/>
         <source>The source is currently unavailable.</source>
         <translation>La source media ou fichier media est actuellement indisponible.</translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="111"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="116"/>
         <source>The resource was corrupted.</source>
         <translation>Ce fichier est corrompu. Chargez une version non corrompue et réessayez.</translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="114"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="119"/>
         <source>Cannot open the sink (possibly because no plugin recognizes it).</source>
         <translation>Impossible de lire le fichier en raison d&apos;une erreur inattendue.</translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="117"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="122"/>
         <source>Insufficient memory to perform the requested operation.</source>
         <translation>Mémoire disponible insuffisante. Fermez des applications et réessayez.</translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="120"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="125"/>
         <source>A required resource such as an encoder or an output feed is presently unavailable.</source>
         <translation>Le fichier ne peut être lu en raison d&apos;une erreur non définie du sous-système multimédia.</translation>
     </message>
     <message>
-        <location filename="../src/LazyMediaPlayer.cpp" line="123"/>
+        <location filename="../src/LazyMediaPlayer.cpp" line="128"/>
         <source>A playback permission error (e.g., user prohibition, region mismatch) error was encountered.</source>
         <translation>Impossible de lire le fichier en raison d&apos;une erreur inattendue.</translation>
     </message>
@@ -552,6 +650,7 @@ Make sure you remember it!</source>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="140"/>
+        <location filename="../src/Persistance.h" line="72"/>
         <location filename="../src/Persistance.h" line="93"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
@@ -563,19 +662,18 @@ Make sure you remember it!</source>
     </message>
     <message>
         <location filename="../src/Persistance.h" line="69"/>
-        <location filename="../src/Persistance.h" line="72"/>
         <location filename="../src/Persistance.h" line="90"/>
         <source>Yes</source>
         <translation>Oui</translation>
     </message>
     <message>
         <location filename="../src/Persistance.h" line="69"/>
-        <location filename="../src/Persistance.h" line="72"/>
         <location filename="../src/Persistance.h" line="90"/>
         <source>No</source>
         <translation>Non</translation>
     </message>
     <message>
+        <location filename="../src/Persistance.h" line="72"/>
         <location filename="../src/Persistance.h" line="92"/>
         <source>OK</source>
         <translation>OK</translation>

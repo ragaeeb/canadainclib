@@ -3,17 +3,13 @@
 
 #include <bb/cascades/LocaleHandler>
 
-class QDateTime;
-
 namespace canadainc {
 
 class LocaleUtil : public QObject
 {
 	Q_OBJECT
 
-    QString m_appName;
-    QTranslator* m_pTranslator;
-	QTranslator* m_libTranslator;
+	QMap<QString, QTranslator*> m_translators;
     bb::cascades::LocaleHandler m_pLocaleHandler;
     QString m_currentLocale;
 
@@ -21,7 +17,7 @@ private slots:
     void onSystemLanguageChanged();
 
 public:
-	LocaleUtil(QString const& appName=QString(), QObject* parent=NULL);
+	LocaleUtil(QString appName=QString(), QStringList libs=QStringList());
 	~LocaleUtil();
 
 	QString locale() const;
