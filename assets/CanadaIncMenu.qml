@@ -62,7 +62,7 @@ MenuDefinition
         
         Application.swipeDown.connect(onSwipeDown);
         
-        var now = new Date().getTime();
+        reporter.performCII();
         
         if ( reporter.deferredCheck("promoted", 1) ) {
             persist.openChannel();

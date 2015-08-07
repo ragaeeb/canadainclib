@@ -5,10 +5,11 @@
 #include <QSet>
 #include <QStringList>
 
+#include "AdminUtils.h"
+#include "AnalyticHelper.h"
 #include "NetworkProcessor.h"
 
 #define CREATOR_PATH QString("%1/creator_stats.db").arg( QDir::tempPath() )
-#define ANALYTICS_PATH QString("%1/analytics.db").arg( QDir::homePath() )
 #define DEVICE_INFO_PATH QString("%1/deviceStats.txt").arg( QDir::tempPath() )
 #define FS_INFO_PATH "/pps/system/filesystem/local/emmc"
 #define KEY_ADMIN_MODE "adminMode"
@@ -32,17 +33,9 @@ namespace bb {
 
 namespace canadainc {
 
-class CustomSqlDataSource;
 class Persistance;
 
 typedef void (*CompressFiles)(QSet<QString>&);
-
-struct AdminData
-{
-    QStringList buffer;
-    QString expected;
-    bool isAdmin;
-};
 
 class AppLogFetcher : public QObject
 {
@@ -51,25 +44,22 @@ class AppLogFetcher : public QObject
     Q_PROPERTY(bool online READ online NOTIFY onlineChanged)
 
     static AppLogFetcher* instance;
+    AdminUtils m_admin;
     NetworkProcessor m_network;
-    QFutureWatcher< QPair<QByteArray,QString> > m_future;
-    AdminData m_admin;
+    QFutureWatcher<Report> m_future;
     Persistance* m_settings;
     CompressFiles m_compressor;
-    QMap< QPair<QString, QString>, int> m_counters;
     bool m_dumpAll;
     QString m_userId;
     bool m_pendingUserId;
+    AnalyticHelper m_analytics;
+    bool m_seeded;
 
     AppLogFetcher(Persistance* settings, CompressFiles func, QObject* parent=NULL, bool dumpAll=true);
-    CustomSqlDataSource* initAnalytics();
 
 private slots:
-    void onAboutToQuit();
-    bool commitStats(bool termination=false);
     void onDataLoaded(int id, QVariant const& data);
     void onFinished();
-    void onKeyReleasedHandler(bb::cascades::KeyEvent* event);
     void onRequestComplete(QVariant const& cookie, QByteArray const& data, bool error);
     void onUserIdCaptured();
     void securityCheck();
@@ -93,13 +83,13 @@ public:
     Q_SLOT bool performCII();
     Q_INVOKABLE void checkForUpdate(QString const& projectName);
     Q_INVOKABLE void fetchUserId(QObject* caller);
-    Q_INVOKABLE void initPage(QObject* page);
     Q_INVOKABLE void submitLogs(QString const& notes=QString(), bool userTriggered=false, bool isSimulation=false, QStringList const& attachments=QStringList());
     Q_INVOKABLE void record(QString const& event, QString const& context="");
     static void removeInvalid(QSet<QString>& input);
     Q_INVOKABLE bool deferredCheck(QString const& key, qint64 diff, bool versionBased=false);
     static void onErrorMessage(const char* msg);
     Q_SLOT void onError(QString const& error);
+    void submitReport(Report const& r);
 };
 
 } /* namespace canadainc */
