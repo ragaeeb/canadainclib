@@ -1,36 +1,37 @@
 #include "AnalyticHelper.h"
 #include "customsqldatasource.h"
 #include "Logger.h"
+#include "IOUtils.h"
 
 #include <bb/Application>
 
+#define ANALYTICS_PATH QString("%1/analytics.db").arg( QDir::homePath() )
 #define COMMITTING_ANALYTICS -5
 #define COMMIT_ANALYTICS -6
 
 namespace canadainc {
 
-AnalyticHelper::AnalyticHelper()
-{
+AnalyticHelper::AnalyticHelper() {
+    connect( QCoreApplication::instance(), SIGNAL( aboutToQuit() ), this, SLOT( onAboutToQuit() ) );
 }
 
 
-void AnalyticHelper::clear()
+void AnalyticHelper::reset()
 {
+    QtConcurrent::run(QFile::remove, ANALYTICS_PATH);
+    /*
     CustomSqlDataSource* sql = initAnalytics();
     sql->setName("analytics2");
     sql->setQuery("DELETE FROM events");
     sql->executeAndWait(QVariant(), COMMITTING_ANALYTICS);
     sql->setQuery("VACUUM");
-    sql->executeAndWait(QVariant(), COMMIT_ANALYTICS);
+    sql->executeAndWait(QVariant(), COMMIT_ANALYTICS); */
 }
 
 
-bool AnalyticHelper::commitStats(bool termination)
+void AnalyticHelper::commitStats()
 {
-    bool success = true;
-    bool autoBugReport = !user_triggered && user_notes != ANALYTICS_SIGNATURE && !termination;
-
-    if ( ( !m_counters.isEmpty() || autoBugReport ) && !m_admin.isAdmin )
+    if ( !m_counters.isEmpty() )
     {
         LOGGER( bb::Application::instance()->extendTerminationTimeout() );
 
@@ -40,7 +41,9 @@ bool AnalyticHelper::commitStats(bool termination)
             IOUtils::writeFile(ANALYTICS_PATH);
         }
 
-        CustomSqlDataSource* sql = initAnalytics();
+        CustomSqlDataSource* sql = new CustomSqlDataSource(this);
+        connect( sql, SIGNAL( dataLoaded(int, QVariant const&) ), this, SLOT( onDataLoaded(int, QVariant const&) ) );
+        sql->setSource(ANALYTICS_PATH);
         sql->setName("analytics");
         sql->startTransaction(COMMITTING_ANALYTICS);
         sql->setQuery("CREATE TABLE IF NOT EXISTS events (id INTEGER PRIMARY KEY, event TEXT NOT NULL, context TEXT NOT NULL DEFAULT '', count INTEGER DEFAULT 0, UNIQUE(event,context) ON CONFLICT REPLACE CHECK(event <> ''))");
@@ -53,43 +56,16 @@ bool AnalyticHelper::commitStats(bool termination)
             sql->executeAndWait( QVariantList() << pair.first << pair.second << pair.first << pair.second, COMMITTING_ANALYTICS );
         }
 
-        if (autoBugReport)
-        {
-            sql->setQuery("CREATE TABLE IF NOT EXISTS auto_reports (id INTEGER PRIMARY KEY, notes TEXT UNIQUE NOT NULL, creation_time INTEGER)");
-            sql->executeAndWait(QVariant(), COMMITTING_ANALYTICS);
-
-            sql->setQuery("SELECT id FROM auto_reports WHERE notes=?");
-            success = sql->executeAndWait(QVariantList() << user_notes, COMMITTING_ANALYTICS).result().toList().isEmpty();
-
-            if (success)
-            {
-                sql->setQuery("INSERT INTO auto_reports (notes,creation_time) VALUES(?,?)");
-                sql->executeAndWait(QVariantList() << user_notes << reportID, COMMITTING_ANALYTICS);
-            }
-        }
-
         sql->endTransaction(COMMIT_ANALYTICS);
         m_counters.clear();
     }
-
-    return success;
-}
-
-
-CustomSqlDataSource* AnalyticHelper::initAnalytics()
-{
-    CustomSqlDataSource* sql = new CustomSqlDataSource(this);
-    connect( sql, SIGNAL( dataLoaded(int, QVariant const&) ), this, SLOT( onDataLoaded(int, QVariant const&) ) );
-    sql->setSource(ANALYTICS_PATH);
-
-    return sql;
 }
 
 
 void AnalyticHelper::onAboutToQuit()
 {
     record( "AppClose", QString::number( QDateTime::currentMSecsSinceEpoch() ) );
-    commitStats(true);
+    commitStats();
 }
 
 

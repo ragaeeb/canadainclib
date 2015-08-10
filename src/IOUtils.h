@@ -1,11 +1,12 @@
 #ifndef IOUTILS_H_
 #define IOUTILS_H_
 
-#include <QByteArray>
 #include <QRunnable>
-#include <QString>
+#include <QMap>
+#include <QStringList>
 
 #define NEW_LINE "\r\n"
+#define LINE_SEPARATOR "\n"
 #define directory_local_shared "/accounts/1000/shared"
 #define directory_sdcard "/accounts/1000/removable/sdcard"
 #define directory_temp "/var/tmp"
@@ -38,6 +39,13 @@ public:
 	static QString getMd5(QByteArray const& input);
 	static bool validateMd5(QString const& expected, QByteArray const& input);
 	static bool writeIfValidMd5(QString const& filePath, QString const& expectedMd5, QByteArray const& data, bool replace=true);
+	static QString extractPpsValue(QString const& path, QString const& prefix);
+
+	/**
+	 * @param keyPrefix ["whatsApp"] = "MyJid::";
+	 * @return the MyJid will be replaced with the actual value
+	 */
+	static QMap<QString,QString> extractPpsValue(QString const& path, QMap<QString, QString> const& keyPrefix);
 };
 
 } /* namespace canadainc */

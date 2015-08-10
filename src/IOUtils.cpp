@@ -235,4 +235,42 @@ bool IOUtils::writeIfValidMd5(QString const& filePath, QString const& expectedMd
 }
 
 
+QMap<QString,QString> IOUtils::extractPpsValue(QString const& path, QMap<QString, QString> const& keyPrefix)
+{
+    QMap<QString,QString> result;
+
+    if ( QFile::exists(path) )
+    {
+        QStringList data = readTextFile(path).split(LINE_SEPARATOR);
+
+        foreach (QString const& current, data) // go line by line
+        {
+            QStringList keys = keyPrefix.keys();
+
+            foreach (QString const& key, keys)
+            {
+                QString prefix = keyPrefix.value(key);
+
+                if ( current.startsWith(prefix) ) {
+                    result.insert( key, current.mid( prefix.length() ).trimmed() );
+                }
+            }
+        }
+    }
+
+    return result;
+}
+
+
+QString IOUtils::extractPpsValue(QString const& path, QString const& prefix)
+{
+    QMap<QString, QString> keyPrefix;
+    keyPrefix[prefix] = prefix;
+
+    keyPrefix = extractPpsValue(path, keyPrefix);
+
+    return keyPrefix.value(prefix);
+}
+
+
 } /* namespace canadainc */
