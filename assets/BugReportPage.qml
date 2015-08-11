@@ -87,7 +87,7 @@ Page
                             }
                             
                             onClosed: {
-                                reporter.simulationFilesAvailable.disconnect(simulate.onSimulationComplete);
+                                //reporter.simulationFilesAvailable.disconnect(simulate.onSimulationComplete);
                                 sheetDelegate.active = false;
                             }
                             
@@ -171,7 +171,7 @@ Page
                                         }
                                         
                                         onCreationCompleted: {
-                                            reporter.simulationFilesAvailable.connect(onSimulationComplete);
+                                            //reporter.simulationFilesAvailable.connect(onSimulationComplete);
                                         }
                                     }
                                 ]
@@ -198,7 +198,7 @@ Page
                                             
                                             if (nameField.validator.valid && emailField.validator.valid)
                                             {
-                                                reporter.submitLogs( nameField.text.trim()+"\n"+emailField.text.trim()+"\n\n"+body.text.trim(), true, filePicker.attachments);
+                                                reporter.submitReport( nameField.text.trim(), emailField.text.trim(), body.text.trim(), filePicker.attachments);
                                                 progressIndicator.value = 0;
                                                 progressIndicator.state = ProgressIndicatorState.Progress;
                                                 progressIndicator.visible = true;

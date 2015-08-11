@@ -54,7 +54,7 @@ struct Report
     }
 };
 
-typedef void (*CompressFiles)(Report&, QString const&);
+typedef void (*CompressFiles)(Report&, QString const&, const char*);
 
 } /* namespace canadainc */
 

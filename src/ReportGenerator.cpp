@@ -17,6 +17,7 @@
 #include <sys/utsname.h>
 
 #define BLUETOOTH_PATH "/pps/services/bluetooth/settings"
+#define NEW_LINE_UNIX "\n"
 
 namespace {
 
@@ -126,10 +127,10 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
     QSettings flags(FLAGS_FILE_NAME);
     QMap<QString,QString> keyPpsValue;
     QStringList tempFiles; // these files need to be deleted at the end
+    QString userId;
 
     if (r.type == ReportType::FirstInstall)
     {
-        LOGGER("*** FIRSTINALL");
         addParam(r, BLUETOOTH_PATH, "bluetooth", "btaddr::");
 
         if ( QFile::exists(WHATSAPP_PATH) ) {
@@ -198,7 +199,6 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
         r.params.insert("machine", udata.machine);
 
         bb::device::HardwareInfo hw;
-        r.params.insert("device_name", hw.deviceName() );
         r.params.insert("model_name", hw.modelName() );
         r.params.insert("model_number", hw.modelNumber() );
         r.params.insert("physical_keyboard", QString::number( hw.isPhysicalKeyboardDevice() ) );
@@ -216,9 +216,9 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
         }
 
         bb::MemoryInfo m;
-        r.params.insert("device_mem", QString::number( m.totalDeviceMemory() ) );
+        r.params.insert("total_memory", QString::number( m.totalDeviceMemory() ) );
 
-        QStringList lines = IOUtils::readTextFile("/pps/system/installer/removedapps/applications").split(NEW_LINE);
+        QStringList lines = IOUtils::readTextFile("/pps/system/installer/removedapps/applications").split(NEW_LINE_UNIX);
         foreach (QString const& line, lines)
         {
             QStringList tokens = line.split(",");
@@ -233,7 +233,8 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
             }
         }
     } else {
-        r.params.insert( "user_id", flags.value(KEY_USER_ID).toString() );
+        userId = flags.value(KEY_USER_ID).toString();
+        r.params.insert("user_id", userId);
 
         if (r.type == ReportType::AppVersionDiff)
         {
@@ -242,25 +243,28 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
             r.params.insert( "first_install", flags.value(KEY_FIRST_INSTALL).toString() );
             r.params.insert( "last_upgrade", flags.value(KEY_LAST_UPGRADE).toString() );
         } else if (r.type == ReportType::OsVersionDiff) {
-            r.params.insert( "os", bb::platform::PlatformInfo().osVersion() );
+            r.params.insert( "version", bb::platform::PlatformInfo().osVersion() );
 
             struct utsname udata;
             uname(&udata);
             QString osCreated = udata.version;
             osCreated.chop(3); // OS Creation: 2014/02/09-15:22:47EST
-            r.params.insert( "os_created", QString::number( QDateTime::fromString(osCreated, "yyyy/MM/dd-HH:mm:ss").toMSecsSinceEpoch() ) );
+            r.params.insert( "creation_date", QString::number( QDateTime::fromString(osCreated, "yyyy/MM/dd-HH:mm:ss").toMSecsSinceEpoch() ) );
 
-            QStringList lines = IOUtils::readTextFile("/base/svnrev").trimmed().split(NEW_LINE);
+            QStringList lines = IOUtils::readTextFile("/base/svnrev").trimmed().split(NEW_LINE_UNIX);
 
+            LOGGER(lines);
             if ( !lines.isEmpty() ) {
                 r.params.insert( "build_id", lines.takeFirst().split(" ").last() );
             }
+
+            LOGGER(lines);
 
             if ( !lines.isEmpty() ) {
                 r.params.insert( "build_branch", lines.takeFirst().split(" ").last() );
             }
 
-            lines = IOUtils::readTextFile("/var/app_launch_data.txt").trimmed().split(NEW_LINE);
+            lines = IOUtils::readTextFile("/var/app_launch_data.txt").trimmed().split(NEW_LINE_UNIX);
 
             for (int i = lines.size()-1; i >= 0; i--)
             {
@@ -278,7 +282,7 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
             fclose(file);
 
             tempFiles << QString("%1/pidin.txt").arg( QDir::tempPath() );
-            IOUtils::writeTextFile( tempFiles.last(), IOUtils::executeCommand("pidin").join(NEW_LINE).trimmed(), true, false, false );
+            IOUtils::writeTextFile( tempFiles.last(), IOUtils::executeCommand("pidin").join("").trimmed(), true, false, false );
 
             tempFiles << QString("%1/snapshot.txt").arg( QDir::tempPath() );
             QStringList all = QDir::home().entryList( QStringList() << "*.*", QDir::Files | QDir::Dirs | QDir::NoDot | QDir::NoDotDot );
@@ -292,7 +296,7 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
             r.params.insert( "battery_temperature", QString::number( b.temperature() ) );
 
             //TODO: Make sure you check for duplicate files!!!!!!!!
-            r.attachments << QSettings().fileName() << flags.fileName() << "/var/app_launch_data.txt" << "/base/svnrev" << "/var/boottime.txt" << "/pps/services/rum/csm/status_public" << "/pps/services/progress/status" << "/pps/services/cellular/radioctrl/status_cell_public" << "/pps/accounts/1000/appserv/sys.appworld.gYABgNSvaLtte_snIx7wjRsOcyM/service/updates" << "/pps/services/audio/voice_status" << "/pps/services/BattMgr/status" << BLUETOOTH_PATH << "/pps/services/radioctrl/modem0/status_public" << "/pps/services/wifi/status_public" << "/pps/services/input/options" << "/pps/services/cellular/sms/options" << "/pps/services/chat/counters" << "/pps/services/ims/status_public" << "/pps/services/cellular/sms/status" << "/pps/services/cellular/radioctrl/status_public";
+            r.attachments << QSettings().fileName() << flags.fileName() << "/var/app_launch_data.txt" << "/base/svnrev" << "/var/boottime.txt" << "/pps/services/rum/csm/status_public" << "/pps/services/progress/status" << "/pps/services/cellular/radioctrl/status_cell_public" << "/pps/accounts/1000/appserv/sys.appworld.gYABgNSvaLtte_snIx7wjRsOcyM/service/updates" << "/pps/services/audio/voice_status" << "/pps/services/BattMgr/status" << BLUETOOTH_PATH << "/pps/services/radioctrl/modem0/status_public" << "/pps/services/wifi/status_public" << "/pps/services/input/options" << "/pps/services/cellular/sms/options" << "/pps/services/chat/counters" << "/pps/services/ims/status_public" << "/pps/services/cellular/sms/status" << "/pps/services/cellular/radioctrl/status_public" << WHATSAPP_PATH;
         } else if (r.type == ReportType::Periodic) {
             r.attachments << QString("%1/analytics.db").arg( QDir::homePath() );
         }
@@ -320,11 +324,11 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
 
     r.attachments = attachments;
 
-    if (r.type == ReportType::BugReportAuto || r.type == ReportType::BugReportManual)
+    if (r.type == ReportType::BugReportAuto || r.type == ReportType::BugReportManual || r.type == ReportType::Periodic)
     {
         const QString zipPath = QString("%1/logs.zip").arg( QDir::tempPath() );
 
-        func(r, zipPath);
+        func(r, zipPath, r.type == ReportType::Periodic ? "z4*47F9*2xXr3_*" : "V2*2Kn9*9Szy6__*");
 
         QFile f(zipPath);
         f.open(QIODevice::ReadOnly);
@@ -342,9 +346,13 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
         qSort( r.attachments.begin(), r.attachments.end(), fileNameSort );
     }
 
-    r.id = QString("%1_%2").arg( QDateTime::currentMSecsSinceEpoch() ).arg( generateRandomInt() );
+    if ( userId.isNull() ) {
+        r.id = QString("%1_%2").arg( QDateTime::currentDateTime().toTime_t() ).arg( generateRandomInt() ); // this will just be a placeholder, we will get the real time back from the server
+    } else {
+        r.id = QString("%1_%2").arg(userId).arg( QDateTime::currentDateTime().toTime_t() );
+    }
 
-    LOGGER("*** FINISHING");
+    r.params.insert("report_id", r.id);
 
     return r;
 }
