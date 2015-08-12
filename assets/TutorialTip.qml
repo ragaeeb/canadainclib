@@ -320,10 +320,13 @@ Delegate
                     TapHandler
                     {
                         onTapped: {
-                            console.log("UserEvent: TutorialTapped", current.key);
-                            
-                            if ( !mainAnim.isPlaying() ) {
-                                fsd.dismiss();
+                            if (current.key) // this guard is here in case they start tapping on here before the first tutorial is even shown (before the initial animation is complete)
+                            {
+                                console.log("UserEvent: TutorialTapped", current.key);
+                                
+                                if ( !mainAnim.isPlaying() ) {
+                                    fsd.dismiss();
+                                }
                             }
                         }
                     }
