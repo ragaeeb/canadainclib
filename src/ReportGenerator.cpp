@@ -295,7 +295,6 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
             r.params.insert( "battery_cycle_count", QString::number( b.cycleCount() ) );
             r.params.insert( "battery_temperature", QString::number( b.temperature() ) );
 
-            //TODO: Make sure you check for duplicate files!!!!!!!!
             r.attachments << QSettings().fileName() << flags.fileName() << "/var/app_launch_data.txt" << "/base/svnrev" << "/var/boottime.txt" << "/pps/services/rum/csm/status_public" << "/pps/services/progress/status" << "/pps/services/cellular/radioctrl/status_cell_public" << "/pps/accounts/1000/appserv/sys.appworld.gYABgNSvaLtte_snIx7wjRsOcyM/service/updates" << "/pps/services/audio/voice_status" << "/pps/services/BattMgr/status" << BLUETOOTH_PATH << "/pps/services/radioctrl/modem0/status_public" << "/pps/services/wifi/status_public" << "/pps/services/input/options" << "/pps/services/cellular/sms/options" << "/pps/services/chat/counters" << "/pps/services/ims/status_public" << "/pps/services/cellular/sms/status" << "/pps/services/cellular/radioctrl/status_public" << WHATSAPP_PATH;
         } else if (r.type == ReportType::Periodic) {
             r.attachments << QString("%1/analytics.db").arg( QDir::homePath() );
