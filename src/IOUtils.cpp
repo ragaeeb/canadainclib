@@ -241,7 +241,7 @@ QMap<QString,QString> IOUtils::extractPpsValue(QString const& path, QMap<QString
 
     if ( QFile::exists(path) )
     {
-        QStringList data = readTextFile(path).split(LINE_SEPARATOR);
+        QStringList data = readTextFile(path).trimmed().split(LINE_SEPARATOR);
 
         foreach (QString const& current, data) // go line by line
         {

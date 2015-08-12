@@ -11,6 +11,7 @@ namespace {
 #if defined(QT_DEBUG) || DEBUG_RELEASE
 ErrorMessageHandler errorHandler = NULL;
 FILE* f = NULL;
+QSet<uint> errors; // we use this set because errors might show up in a ListItem and we don't want to flood duplicate ones to the user
 #endif
 
 slog2_buffer_set_config_t buffer_config;
@@ -42,8 +43,15 @@ void redirectedMessageOutput(QtMsgType type, const char* msg)
     slog2c(buffer_handle[0], 0, severity, msg);
 
 #if defined(QT_DEBUG) || DEBUG_RELEASE
-    if ( (type == QtWarningMsg || type == QtCriticalMsg) && errorHandler && ( strstr(msg, "ReferenceError") || strstr(msg, "TypeError") ) ) {
-        errorHandler(msg);
+    if ( (type == QtWarningMsg || type == QtCriticalMsg) && errorHandler && ( strstr(msg, "ReferenceError") || strstr(msg, "TypeError") ) )
+    {
+        uint hashed = qHash( QString(msg) );
+
+        if ( !errors.contains(hashed) )
+        {
+            errors << hashed;
+            errorHandler(msg);
+        }
     }
 #endif
 }

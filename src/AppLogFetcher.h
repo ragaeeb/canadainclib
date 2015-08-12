@@ -3,6 +3,7 @@
 
 #include <QFutureWatcher>
 #include <QSet>
+#include <QSettings>
 #include <QStringList>
 
 #include "AdminUtils.h"
@@ -28,6 +29,7 @@ class AppLogFetcher : public QObject
     CompressFiles m_compressor;
     bool m_dumpAll;
     AnalyticHelper m_analytics;
+    QQueue<Report> m_queue; // we use this queue in case multiple different BugReportAutos are generated in short bursts
 
     AppLogFetcher(Persistance* settings, CompressFiles func, QObject* parent=NULL, bool dumpAll=true);
 
