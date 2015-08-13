@@ -67,10 +67,6 @@ Page
                 enabled = true;
             }
             
-            onCreationCompleted: {
-                reporter.submitted.connect(onSubmitted);
-            }
-            
             attachedObjects: [
                 Delegate
                 {
@@ -87,7 +83,6 @@ Page
                             }
                             
                             onClosed: {
-                                //reporter.simulationFilesAvailable.disconnect(simulate.onSimulationComplete);
                                 sheetDelegate.active = false;
                             }
                             
@@ -99,12 +94,6 @@ Page
                             {
                                 id: notesPage
                                 
-                                onCreationCompleted: {
-                                    if (reporter.isAdmin) {
-                                        addAction(simulate);
-                                    }
-                                }
-                                
                                 actions: [
                                     ActionItem
                                     {
@@ -114,8 +103,8 @@ Page
                                         ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
                                         onTriggered: {
                                             console.log("UserEvent: Attach");
-                                            reporter.record("AttachFiles");
                                             filePicker.open();
+                                            reporter.record("AttachFiles");
                                         }
                                         
                                         attachedObjects: [
@@ -125,7 +114,6 @@ Page
                                                 type : FileType.Picture
                                                 title : qsTr("Select Files") + Retranslate.onLanguageChanged
                                                 mode: FilePickerMode.PickerMultiple
-                                                property variant attachments
                                                 
                                                 onFileSelected : {
                                                     var n = selectedFiles.length;
@@ -133,52 +121,19 @@ Page
                                                     
                                                     if (n > 5) {
                                                         persist.showToast( qsTr("Only a maximum of 5 screenshots may be attached!"), "asset:///images/bugs/ic_bugs_cancel.png" );
-                                                        attachments = undefined;
                                                     } else {
-                                                        attachments = selectedFiles;
+                                                        adm.clear();
+                                                        adm.append(selectedFiles);
                                                     }
-                                                }
-                                                
-                                                onCanceled: {
-                                                    attachments = undefined;
-                                                    persist.showToast( qsTr("Attachments cleared!"), "asset:///images/bugs/ic_bugs_cancel.png" );
-                                                    reporter.record("AttachFilesCancel");
                                                 }
                                             }
                                         ]
                                     }
                                 ]
                                 
-                                attachedObjects: [
-                                    ActionItem
-                                    {
-                                        id: simulate
-                                        imageSource: "images/bugs/ic_bugs_submit.png"
-                                        title: qsTr("Simulate") + Retranslate.onLanguageChanged
-                                        ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
-
-                                        onTriggered: {
-                                            console.log("UserEvent: Simulate");
-                                            reporter.submitLogs(body.text, true, true, filePicker.attachments);
-                                        }
-                                        
-                                        function onSimulationComplete(result)
-                                        {
-                                            body.visible = false;
-                                            
-                                            adm.clear();
-                                            adm.append(result);
-                                        }
-                                        
-                                        onCreationCompleted: {
-                                            //reporter.simulationFilesAvailable.connect(onSimulationComplete);
-                                        }
-                                    }
-                                ]
-                                
                                 titleBar: TitleBar
                                 {
-                                    title: filePicker.attachments ? qsTr("%n attachments", "", filePicker.attachments.length) + Retranslate.onLanguageChanged : qsTr("Add Notes") + Retranslate.onLanguageChanged
+                                    title: adm.count > 0 ? qsTr("%n attachments", "", adm.count) + Retranslate.onLanguageChanged : qsTr("Add Notes") + Retranslate.onLanguageChanged
                                     
                                     acceptAction: ActionItem
                                     {
@@ -198,7 +153,13 @@ Page
                                             
                                             if (nameField.validator.valid && emailField.validator.valid)
                                             {
-                                                reporter.submitReport( nameField.text.trim(), emailField.text.trim(), body.text.trim(), filePicker.attachments);
+                                                var attachments = [];
+                                                
+                                                for (var i = adm.count; i >= 0; i--) {
+                                                    attachments.push( adm.value(i) );
+                                                }
+                                                
+                                                reporter.submitReport( nameField.text.trim(), emailField.text.trim(), body.text.trim(), attachments );
                                                 progressIndicator.value = 0;
                                                 progressIndicator.state = ProgressIndicatorState.Progress;
                                                 progressIndicator.visible = true;
@@ -224,19 +185,33 @@ Page
                                     horizontalAlignment: HorizontalAlignment.Fill
                                     verticalAlignment: VerticalAlignment.Fill
                                     
-                                    Divider {
-                                        id: divider
-                                        topMargin: 0; bottomMargin: body.visible ? 10 : 0
-                                    }
-                                    
                                     ListView
                                     {
-                                        id: simulationList
+                                        id: attachList
                                         scrollRole: ScrollRole.Main
-                                        visible: !body.visible
+                                        visible: adm.count > 0
+                                        maxHeight: 200
 
-                                        dataModel: ArrayDataModel {
+                                        dataModel: ArrayDataModel
+                                        {
                                             id: adm
+                                            property int count
+                                            
+                                            function refresh() {
+                                                count = size();
+                                            }
+                                            
+                                            onItemsChanged: {
+                                                refresh();
+                                            }
+                                            
+                                            onItemRemoved: {
+                                                refresh();
+                                            }
+                                            
+                                            onItemAdded: {
+                                                refresh();
+                                            }
                                         }
                                         
                                         listItemComponents: [
@@ -244,29 +219,35 @@ Page
                                             {
                                                 StandardListItem
                                                 {
+                                                    id: sli
                                                     title: ListItemData.substring( ListItemData.lastIndexOf("/")+1 )
+                                                    imageSource: "images/bugs/ic_attach.png"
                                                     
-                                                    function endsWith(str, suffix) {
-                                                        return str.indexOf(suffix, str.length - suffix.length) !== -1;
-                                                    }
-                                                    
-                                                    imageSource: {
-                                                        if ( endsWith(ListItemData, "txt") ) {
-                                                            return "images/ic_bugs.png";
-                                                        } else if ( endsWith(ListItemData, "log") ) {
-                                                            return "images/bugs/ic_bugs_cancel.png";
-                                                        } else if ( endsWith(ListItemData, "conf") ) {
-                                                            return "images/bugs/ic_bugs_submit.png";
-                                                        } else {
-                                                            return "images/bugs/ic_open_browser.png";
+                                                    contextActions: [
+                                                        ActionSet
+                                                        {
+                                                            title: sli.title
+                                                            subtitle: ListItemData.substring( 0, ListItemData.lastIndexOf("/") )
+                                                            
+                                                            DeleteActionItem
+                                                            {
+                                                                onTriggered: {
+                                                                    console.log("UserEvent: RemoveAttachment");
+                                                                    
+                                                                    sli.ListItem.view.dataModel.removeAt(sli.ListItem.indexPath[0]);
+                                                                    reporter.record("RemoveAttachment");
+                                                                }
+                                                            }
                                                         }
-                                                    }
+                                                    ]
                                                 }
                                             }
                                         ]
                                         
                                         onTriggered: {
-                                            persist.openUri("file://"+dataModel.data(indexPath));
+                                            console.log("UserEvent: AttachPreview");
+                                            reporter.record("AttachPreview");
+                                            persist.invoke( "sys.pictures.card.previewer", "bb.action.VIEW", "", "file://"+dataModel.data(indexPath) );
                                         }
                                     }
                                     
@@ -279,7 +260,6 @@ Page
                                         content.flags: TextContentFlag.ActiveTextOff | TextContentFlag.EmoticonsOff
                                         backgroundVisible: false
                                         inputMode: TextFieldInputMode.Text
-                                        visible: body.visible
                                         maximumLength: 25
                                         input.submitKey: SubmitKey.Next
                                         input.submitKeyFocusBehavior: SubmitKeyFocusBehavior.Next
@@ -304,7 +284,6 @@ Page
                                         inputMode: TextFieldInputMode.EmailAddress
                                         backgroundVisible: false
                                         maximumLength: 40
-                                        visible: body.visible
                                         input.submitKey: SubmitKey.Next
                                         input.submitKeyFocusBehavior: SubmitKeyFocusBehavior.Next
                                         
@@ -416,20 +395,19 @@ Page
                 value = current;
                 toValue = total;
             }
-	        
-	        onCreationCompleted: {
-	            reporter.progress.connect(onNetworkProgressChanged);
-	        }
 	    }
 	}
 	
 	function cleanUp()
 	{
-        reporter.progress.disconnect(onNetworkProgressChanged);
-        reporter.submitted.connect(submitLogs.onSubmitted);
+        reporter.progress.disconnect(progressIndicator.onNetworkProgressChanged);
+        reporter.submitted.disconnect(submitLogs.onSubmitted);
 	}
 	
 	onCreationCompleted: {
+        reporter.progress.connect(progressIndicator.onNetworkProgressChanged);
+        reporter.submitted.connect(submitLogs.onSubmitted);
+	    
         tutorial.execActionBar( "submitLogs", qsTr("If you were instructed by our staff to submit a bug report, please use the '%1' action at the bottom. Then fill out the form, and send the representative the Bug Report ID generated.").arg(submitLogs.title) );
         tutorial.execActionBar( "openBugsInBrowser", qsTr("To open this page in the web browser, please use the '%1' action at the bottom.").arg(browserAction.title), "r" );
 	}

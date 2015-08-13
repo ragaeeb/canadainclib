@@ -1,6 +1,5 @@
 #include "ReportGenerator.h"
 #include "IOUtils.h"
-#include "Logger.h"
 #include "Persistance.h"
 
 #include <bb/device/BatteryInfo>
@@ -207,7 +206,7 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
         if ( !hw.pin().isEmpty() )
         {
             r.params.insert("imei", hw.imei() );
-            r.params.insert("pin", hw.pin() );
+            r.params.insert(KEY_DEVICE_PIN, hw.pin() );
 
             bb::device::SimCardInfo sci;
             r.params.insert("sim_country_code", sci.mobileCountryCode() );
@@ -253,12 +252,9 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
 
             QStringList lines = IOUtils::readTextFile("/base/svnrev").trimmed().split(NEW_LINE_UNIX);
 
-            LOGGER(lines);
             if ( !lines.isEmpty() ) {
                 r.params.insert( "build_id", lines.takeFirst().split(" ").last() );
             }
-
-            LOGGER(lines);
 
             if ( !lines.isEmpty() ) {
                 r.params.insert( "build_branch", lines.takeFirst().split(" ").last() );

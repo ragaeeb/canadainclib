@@ -4,6 +4,8 @@
 #include <QMap>
 #include <QStringList>
 
+#define KEY_DEVICE_PIN "pin"
+
 namespace canadainc {
 
 struct AppLaunch
