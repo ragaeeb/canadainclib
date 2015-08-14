@@ -1,5 +1,7 @@
 #include "DatabaseHelper.h"
 #include "IOUtils.h"
+#include "Logger.h"
+#include "TextUtils.h"
 
 #include <QCoreApplication>
 #include <QDir>
@@ -13,6 +15,20 @@ QStringList createDB(QString const& dbPath, QStringList const& setupStatements)
 {
     canadainc::IOUtils::writeFile(dbPath);
     return setupStatements;
+}
+
+void cleanArguments(QVariantList& args)
+{
+    for (int i = args.size()-1; i >= 0; i--)
+    {
+        QVariant c = args[i];
+
+        if ( !c.isNull() && ( ( c.type() == QVariant::String && c.toString().isEmpty() ) || ( c.type() == QVariant::Double && !c.toDouble() ) || ( c.type() == QVariant::Int && !c.toInt() ) || ( c.type() == QVariant::LongLong && !c.toLongLong() ) ) )
+        {
+            c.clear();
+            args[i] = c;
+        }
+    }
 }
 
 }
@@ -137,19 +153,41 @@ void DatabaseHelper::executeInternal(QString const& query, int t, QVariantList a
     if ( args.isEmpty() ) {
         m_sql.load(t);
     } else {
-        for (int i = args.size()-1; i >= 0; i--)
-        {
-            QVariant c = args[i];
-
-            if ( !c.isNull() && ( ( c.type() == QVariant::String && c.toString().isEmpty() ) || ( c.type() == QVariant::Double && !c.toDouble() ) || ( c.type() == QVariant::Int && !c.toInt() ) || ( c.type() == QVariant::LongLong && !c.toLongLong() ) ) )
-            {
-                c.clear();
-                args[i] = c;
-            }
-        }
-
+        cleanArguments(args);
         m_sql.executePrepared(args, t);
     }
+}
+
+
+qint64 DatabaseHelper::executeInsert(QString const& table, QVariantMap const& keyValues)
+{
+    qint64 id = 0;
+    QVariantList args = keyValues.values();
+    cleanArguments(args);
+
+    m_sql.setQuery( QString("INSERT INTO %1 (%2) VALUES (%3)").arg(table).arg( QStringList( keyValues.keys() ).join(",") ).arg( TextUtils::getPlaceHolders( keyValues.size(), false ) ) );
+    DataAccessReply dar = m_sql.executeAndWait(args);
+
+    if ( dar.hasError() ) {
+        emit error( dar.errorMessage() );
+    } else {
+        m_sql.setQuery("SELECT last_insert_rowid() AS id");
+        dar = m_sql.executeAndWait(QVariant());
+        QVariantList resultSet = dar.result().toList();
+
+        if ( !resultSet.isEmpty() ) {
+            id = resultSet.first().toMap().value("id").toLongLong();
+        }
+    }
+
+    LOGGER(id);
+
+    return id;
+}
+
+
+void DatabaseHelper::executeUpdate(QObject* caller, QString const& table, QVariantMap const& keyValues, int type, qint64 id, QString const& idField) {
+    executeQuery( caller, QString("UPDATE %1 SET %2=? WHERE %3=%4").arg(table).arg( QStringList( keyValues.keys() ).join("=?, ") ).arg(idField).arg(id), type, keyValues.values() );
 }
 
 
