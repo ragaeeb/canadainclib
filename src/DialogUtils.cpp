@@ -92,7 +92,7 @@ void DialogUtils::onLookupFinished()
 }
 
 
-void DialogUtils::showDialog(QObject* caller, QVariant const& data, QString const& title, QString const& text, QString const& okButton, QString const& cancelButton, bool okEnabled, QString const& rememberMeText, bool rememberMeValue)
+void DialogUtils::showDialog(QObject* caller, QVariant const& data, QString const& title, QString const& text, QString const& okButton, QString const& cancelButton, bool okEnabled, QString const& rememberMeText, bool rememberMeValue, QString const& funcName)
 {
     isNowBlocked = true;
 
@@ -118,6 +118,7 @@ void DialogUtils::showDialog(QObject* caller, QVariant const& data, QString cons
     m_dialog->confirmButton()->setLabel(okButton);
     m_dialog->confirmButton()->setEnabled(okEnabled);
     m_dialog->setProperty(KEY_ARGS, data);
+    m_dialog->setProperty(KEY_CALLBACK, funcName);
     m_dialog->show();
 }
 
@@ -132,6 +133,8 @@ void DialogUtils::dialogFinished(bb::system::SystemUiResult::Type value)
     {
         bool result = value == SystemUiResult::ConfirmButtonSelection;
         QVariant data = m_dialog->property(KEY_ARGS);
+        QByteArray qba = m_dialog->property(KEY_CALLBACK).toString().toUtf8();
+        const char* callback = qba.constData();
         m_dialog->setParent(this);
 
         if ( m_dialog->includeRememberMe() )
@@ -139,18 +142,19 @@ void DialogUtils::dialogFinished(bb::system::SystemUiResult::Type value)
             bool rememberMe = m_dialog->rememberMeSelection();
 
             if ( data.isValid() ) {
-                QMetaObject::invokeMethod( caller, METHOD_NAME, Qt::QueuedConnection, Q_ARG(QVariant, result), Q_ARG(QVariant, rememberMe), Q_ARG(QVariant, data) );
+                QMetaObject::invokeMethod( caller, callback, Qt::QueuedConnection, Q_ARG(QVariant, result), Q_ARG(QVariant, rememberMe), Q_ARG(QVariant, data) );
             } else {
-                QMetaObject::invokeMethod( caller, METHOD_NAME, Qt::QueuedConnection, Q_ARG(QVariant, result), Q_ARG(QVariant, rememberMe) );
+                QMetaObject::invokeMethod( caller, callback, Qt::QueuedConnection, Q_ARG(QVariant, result), Q_ARG(QVariant, rememberMe) );
             }
         } else {
             if ( data.isValid() ) {
-                QMetaObject::invokeMethod( caller, METHOD_NAME, Qt::QueuedConnection, Q_ARG(QVariant, result), Q_ARG(QVariant, data) );
+                QMetaObject::invokeMethod( caller, callback, Qt::QueuedConnection, Q_ARG(QVariant, result), Q_ARG(QVariant, data) );
             } else {
-                QMetaObject::invokeMethod( caller, METHOD_NAME, Qt::QueuedConnection, Q_ARG(QVariant, result) );
+                QMetaObject::invokeMethod( caller, callback, Qt::QueuedConnection, Q_ARG(QVariant, result) );
             }
         }
 
+        m_dialog->setProperty(KEY_CALLBACK, QVariant());
         m_dialog->setProperty(KEY_ARGS, QVariant());
     }
 }
@@ -196,7 +200,8 @@ void DialogUtils::promptFinished(bb::system::SystemUiResult::Type value)
         m_prompt->setParent(this);
 
         QString result = value == SystemUiResult::ConfirmButtonSelection ? m_prompt->inputFieldTextEntry().trimmed() : "";
-        const char* callback = m_prompt->property(KEY_CALLBACK).toString().toUtf8().constData();
+        QByteArray qba = m_prompt->property(KEY_CALLBACK).toString().toUtf8();
+        const char* callback = qba.constData();
 
         if ( data.isValid() ) {
             QMetaObject::invokeMethod( caller, callback, Qt::QueuedConnection, Q_ARG(QVariant, result), Q_ARG(QVariant, data) );

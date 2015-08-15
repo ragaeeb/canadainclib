@@ -121,13 +121,13 @@ void Persistance::showDialog(QString const& title, QString const& text, QString 
 }
 
 
-void Persistance::showDialog(QObject* caller, QString const& title, QString const& text, QString const& okButton, QString const& cancelButton, QString const& rememberMeText, bool rememberMeValue) {
-    showDialog(caller, QVariant(), title, text, okButton, cancelButton, true, rememberMeText, rememberMeValue);
+void Persistance::showDialog(QObject* caller, QString const& title, QString const& text, QString const& okButton, QString const& cancelButton, QString const& rememberMeText, bool rememberMeValue, QString const& funcName) {
+    showDialog(caller, QVariant(), title, text, okButton, cancelButton, true, rememberMeText, rememberMeValue, funcName);
 }
 
 
-void Persistance::showDialog(QObject* caller, QVariant const& data, QString const& title, QString const& text, QString const& okButton, QString const& cancelButton, bool okEnabled, QString const& rememberMeText, bool rememberMeValue) {
-    m_dialogs.showDialog(caller, data, title, text, okButton, cancelButton, okEnabled, rememberMeText, rememberMeValue);
+void Persistance::showDialog(QObject* caller, QVariant const& data, QString const& title, QString const& text, QString const& okButton, QString const& cancelButton, bool okEnabled, QString const& rememberMeText, bool rememberMeValue, QString const& funcName) {
+    m_dialogs.showDialog(caller, data, title, text, okButton, cancelButton, okEnabled, rememberMeText, rememberMeValue, funcName);
 }
 
 
@@ -462,8 +462,10 @@ void Persistance::onErrorMessage(const char* msg)
 }
 
 
-void Persistance::onError(QString const& message) {
-    onErrorMessage( message.toUtf8().constData() );
+void Persistance::onError(QString const& message)
+{
+    QByteArray qba = message.toUtf8();
+    onErrorMessage( qba.constData() );
 }
 
 

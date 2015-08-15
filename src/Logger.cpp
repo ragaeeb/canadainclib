@@ -72,7 +72,8 @@ void setErrorHandler(ErrorMessageHandler handler)
 void registerLogging(const char* key, ErrorMessageHandler handler)
 {
 #if defined(QT_DEBUG) || DEBUG_RELEASE
-    const char* cached_file_name = QString("%1/logs/%2.log").arg( QDir::currentPath() ).arg(key).toUtf8().constData();
+    QByteArray qba = QString("%1/logs/%2.log").arg( QDir::currentPath() ).arg(key).toUtf8();
+    const char* cached_file_name = qba.constData();
     f = fopen(cached_file_name, "w");
     errorHandler = handler;
 #else

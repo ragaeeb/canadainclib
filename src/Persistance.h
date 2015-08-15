@@ -87,8 +87,8 @@ public:
     Q_INVOKABLE void registerForSetting(QObject* q, QString const& key, bool isFlag=false, bool immediate=true);
     Q_INVOKABLE void remove(QString const& key, bool fireEvent=true);
     Q_INVOKABLE void setFlag(QString const& key, QVariant const& value=QVariant());
-    Q_INVOKABLE void showDialog(QObject* caller, QString const& title, QString const& text, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"), QString const& rememberMeText=QString(), bool rememberMeValue=false);
-    Q_INVOKABLE void showDialog(QObject* caller, QVariant const& data, QString const& title, QString const& text, QString const& okButton, QString const& cancelButton, bool okEnabled=true, QString const& rememberMeText=QString(), bool rememberMeValue=false);
+    Q_INVOKABLE void showDialog(QObject* caller, QString const& title, QString const& text, QString const& okButton=tr("Yes"), QString const& cancelButton=tr("No"), QString const& rememberMeText=QString(), bool rememberMeValue=false, QString const& funcName="onFinished");
+    Q_INVOKABLE void showDialog(QObject* caller, QVariant const& data, QString const& title, QString const& text, QString const& okButton, QString const& cancelButton, bool okEnabled=true, QString const& rememberMeText=QString(), bool rememberMeValue=false, QString const& funcName="onFinished");
     Q_INVOKABLE void showDialog(QString const& title, QString const& text, QString okButton=tr("OK"));
     Q_INVOKABLE void showPrompt(QObject* caller, QString const& title, QString const& body, QString const& defaultText, QString const& hintText, int maxLength, bool autoCapitalize=true, QString const& okButton=tr("Save"), QString const& cancelButton=tr("Cancel"), int inputMode=0, QString const& funcName="onFinished", QVariant const& data=QVariant());
     Q_INVOKABLE void showPrompt(QObject* caller, QString const& title, QString const& body, QString const& defaultText, QString const& hintText, int maxLength, QString const& funcName, QVariant const& data=QVariant());

@@ -273,7 +273,8 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
         } else if (r.type == ReportType::BugReportAuto || r.type == ReportType::BugReportManual) {
             tempFiles << QString("%1/slog2.txt").arg( QDir::tempPath() );
 
-            FILE* file = fopen( tempFiles.last().toUtf8().constData(), "w" );
+            QByteArray qba = tempFiles.last().toUtf8();
+            FILE* file = fopen( qba.constData(), "w" );
             slog2_dump_logs_to_file(file, r.dumpAll ? SLOG2_DUMP_LOGS_ALL : 0);
             fclose(file);
 

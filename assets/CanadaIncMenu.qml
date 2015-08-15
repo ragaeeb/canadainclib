@@ -8,7 +8,7 @@ MenuDefinition
     property string projectName
     property alias help: helpActionItem
     property alias settings: settingsActionItem
-    signal finished()
+    signal finished(bool clean)
     
     function launchPage(page)
     {
@@ -77,7 +77,8 @@ MenuDefinition
     
     function asyncWork()
     {
-        if (allowDonations) {
+        if (allowDonations)
+        {
             var donator = donateDefinition.createObject();
             addAction(donator);
         }
@@ -86,6 +87,8 @@ MenuDefinition
         
         reporter.performCII();
         
+        var clean = false;
+        
         if ( reporter.deferredCheck("promoted", 1) ) {
             persist.openChannel();
             persist.setFlag("promoted", 1);
@@ -93,9 +96,12 @@ MenuDefinition
             reporter.latestAppVersionFound.connect(onLatestVersionFound);
             reporter.checkForUpdate(projectName);
         } else if ( promptReview() ) {
-        } else if ( allowDonations && promptDonation() ) {}
+        } else if ( allowDonations && promptDonation() ) {
+        } else {
+            clean = true;
+        }
         
-        finished();
+        finished(clean);
     }
     
     onCreationCompleted: {
