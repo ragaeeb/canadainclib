@@ -100,6 +100,8 @@ Delegate
             key = "tutorial" + key.charAt(0).toUpperCase() + key.slice(1);
         }
         
+        console.log("***", key, suppressTutorials);
+        
         if ( text.length > 0 && !suppressTutorials && ( !key || !persist.containsFlag(key) ) )
         {
             var allKeys = keys;
