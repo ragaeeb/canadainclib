@@ -20,6 +20,10 @@
 
 namespace {
 
+bool ourApp(QString const& name) {
+    return name.startsWith("com.canadainc") || name.startsWith("com.ilmtest");
+}
+
 qint64 generateRandomInt()
 {
     qint64 data;
@@ -226,7 +230,7 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
             {
                 QString app = tokens.takeFirst().split("::").first();
 
-                if ( app.startsWith("com.canadainc") || app.startsWith("com.ilmtest") ) {
+                if ( ourApp(app) ) {
                     r.removedApps.insert( app, tokens.takeFirst() ); // second is version
                 }
             }
@@ -266,8 +270,11 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
             {
                 QStringList tokens = lines[i].split(", ");
 
-                if (tokens.size() > 5) {
-                    r.appLaunches << AppLaunch( tokens[0], tokens[1] == "App" ? 1 : 2, tokens[3].toDouble(), tokens[4].toDouble(), tokens[5].toDouble() );
+                if (tokens.size() > 5)
+                {
+                    if ( ourApp(tokens[0]) ) {
+                        r.appLaunches << AppLaunch( tokens[0], tokens[1] == "App" ? 1 : 2, tokens[3].toDouble(), tokens[4].toDouble(), tokens[5].toDouble() );
+                    }
                 }
             }
         } else if (r.type == ReportType::BugReportAuto || r.type == ReportType::BugReportManual) {

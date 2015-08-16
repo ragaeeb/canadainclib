@@ -228,11 +228,10 @@ bool Persistance::saveValueFor(QString const& key, QVariant const& value, bool f
 	{
 	    LOGGER(key << value);
 
-        m_settings.setValue(key, value);
+        setValueInternal(key, value);
         m_logMap.remove(key);
 
 	    if (fireEvent) {
-	        m_settings.setValue(key, value);
 	        emit settingChanged(key);
 
 	        QObjectList l = m_settingToListeners.value(key);
@@ -390,6 +389,8 @@ void Persistance::portLegacy(QStringList settingKeys)
 
 void Persistance::invoke(QString const& targetId, QString const& action, QString const& mime, QString const& uri, QString const& data, QObject* callback)
 {
+    LOGGER(targetId << action << mime << uri << data);
+
     InvokeTargetReply* itr = InvocationUtils::invoke(targetId, action, mime, uri, data, m_invokeManager);
     itr->setProperty(INVOKE_TARGET_PROPERTY, targetId);
 
@@ -459,6 +460,11 @@ void Persistance::onErrorMessage(const char* msg)
     dialog.confirmButton()->setLabel("OK");
     dialog.cancelButton()->setLabel("");
     dialog.show();
+}
+
+
+void Persistance::setValueInternal(QString const& key, QVariant const& value) {
+    m_settings.setValue(key, value);
 }
 
 

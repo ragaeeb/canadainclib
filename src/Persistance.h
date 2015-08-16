@@ -9,9 +9,8 @@
 
 #include "DialogUtils.h"
 
-#define INIT_SETTING(a,b) if ( !m_persistance.contains(a) ) m_persistance.saveValueFor(a,b,false);
+#define INIT_SETTING(a,b) if ( !m_persistance.contains(a) ) m_persistance.setValueInternal(a,b);
 #define FLAGS_FILE_NAME "flags"
-#define KEY_SUPPRESS_TUTORIALS "suppressTutorials"
 
 namespace bb {
 	namespace system {
@@ -99,6 +98,7 @@ public:
     Q_SLOT void openChannel();
     Q_SLOT void openUri(QString const& uri);
     Q_SLOT void reviewApp();
+    void setValueInternal(QString const& key, QVariant const& value);
     static bool showBlockingDialog(QString const& title, QString const& text, QString const& rememberMeText, bool &rememberMeValue, QString const& okButton, QString const& cancelButton, bool okEnabled=true);
     static void onErrorMessage(const char* msg);
     Q_SLOT void onError(QString const& message);

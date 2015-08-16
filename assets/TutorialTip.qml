@@ -53,7 +53,7 @@ Delegate
     }
     
     function isTopPane(navPane, p) {
-        return navPane.parent.parent.activePane == navPane && navPane.top == p;
+        return navPane.parent && navPane.parent.parent ? navPane.parent.parent.activePane == navPane && navPane.top == p : navPane.parent ? navPane.parent.activePane == navPane && navPane.top == p : navPane.top == p;
     }
     
     function execBelowTitleBar(key, text, topPadding, pos, type, imageSource)
@@ -99,8 +99,6 @@ Delegate
         if (key) {
             key = "tutorial" + key.charAt(0).toUpperCase() + key.slice(1);
         }
-        
-        console.log("***", key, suppressTutorials);
         
         if ( text.length > 0 && !suppressTutorials && ( !key || !persist.containsFlag(key) ) )
         {
@@ -288,13 +286,14 @@ Delegate
                     TapHandler
                     {
                         onTapped: {
-                            if (current.key) // this guard is here in case they start tapping on here before the first tutorial is even shown (before the initial animation is complete)
-                            {
+                            if (current.key) {
                                 console.log("UserEvent: TutorialTapped", current.key);
-                                
-                                if ( !mainAnim.isPlaying() ) {
-                                    fsd.dismiss();
-                                }
+                            } else {
+                                console.log("UserEvent: FixedTutorialTapped");
+                            }
+                            
+                            if ( !mainAnim.isPlaying() ) {
+                                fsd.dismiss();
                             }
                         }
                     }
