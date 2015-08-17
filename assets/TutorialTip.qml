@@ -8,6 +8,7 @@ Delegate
     property variant keys: {}
     property int currentIndex: -1
     signal tutorialFinished(string key)
+    signal tutorialStarted(string key)
     
     function count() {
         return data.length;
@@ -196,6 +197,18 @@ Delegate
                     swipeAnim.toY = -ui.du(45);
                     swipeAnim.play();
                 }
+                
+                if (current.key) {
+                    tutorialStarted( getTutorialKey(current.key) );
+                }
+            }
+            
+            function getTutorialKey(key)
+            {
+                key = key.substring("tutorial".length);
+                key = key.charAt(0).toLowerCase() + key.slice(1);
+                
+                return key;
             }
             
             function dismiss()
@@ -205,10 +218,7 @@ Delegate
                 if (key && key.length > 0)
                 {
                     persist.setFlag(key, 1);
-                    
-                    key = key.substring("tutorial".length);
-                    key = key.charAt(0).toLowerCase() + key.slice(1);
-                    tutorialFinished(key);
+                    tutorialFinished( getTutorialKey(key) );
                 }
                 
                 if (currentIndex < data.length-1) {
