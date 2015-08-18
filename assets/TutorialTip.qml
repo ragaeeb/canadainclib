@@ -108,6 +108,12 @@ Delegate
             if ( !(key in allKeys) )
             {
                 var allData = data;
+                
+                if ( !persist.containsFlag("tutorialAppInit") && !("tutorialAppInit" in allKeys) ) {
+                    allData.push( {'key': "tutorialAppInit", 'body': qsTr("Welcome to %1 v%2.\n\nThese are interactive tutorials to help you learn how to use the app.\n\nSimply tap on the screen to move on to the next tutorial. If you want to skip all tutorials press-and-hold on here and choose 'Suppress Tutorials' from the menu.").arg(Application.applicationName).arg(Application.applicationVersion), 'icon': "images/menu/ic_help.png", 'h': HorizontalAlignment.Center, 'v': VerticalAlignment.Center, 'l': 0, 'r': 0, 't': 0, 'b': 0, 'type': undefined} );
+                    allKeys["tutorialAppInit"] = allData.length-1;
+                }
+                
                 allData.push( {'key': key, 'body': text, 'icon': imageUri, 'h': h, 'v': v, 'l': left, 'r': right, 't': top, 'b': bottom, 'type': type} );
                 data = allData;
                 

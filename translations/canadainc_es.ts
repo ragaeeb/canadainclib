@@ -113,37 +113,27 @@
         <translation>Estado</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="113"/>
+        <location filename="../assets/BugReportPage.qml" line="102"/>
         <source>Attach</source>
         <translation>Adjuntar</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="126"/>
+        <location filename="../assets/BugReportPage.qml" line="115"/>
         <source>Select Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="135"/>
+        <location filename="../assets/BugReportPage.qml" line="123"/>
         <source>Only a maximum of 5 screenshots may be attached!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="144"/>
-        <source>Attachments cleared!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/BugReportPage.qml" line="157"/>
-        <source>Simulate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/BugReportPage.qml" line="181"/>
+        <location filename="../assets/BugReportPage.qml" line="136"/>
         <source>Add Notes</source>
         <translation>Notas</translation>
     </message>
     <message numerus="yes">
-        <location filename="../assets/BugReportPage.qml" line="181"/>
+        <location filename="../assets/BugReportPage.qml" line="136"/>
         <source>%n attachments</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -151,42 +141,42 @@
         </translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="187"/>
+        <location filename="../assets/BugReportPage.qml" line="142"/>
         <source>Submit</source>
         <translation>Enviar</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="195"/>
+        <location filename="../assets/BugReportPage.qml" line="150"/>
         <source>Please enter detailed notes about the bug you observed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="213"/>
+        <location filename="../assets/BugReportPage.qml" line="174"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="277"/>
+        <location filename="../assets/BugReportPage.qml" line="258"/>
         <source>Name:</source>
         <translation>Nombre:</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="289"/>
+        <location filename="../assets/BugReportPage.qml" line="269"/>
         <source>Name cannot be empty!</source>
         <translation>El nombre para mostrar no puede estar vacío</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="301"/>
+        <location filename="../assets/BugReportPage.qml" line="281"/>
         <source>Email Address:</source>
         <translation>Dirección de correo</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="319"/>
+        <location filename="../assets/BugReportPage.qml" line="298"/>
         <source>Invalid email address!</source>
         <translation>Correo no válido</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="340"/>
+        <location filename="../assets/BugReportPage.qml" line="319"/>
         <source>Summary of Bug:
 
 
@@ -197,17 +187,17 @@ How often can you reproduce this?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="343"/>
+        <location filename="../assets/BugReportPage.qml" line="322"/>
         <source>Enter the notes you wish to add...</source>
         <translation>Notas</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="433"/>
+        <location filename="../assets/BugReportPage.qml" line="411"/>
         <source>If you were instructed by our staff to submit a bug report, please use the &apos;%1&apos; action at the bottom. Then fill out the form, and send the representative the Bug Report ID generated.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="434"/>
+        <location filename="../assets/BugReportPage.qml" line="412"/>
         <source>To open this page in the web browser, please use the &apos;%1&apos; action at the bottom.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -226,11 +216,15 @@ How often can you reproduce this?</source>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="46"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="60"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="71"/>
         <source>Yes</source>
         <translation>Sí</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="46"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="60"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="71"/>
         <source>No</source>
         <translation>No</translation>
     </message>
@@ -240,17 +234,29 @@ How often can you reproduce this?</source>
         <translation>No volver a mostrar.</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="107"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="60"/>
+        <source>If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?</source>
+        <translation type="unfinished">Si le gusta utilizar la aplicación, dedique unos instantes a calificar la aplicación. ¡Gracias!</translation>
+    </message>
+    <message>
+        <location filename="../assets/CanadaIncMenu.qml" line="71"/>
+        <source>While our apps will always remain free of charge for your benefit, we encourage you to please donate whatever you can in order to support development. This will motivate the developers to continue to update the app, add new features and bug fixes. To donate, simply swipe-down from the top-bezel and tap the &apos;Donate&apos; button to send money via PayPal. Would you like to donate now?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/CanadaIncMenu.qml" line="136"/>
         <source>Bug Reports</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="129"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="60"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="158"/>
         <source>Review</source>
         <translation>Comentarios</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="180"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="71"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="209"/>
         <source>Donate</source>
         <translation type="unfinished"></translation>
     </message>
@@ -404,67 +410,43 @@ Make sure you remember it!</source>
 <context>
     <name>TutorialTip</name>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="162"/>
+        <location filename="../assets/TutorialTip.qml" line="151"/>
         <source>Video Tutorial</source>
         <translation>Tutorial</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="162"/>
+        <location filename="../assets/TutorialTip.qml" line="151"/>
         <source>Would you like to see a video tutorial on how to use the app?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="162"/>
-        <location filename="../assets/TutorialTip.qml" line="173"/>
-        <location filename="../assets/TutorialTip.qml" line="184"/>
+        <location filename="../assets/TutorialTip.qml" line="151"/>
         <source>Yes</source>
         <translation>Sí</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="162"/>
-        <location filename="../assets/TutorialTip.qml" line="173"/>
-        <location filename="../assets/TutorialTip.qml" line="184"/>
+        <location filename="../assets/TutorialTip.qml" line="151"/>
         <source>No</source>
         <translation>No</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="173"/>
-        <source>Review</source>
-        <translation>Comentarios</translation>
-    </message>
-    <message>
-        <location filename="../assets/TutorialTip.qml" line="173"/>
-        <source>If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?</source>
-        <translation>Si le gusta utilizar la aplicación, dedique unos instantes a calificar la aplicación. ¡Gracias!</translation>
-    </message>
-    <message>
-        <location filename="../assets/TutorialTip.qml" line="184"/>
-        <source>Donate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/TutorialTip.qml" line="184"/>
-        <source>While our apps will always remain free of charge for your benefit, we encourage you to please donate whatever you can in order to support development. This will motivate the developers to continue to update the app, add new features and bug fixes. To donate, simply swipe-down from the top-bezel and tap the &apos;Donate&apos; button to send money via PayPal. Would you like to donate now?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/TutorialTip.qml" line="287"/>
+        <location filename="../assets/TutorialTip.qml" line="263"/>
         <source>Stop all Tutorials</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="288"/>
+        <location filename="../assets/TutorialTip.qml" line="264"/>
         <source>Prevent any tutorials from showing...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="294"/>
-        <location filename="../assets/TutorialTip.qml" line="311"/>
+        <location filename="../assets/TutorialTip.qml" line="270"/>
+        <location filename="../assets/TutorialTip.qml" line="287"/>
         <source>Suppress Tutorials</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="311"/>
+        <location filename="../assets/TutorialTip.qml" line="287"/>
         <source>Are you sure you want to prevent all further tutorials? If you ever want to enable them again, swipe-down from the top-bezel, go to Help, tap on the title bar and uncheck the &apos;Suppress Tutorials&apos; checkmark.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -493,41 +475,41 @@ Make sure you remember it!</source>
     </message>
 </context>
 <context>
+    <name>canadainc::AdminUtils</name>
+    <message>
+        <location filename="../src/AdminUtils.cpp" line="94"/>
+        <source>Admin Access Granted for: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>canadainc::AppLogFetcher</name>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="338"/>
-        <source>Login</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/AppLogFetcher.cpp" line="339"/>
-        <source>Please enter the credentials provided to you by Canada Inc:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/AppLogFetcher.cpp" line="404"/>
+        <location filename="../src/AppLogFetcher.cpp" line="112"/>
         <source>Could not submit report! Please try again...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="411"/>
-        <source>Report could not be submitted because you are offline! Please reconnect to the network and try again...</source>
-        <translation>No hay conexión de red</translation>
-    </message>
-    <message>
-        <location filename="../src/AppLogFetcher.cpp" line="458"/>
-        <source>Admin Access Granted for: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/AppLogFetcher.cpp" line="473"/>
+        <location filename="../src/AppLogFetcher.cpp" line="181"/>
         <source>Could not submit logs! Please try again...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="473"/>
+        <location filename="../src/AppLogFetcher.cpp" line="181"/>
         <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/AppLogFetcher.cpp" line="185"/>
+        <source>
+
+You may have to close the app and re-open it to correct the error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/AppLogFetcher.cpp" line="110"/>
+        <source>Report could not be submitted because you are offline! Please reconnect to the network and try again...</source>
+        <translation>No hay conexión de red</translation>
     </message>
 </context>
 <context>
@@ -638,14 +620,14 @@ Make sure you remember it!</source>
     <name>canadainc::Persistance</name>
     <message>
         <location filename="../src/Persistance.cpp" line="140"/>
-        <location filename="../src/Persistance.h" line="93"/>
+        <location filename="../src/Persistance.h" line="92"/>
         <source>Save</source>
         <translation>Guardar</translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="140"/>
-        <location filename="../src/Persistance.h" line="72"/>
-        <location filename="../src/Persistance.h" line="93"/>
+        <location filename="../src/Persistance.h" line="71"/>
+        <location filename="../src/Persistance.h" line="92"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
@@ -655,20 +637,20 @@ Make sure you remember it!</source>
         <translation>Se ha copiado %1</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.h" line="69"/>
-        <location filename="../src/Persistance.h" line="90"/>
+        <location filename="../src/Persistance.h" line="68"/>
+        <location filename="../src/Persistance.h" line="89"/>
         <source>Yes</source>
         <translation>Sí</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.h" line="69"/>
-        <location filename="../src/Persistance.h" line="90"/>
+        <location filename="../src/Persistance.h" line="68"/>
+        <location filename="../src/Persistance.h" line="89"/>
         <source>No</source>
         <translation>No</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.h" line="72"/>
-        <location filename="../src/Persistance.h" line="92"/>
+        <location filename="../src/Persistance.h" line="71"/>
+        <location filename="../src/Persistance.h" line="91"/>
         <source>OK</source>
         <translation>Aceptar</translation>
     </message>
