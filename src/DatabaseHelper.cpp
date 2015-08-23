@@ -42,7 +42,6 @@ DatabaseHelper::DatabaseHelper(QString const& dbase, QObject* parent) :
     connect( &m_sql, SIGNAL( dataLoaded(int, QVariant const&) ), this, SLOT( dataLoaded(int, QVariant const&) ), Qt::QueuedConnection );
     connect( &m_sql, SIGNAL( error(QString const&) ), this, SIGNAL( error(QString const&) ), Qt::QueuedConnection );
     connect( &m_sql, SIGNAL( setupError(QString const&) ), this, SIGNAL( setupError(QString const&) ), Qt::QueuedConnection );
-    connect( &m_creator, SIGNAL( finished() ), this, SLOT( onDatabaseCreated() ) );
 }
 
 
@@ -65,7 +64,7 @@ void DatabaseHelper::attachIfNecessary(QString const& dbase, QString const& path
     {
         m_sql.setQuery( QString("ATTACH DATABASE '%1' AS %2").arg( QString("%1/%2.db") ).arg(path).arg(dbase) );
         m_sql.load(id);
-        m_attached.insert(dbase, true);
+        m_attached << dbase;
     }
 }
 
@@ -102,7 +101,7 @@ void DatabaseHelper::dataLoaded(int id, QVariant const& data)
 
         m_idToObjectQueryType.remove(id);
 
-        QMap<int,bool> idsForObject = m_objectToIds[caller];
+        QSet<int> idsForObject = m_objectToIds[caller];
         idsForObject.remove(id);
 
         if ( !idsForObject.isEmpty() ) {
@@ -128,8 +127,8 @@ void DatabaseHelper::stash(QObject* caller, int t)
         connect( caller, SIGNAL( destroyed(QObject*) ), this, SLOT( onDestroyed(QObject*) ) );
     }
 
-    QMap<int,bool> idsForObject = m_objectToIds[caller];
-    idsForObject.insert(m_currentId, true);
+    QSet<int> idsForObject = m_objectToIds[caller];
+    idsForObject << m_currentId;
     m_objectToIds[caller] = idsForObject;
 }
 
@@ -203,13 +202,11 @@ void DatabaseHelper::initSetup(QObject* caller, QStringList const& setupStatemen
 
 void DatabaseHelper::onDestroyed(QObject* obj)
 {
-    QMap<int,bool> idsForObject = m_objectToIds[obj];
+    QSet<int> ids = m_objectToIds[obj];
     m_objectToIds.remove(obj);
 
-    QList<int> ids = idsForObject.keys();
-
-    for (int i = ids.size()-1; i >= 0; i--) {
-        m_idToObjectQueryType.remove(ids[i]);
+    foreach (int i, ids) {
+        m_idToObjectQueryType.remove(i);
     }
 }
 

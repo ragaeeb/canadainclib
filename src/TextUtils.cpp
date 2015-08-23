@@ -2,7 +2,7 @@
 
 #include <QRegExp>
 #include <QStringList>
-#include <QUrl>
+#include <QTime>
 
 #include <math.h>
 #include <stdint.h>
@@ -148,7 +148,17 @@ QString TextUtils::bytesToSize(qint64 bytes)
 }
 
 
-int TextUtils::randInt(int low, int high) {
+int TextUtils::randInt(int low, int high)
+{
+    static bool seeded = false;
+
+    if (!seeded)
+    {
+        QTime time = QTime::currentTime();
+        qsrand( (uint)time.msec() );
+        seeded = true;
+    }
+
     return qrand() % ((high + 1) - low) + low;
 }
 

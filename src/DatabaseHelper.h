@@ -19,11 +19,10 @@ class DatabaseHelper : public QObject
 
     CustomSqlDataSource m_sql;
     int m_currentId;
-    QMap< QObject*, QMap<int,bool> > m_objectToIds;
+    QMap< QObject*, QSet<int> > m_objectToIds;
     QMap<int, QPair<QObject*,int> > m_idToObjectQueryType;
-    QMap<QString, bool> m_attached;
+    QSet<QString> m_attached;
     bool m_enabled;
-    QFutureWatcher<QStringList> m_creator;
 
     void stash(QObject* caller, int t);
 
