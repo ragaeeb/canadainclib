@@ -4,6 +4,8 @@
 #include <QStringList>
 #include <QTime>
 
+#include "Logger.h"
+
 #include <math.h>
 #include <stdint.h>
 #include <sys/types.h>
@@ -159,7 +161,7 @@ int TextUtils::randInt(int low, int high)
         seeded = true;
     }
 
-    return qrand() % ((high + 1) - low) + low;
+    return low + (int)( (high*1.0) * (qrand() / (RAND_MAX + 1.0) ) );
 }
 
 
