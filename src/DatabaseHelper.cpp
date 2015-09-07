@@ -22,10 +22,14 @@ void cleanArguments(QVariantList& args)
     for (int i = args.size()-1; i >= 0; i--)
     {
         QVariant c = args[i];
+        bool isBool = c.type() == QVariant::Bool;
 
-        if ( !c.isNull() && ( ( c.type() == QVariant::String && c.toString().isEmpty() ) || ( c.type() == QVariant::Double && !c.toDouble() ) || ( c.type() == QVariant::Int && !c.toInt() ) || ( c.type() == QVariant::LongLong && !c.toLongLong() ) ) )
+        if ( !c.isNull() && ( ( c.type() == QVariant::String && c.toString().isEmpty() ) || ( c.type() == QVariant::Double && !c.toDouble() ) || ( c.type() == QVariant::Int && !c.toInt() ) || ( c.type() == QVariant::LongLong && !c.toLongLong() ) || ( isBool && !c.toBool() ) ) )
         {
             c.clear();
+            args[i] = c;
+        } else if ( isBool && c.toBool() ) {
+            c = 1;
             args[i] = c;
         }
     }
@@ -187,6 +191,11 @@ qint64 DatabaseHelper::executeInsert(QString const& table, QVariantMap const& ke
 
 void DatabaseHelper::executeUpdate(QObject* caller, QString const& table, QVariantMap const& keyValues, int type, qint64 id, QString const& idField) {
     executeQuery( caller, QString("UPDATE %1 SET %2=? WHERE %3=%4").arg(table).arg( QStringList( keyValues.keys() ).join("=?, ") ).arg(idField).arg(id), type, keyValues.values() );
+}
+
+
+void DatabaseHelper::executeDelete(QObject* caller, QString const& table, int type, qint64 id, QString const& idField) {
+    executeQuery( caller, QString("DELETE FROM %1 WHERE %2=%3").arg(table).arg(idField).arg(id), type );
 }
 
 
