@@ -35,8 +35,6 @@ public:
 
     Q_INVOKABLE static int randInt(int low, int high);
 
-    Q_INVOKABLE static QString getPlaceHolders(int n, bool multi=true, QString const& symbol="?");
-
     Q_INVOKABLE static QString toTitleCase(QString const& s);
     Q_INVOKABLE static QString removeBrackets(QString& input);
     Q_INVOKABLE static QString optimize(QString input);

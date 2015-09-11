@@ -117,12 +117,6 @@ public:
     Q_INVOKABLE void startTransaction(int id);
     Q_INVOKABLE void endTransaction(int id);
 
-    /**
-     * @param
-     * @return <code>true</code> If setup was successfully completed, <code>false</code> if setup was not needed.
-     */
-    Q_INVOKABLE bool initSetup(QStringList const& setupStatements, int id=1, int settingUpId=-2);
-
     void setVerbose(bool verbose=true);
 
 signals:

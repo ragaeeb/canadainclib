@@ -165,18 +165,6 @@ int TextUtils::randInt(int low, int high)
 }
 
 
-QString TextUtils::getPlaceHolders(int n, bool multi, QString const& symbol)
-{
-    QStringList placeHolders;
-
-    for (int i = 0; i < n; i++) {
-        placeHolders << symbol;
-    }
-
-    return placeHolders.join(multi ? "),(" : ",");
-}
-
-
 QString TextUtils::toTitleCase(QString const& s)
 {
     static const QString matchWords = QString("\\b([\\w'%1%2]+)\\b").arg( QChar(8217) ).arg( QChar(8216) );

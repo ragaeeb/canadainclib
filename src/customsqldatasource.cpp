@@ -165,31 +165,6 @@ void CustomSqlDataSource::onLoadAsyncResultData(bb::data::DataAccessReply const&
 }
 
 
-bool CustomSqlDataSource::initSetup(QStringList const& setupStatements, int id, int settingUpId)
-{
-    if (m_verbose) {
-        LOGGER(setupStatements << id);
-    }
-
-	bool result = IOUtils::writeFile(m_source);
-
-    //m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
-
-    if ( checkConnection() )
-    {
-        m_sqlConnector->beginTransaction(settingUpId);
-
-        foreach (QString const& query, setupStatements) {
-            m_sqlConnector->execute(query, settingUpId);
-        }
-
-        m_sqlConnector->endTransaction(id);
-    }
-
-	return result;
-}
-
-
 void CustomSqlDataSource::setSource(QString const& source) {
 	m_source = source;
 }

@@ -1,13 +1,14 @@
 #include "DatabaseHelper.h"
 #include "IOUtils.h"
 #include "Logger.h"
-#include "TextUtils.h"
 
 #include <QCoreApplication>
 #include <QDir>
 #include <QtCore>
 
 #define CHECK_ENABLED if (!m_enabled) return
+#define FIELD_ID "id"
+#define FIELD_TABLE_NAME "table_name"
 
 namespace {
 
@@ -51,47 +52,46 @@ DatabaseHelper::DatabaseHelper(QString const& dbase, QObject* parent) :
 
 void DatabaseHelper::onDatabaseCreated()
 {
-
 }
 
 
-void DatabaseHelper::attachIfNecessary(QString const& dbase, bool homePath, int id) {
-    attachIfNecessary( dbase, homePath ? QDir::homePath() : QString("%1/assets/dbase").arg( QCoreApplication::applicationDirPath() ), id );
+void DatabaseHelper::attachIfNecessary(QString const& dbase, bool homePath) {
+    attachIfNecessary( dbase, homePath ? QDir::homePath() : QString("%1/assets/dbase").arg( QCoreApplication::applicationDirPath() ) );
 }
 
 
-void DatabaseHelper::attachIfNecessary(QString const& dbase, QString const& path, int id)
+void DatabaseHelper::attachIfNecessary(QString const& dbase, QString const& path)
 {
     CHECK_ENABLED;
 
     if ( !dbase.isEmpty() && !m_attached.contains(dbase) )
     {
         m_sql.setQuery( QString("ATTACH DATABASE '%1' AS %2").arg( QString("%1/%2.db") ).arg(path).arg(dbase) );
-        m_sql.load(id);
+        m_sql.load(InternalQueryId::AttachDatabase);
         m_attached << dbase;
     }
 }
 
 
-void DatabaseHelper::detach(QString const& dbase, int id)
+void DatabaseHelper::detach(QString const& dbase)
 {
     CHECK_ENABLED;
 
     if ( m_attached.contains(dbase) )
     {
         m_sql.setQuery( QString("DETACH DATABASE %1").arg(dbase) );
-        m_sql.load(id);
+        m_sql.load(InternalQueryId::DetachDatabase);
         m_attached.remove(dbase);
     }
 }
 
 
-void DatabaseHelper::enableForeignKeys(int id)
+void DatabaseHelper::enableForeignKeys()
 {
     CHECK_ENABLED;
 
     m_sql.setQuery("PRAGMA foreign_keys = ON");
-    m_sql.load(id);
+    m_sql.load(InternalQueryId::ForeignKeySetup);
 }
 
 
@@ -168,7 +168,7 @@ qint64 DatabaseHelper::executeInsert(QString const& table, QVariantMap const& ke
     QVariantList args = keyValues.values();
     cleanArguments(args);
 
-    m_sql.setQuery( QString("INSERT INTO %1 (%2) VALUES (%3)").arg(table).arg( QStringList( keyValues.keys() ).join(",") ).arg( TextUtils::getPlaceHolders( keyValues.size(), false ) ) );
+    m_sql.setQuery( QString("INSERT INTO %1 (%2) VALUES (%3)").arg(table).arg( QStringList( keyValues.keys() ).join(",") ).arg( getPlaceHolders( keyValues.size(), false ) ) );
     DataAccessReply dar = m_sql.executeAndWait(args);
 
     if ( dar.hasError() ) {
@@ -198,18 +198,39 @@ void DatabaseHelper::executeDelete(QObject* caller, QString const& table, int ty
     executeQuery( caller, QString("DELETE FROM %1 WHERE %2=%3").arg(table).arg(idField).arg(id), type );
 }
 
-void DatabaseHelper::executeDelete(QObject* caller, QString const& table, int type) {
+void DatabaseHelper::executeClear(QObject* caller, QString const& table, int type) {
     executeQuery( caller, QString("DELETE FROM %1").arg(table), type );
 }
 
 
-void DatabaseHelper::initSetup(QObject* caller, QStringList const& setupStatements, int t)
+void DatabaseHelper::fetchAllIds(QObject* caller, QString const& table) {
+    executeQuery(caller, QString("SELECT %3,'%1' AS %2 FROM %1 ORDER BY %3").arg(table).arg(FIELD_TABLE_NAME).arg(FIELD_ID), InternalQueryId::FetchAllIds);
+}
+
+
+void DatabaseHelper::setIndexAsId(QObject* caller, QVariantList const& data, QVariantList const& intersection)
 {
-    stash(caller, t);
+    QSet<qint64> commonIds;
 
-    CHECK_ENABLED;
+    foreach (QVariant q, intersection) {
+        commonIds << q.toMap().value(FIELD_ID).toLongLong();
+    }
 
-    m_sql.initSetup(setupStatements, m_currentId);
+    startTransaction(caller, InternalQueryId::PendingTransaction);
+
+    for (int i = 0; i < data.size(); i++)
+    {
+        QVariantMap current = data[i].toMap();
+        QString table = current.value(FIELD_TABLE_NAME).toString();
+        qint64 id = current.value(FIELD_ID).toLongLong();
+        qint64 target = i+1;
+
+        if ( id != target && !commonIds.contains(id) ) {
+            executeQuery(caller, QString("UPDATE %1 SET %4=%3 WHERE %4=%2").arg(table).arg(id).arg(target).arg(FIELD_ID), InternalQueryId::PendingTransaction);
+        }
+    }
+
+    endTransaction(caller, InternalQueryId::UpdateIdWithIndex);
 }
 
 
@@ -270,6 +291,18 @@ void DatabaseHelper::setEnabled(bool enabled) {
 
 void DatabaseHelper::setVerboseLogging(bool enabled) {
     m_sql.setVerbose(enabled);
+}
+
+
+QString DatabaseHelper::getPlaceHolders(int n, bool multi, QString const& symbol)
+{
+    QStringList placeHolders;
+
+    for (int i = 0; i < n; i++) {
+        placeHolders << symbol;
+    }
+
+    return placeHolders.join(multi ? "),(" : ",");
 }
 
 
