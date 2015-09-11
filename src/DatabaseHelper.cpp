@@ -198,6 +198,10 @@ void DatabaseHelper::executeDelete(QObject* caller, QString const& table, int ty
     executeQuery( caller, QString("DELETE FROM %1 WHERE %2=%3").arg(table).arg(idField).arg(id), type );
 }
 
+void DatabaseHelper::executeDelete(QObject* caller, QString const& table, int type) {
+    executeQuery( caller, QString("DELETE FROM %1").arg(table), type );
+}
+
 
 void DatabaseHelper::initSetup(QObject* caller, QStringList const& setupStatements, int t)
 {

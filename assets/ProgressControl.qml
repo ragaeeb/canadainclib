@@ -22,6 +22,7 @@ ControlDelegate
                 horizontalAlignment: HorizontalAlignment.Center
                 imageSource: asset
                 loadEffect: ImageViewLoadEffect.FadeZoom
+                scalingMethod: ScalingMethod.AspectFit
                 
                 animations: [
                     RotateTransition {
