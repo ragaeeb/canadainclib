@@ -41,6 +41,8 @@ public:
     void initPage(QObject* page);
     void processResponse(QString const& result);
     bool isAdmin() const;
+
+    static QUrl getBasePath();
 };
 
 } /* namespace canadainc */

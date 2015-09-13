@@ -7,6 +7,8 @@
 
 #include <QNetworkConfigurationManager>
 
+#define HTTP_RESPONSE_OK "200 OK"
+
 class QNetworkAccessManager;
 class QNetworkReply;
 
