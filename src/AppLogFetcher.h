@@ -45,6 +45,7 @@ signals:
     void progress(QVariant const& cookie, qint64 bytesSent, qint64 bytesTotal);
     void submitted(QString const& message);
     void latestAppVersionFound(QString const& version);
+    void userIdFetched(QString const& userId);
 
 public:
     static AppLogFetcher* create(Persistance* settings, CompressFiles func, QObject* parent=NULL, bool dumpAll=true);
