@@ -43,6 +43,18 @@ public:
     Q_INVOKABLE static bool isEmail(QString const& input);
     Q_INVOKABLE static bool isPhoneNumber(QString const& input);
     Q_INVOKABLE static bool isUrl(QString const& input);
+
+    template<class Enum>
+    static QString e2s(int t) {
+        return QString( Enum::staticMetaObject.enumerator(0).valueToKey(t) );
+    }
+
+    template<class Enum>
+    static QString s2e(QString const& t)
+    {
+        QByteArray qba = t.toUtf8();
+        return QString( Enum::staticMetaObject.enumerator(0).keyToValue( qba.constData() ) );
+    }
 };
 
 } /* namespace canadainc */
