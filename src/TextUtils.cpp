@@ -161,7 +161,7 @@ int TextUtils::randInt(int low, int high)
         seeded = true;
     }
 
-    return low + (int)( (high*1.0) * (qrand() / (RAND_MAX + 1.0) ) );
+    return qrand() % ((high + 1) - low) + low;
 }
 
 
