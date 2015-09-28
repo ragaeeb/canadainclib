@@ -4,6 +4,7 @@ Delegate
 {
     id: tutorialDelegate
     property bool suppressTutorials
+    property bool blockTapping: false
     property variant data: []
     property variant keys: {}
     property int currentIndex: -1
@@ -149,6 +150,10 @@ Delegate
         reporter.record( "TutorialPromptResult", data.cookie+":"+confirmed.toString() );
     }
     
+    function execAppMenu()
+    {
+        execSwipe("showAppMenu", qsTr("Swipe down from the top-bezel to display the Settings and Help and file bugs!"), HorizontalAlignment.Center, VerticalAlignment.Top, "d");
+    }
     
     function promptVideo(uri)
     {
@@ -159,6 +164,12 @@ Delegate
         }
         
         return false;
+    }
+    
+    onTutorialStarted: {
+        if (key == "openAppMenu") {
+            blockTapping = true;
+        }
     }
     
     sourceComponent: ComponentDefinition
@@ -234,13 +245,24 @@ Delegate
                 }
             }
             
+            function onSwipeDown()
+            {
+                if ( getTutorialKey(current.key) == "openAppMenu" )
+                {
+                    blockTapping = false;
+                    fsd.dismiss();
+                }
+            }
+            
             onOpened: {
                 mainAnim.play();
+                Application.swipeDown.connect(onSwipeDown);
             }
             
             onClosed: {
                 icon.resetImageSource();
                 bodyControl.resetText();
+                Application.swipeDown.disconnect(onSwipeDown);
             }
             
             onCreationCompleted: {
@@ -308,7 +330,7 @@ Delegate
                                 console.log("UserEvent: FixedTutorialTapped");
                             }
                             
-                            if ( !mainAnim.isPlaying() ) {
+                            if ( !mainAnim.isPlaying() && !blockTapping ) {
                                 fsd.dismiss();
                             }
                         }

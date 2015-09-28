@@ -50,7 +50,8 @@ MenuDefinition
         }
     }
     
-    function onSwipeDown() {
+    function onSwipeDown()
+    {
         reporter.record("SwipeDown");
     }
     
