@@ -8,7 +8,8 @@ MenuDefinition
     property string projectName
     property alias help: helpActionItem
     property alias settings: settingsActionItem
-    signal finished(bool clean)
+    signal finished(bool clean, int analyticResult)
+    property int analyticDiffDays: 30
     
     function launchPage(page)
     {
@@ -85,8 +86,7 @@ MenuDefinition
         
         Application.swipeDown.connect(onSwipeDown);
         
-        reporter.performCII();
-        
+        var analyticResult = reporter.performCII(analyticDiffDays);
         var clean = false;
         
         if ( reporter.deferredCheck("promoted", 1) ) {
@@ -101,7 +101,7 @@ MenuDefinition
             clean = true;
         }
         
-        finished(clean);
+        finished(clean, analyticResult);
     }
     
     onCreationCompleted: {

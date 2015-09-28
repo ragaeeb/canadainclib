@@ -54,7 +54,7 @@ public:
 
     bool adminEnabled() const;
     bool online() const;
-    Q_SLOT bool performCII();
+    Q_SLOT int performCII(int analyticDiffDays=30);
     Q_INVOKABLE void checkForUpdate(QString const& projectName);
     Q_INVOKABLE bool deferredCheck(QString const& key, qint64 diff, bool versionBased=false);
     Q_INVOKABLE void initPage(QObject* page);

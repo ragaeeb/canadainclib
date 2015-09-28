@@ -5,6 +5,8 @@
 #include <QMap>
 #include <QPair>
 
+#define ANALYTIC_DB_NAME "analytics"
+
 namespace canadainc {
 
 class CustomSqlDataSource;

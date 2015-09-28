@@ -5,7 +5,7 @@
 
 #include <bb/Application>
 
-#define ANALYTICS_PATH QString("%1/analytics.db").arg( QDir::homePath() )
+#define ANALYTICS_PATH QString("%1/%2.db").arg( QDir::homePath() ).arg(ANALYTIC_DB_NAME)
 #define COMMITTING_ANALYTICS -5
 #define COMMIT_ANALYTICS -6
 
