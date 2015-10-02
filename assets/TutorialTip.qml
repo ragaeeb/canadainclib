@@ -10,6 +10,7 @@ Delegate
     property int currentIndex: -1
     signal tutorialFinished(string key)
     signal tutorialStarted(string key)
+    property string appMenuKey: "showAppMenu"
     
     function count() {
         return data.length;
@@ -152,7 +153,7 @@ Delegate
     
     function execAppMenu()
     {
-        execSwipe("showAppMenu", qsTr("Swipe down from the top-bezel to display the Settings and Help and file bugs!"), HorizontalAlignment.Center, VerticalAlignment.Top, "d");
+        execSwipe(appMenuKey, qsTr("Swipe down from the top-bezel to display the Settings and Help and file bugs!"), HorizontalAlignment.Center, VerticalAlignment.Top, "d");
     }
     
     function promptVideo(uri)
@@ -167,7 +168,7 @@ Delegate
     }
     
     onTutorialStarted: {
-        if (key == "openAppMenu") {
+        if (key == appMenuKey) {
             blockTapping = true;
         }
     }
@@ -247,7 +248,7 @@ Delegate
             
             function onSwipeDown()
             {
-                if ( getTutorialKey(current.key) == "openAppMenu" )
+                if ( getTutorialKey(current.key) == appMenuKey )
                 {
                     blockTapping = false;
                     fsd.dismiss();

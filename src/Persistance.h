@@ -3,7 +3,6 @@
 
 #include <QSettings>
 
-#include <bb/system/InvokeManager>
 #include <bb/system/SystemUiPosition>
 #include <bb/system/SystemUiResult>
 
@@ -14,6 +13,7 @@
 
 namespace bb {
 	namespace system {
+	    class InvokeManager;
 	    class SystemDialog;
 	    class SystemPrompt;
 		class SystemToast;

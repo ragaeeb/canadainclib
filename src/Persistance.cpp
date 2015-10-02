@@ -6,6 +6,7 @@
 #include <bb/system/Clipboard>
 #include <bb/system/InvokeAction>
 #include <bb/system/InvokeTargetReply>
+#include <bb/system/InvokeManager>
 #include <bb/system/SystemDialog>
 #include <bb/system/SystemPrompt>
 

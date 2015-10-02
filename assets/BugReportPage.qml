@@ -231,6 +231,8 @@ Page
                                                             
                                                             DeleteActionItem
                                                             {
+                                                                imageSource: "images/bugs/ic_remove_attachment.png"
+                                                                
                                                                 onTriggered: {
                                                                     console.log("UserEvent: RemoveAttachment");
                                                                     
