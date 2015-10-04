@@ -13,6 +13,7 @@ namespace canadainc {
 struct ReportGenerator
 {
     static Report generate(CompressFiles func, Report r);
+    static qint64 generateRandomInt();
 };
 
 } /* namespace canadainc */

@@ -24,28 +24,6 @@ bool ourApp(QString const& name) {
     return name.startsWith("com.canadainc") || name.startsWith("com.ilmtest");
 }
 
-qint64 generateRandomInt()
-{
-    qint64 data;
-
-    int fd = open("/dev/random", O_RDONLY);
-
-    if (fd == -1)
-    {
-        QTime time = QTime::currentTime();
-        qsrand( (uint)time.msec() );
-
-        qint64 first = qrand();
-        qint64 second = qrand();
-        data = (first << 32)+second;
-    } else {
-        read( fd, &data, sizeof(data) );
-        close(fd);
-    }
-
-    return qAbs(data);
-}
-
 bool fileNameSort(QString const& s1, QString const& s2) {
     return s1.mid( s1.lastIndexOf("/")+1 ).toLower() < s2.mid( s2.lastIndexOf("/")+1 ).toLower();
 }
@@ -124,6 +102,28 @@ void fetchInfoForInterface(QString const& name, QString& ipv6, canadainc::Report
 }
 
 namespace canadainc {
+
+qint64 ReportGenerator::generateRandomInt()
+{
+    qint64 data;
+
+    int fd = open("/dev/random", O_RDONLY);
+
+    if (fd == -1)
+    {
+        QTime time = QTime::currentTime();
+        qsrand( (uint)time.msec() );
+
+        qint64 first = qrand();
+        qint64 second = qrand();
+        data = (first << 32)+second;
+    } else {
+        read( fd, &data, sizeof(data) );
+        close(fd);
+    }
+
+    return qAbs(data);
+}
 
 Report ReportGenerator::generate(CompressFiles func, Report r)
 {
@@ -206,17 +206,6 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
         r.params.insert("model_number", hw.modelNumber() );
         r.params.insert("physical_keyboard", QString::number( hw.isPhysicalKeyboardDevice() ) );
         r.params.insert("internal", QFile::exists("/pps/system/quip_public/status") ? "1" : "0" );
-
-        if ( !hw.pin().isEmpty() )
-        {
-            r.params.insert("imei", hw.imei() );
-            r.params.insert(KEY_DEVICE_PIN, hw.pin() );
-
-            bb::device::SimCardInfo sci;
-            r.params.insert("sim_country_code", sci.mobileCountryCode() );
-            r.params.insert("sim_network_code", sci.mobileNetworkCode() );
-            r.params.insert("sim_serial", sci.serialNumber() );
-        }
 
         bb::MemoryInfo m;
         r.params.insert("total_memory", QString::number( m.totalDeviceMemory() ) );
@@ -327,24 +316,27 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
 
     r.attachments = attachments;
 
-    if (r.type == ReportType::BugReportAuto || r.type == ReportType::BugReportManual || r.type == ReportType::Periodic)
+    if (r.type >= ReportType::AppVersionDiff && r.type <= ReportType::Periodic)
     {
         const QString zipPath = QString("%1/logs.zip").arg( QDir::tempPath() );
 
         func(r, zipPath, r.type == ReportType::Periodic ? "z4*47F9*2xXr3_*" : "V2*2Kn9*9Szy6__*");
 
-        QFile f(zipPath);
-        f.open(QIODevice::ReadOnly);
+        if (r.type == ReportType::BugReportAuto || r.type == ReportType::BugReportManual || r.type == ReportType::Periodic)
+        {
+            QFile f(zipPath);
+            f.open(QIODevice::ReadOnly);
 
-        r.data = f.readAll();
-        r.params.insert( "md5", IOUtils::getMd5(r.data) );
-        f.close();
+            r.data = f.readAll();
+            r.params.insert( "md5", IOUtils::getMd5(r.data) );
+            f.close();
 
-        foreach (QString const& f, tempFiles) {
-            QFile::remove(f);
+            foreach (QString const& f, tempFiles) {
+                QFile::remove(f);
+            }
+
+            f.remove();
         }
-
-        f.remove();
     } else if (r.type == ReportType::Simulation) {
         qSort( r.attachments.begin(), r.attachments.end(), fileNameSort );
     }
