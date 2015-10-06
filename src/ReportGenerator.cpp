@@ -20,6 +20,8 @@
 
 namespace {
 
+using namespace canadainc;
+
 bool ourApp(QString const& name) {
     return name.startsWith("com.canadainc") || name.startsWith("com.ilmtest");
 }
@@ -99,6 +101,36 @@ void fetchInfoForInterface(QString const& name, QString& ipv6, canadainc::Report
     }
 }
 
+void applyAppInfo(Report& r, QSettings const& flags)
+{
+    r.params.insert( "app_name", QCoreApplication::applicationName() );
+    r.params.insert( "app_version", QCoreApplication::applicationVersion() );
+    r.params.insert( "first_install", flags.value(KEY_FIRST_INSTALL).toString() );
+    r.params.insert( "last_upgrade", flags.value(KEY_LAST_UPGRADE).toString() );
+}
+
+
+void applyOSInfo(Report& r)
+{
+    r.params.insert( "version", bb::platform::PlatformInfo().osVersion() );
+
+    struct utsname udata;
+    uname(&udata);
+    QString osCreated = udata.version;
+    osCreated.chop(3); // OS Creation: 2014/02/09-15:22:47EST
+    r.params.insert( "creation_date", QString::number( QDateTime::fromString(osCreated, "yyyy/MM/dd-HH:mm:ss").toMSecsSinceEpoch() ) );
+
+    QStringList lines = IOUtils::readTextFile("/base/svnrev").trimmed().split(NEW_LINE_UNIX);
+
+    if ( !lines.isEmpty() ) {
+        r.params.insert( "build_id", lines.takeFirst().split(" ").last() );
+    }
+
+    if ( !lines.isEmpty() ) {
+        r.params.insert( "build_branch", lines.takeFirst().split(" ").last() );
+    }
+}
+
 }
 
 namespace canadainc {
@@ -124,6 +156,7 @@ qint64 ReportGenerator::generateRandomInt()
 
     return qAbs(data);
 }
+
 
 Report ReportGenerator::generate(CompressFiles func, Report r)
 {
@@ -228,32 +261,12 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
         userId = flags.value(KEY_USER_ID).toString();
         r.params.insert("user_id", userId);
 
-        if (r.type == ReportType::AppVersionDiff)
-        {
-            r.params.insert( "app_name", QCoreApplication::applicationName() );
-            r.params.insert( "app_version", QCoreApplication::applicationVersion() );
-            r.params.insert( "first_install", flags.value(KEY_FIRST_INSTALL).toString() );
-            r.params.insert( "last_upgrade", flags.value(KEY_LAST_UPGRADE).toString() );
+        if (r.type == ReportType::AppVersionDiff) {
+            applyAppInfo(r, flags);
         } else if (r.type == ReportType::OsVersionDiff) {
-            r.params.insert( "version", bb::platform::PlatformInfo().osVersion() );
+            applyOSInfo(r);
 
-            struct utsname udata;
-            uname(&udata);
-            QString osCreated = udata.version;
-            osCreated.chop(3); // OS Creation: 2014/02/09-15:22:47EST
-            r.params.insert( "creation_date", QString::number( QDateTime::fromString(osCreated, "yyyy/MM/dd-HH:mm:ss").toMSecsSinceEpoch() ) );
-
-            QStringList lines = IOUtils::readTextFile("/base/svnrev").trimmed().split(NEW_LINE_UNIX);
-
-            if ( !lines.isEmpty() ) {
-                r.params.insert( "build_id", lines.takeFirst().split(" ").last() );
-            }
-
-            if ( !lines.isEmpty() ) {
-                r.params.insert( "build_branch", lines.takeFirst().split(" ").last() );
-            }
-
-            lines = IOUtils::readTextFile("/var/app_launch_data.txt").trimmed().split(NEW_LINE_UNIX);
+            QStringList lines = IOUtils::readTextFile("/var/app_launch_data.txt").trimmed().split(NEW_LINE_UNIX);
 
             for (int i = lines.size()-1; i >= 0; i--)
             {
