@@ -38,7 +38,7 @@ ControlDelegate
             }
             
             ImageView {
-                imageSource: "images/toast/permission_toast_bg.amd"
+                imageSource: "images/common/permission_toast_bg.amd"
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Fill
             }

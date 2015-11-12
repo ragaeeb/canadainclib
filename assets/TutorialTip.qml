@@ -112,7 +112,7 @@ Delegate
                 var allData = data;
                 
                 if ( !persist.containsFlag("tutorialAppInit") && !("tutorialAppInit" in allKeys) ) {
-                    allData.push( {'key': "tutorialAppInit", 'body': qsTr("Welcome to %1 v%2.\n\nThese are interactive tutorials to help you learn how to use the app.\n\nSimply tap on the screen to move on to the next tutorial. If you want to skip all tutorials press-and-hold on here and choose 'Suppress Tutorials' from the menu.").arg(Application.applicationName).arg(Application.applicationVersion), 'icon': "images/menu/ic_help.png", 'h': HorizontalAlignment.Center, 'v': VerticalAlignment.Center, 'l': 0, 'r': 0, 't': 0, 'b': 0, 'type': undefined} );
+                    allData.push( {'key': "tutorialAppInit", 'body': qsTr("Welcome to %1 v%2.\n\nThese are interactive tutorials to help you learn how to use the app.\n\nSimply tap on the screen to move on to the next tutorial. If you want to skip all tutorials press-and-hold on here and choose 'Suppress Tutorials' from the menu.").arg(Application.applicationName).arg(Application.applicationVersion), 'icon': "images/common/ic_help.png", 'h': HorizontalAlignment.Center, 'v': VerticalAlignment.Center, 'l': 0, 'r': 0, 't': 0, 'b': 0, 'type': undefined} );
                     allKeys["tutorialAppInit"] = allData.length-1;
                 }
                 
@@ -190,7 +190,7 @@ Delegate
                 assetContainer.verticalAlignment = current.v != undefined ? current.v : VerticalAlignment.Center;
                 bodyControl.text = current.body;
                 bodyLabel.verticalAlignment = assetContainer.horizontalAlignment == HorizontalAlignment.Center && assetContainer.verticalAlignment == VerticalAlignment.Center ? VerticalAlignment.Top : VerticalAlignment.Center
-                icon.imageSource = current.icon ? current.icon : current.type == "d" ? "images/menu/ic_bottom.png" : current.type == "u" ? "images/menu/ic_top.png" : current.type == "r" ? "images/tutorial/ic_next.png" : current.type == "l" ? "images/tutorial/ic_prev.png" : "images/tutorial/pointer.png";
+                icon.imageSource = current.icon ? current.icon : current.type == "d" ? "images/common/ic_bottom.png" : current.type == "u" ? "images/common/ic_top.png" : current.type == "r" ? "images/common/ic_next.png" : current.type == "l" ? "images/common/ic_prev.png" : "images/common/pointer.png";
                 
                 swipeAnim.resetFromY();
                 swipeAnim.resetToY();

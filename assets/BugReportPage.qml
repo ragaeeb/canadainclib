@@ -35,7 +35,7 @@ Page
         ActionItem
         {
             id: browserAction
-            imageSource: "images/bugs/ic_open_browser.png"
+            imageSource: "images/common/bugs/ic_open_browser.png"
             ActionBar.placement: ActionBarPlacement.OnBar
             title: qsTr("Open in Browser") + Retranslate.onLanguageChanged
             
@@ -51,7 +51,7 @@ Page
             id: submitLogs
             ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
             title: qsTr("Submit Logs") + Retranslate.onLanguageChanged
-            imageSource: "images/ic_bugs.png"
+            imageSource: "images/common/bugs/ic_bugs.png"
             
             onTriggered: {
                 console.log("UserEvent: SubmitLogs");
@@ -98,7 +98,7 @@ Page
                                     ActionItem
                                     {
                                         id: attach
-                                        imageSource: "images/bugs/ic_attach.png"
+                                        imageSource: "images/common/bugs/ic_attach.png"
                                         title: qsTr("Attach") + Retranslate.onLanguageChanged
                                         ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
                                         onTriggered: {
@@ -120,7 +120,7 @@ Page
                                                     reporter.record("AttachmentCount", n);
                                                     
                                                     if (n > 5) {
-                                                        persist.showToast( qsTr("Only a maximum of 5 screenshots may be attached!"), "asset:///images/bugs/ic_bugs_cancel.png" );
+                                                        persist.showToast( qsTr("Only a maximum of 5 screenshots may be attached!"), "asset:///images/common/bugs/ic_bugs_cancel.png" );
                                                     } else {
                                                         adm.clear();
                                                         adm.append(selectedFiles);
@@ -138,7 +138,7 @@ Page
                                     acceptAction: ActionItem
                                     {
                                         id: submit
-                                        imageSource: "images/bugs/ic_bugs_submit.png"
+                                        imageSource: "images/common/bugs/ic_bugs_submit.png"
                                         title: qsTr("Submit") + Retranslate.onLanguageChanged
                                         
                                         onTriggered: {
@@ -147,7 +147,7 @@ Page
                                             emailField.validator.validate();
                                             
                                             if ( body.text.trim() == body.template ) {
-                                                persist.showToast( qsTr("Please enter detailed notes about the bug you observed!"), "images/bugs/ic_bugs_info.png" );
+                                                persist.showToast( qsTr("Please enter detailed notes about the bug you observed!"), "images/common/bugs/ic_bugs_info.png" );
                                                 return;
                                             }
                                             
@@ -170,7 +170,7 @@ Page
                                     
                                     dismissAction: ActionItem
                                     {
-                                        imageSource: "images/bugs/ic_bugs_cancel.png"
+                                        imageSource: "images/common/bugs/ic_bugs_cancel.png"
                                         title: qsTr("Cancel") + Retranslate.onLanguageChanged
                                         
                                         onTriggered: {
@@ -221,7 +221,7 @@ Page
                                                 {
                                                     id: sli
                                                     title: ListItemData.substring( ListItemData.lastIndexOf("/")+1 )
-                                                    imageSource: "images/bugs/ic_attach.png"
+                                                    imageSource: "images/common/bugs/ic_attach.png"
                                                     
                                                     contextActions: [
                                                         ActionSet
@@ -231,7 +231,7 @@ Page
                                                             
                                                             DeleteActionItem
                                                             {
-                                                                imageSource: "images/bugs/ic_remove_attachment.png"
+                                                                imageSource: "images/common/bugs/ic_remove_attachment.png"
                                                                 
                                                                 onTriggered: {
                                                                     console.log("UserEvent: RemoveAttachment");
@@ -265,6 +265,7 @@ Page
                                         maximumLength: 25
                                         input.submitKey: SubmitKey.Next
                                         input.submitKeyFocusBehavior: SubmitKeyFocusBehavior.Next
+                                        text: persist.getFlag("cached_user_name")
                                         
                                         validator: Validator
                                         {
@@ -288,6 +289,7 @@ Page
                                         maximumLength: 40
                                         input.submitKey: SubmitKey.Next
                                         input.submitKeyFocusBehavior: SubmitKeyFocusBehavior.Next
+                                        text: persist.getFlag("cached_user_email")
                                         
                                         input.onSubmitted: {
                                             if (body.text == body.template) {
@@ -300,19 +302,13 @@ Page
                                             errorMessage: qsTr("Invalid email address!") + Retranslate.onLanguageChanged
                                             
                                             onValidate: {
-                                                var t = emailField.text.trim();
-                                                var firstAtSign = t.indexOf("@");
-                                                var lastAtSign = t.lastIndexOf("@");
-                                                var dotExists = t.indexOf(".") > 0;
-                                                
-                                                valid = t.length > 8 && firstAtSign >= 0 && lastAtSign >= 0 && firstAtSign == lastAtSign && dotExists;
+                                                valid = ciu.isValidEmail( emailField.text.trim() );
                                             }
                                         }
                                     }
                                     
                                     Divider {
                                         topMargin: 0; bottomMargin: 0
-                                        visible: emailField.visible
                                     }
                                     
                                     TextArea
@@ -327,6 +323,12 @@ Page
                                         verticalAlignment: VerticalAlignment.Fill
                                     }
                                 }
+                                
+                                attachedObjects: [
+                                    CanadaIncUtils {
+                                        id: ciu
+                                    }
+                                ]
                             }
                         }
                     }

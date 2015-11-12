@@ -20,14 +20,14 @@ DropDown
             option.description = current.address;
             option.value = current.accountId;
             
-            var imageSource = "images/dropdown/ic_account.png";
+            var imageSource = "images/common/dropdown/ic_account.png";
             
             if (current.accountId == 23) {
-                imageSource = "images/dropdown/ic_sms.png";
+                imageSource = "images/common/dropdown/ic_sms.png";
             } else if (current.accountId == 8) {
-                imageSource = "images/dropdown/ic_phone.png";
+                imageSource = "images/common/dropdown/ic_phone.png";
             } else if (current.accountId == 199) {
-                imageSource = "images/dropdown/ic_pin.png";
+                imageSource = "images/common/dropdown/ic_pin.png";
             }
             
             option.imageSource = imageSource;

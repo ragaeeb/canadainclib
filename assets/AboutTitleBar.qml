@@ -108,6 +108,7 @@ TitleBar
                 {
                     reporter.initPage(titleControl.parent);
                     titleControl.parent.addAction(channelAction);
+                    titleControl.parent.addAction(clearCacheAction);
                     
                     if (videoTutorialUri.length > 0) {
                         titleControl.parent.addAction(videoTutorialAction);
@@ -126,7 +127,7 @@ TitleBar
         ActionItem
         {
             id: channelAction
-            imageSource: "images/menu/ic_channel.png"
+            imageSource: "images/common/ic_channel.png"
             title: qsTr("Our BBM Channel") + Retranslate.onLanguageChanged
             ActionBar.placement: 'Signature' in ActionBarPlacement && videoTutorialUri.length == 0 ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
             
@@ -140,7 +141,7 @@ TitleBar
         ActionItem
         {
             id: videoTutorialAction
-            imageSource: "images/menu/ic_video_tutorial.png"
+            imageSource: "images/common/ic_video_tutorial.png"
             title: qsTr("Video Tutorial") + Retranslate.onLanguageChanged
             ActionBar.placement: 'Signature' in ActionBarPlacement && videoTutorialUri.length > 0 ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
             
@@ -148,6 +149,29 @@ TitleBar
                 console.log("UserEvent: VideoTutorial");
                 persist.openUri(videoTutorialUri);
                 reporter.record("VideoTutorialTriggered");
+            }
+        },
+        
+        DeleteActionItem
+        {
+            id: clearCacheAction
+            imageSource: "images/common/ic_clear_cache.png"
+            title: qsTr("Clear Cache") + Retranslate.onLanguageChanged
+            
+            function onFinished(ok)
+            {
+                if (ok)
+                {
+                    reporter.record("ClearCacheConfirm");
+                    persist.clearCache();
+                    persist.showToast( qsTr("Cache was successfully cleared!"), "images/menu/ic_clear_cache.png" );
+                }
+            }
+            
+            onTriggered: {
+                console.log("UserEvent: ClearCache");
+                reporter.record("ClearCache");
+                persist.showDialog( clearCacheAction, qsTr("Confirmation"), qsTr("Are you sure you want to clear the application cache?") );
             }
         }
     ]

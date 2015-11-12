@@ -25,19 +25,21 @@ Sheet
             acceptAction: ActionItem
             {
                 id: setPasswordAction
-                imageSource: "images/dropdown/set_password.png"
+                imageSource: "images/common/dropdown/set_password.png"
                 title: qsTr("Save") + Retranslate.onLanguageChanged
                 
                 onTriggered: {
                     console.log("UserEvent: SetPassword");
+                    reporter.record("SetPassword");
                     
                     minCharValidator.validate();
                     equalityValidator.validate();
                     
                     if (minCharValidator.valid && equalityValidator.valid)
                     {
+                        reporter.record("PasswordLength", passwordField.text.length);
                         security.savePassword(passwordField.text);
-                        persist.showToast( qsTr("Successfully set password!\n\nMake sure you remember it!"), "asset:///images/dropdown/set_password.png" );
+                        persist.showToast( qsTr("Successfully set password!\n\nMake sure you remember it!"), "images/common/dropdown/set_password.png" );
                         sheet.close();
                     }
                 }
@@ -85,6 +87,10 @@ Sheet
                     
                     onValidate: {
                         valid = confirmField.text == passwordField.text;
+                        
+                        if (!valid) {
+                            reporter.record("MismatchingPasswords");
+                        }
                     }
                 }
                 
@@ -108,11 +114,12 @@ Sheet
                 ActionItem
                 {
                     id: cancelAction
-                    imageSource: "images/dropdown/dismiss.png"
+                    imageSource: "images/common/dropdown/dismiss.png"
                     title: qsTr("Cancel") + Retranslate.onLanguageChanged
                     
                     onTriggered: {
                         console.log("UserEvent: SignupSheetCancel");
+                        reporter.record("SignupSheetCancel");
                         sheet.close();
                     }
                 }

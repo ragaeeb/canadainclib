@@ -39,10 +39,10 @@ void DeviceUtils::attachTopBottomKeys(bb::cascades::Page* page, bb::cascades::Li
 {
     if ( !isPhysicalKeyboardDevice() )
     {
-        AbstractActionItem* top = ActionItem::create().title( tr("Top") ).imageSource( QUrl("asset:///images/menu/ic_top.png") ).onTriggered( this, SLOT( onTopTriggered() ) );
+        AbstractActionItem* top = ActionItem::create().title( tr("Top") ).imageSource( QUrl("asset:///images/common/ic_top.png") ).onTriggered( this, SLOT( onTopTriggered() ) );
         connect( top, SIGNAL( destroyed(QObject*) ), this, SLOT( onDestroyed(QObject*) ) );
 
-        AbstractActionItem* bottom = ActionItem::create().title( tr("Bottom") ).imageSource( QUrl("asset:///images/menu/ic_bottom.png") ).onTriggered( this, SLOT( onBottomTriggered() ) );
+        AbstractActionItem* bottom = ActionItem::create().title( tr("Bottom") ).imageSource( QUrl("asset:///images/common/ic_bottom.png") ).onTriggered( this, SLOT( onBottomTriggered() ) );
         connect( bottom, SIGNAL( destroyed(QObject*) ), this, SLOT( onDestroyed(QObject*) ) );
 
         page->addAction(top, onBar ? ActionBarPlacement::OnBar : ActionBarPlacement::Default);

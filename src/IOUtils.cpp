@@ -178,16 +178,20 @@ void IOUtils::clearAllCache()
 {
     QString homePath = QDir::homePath();
 
-    QFile::remove( QString("%1/WebpageIcons.db").arg(homePath) );
+    QFile::remove( QString("%1/adreno_cached_blob.bin").arg(homePath) );
     QFile::remove( QString("%1/cookieCollection.db").arg(homePath) );
     QFile::remove( QString("%1/cookieCollection.db-wal").arg(homePath) );
+    QFile::remove( QString("%1/metadata").arg(homePath) );
     QFile::remove( QString("%1/storagequota.db").arg(homePath) );
+    QFile::remove( QString("%1/WebpageIcons.db").arg(homePath) );
 
     removeDir( QString("%1/appcache").arg(homePath) );
     removeDir( QString("%1/cache").arg(homePath) );
     removeDir( QString("%1/certificates").arg(homePath) );
     removeDir( QString("%1/downloads").arg(homePath) );
+    removeDir( QString("%1/enhancedcontent").arg(homePath) );
     removeDir( QString("%1/localstorage").arg(homePath) );
+    removeDir( QString("%1/mapKit3Dcontent").arg(homePath) );
 }
 
 

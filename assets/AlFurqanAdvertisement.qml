@@ -13,7 +13,7 @@ Sheet
             ActionItem
             {
                 ActionBar.placement: 'Signature' in ActionBarPlacement ? ActionBarPlacement["Signature"] : ActionBarPlacement.OnBar
-                imageSource: "images/list/site_twitter.png"
+                imageSource: "images/common/list/site_twitter.png"
                 title: qsTr("Twitter") + Retranslate.onLanguageChanged
                 
                 onTriggered: {
@@ -27,7 +27,7 @@ Sheet
             ActionItem
             {
                 ActionBar.placement: ActionBarPlacement.OnBar
-                imageSource: "images/list/site_facebook.png"
+                imageSource: "images/common/list/site_facebook.png"
                 title: qsTr("Facebook") + Retranslate.onLanguageChanged
                 
                 onTriggered: {
@@ -41,7 +41,7 @@ Sheet
             ActionItem
             {
                 ActionBar.placement: ActionBarPlacement.OnBar
-                imageSource: "images/list/ic_email.png"
+                imageSource: "images/common/list/ic_email.png"
                 title: qsTr("Email") + Retranslate.onLanguageChanged
                 
                 onTriggered: {
@@ -73,7 +73,7 @@ Sheet
             dismissAction: ActionItem
             {
                 title: qsTr("Back") + Retranslate.onLanguageChanged
-                imageSource: "images/title/ic_prev.png"
+                imageSource: "images/common/title/ic_prev.png"
                 
                 onTriggered: {
                     console.log("UserEvent: AlFurqanBack");

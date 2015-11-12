@@ -5,7 +5,7 @@ ControlDelegate
     delegateActive: !reporter.online
     signal imageTapped();
     visible: delegateActive
-    property variant graphic: "images/ic_offline.png"
+    property variant graphic: "images/common/ic_offline.png"
     
     horizontalAlignment: HorizontalAlignment.Fill
     verticalAlignment: VerticalAlignment.Center

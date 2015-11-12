@@ -135,7 +135,7 @@ MenuDefinition
         {
             id: bugReportActionItem
             title: qsTr("Bug Reports") + Retranslate.onLanguageChanged
-            imageSource: "images/ic_bugs.png"
+            imageSource: "images/common/bugs/ic_bugs.png"
             
             function onDestroyed() {
                 enabled = true;
@@ -157,7 +157,7 @@ MenuDefinition
         ActionItem
         {
             title: qsTr("Review") + Retranslate.onLanguageChanged
-            imageSource: "images/ic_review.png"
+            imageSource: "images/common/ic_review.png"
             
             onTriggered: {
                 console.log("UserEvent: ReviewApp");
@@ -208,7 +208,7 @@ MenuDefinition
             ActionItem
             {
                 title: qsTr("Donate") + Retranslate.onLanguageChanged
-                imageSource: "images/ic_donate.png"
+                imageSource: "images/common/ic_donate.png"
                 
                 onTriggered: {
                     console.log("UserEvent: Donate");

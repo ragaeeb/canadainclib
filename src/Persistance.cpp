@@ -335,6 +335,11 @@ void Persistance::clear()
 }
 
 
+void Persistance::clearCache() {
+    QtConcurrent::run(&IOUtils::clearAllCache);
+}
+
+
 void Persistance::launchAppPermissionSettings()
 {
     QVariantMap qvm;

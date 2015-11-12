@@ -93,6 +93,7 @@ public:
     Q_INVOKABLE void showPrompt(QObject* caller, QString const& title, QString const& body, QString const& defaultText, QString const& hintText, int maxLength, QString const& funcName, QVariant const& data=QVariant());
     Q_INVOKABLE void showToast(QString const& text, QString const& icon=QString(), int pos=2);
     Q_SLOT void clear();
+    Q_SLOT void clearCache();
     Q_SLOT void donate();
     Q_SLOT void forceSync();
     Q_SLOT void openChannel();
