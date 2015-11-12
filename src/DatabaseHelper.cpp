@@ -12,10 +12,10 @@
 
 namespace {
 
-QStringList createDB(QString const& dbPath, QStringList const& setupStatements)
+QPair<QObject*, QStringList> createDB(QString const& dbPath, QObject* caller, QStringList const& setupStatements)
 {
     canadainc::IOUtils::writeFile(dbPath);
-    return setupStatements;
+    return qMakePair<QObject*, QStringList>(caller, setupStatements);
 }
 
 void cleanArguments(QVariantList& args)
@@ -47,6 +47,7 @@ DatabaseHelper::DatabaseHelper(QString const& dbase, QObject* parent) :
     connect( &m_sql, SIGNAL( dataLoaded(int, QVariant const&) ), this, SLOT( dataLoaded(int, QVariant const&) ), Qt::QueuedConnection );
     connect( &m_sql, SIGNAL( error(QString const&) ), this, SIGNAL( error(QString const&) ), Qt::QueuedConnection );
     connect( &m_sql, SIGNAL( setupError(QString const&) ), this, SIGNAL( setupError(QString const&) ), Qt::QueuedConnection );
+    connect( &m_setup, SIGNAL( finished() ), this, SLOT( onSetupFinished() ) );
 }
 
 
@@ -269,18 +270,42 @@ void DatabaseHelper::endTransaction(QObject* caller, int id)
 }
 
 
-void DatabaseHelper::createDatabaseIfNotExists(bool sameThread, QStringList const& setupStatements) const
+bool DatabaseHelper::createDatabaseIfNotExists(QObject* caller, QStringList const& setupStatements)
 {
-    CHECK_ENABLED;
-
     if ( !QFile::exists( m_sql.source() ) )
     {
-        if (sameThread) {
-            createDB( m_sql.source(), setupStatements );
+        if (!caller)
+        {
+            createDB( m_sql.source(), caller, setupStatements );
+            processSetup(caller, setupStatements);
         } else {
-            QtConcurrent::run( createDB, m_sql.source(), setupStatements );
+            QFuture< QPair<QObject*, QStringList> > f = QtConcurrent::run( createDB, m_sql.source(), caller, setupStatements );
+            m_setup.setFuture(f);
         }
+
+        return false;
     }
+
+    return true;
+}
+
+
+void DatabaseHelper::processSetup(QObject* caller, QStringList const& statements)
+{
+    startTransaction(NULL, InternalQueryId::SettingUp);
+
+    foreach (QString const& query, statements) {
+        executeInternal(query, InternalQueryId::SettingUp);
+    }
+
+    endTransaction(caller, InternalQueryId::Setup);
+}
+
+
+void DatabaseHelper::onSetupFinished()
+{
+    QPair<QObject*, QStringList> result = m_setup.result();
+    processSetup(result.first, result.second);
 }
 
 

@@ -11,6 +11,8 @@
 #include "NetworkProcessor.h"
 #include "Report.h"
 
+#define KEY_REPORT_NOTES "notes"
+
 namespace canadainc {
 
 class Persistance;

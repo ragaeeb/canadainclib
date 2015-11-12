@@ -20,7 +20,9 @@ public:
         DetachDatabase = -3,
         FetchAllIds = -4,
         PendingTransaction = -5,
-        UpdateIdWithIndex = -6
+        UpdateIdWithIndex = -6,
+        SettingUp = -7,
+        Setup = -8
     };
 };
 
@@ -34,7 +36,9 @@ class DatabaseHelper : public QObject
     QMap<int, QPair<QObject*,int> > m_idToObjectQueryType;
     QSet<QString> m_attached;
     bool m_enabled;
+    QFutureWatcher< QPair<QObject*, QStringList> > m_setup;
 
+    void processSetup(QObject* caller, QStringList const& statements);
     void stash(QObject* caller, int t);
 
 signals:
@@ -52,6 +56,7 @@ private slots:
     void dataLoaded(int id, QVariant const& data);
     void onDatabaseCreated();
     void onDestroyed(QObject* obj);
+    void onSetupFinished();
 
 public:
     DatabaseHelper(QString const& dbase, QObject* parent=NULL);
@@ -71,7 +76,7 @@ public:
     Q_INVOKABLE void fetchAllIds(QObject* caller, QString const& table);
     Q_INVOKABLE void setIndexAsId(QObject* caller, QVariantList const& q, QVariantList const& intersection=QVariantList());
     Q_INVOKABLE void startTransaction(QObject* caller, int id);
-    void createDatabaseIfNotExists(bool sameThread=false, QStringList const& setupStatements=QStringList()) const;
+    bool createDatabaseIfNotExists(QObject* caller=NULL, QStringList const& setupStatements=QStringList());
     void setEnabled(bool enabled);
     void setVerboseLogging(bool enabled=true);
 
