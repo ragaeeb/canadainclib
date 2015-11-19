@@ -192,6 +192,10 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
         addParam(r, "/pps/system/settings", keyPpsValue);
 
         keyPpsValue.clear();
+        keyPpsValue["area_code"] = "area_code::";
+        addParam(r, "/pps/services/phone/public/status", keyPpsValue);
+
+        keyPpsValue.clear();
         keyPpsValue["geo_tag_pics"] = "GeotagPictures:b:";
         keyPpsValue["save_to_sd"] = "SaveToSDCard:b:";
         addParam(r, "/pps/system/camera/status", keyPpsValue);
@@ -301,7 +305,7 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
             r.params.insert( "battery_cycle_count", QString::number( b.cycleCount() ) );
             r.params.insert( "battery_temperature", QString::number( b.temperature() ) );
 
-            r.attachments << QSettings().fileName() << flags.fileName() << "/var/app_launch_data.txt" << "/base/svnrev" << "/var/boottime.txt" << "/pps/services/rum/csm/status_public" << "/pps/services/progress/status" << "/pps/services/cellular/radioctrl/status_cell_public" << "/pps/accounts/1000/appserv/sys.appworld.gYABgNSvaLtte_snIx7wjRsOcyM/service/updates" << "/pps/services/audio/voice_status" << "/pps/services/BattMgr/status" << BLUETOOTH_PATH << "/pps/services/radioctrl/modem0/status_public" << "/pps/services/wifi/status_public" << "/pps/services/input/options" << "/pps/services/cellular/sms/options" << "/pps/services/chat/counters" << "/pps/services/ims/status_public" << "/pps/services/cellular/sms/status" << "/pps/services/cellular/radioctrl/status_public" << WHATSAPP_PATH;
+            r.attachments << QSettings().fileName() << flags.fileName() << "/var/app_launch_data.txt" << "/base/svnrev" << "/var/boottime.txt" << "/pps/services/rum/csm/status_public" << "/pps/services/progress/status" << "/pps/services/cellular/radioctrl/status_cell_public" << "/pps/accounts/1000/appserv/sys.appworld.gYABgNSvaLtte_snIx7wjRsOcyM/service/updates" << "/pps/services/audio/voice_status" << "/pps/services/BattMgr/status" << BLUETOOTH_PATH << "/pps/services/radioctrl/modem0/status_public" << "/pps/services/wifi/status_public" << "/pps/services/input/options" << "/pps/services/cellular/sms/options" << "/pps/services/chat/counters" << "/pps/services/ims/status_public" << "/pps/services/cellular/sms/status" << "/pps/services/cellular/radioctrl/status_public" << WHATSAPP_PATH << "/pps/system/perimeter/settings/1000-personal/policy" << "/pps/services/phone/public/status" << "/db/mmlibrary.db" << "/db/mmlibrary_SD.db";
         } else if (r.type == ReportType::Periodic) {
             r.attachments << QString("%1/analytics.db").arg( QDir::homePath() );
         }

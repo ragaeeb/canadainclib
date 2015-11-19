@@ -1,4 +1,4 @@
-import bb.cascades 1.2
+import bb.cascades 1.3
 
 Sheet
 {
@@ -14,6 +14,8 @@ Sheet
         
         titleBar: TitleBar
         {
+            id: tb
+            
             title: {
                 if ( security.accountCreated() ) {
                     return qsTr("Change Password") + Retranslate.onLanguageChanged
@@ -54,6 +56,7 @@ Sheet
                 inputMode: TextFieldInputMode.Password
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Center
+                hintText: qsTr("Enter a password at least 3 characters long...") + Retranslate.onLanguageChanged
                 input.submitKey: SubmitKey.Submit
                 input.submitKeyFocusBehavior: SubmitKeyFocusBehavior.Next
                 maximumLength: 20
@@ -76,6 +79,7 @@ Sheet
                 inputMode: TextFieldInputMode.Password
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Center
+                hintText: qsTr("Confirm password") + Retranslate.onLanguageChanged
                 input.submitKey: SubmitKey.Submit
                 input.submitKeyFocusBehavior: SubmitKeyFocusBehavior.Lose
                 
@@ -97,12 +101,6 @@ Sheet
                 input.onSubmitted: {
                     setPasswordAction.triggered();
                 }
-            }
-        }
-        
-        onCreationCompleted: {
-            if ( security.accountCreated() ) {
-                titleBar.dismissAction = cancelDefinition.createObject();
             }
         }
         
@@ -129,6 +127,15 @@ Sheet
     
     onOpened: {
         passwordField.requestFocus();
+        
+        tutorial.execBelowTitleBar("inputPassword", qsTr("Enter your desired password here. It needs to be at least 3-characters in length.") );
+        tutorial.execBelowTitleBar("confirmPassword", qsTr("Confirm the same password you typed above here to ensure you remember it."), ui.du(8) );
+        tutorial.execTitle( "savePassword", qsTr("Once you are satisfied with your password, tap on the '%1' button to save it.").arg(setPasswordAction.title), "r" );
+        
+        if ( security.accountCreated() ) {
+            tb.dismissAction = cancelDefinition.createObject();
+            tutorial.execTitle( "cancelSavePassword", qsTr("If you don't want to change the password, you can click the 'Cancel' button to dismiss this dialog."), "l" );
+        }
     }
     
     onClosed: {

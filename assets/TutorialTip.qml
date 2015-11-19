@@ -86,7 +86,11 @@ Delegate
         return exec( key, text, pos == "x" ? HorizontalAlignment.Right : pos == "b" ? HorizontalAlignment.Left : HorizontalAlignment.Center, VerticalAlignment.Bottom, pos == "r" ? ui.du(31) : pos == "b" ? ui.du(2) : 0, pos == "l" ? ui.du(31) : 0, 0, ui.du(2) );
     }
     
-    function execSwipe(key, text, h, v, direction)
+    function execSwipe(key, text, h, v, direction) {
+        exec(key, text, h, v, 0, 0, 0, 0, undefined, direction);
+    }
+    
+    function execTitle(key, text, pos)
     {
         if (!Application.scene) {
             return false;
@@ -94,7 +98,7 @@ Delegate
         
         var ui = Application.scene.ui;
         
-        exec(key, text, h, v, 0, 0, 0, 0, undefined, direction);
+        exec(key, text, pos == "l" ? HorizontalAlignment.Left : pos == "r" ? HorizontalAlignment.Right : HorizontalAlignment.Center, VerticalAlignment.Top, pos == "l" ? ui.du(5) : 0, pos == "r" ? ui.du(5) : 0, ui.du(5))
     }
     
     function exec(key, text, h, v, left, right, top, bottom, imageUri, type)
