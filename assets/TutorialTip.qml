@@ -299,7 +299,7 @@ Delegate
                         DeleteActionItem
                         {
                             id: dai
-                            imageSource: "images/bugs/ic_bugs_cancel.png"
+                            imageSource: "images/common/bugs/ic_bugs_cancel.png"
                             title: qsTr("Suppress Tutorials") + Retranslate.onLanguageChanged
                             
                             function onFinished(confirmed)

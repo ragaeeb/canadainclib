@@ -6,7 +6,9 @@ TitleBar
     property bool initialized: false
     property string videoTutorialUri
     property alias expandedContent: expandedContainer.controls
+    property alias clearCacheImage: clearCacheAction.imageSource
     signal contentExpanded();
+    signal clearCacheTriggered();
     kind: TitleBarKind.FreeForm
     scrollBehavior: TitleBarScrollBehavior.NonSticky
     kindProperties: FreeFormTitleBarKindProperties
@@ -116,6 +118,7 @@ TitleBar
                     }
                     
                     tutorial.execActionBar("openChannel", qsTr("To stay up to date on the latest news on our apps or to reach out to us for support regarding any of our apps, tap on the '%1' action.").arg(channelAction.title), videoTutorialUri.length > 0 ? "r" : undefined);
+                    tutorial.execActionBar("clearCache", qsTr("If you notice the app taking up a lot of space, you should choose '%1' from the overflow menu.").arg(clearCacheAction.title), clearCacheAction.imageSource.toString());
                     
                     initialized = true;
                 }
@@ -164,7 +167,8 @@ TitleBar
                 {
                     reporter.record("ClearCacheConfirm");
                     persist.clearCache();
-                    persist.showToast( qsTr("Cache was successfully cleared!"), "images/menu/ic_clear_cache.png" );
+                    clearCacheTriggered();
+                    persist.showToast( qsTr("Cache was successfully cleared!"), imageSource.toString() );
                 }
             }
             
