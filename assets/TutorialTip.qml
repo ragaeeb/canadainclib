@@ -70,6 +70,13 @@ Delegate
         return exec( key, text, pos == "l" ? HorizontalAlignment.Left : pos == "r" ? HorizontalAlignment.Right : HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, ui.du(14) + topPadding, 0, imageSource, type );
     }
     
+    function execOverFlow(key, text, action)
+    {
+        var ui = Application.scene.ui;
+        
+        exec(key, text.arg(action.title), HorizontalAlignment.Right, VerticalAlignment.Center, 0, ui.du(2), 0, 0, action.imageSource.toString());
+    }
+    
     function execCentered(key, text, imageSource)
     {
         return exec(key, text, HorizontalAlignment.Center, VerticalAlignment.Center, 0, 0, 0, 0, imageSource);

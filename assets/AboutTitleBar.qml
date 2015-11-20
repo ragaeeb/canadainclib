@@ -118,7 +118,7 @@ TitleBar
                     }
                     
                     tutorial.execActionBar("openChannel", qsTr("To stay up to date on the latest news on our apps or to reach out to us for support regarding any of our apps, tap on the '%1' action.").arg(channelAction.title), videoTutorialUri.length > 0 ? "r" : undefined);
-                    tutorial.execActionBar("clearCache", qsTr("If you notice the app taking up a lot of space, you should choose '%1' from the overflow menu.").arg(clearCacheAction.title), clearCacheAction.imageSource.toString());
+                    tutorial.execActionBar("clearCache", qsTr("If you notice the app taking up a lot of space, you should choose '%1' from the overflow menu.").arg(clearCacheAction.title), "x");
                     
                     initialized = true;
                 }
