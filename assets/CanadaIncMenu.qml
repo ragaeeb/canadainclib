@@ -112,6 +112,8 @@ MenuDefinition
     settingsAction: SettingsActionItem
     {
         id: settingsActionItem
+        imageSource: "images/common/ic_settings.png"
+        title: qsTr("Settings") + Retranslate.onLanguageChanged
         
         function onDestroyed() {
             enabled = true;
@@ -171,6 +173,8 @@ MenuDefinition
     helpAction: HelpActionItem
     {
         id: helpActionItem
+        imageSource: "images/common/ic_help.png"
+        title: qsTr("Help") + Retranslate.onLanguageChanged
         
         function onDestroyed() {
             enabled = true;

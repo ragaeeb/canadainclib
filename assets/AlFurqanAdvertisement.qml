@@ -73,7 +73,7 @@ Sheet
             dismissAction: ActionItem
             {
                 title: qsTr("Back") + Retranslate.onLanguageChanged
-                imageSource: "images/common/title/ic_prev.png"
+                imageSource: "images/common/ic_prev.png"
                 
                 onTriggered: {
                     console.log("UserEvent: AlFurqanBack");
