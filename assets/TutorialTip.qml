@@ -1,4 +1,4 @@
-import bb.cascades 1.3
+import bb.cascades 1.0
 
 Delegate
 {
@@ -61,36 +61,23 @@ Delegate
     
     function execBelowTitleBar(key, text, topPadding, pos, type, imageSource)
     {
-        var ui = Application.scene.ui;
-        
         if (!topPadding) {
             topPadding = 0;
         }
 
-        return exec( key, text, pos == "l" ? HorizontalAlignment.Left : pos == "r" ? HorizontalAlignment.Right : HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, ui.du(14) + topPadding, 0, imageSource, type );
+        return exec( key, text, pos == "l" ? HorizontalAlignment.Left : pos == "r" ? HorizontalAlignment.Right : HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, deviceUtils.du(14) + topPadding, 0, imageSource, type );
     }
     
-    function execOverFlow(key, text, action)
-    {
-        var ui = Application.scene.ui;
-        
-        exec(key, text.arg(action.title), HorizontalAlignment.Right, VerticalAlignment.Center, 0, ui.du(2), 0, 0, action.imageSource.toString());
+    function execOverFlow(key, text, action) {
+        exec(key, text.arg(action.title), HorizontalAlignment.Right, VerticalAlignment.Center, 0, deviceUtils.du(2), 0, 0, action.imageSource.toString());
     }
     
-    function execCentered(key, text, imageSource)
-    {
+    function execCentered(key, text, imageSource) {
         return exec(key, text, HorizontalAlignment.Center, VerticalAlignment.Center, 0, 0, 0, 0, imageSource);
     }
     
-    function execActionBar(key, text, pos)
-    {
-        if (!Application.scene) {
-            return false;
-        }
-        
-        var ui = Application.scene.ui;
-        
-        return exec( key, text, pos == "x" ? HorizontalAlignment.Right : pos == "b" ? HorizontalAlignment.Left : HorizontalAlignment.Center, VerticalAlignment.Bottom, pos == "r" ? ui.du(31) : pos == "b" ? ui.du(2) : 0, pos == "l" ? ui.du(31) : 0, 0, ui.du(2) );
+    function execActionBar(key, text, pos) {
+        return exec( key, text, pos == "x" ? HorizontalAlignment.Right : pos == "b" ? HorizontalAlignment.Left : HorizontalAlignment.Center, VerticalAlignment.Bottom, pos == "r" ? deviceUtils.du(31) : pos == "b" ? deviceUtils.du(2) : 0, pos == "l" ? deviceUtils.du(31) : 0, 0, deviceUtils.du(2) );
     }
     
     function execSwipe(key, text, h, v, direction) {
@@ -99,50 +86,47 @@ Delegate
     
     function execTitle(key, text, pos)
     {
-        if (!Application.scene) {
-            return false;
-        }
-        
-        var ui = Application.scene.ui;
-        
-        exec(key, text, pos == "l" ? HorizontalAlignment.Left : pos == "r" ? HorizontalAlignment.Right : HorizontalAlignment.Center, VerticalAlignment.Top, pos == "l" ? ui.du(5) : 0, pos == "r" ? ui.du(5) : 0, ui.du(5))
+        exec(key, text, pos == "l" ? HorizontalAlignment.Left : pos == "r" ? HorizontalAlignment.Right : HorizontalAlignment.Center, VerticalAlignment.Top, pos == "l" ? deviceUtils.du(5) : 0, pos == "r" ? deviceUtils.du(5) : 0, deviceUtils.du(5))
     }
     
     function exec(key, text, h, v, left, right, top, bottom, imageUri, type)
     {
-        if (key) {
-            key = "tutorial" + key.charAt(0).toUpperCase() + key.slice(1);
-        }
-        
-        if ( text.length > 0 && !suppressTutorials && ( !key || !persist.containsFlag(key) ) )
+        if (Application.scene)
         {
-            var allKeys = keys;
-
-            if ( !(key in allKeys) )
-            {
-                var allData = data;
-                
-                if ( !persist.containsFlag("tutorialAppInit") && !("tutorialAppInit" in allKeys) ) {
-                    allData.push( {'key': "tutorialAppInit", 'body': qsTr("Welcome to %1 v%2.\n\nThese are interactive tutorials to help you learn how to use the app.\n\nSimply tap on the screen to move on to the next tutorial. If you want to skip all tutorials press-and-hold on here and choose 'Suppress Tutorials' from the menu.").arg(Application.applicationName).arg(Application.applicationVersion), 'icon': "images/common/ic_help.png", 'h': HorizontalAlignment.Center, 'v': VerticalAlignment.Center, 'l': 0, 'r': 0, 't': 0, 'b': 0, 'type': undefined} );
-                    allKeys["tutorialAppInit"] = allData.length-1;
-                }
-                
-                allData.push( {'key': key, 'body': text, 'icon': imageUri, 'h': h, 'v': v, 'l': left, 'r': right, 't': top, 'b': bottom, 'type': type} );
-                data = allData;
-                
-                if (key) {
-                    allKeys[key] = allData.length-1;
-                    keys = allKeys;
-                }
-                
-                if (!active) {
-                    active = true;
-                } else if (active && object) {
-                    object.open();
-                }
+            if (key) {
+                key = "tutorial" + key.charAt(0).toUpperCase() + key.slice(1);
             }
             
-            return true;
+            if ( text.length > 0 && !suppressTutorials && ( !key || !persist.containsFlag(key) ) )
+            {
+                var allKeys = keys;
+                
+                if ( !(key in allKeys) )
+                {
+                    var allData = data;
+                    
+                    if ( !persist.containsFlag("tutorialAppInit") && !("tutorialAppInit" in allKeys) ) {
+                        allData.push( {'key': "tutorialAppInit", 'body': qsTr("Welcome to %1 v%2.\n\nThese are interactive tutorials to help you learn how to use the app.\n\nSimply tap on the screen to move on to the next tutorial. If you want to skip all tutorials press-and-hold on here and choose 'Suppress Tutorials' from the menu.").arg(Application.applicationName).arg(Application.applicationVersion), 'icon': "images/common/ic_help.png", 'h': HorizontalAlignment.Center, 'v': VerticalAlignment.Center, 'l': 0, 'r': 0, 't': 0, 'b': 0, 'type': undefined} );
+                        allKeys["tutorialAppInit"] = allData.length-1;
+                    }
+                    
+                    allData.push( {'key': key, 'body': text, 'icon': imageUri, 'h': h, 'v': v, 'l': left, 'r': right, 't': top, 'b': bottom, 'type': type} );
+                    data = allData;
+                    
+                    if (key) {
+                        allKeys[key] = allData.length-1;
+                        keys = allKeys;
+                    }
+                    
+                    if (!active) {
+                        active = true;
+                    } else if (active && object) {
+                        object.open();
+                    }
+                }
+                
+                return true;
+            }
         }
         
         return false;
@@ -210,20 +194,20 @@ Delegate
                 
                 if (current.type == "r")
                 {
-                    swipeAnim.fromX = -ui.du(2);
-                    swipeAnim.toX = ui.du(45);
+                    swipeAnim.fromX = -deviceUtils.du(2);
+                    swipeAnim.toX = deviceUtils.du(45);
                     swipeAnim.play();
                 } else if (current.type == "l") {
-                    swipeAnim.fromX = ui.du(2);
-                    swipeAnim.toX = -ui.du(45);
+                    swipeAnim.fromX = deviceUtils.du(2);
+                    swipeAnim.toX = -deviceUtils.du(45);
                     swipeAnim.play();
                 } else if (current.type == "d") {
-                    swipeAnim.fromY = -ui.du(2);
-                    swipeAnim.toY = ui.du(45);
+                    swipeAnim.fromY = -deviceUtils.du(2);
+                    swipeAnim.toY = deviceUtils.du(45);
                     swipeAnim.play();
                 } else if (current.type == "u") {
-                    swipeAnim.fromY = ui.du(2);
-                    swipeAnim.toY = -ui.du(45);
+                    swipeAnim.fromY = deviceUtils.du(2);
+                    swipeAnim.toY = -deviceUtils.du(45);
                     swipeAnim.play();
                 }
                 

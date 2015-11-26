@@ -34,6 +34,7 @@ class DeviceUtils : public QObject
     HardwareInfo* m_hw;
     DisplayInfo* m_display;
     QMap<QObject*, QObject*> m_actionToList;
+    int m_factor;
 
     void processDirection(ScrollPosition::Type);
 
@@ -60,6 +61,7 @@ public:
 
     static void registerTutorialTips(QObject* parent);
     Q_INVOKABLE void log(QVariant const& message, QObject* q=NULL);
+    Q_INVOKABLE qreal du(qreal units);
 };
 
 } /* namespace canadainc */
