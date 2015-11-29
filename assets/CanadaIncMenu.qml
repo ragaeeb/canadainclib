@@ -8,6 +8,7 @@ MenuDefinition
     property string projectName
     property alias help: helpActionItem
     property alias settings: settingsActionItem
+    property string helpPageQml: "HelpPage.qml"
     signal finished(bool clean, int analyticResult)
     property int analyticDiffDays: 30
     
@@ -184,7 +185,7 @@ MenuDefinition
         {
             console.log("UserEvent: HelpPage");
             
-            var p = definition.init("HelpPage.qml");
+            var p = definition.init(helpPageQml);
             persist.registerForDestroyed(p, helpActionItem);
             launchPage(p);
             enabled = false;
