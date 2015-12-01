@@ -11,6 +11,32 @@ Delegate
     signal tutorialFinished(string key)
     signal tutorialStarted(string key)
     property string appMenuKey: "showAppMenu"
+    property real factor: 0
+    
+    function du(units)
+    {
+        if ('Signature' in ActionBarPlacement && Application.scene) {
+            return Application.scene.ui.du(units);
+        }
+        
+        if (factor > 0) {
+            return factor*units;
+        }
+        
+        var ps = deviceUtils.pixelSize;
+        
+        if (ps.width == 720 && ps.height == 720) { // n-series
+            factor = 9;
+        } else if (ps.width == 720 && ps.height == 1280) { // a-series
+            factor = 8;
+        } else if (ps.width == 1440 && ps.height == 1440) { // windmere
+            factor = 12;
+        } else {
+            factor = 10;
+        }
+        
+        return factor*units;
+    }
     
     function count() {
         return data.length;
@@ -65,11 +91,11 @@ Delegate
             topPadding = 0;
         }
 
-        return exec( key, text, pos == "l" ? HorizontalAlignment.Left : pos == "r" ? HorizontalAlignment.Right : HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, deviceUtils.du(14) + topPadding, 0, imageSource, type );
+        return exec( key, text, pos == "l" ? HorizontalAlignment.Left : pos == "r" ? HorizontalAlignment.Right : HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, tutorialDelegate.du(14) + topPadding, 0, imageSource, type );
     }
     
     function execOverFlow(key, text, action) {
-        exec(key, text.arg(action.title), HorizontalAlignment.Right, VerticalAlignment.Center, 0, deviceUtils.du(2), 0, 0, action.imageSource.toString());
+        exec(key, text.arg(action.title), HorizontalAlignment.Right, VerticalAlignment.Center, 0, tutorialDelegate.du(2), 0, 0, action.imageSource.toString());
     }
     
     function execCentered(key, text, imageSource) {
@@ -80,7 +106,7 @@ Delegate
     {
         var oldOS = !('Signature' in ActionBarPlacement);
         var unsupportedSignature = oldOS && !pos; // dev specified signature, but there is no signature supported
-        return exec( key, text, pos == "x" ? HorizontalAlignment.Right : pos == "b" ? HorizontalAlignment.Left : HorizontalAlignment.Center, VerticalAlignment.Bottom, pos == "r" ? deviceUtils.du(31) : pos == "b" ? deviceUtils.du(2) : 0, (pos == "l" && !oldOS) || unsupportedSignature ? deviceUtils.du(31) : 0, 0, deviceUtils.du(2) );
+        return exec( key, text, pos == "x" ? HorizontalAlignment.Right : pos == "b" ? HorizontalAlignment.Left : HorizontalAlignment.Center, VerticalAlignment.Bottom, pos == "r" ? tutorialDelegate.du(31) : pos == "b" ? tutorialDelegate.du(2) : 0, (pos == "l" && !oldOS) || unsupportedSignature ? tutorialDelegate.du(31) : 0, 0, tutorialDelegate.du(2) );
     }
     
     function execSwipe(key, text, h, v, direction) {
@@ -89,7 +115,7 @@ Delegate
     
     function execTitle(key, text, pos)
     {
-        exec(key, text, pos == "l" ? HorizontalAlignment.Left : pos == "r" ? HorizontalAlignment.Right : HorizontalAlignment.Center, VerticalAlignment.Top, pos == "l" ? deviceUtils.du(5) : 0, pos == "r" ? deviceUtils.du(5) : 0, deviceUtils.du(5))
+        exec(key, text, pos == "l" ? HorizontalAlignment.Left : pos == "r" ? HorizontalAlignment.Right : HorizontalAlignment.Center, VerticalAlignment.Top, pos == "l" ? tutorialDelegate.du(5) : 0, pos == "r" ? tutorialDelegate.du(5) : 0, tutorialDelegate.du(5))
     }
     
     function exec(key, text, h, v, left, right, top, bottom, imageUri, type)
@@ -197,20 +223,20 @@ Delegate
                 
                 if (current.type == "r")
                 {
-                    swipeAnim.fromX = -deviceUtils.du(2);
-                    swipeAnim.toX = deviceUtils.du(45);
+                    swipeAnim.fromX = -tutorialDelegate.du(2);
+                    swipeAnim.toX = tutorialDelegate.du(45);
                     swipeAnim.play();
                 } else if (current.type == "l") {
-                    swipeAnim.fromX = deviceUtils.du(2);
-                    swipeAnim.toX = -deviceUtils.du(45);
+                    swipeAnim.fromX = tutorialDelegate.du(2);
+                    swipeAnim.toX = -tutorialDelegate.du(45);
                     swipeAnim.play();
                 } else if (current.type == "d") {
-                    swipeAnim.fromY = -deviceUtils.du(2);
-                    swipeAnim.toY = deviceUtils.du(45);
+                    swipeAnim.fromY = -tutorialDelegate.du(2);
+                    swipeAnim.toY = tutorialDelegate.du(45);
                     swipeAnim.play();
                 } else if (current.type == "u") {
-                    swipeAnim.fromY = deviceUtils.du(2);
-                    swipeAnim.toY = -deviceUtils.du(45);
+                    swipeAnim.fromY = tutorialDelegate.du(2);
+                    swipeAnim.toY = -tutorialDelegate.du(45);
                     swipeAnim.play();
                 }
                 

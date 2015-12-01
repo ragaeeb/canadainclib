@@ -129,7 +129,7 @@ Sheet
         passwordField.requestFocus();
         
         tutorial.execBelowTitleBar("inputPassword", qsTr("Enter your desired password here. It needs to be at least 3-characters in length.") );
-        tutorial.execBelowTitleBar("confirmPassword", qsTr("Confirm the same password you typed above here to ensure you remember it."), deviceUtils.du(8) );
+        tutorial.execBelowTitleBar("confirmPassword", qsTr("Confirm the same password you typed above here to ensure you remember it."), tutorial.du(8) );
         tutorial.execTitle( "savePassword", qsTr("Once you are satisfied with your password, tap on the '%1' button to save it.").arg(setPasswordAction.title), "r" );
         
         if ( security.accountCreated() ) {

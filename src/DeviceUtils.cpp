@@ -149,35 +149,6 @@ void DeviceUtils::log(QVariant const& message, QObject* q)
 }
 
 
-qreal DeviceUtils::du(qreal units)
-{
-#if BBNDK_VERSION_AT_LEAST(10,3,0)
-    if ( Application::instance()->scene() ) {
-        return Application::instance()->scene()->ui()->du(units);
-    }
-#endif
-
-    if (m_factor) {
-        return m_factor*units;
-    }
-
-    QSize ps = pixelSize();
-
-    if (ps.width() == 720 && ps.height() == 720) { // n-series
-        m_factor = 9;
-    } else if (ps.width() == 720 && ps.height() == 1280) { // a-series
-        m_factor = 8;
-    } else if (ps.width() == 1440 && ps.height() == 1440) { // windmere
-        m_factor = 12;
-    } else {
-        m_factor = 10;
-    }
-
-    return m_factor*units;
-
-}
-
-
 DeviceUtils::~DeviceUtils()
 {
 }

@@ -60,7 +60,6 @@ public:
 
     static void registerTutorialTips(QObject* parent);
     Q_INVOKABLE void log(QVariant const& message, QObject* q=NULL);
-    Q_INVOKABLE qreal du(qreal units);
 };
 
 } /* namespace canadainc */
