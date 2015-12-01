@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="tr_TR">
+<TS version="2.0" language="th_TH">
 <context>
     <name>AccountsDropDown</name>
     <message>
         <location filename="../assets/AccountsDropDown.qml" line="10"/>
         <source>Account</source>
-        <translation>Hesap</translation>
+        <translation>บัญชี</translation>
     </message>
 </context>
 <context>
@@ -24,7 +24,7 @@
     <message>
         <location filename="../assets/AlFurqanAdvertisement.qml" line="45"/>
         <source>Email</source>
-        <translation>E-posta</translation>
+        <translation>อีเมล์</translation>
     </message>
     <message>
         <location filename="../assets/AlFurqanAdvertisement.qml" line="58"/>
@@ -49,7 +49,7 @@
     <message>
         <location filename="../assets/AlFurqanAdvertisement.qml" line="88"/>
         <source>Back</source>
-        <translation>Geri</translation>
+        <translation>ย้อนกลับ</translation>
     </message>
 </context>
 <context>
@@ -57,27 +57,27 @@
     <message>
         <location filename="../assets/BugReportPage.qml" line="25"/>
         <source>Bug Reports</source>
-        <translation>Böcek</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="40"/>
         <source>Open in Browser</source>
-        <translation>Tarayıcıda Aç</translation>
+        <translation>เปิดในเบราเซอร์</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="53"/>
         <source>Submit Logs</source>
-        <translation>Rapor Oluştur</translation>
+        <translation>ส่ง</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="66"/>
         <source>Submission Status</source>
-        <translation>Durum</translation>
+        <translation>สถานะ</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="102"/>
         <source>Attach</source>
-        <translation>Ekle</translation>
+        <translation>แนบ</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="115"/>
@@ -89,11 +89,6 @@
         <source>Only a maximum of 5 screenshots may be attached!</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="../assets/BugReportPage.qml" line="136"/>
-        <source>Add Notes</source>
-        <translation>Notlar</translation>
-    </message>
     <message numerus="yes">
         <location filename="../assets/BugReportPage.qml" line="136"/>
         <source>%n attachments</source>
@@ -102,9 +97,14 @@
         </translation>
     </message>
     <message>
+        <location filename="../assets/BugReportPage.qml" line="136"/>
+        <source>Add Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../assets/BugReportPage.qml" line="142"/>
         <source>Submit</source>
-        <translation>Gönder</translation>
+        <translation>ส่ง</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="150"/>
@@ -114,27 +114,27 @@
     <message>
         <location filename="../assets/BugReportPage.qml" line="174"/>
         <source>Cancel</source>
-        <translation>İptal</translation>
+        <translation>ยกเลิก</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="260"/>
         <source>Name:</source>
-        <translation>Ad</translation>
+        <translation>ชื่อ:</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="272"/>
         <source>Name cannot be empty!</source>
-        <translation>Ekran adı boş olamaz</translation>
+        <translation>ชื่อที่แสดงไม่สามารถว่างได้</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="284"/>
         <source>Email Address:</source>
-        <translation>E-posta Adresi</translation>
+        <translation>อีเมล์แอดเดรส</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="302"/>
         <source>Invalid email address!</source>
-        <translation>E-posta Geçerli Değil</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="317"/>
@@ -150,7 +150,7 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/BugReportPage.qml" line="320"/>
         <source>Enter the notes you wish to add...</source>
-        <translation>Notlar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="415"/>
@@ -180,24 +180,36 @@ How often can you reproduce this?</source>
         <location filename="../assets/CanadaIncMenu.qml" line="63"/>
         <location filename="../assets/CanadaIncMenu.qml" line="74"/>
         <source>Yes</source>
-        <translation>Evet</translation>
+        <translation>ใช่</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="48"/>
         <location filename="../assets/CanadaIncMenu.qml" line="63"/>
         <location filename="../assets/CanadaIncMenu.qml" line="74"/>
         <source>No</source>
-        <translation>Hayır</translation>
+        <translation>ไม่</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="48"/>
         <source>Don&apos;t Show Again</source>
-        <translation>Tekrar gösterme</translation>
+        <translation>ไม่ต้องแสดงอีก</translation>
+    </message>
+    <message>
+        <location filename="../assets/CanadaIncMenu.qml" line="63"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="162"/>
+        <source>Review</source>
+        <translation>คำวิจารณ์</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="63"/>
         <source>If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?</source>
-        <translation type="unfinished">App&apos;i kullanmaktan keyif aldıysanız, lütfen birkaç dakikanızı ayırıp uygulamayı değerlendirin. Teşekkürler!</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/CanadaIncMenu.qml" line="74"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="215"/>
+        <source>Donate</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="74"/>
@@ -207,29 +219,17 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="117"/>
         <source>Settings</source>
-        <translation>Ayarlar</translation>
+        <translation>การตั้งค่า</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="140"/>
         <source>Bug Reports</source>
-        <translation>Böcek</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="178"/>
         <source>Help</source>
-        <translation>Yardım</translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="63"/>
-        <location filename="../assets/CanadaIncMenu.qml" line="162"/>
-        <source>Review</source>
-        <translation>İncele</translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="74"/>
-        <location filename="../assets/CanadaIncMenu.qml" line="215"/>
-        <source>Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>วิธีใช้</translation>
     </message>
 </context>
 <context>
@@ -272,62 +272,62 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/CanadaIncUtils.qml" line="112"/>
         <source>Muharram</source>
-        <translation>Muharrem</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncUtils.qml" line="112"/>
         <source>Safar</source>
-        <translation>Safer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncUtils.qml" line="112"/>
         <source>Rabi&apos;ul Awwal</source>
-        <translation>Rebiülevvel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncUtils.qml" line="112"/>
         <source>Rabi&apos;ul Akhir</source>
-        <translation>Rebiülahir</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncUtils.qml" line="113"/>
         <source>Jumadal Ula</source>
-        <translation>Cemaziyelevvel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncUtils.qml" line="113"/>
         <source>Jumadal Akhira</source>
-        <translation>Cemaziyelahir</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncUtils.qml" line="113"/>
         <source>Rajab</source>
-        <translation>Recep</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncUtils.qml" line="113"/>
         <source>Sha&apos;ban</source>
-        <translation>Şaban</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncUtils.qml" line="114"/>
         <source>Ramadan</source>
-        <translation>Ramazan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncUtils.qml" line="114"/>
         <source>Shawwal</source>
-        <translation>Şevval</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncUtils.qml" line="114"/>
         <source>Dhul Qa&apos;ada</source>
-        <translation>Zilkade</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncUtils.qml" line="114"/>
         <source>Dhul Hijja</source>
-        <translation>Zilhicce</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -345,7 +345,7 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/HelpPage.qml" line="42"/>
         <source>Video Tutorial</source>
-        <translation>Öğretici</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/HelpPage.qml" line="56"/>
@@ -355,12 +355,12 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/HelpPage.qml" line="65"/>
         <source>Cache was successfully cleared!</source>
-        <translation>Önbelleğiniz temizlendi.</translation>
+        <translation>ล้างแคชของคุณแล้ว</translation>
     </message>
     <message>
         <location filename="../assets/HelpPage.qml" line="72"/>
         <source>Confirmation</source>
-        <translation>Onayla</translation>
+        <translation>ยืนยัน</translation>
     </message>
     <message>
         <location filename="../assets/HelpPage.qml" line="72"/>
@@ -403,7 +403,7 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/OfflineDelegate.qml" line="55"/>
         <source>You are currently offline. Please check your network connection.</source>
-        <translation>Ağ Bağlantısı Yok</translation>
+        <translation>ไม่มีการเชื่อมต่อเครือข่าย</translation>
     </message>
 </context>
 <context>
@@ -411,17 +411,17 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/SignupSheet.qml" line="21"/>
         <source>Change Password</source>
-        <translation>Parolayı Değiştir</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="23"/>
         <source>Create Password</source>
-        <translation>Yeni parola girin</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="31"/>
         <source>Save</source>
-        <translation>Kaydet</translation>
+        <translation type="unfinished">บันทึก</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="44"/>
@@ -438,22 +438,22 @@ Make sure you remember it!</source>
     <message>
         <location filename="../assets/SignupSheet.qml" line="67"/>
         <source>The password must be at least 3 characters!</source>
-        <translation>En az 3 karakter içermeli</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="82"/>
         <source>Confirm password</source>
-        <translation>Parolayı onaylayın</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="89"/>
         <source>Passwords do not match!</source>
-        <translation>Parolalar eşleşmiyor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="116"/>
         <source>Cancel</source>
-        <translation>İptal</translation>
+        <translation>ยกเลิก</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="131"/>
@@ -495,7 +495,7 @@ Simply tap on the screen to move on to the next tutorial. If you want to skip al
     <message>
         <location filename="../assets/TutorialTip.qml" line="161"/>
         <source>Video Tutorial</source>
-        <translation>Öğretici</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="161"/>
@@ -505,12 +505,12 @@ Simply tap on the screen to move on to the next tutorial. If you want to skip al
     <message>
         <location filename="../assets/TutorialTip.qml" line="161"/>
         <source>Yes</source>
-        <translation>Evet</translation>
+        <translation>ใช่</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="161"/>
         <source>No</source>
-        <translation>Hayır</translation>
+        <translation>ไม่</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="290"/>
@@ -544,7 +544,7 @@ Simply tap on the screen to move on to the next tutorial. If you want to skip al
     <message>
         <location filename="../src/AccountImporter.cpp" line="46"/>
         <source>Local</source>
-        <translation>Yerel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/AccountImporter.cpp" line="48"/>
@@ -554,7 +554,7 @@ Simply tap on the screen to move on to the next tutorial. If you want to skip al
     <message>
         <location filename="../src/AccountImporter.cpp" line="68"/>
         <source>Cellular</source>
-        <translation>Hücresel</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -568,14 +568,19 @@ Simply tap on the screen to move on to the next tutorial. If you want to skip al
 <context>
     <name>canadainc::AppLogFetcher</name>
     <message>
+        <location filename="../src/AppLogFetcher.cpp" line="109"/>
+        <source>Report could not be submitted because you are offline! Please reconnect to the network and try again...</source>
+        <translation>ไม่มีการเชื่อมต่อเครือข่าย</translation>
+    </message>
+    <message>
         <location filename="../src/AppLogFetcher.cpp" line="111"/>
         <source>Could not submit report! Please try again...</source>
-        <translation type="unfinished"></translation>
+        <translation>คำขอล้มเหลว โปรดลองอีกครั้ง</translation>
     </message>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="184"/>
         <source>Could not submit logs! Please try again...</source>
-        <translation type="unfinished"></translation>
+        <translation>คำขอล้มเหลว โปรดลองอีกครั้ง</translation>
     </message>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="184"/>
@@ -589,23 +594,18 @@ Simply tap on the screen to move on to the next tutorial. If you want to skip al
 You may have to close the app and re-open it to correct the error.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="../src/AppLogFetcher.cpp" line="109"/>
-        <source>Report could not be submitted because you are offline! Please reconnect to the network and try again...</source>
-        <translation>Cihazınızın Internet&apos;e bağlı olduğunu kontrol edip tekrar deneyin.</translation>
-    </message>
 </context>
 <context>
     <name>canadainc::DeviceUtils</name>
     <message>
         <location filename="../src/DeviceUtils.cpp" line="44"/>
         <source>Top</source>
-        <translation>Yukarı kaydır</translation>
+        <translation>บนสุด</translation>
     </message>
     <message>
         <location filename="../src/DeviceUtils.cpp" line="47"/>
         <source>Bottom</source>
-        <translation>Aşağı kaydır</translation>
+        <translation>ล่างสุด</translation>
     </message>
 </context>
 <context>
@@ -613,82 +613,82 @@ You may have to close the app and re-open it to correct the error.</source>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="81"/>
         <source>A DRM related error was encountered.</source>
-        <translation>Bu dosya, desteklenmeyen DRM tarafından korunuyor.</translation>
+        <translation>ไฟล์นี้ป้องกันด้วย DRM ที่ไม่สนับสนุน</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="86"/>
         <source>An unexpected internal error has occured!</source>
-        <translation>Dosya, beklenmeyen bir hata nedeniyle oynatılamıyor.</translation>
+        <translation>ไม่สามารถเล่นไฟล์ได้เนื่องจากข้อผิดพลาดที่ไม่คาดคิด</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="89"/>
         <source>An invalid parameter was specified!</source>
-        <translation>Dosya, beklenmeyen bir hata nedeniyle oynatılamıyor.</translation>
+        <translation>ไม่สามารถเล่นไฟล์ได้เนื่องจากข้อผิดพลาดที่ไม่คาดคิด</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="92"/>
         <source>An illegal operation given the context state.</source>
-        <translation>Dosya, beklenmeyen bir hata nedeniyle oynatılamıyor.</translation>
+        <translation>ไม่สามารถเล่นไฟล์ได้เนื่องจากข้อผิดพลาดที่ไม่คาดคิด</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="95"/>
         <source>An unrecognized input or output type or an out-of-range speed setting encountered.</source>
-        <translation>Bu dosya, desteklenmeyen bir ortam biçimi içeriyor.</translation>
+        <translation>ไม่สามารถเล่นไฟล์ได้เนื่องจากข้อผิดพลาดระบบย่อยมีเดียที่ไม่ได้กำหนด</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="98"/>
         <source>A data format not recognized by any plugin encountered.</source>
-        <translation>Bu dosya, desteklenmeyen bir ortam biçimi içeriyor.</translation>
+        <translation>ไฟล์นี้มีรูปแบบมีเดียที่ไม่สนับสนุน</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="101"/>
         <source>A DRM protected input was specified.</source>
-        <translation>Bu dosya, desteklenmeyen DRM tarafından korunuyor.</translation>
+        <translation>ไฟล์นี้ป้องกันด้วย DRM ที่ไม่สนับสนุน</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="104"/>
         <source>An illegal operation was encountered by the playback process.</source>
-        <translation>Tanımlı olmayan bir ortam altsistem hatası nedeniyle dosya oynatılamıyor.</translation>
+        <translation>ไม่สามารถเล่นไฟล์ได้เนื่องจากข้อผิดพลาดที่ไม่คาดคิด</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="107"/>
         <source>An I/O error has been encountered at the source!</source>
-        <translation>Tanımlı olmayan bir ortam altsistem hatası nedeniyle dosya oynatılamıyor.</translation>
+        <translation>ไม่สามารถเล่นไฟล์ได้เนื่องจากข้อผิดพลาดที่ไม่คาดคิด</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="110"/>
         <source>An I/O error has been encountered at the sink!</source>
-        <translation>Tanımlı olmayan bir ortam altsistem hatası nedeniyle dosya oynatılamıyor.</translation>
+        <translation>ไม่สามารถเล่นไฟล์ได้เนื่องจากข้อผิดพลาดที่ไม่คาดคิด</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="113"/>
         <source>The source is currently unavailable.</source>
-        <translation>Tanımlı olmayan bir ortam altsistem hatası nedeniyle dosya oynatılamıyor.</translation>
+        <translation>ไม่สามารถเล่นไฟล์ได้เนื่องจากข้อผิดพลาดที่ไม่คาดคิด</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="116"/>
         <source>The resource was corrupted.</source>
-        <translation>Bu dosya bozuk. Bozuk olmayan bir sürüm yükleyip tekrar deneyin.</translation>
+        <translation>ไม่สามารถเล่นไฟล์ได้เนื่องจากข้อผิดพลาดที่ไม่คาดคิด</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="119"/>
         <source>Cannot open the sink (possibly because no plugin recognizes it).</source>
-        <translation>Tanımlı olmayan bir ortam altsistem hatası nedeniyle dosya oynatılamıyor.</translation>
+        <translation>ไม่สามารถเล่นไฟล์ได้เนื่องจากข้อผิดพลาดที่ไม่คาดคิด</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="122"/>
         <source>Insufficient memory to perform the requested operation.</source>
-        <translation>Yeterli bellek yok. Bazı uygulamaları kapatıp tekrar deneyin.</translation>
+        <translation>หน่วยความจำว่างไม่เพียงพอ ปิดบางแอปพลิเคชัน และลองอีกครั้ง</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="125"/>
         <source>A required resource such as an encoder or an output feed is presently unavailable.</source>
-        <translation>Tanımlı olmayan bir ortam altsistem hatası nedeniyle dosya oynatılamıyor.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="128"/>
         <source>A playback permission error (e.g., user prohibition, region mismatch) error was encountered.</source>
-        <translation>Tanımlı olmayan bir ortam altsistem hatası nedeniyle dosya oynatılamıyor.</translation>
+        <translation>ไม่สามารถเล่นไฟล์ได้เนื่องจากข้อผิดพลาดระบบย่อยมีเดียที่ไม่ได้กำหนด</translation>
     </message>
 </context>
 <context>
@@ -696,7 +696,7 @@ You may have to close the app and re-open it to correct the error.</source>
     <message>
         <location filename="../src/MessageImporter.cpp" line="36"/>
         <source>You</source>
-        <translation>Siz</translation>
+        <translation>คุณ</translation>
     </message>
 </context>
 <context>
@@ -705,37 +705,37 @@ You may have to close the app and re-open it to correct the error.</source>
         <location filename="../src/Persistance.cpp" line="141"/>
         <location filename="../src/Persistance.h" line="92"/>
         <source>Save</source>
-        <translation>Kaydet</translation>
+        <translation>บันทึก</translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="141"/>
         <location filename="../src/Persistance.h" line="71"/>
         <location filename="../src/Persistance.h" line="92"/>
         <source>Cancel</source>
-        <translation>İptal</translation>
+        <translation>ยกเลิก</translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="162"/>
         <source>Copied: %1 to clipboard</source>
-        <translation>Panoya %1 kopyalandı</translation>
+        <translation>%1 ค่าถูกคัดลอกไปยังคลิปบอร์ด</translation>
     </message>
     <message>
         <location filename="../src/Persistance.h" line="68"/>
         <location filename="../src/Persistance.h" line="89"/>
         <source>Yes</source>
-        <translation>Evet</translation>
+        <translation>ใช่</translation>
     </message>
     <message>
         <location filename="../src/Persistance.h" line="68"/>
         <location filename="../src/Persistance.h" line="89"/>
         <source>No</source>
-        <translation>Hayır</translation>
+        <translation>ไม่</translation>
     </message>
     <message>
         <location filename="../src/Persistance.h" line="71"/>
         <location filename="../src/Persistance.h" line="91"/>
         <source>OK</source>
-        <translation>Tamam</translation>
+        <translation>ตกลง</translation>
     </message>
 </context>
 <context>
@@ -748,7 +748,7 @@ You may have to close the app and re-open it to correct the error.</source>
     <message>
         <location filename="../src/PimContactPickerSheet.cpp" line="86"/>
         <source>OK</source>
-        <translation>Tamam</translation>
+        <translation>ตกลง</translation>
     </message>
 </context>
 <context>
@@ -764,7 +764,7 @@ You may have to close the app and re-open it to correct the error.</source>
     <message>
         <location filename="../src/TextUtils.cpp" line="140"/>
         <source>Bytes</source>
-        <translation>bayt</translation>
+        <translation>ไบต์</translation>
     </message>
     <message>
         <location filename="../src/TextUtils.cpp" line="140"/>
@@ -789,7 +789,7 @@ You may have to close the app and re-open it to correct the error.</source>
     <message>
         <location filename="../src/TextUtils.cpp" line="143"/>
         <source>0 Bytes</source>
-        <translation>0 bayt</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

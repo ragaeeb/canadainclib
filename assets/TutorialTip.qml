@@ -76,8 +76,11 @@ Delegate
         return exec(key, text, HorizontalAlignment.Center, VerticalAlignment.Center, 0, 0, 0, 0, imageSource);
     }
     
-    function execActionBar(key, text, pos) {
-        return exec( key, text, pos == "x" ? HorizontalAlignment.Right : pos == "b" ? HorizontalAlignment.Left : HorizontalAlignment.Center, VerticalAlignment.Bottom, pos == "r" ? deviceUtils.du(31) : pos == "b" ? deviceUtils.du(2) : 0, pos == "l" ? deviceUtils.du(31) : 0, 0, deviceUtils.du(2) );
+    function execActionBar(key, text, pos)
+    {
+        var oldOS = !('Signature' in ActionBarPlacement);
+        var unsupportedSignature = oldOS && !pos; // dev specified signature, but there is no signature supported
+        return exec( key, text, pos == "x" ? HorizontalAlignment.Right : pos == "b" ? HorizontalAlignment.Left : HorizontalAlignment.Center, VerticalAlignment.Bottom, pos == "r" ? deviceUtils.du(31) : pos == "b" ? deviceUtils.du(2) : 0, (pos == "l" && !oldOS) || unsupportedSignature ? deviceUtils.du(31) : 0, 0, deviceUtils.du(2) );
     }
     
     function execSwipe(key, text, h, v, direction) {

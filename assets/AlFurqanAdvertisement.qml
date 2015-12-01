@@ -18,7 +18,7 @@ Sheet
                 
                 onTriggered: {
                     console.log("UserEvent: AlFurqanTwitter");
-                    persist.openUri("https://twitter.com/AlFurqanArabic");
+                    persist.openUri("https://twitter.com/markazalhikmah");
                     
                     reporter.record("AlFurqanTwitter");
                 }
@@ -32,7 +32,7 @@ Sheet
                 
                 onTriggered: {
                     console.log("UserEvent: AlFurqanFacebook");
-                    persist.openUri("https://www.facebook.com/AlFurqanArabicMakkah");
+                    persist.openUri("https://www.facebook.com/profile.php?id=100010470699798");
                     
                     reporter.record("AlFurqanFacebook");
                 }
@@ -46,9 +46,22 @@ Sheet
                 
                 onTriggered: {
                     console.log("UserEvent: AlFurqanEmail");
-                    persist.invoke("", "", "", "mailto:alfurqanarabic1@gmail.com");
+                    persist.invoke("", "", "", "mailto:admin@markazalhikmah.net");
                     
                     reporter.record("AlFurqanEmail");
+                }
+            },
+            
+            ActionItem
+            {
+                imageSource: "images/common/list/ic_instagram.png"
+                title: qsTr("Instagram") + Retranslate.onLanguageChanged
+                
+                onTriggered: {
+                    console.log("UserEvent: MarkazAlHikmahIG");
+                    persist.openUri("http://instagram.com/MarkazAlHikmah");
+                    
+                    reporter.record("MarkazAlHikmahIG");
                 }
             }
         ]
@@ -64,7 +77,7 @@ Sheet
                 
                 onTriggered: {
                     console.log("UserEvent: AlFurqanBBM");
-                    persist.invoke("", "", "", "pin:55C89DD5");
+                    persist.invoke("", "", "", "pin:56E8A18A");
                     
                     reporter.record("AlFurqanBBM");
                 }

@@ -37,7 +37,7 @@ QSize DeviceUtils::pixelSize()
 }
 
 
-void DeviceUtils::attachTopBottomKeys(bb::cascades::Page* page, bb::cascades::ListView* listView, bool onBar)
+void DeviceUtils::attachTopBottomKeys(QObject* p, QObject* listView, bool onBar)
 {
     if ( !isPhysicalKeyboardDevice() )
     {
@@ -47,6 +47,7 @@ void DeviceUtils::attachTopBottomKeys(bb::cascades::Page* page, bb::cascades::Li
         AbstractActionItem* bottom = ActionItem::create().title( tr("Bottom") ).imageSource( QUrl("asset:///images/common/ic_bottom.png") ).onTriggered( this, SLOT( onBottomTriggered() ) );
         connect( bottom, SIGNAL( destroyed(QObject*) ), this, SLOT( onDestroyed(QObject*) ) );
 
+        Page* page = static_cast<Page*>(p);
         page->addAction(top, onBar ? ActionBarPlacement::OnBar : ActionBarPlacement::Default);
         page->addAction(bottom, onBar ? ActionBarPlacement::OnBar : ActionBarPlacement::Default);
 
@@ -54,7 +55,7 @@ void DeviceUtils::attachTopBottomKeys(bb::cascades::Page* page, bb::cascades::Li
         m_actionToList[bottom] = listView;
     }
 
-    listView->setScrollRole(ScrollRole::Main);
+    static_cast<ListView*>(listView)->setScrollRole(ScrollRole::Main);
 }
 
 

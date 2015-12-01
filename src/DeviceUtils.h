@@ -9,7 +9,6 @@
 
 namespace bb {
     namespace cascades {
-        class ListView;
         class Page;
     }
 
@@ -47,7 +46,7 @@ public:
     DeviceUtils(QObject* parent=NULL);
     virtual ~DeviceUtils();
 
-    Q_INVOKABLE void attachTopBottomKeys(bb::cascades::Page* page, bb::cascades::ListView* listView, bool onBar=false);
+    Q_INVOKABLE void attachTopBottomKeys(QObject* page, QObject* listView, bool onBar=false);
     QSize pixelSize();
     bool isPhysicalKeyboardDevice();
 
