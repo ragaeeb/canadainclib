@@ -374,10 +374,10 @@ Delegate
                         opacity: 0
                         scaleX: 0
                         scaleY: 0
-                        leftPadding: fsd.current.l ? fsd.current.l : 0;
-                        rightPadding: fsd.current.r ? fsd.current.r : 0;
-                        bottomPadding: fsd.current.b ? fsd.current.b+iconLuh.layoutFrame.height/2 : 0;
-                        topPadding: fsd.current.t ? fsd.current.t-iconLuh.layoutFrame.height/2 : 0;
+                        leftPadding: fsd.current && fsd.current.l ? fsd.current.l : 0;
+                        rightPadding: fsd.current && fsd.current.r ? fsd.current.r : 0;
+                        bottomPadding: fsd.current && fsd.current.b ? fsd.current.b+iconLuh.layoutFrame.height/2 : 0;
+                        topPadding: fsd.current && fsd.current.t ? fsd.current.t-iconLuh.layoutFrame.height/2 : 0;
                         
                         ImageView
                         {
