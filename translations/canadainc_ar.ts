@@ -406,7 +406,7 @@ How often can you reproduce this?</source>
 <context>
     <name>OfflineDelegate</name>
     <message>
-        <location filename="../assets/OfflineDelegate.qml" line="55"/>
+        <location filename="../assets/OfflineDelegate.qml" line="52"/>
         <source>You are currently offline. Please check your network connection.</source>
         <translation>لا يوجد اتصال شبكة</translation>
     </message>
@@ -484,7 +484,7 @@ Make sure you remember it!</source>
 <context>
     <name>TutorialTip</name>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="112"/>
+        <location filename="../assets/TutorialTip.qml" line="138"/>
         <source>Welcome to %1 v%2.
 
 These are interactive tutorials to help you learn how to use the app.
@@ -493,48 +493,48 @@ Simply tap on the screen to move on to the next tutorial. If you want to skip al
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="154"/>
+        <location filename="../assets/TutorialTip.qml" line="180"/>
         <source>Swipe down from the top-bezel to display the Settings and Help and file bugs!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="161"/>
+        <location filename="../assets/TutorialTip.qml" line="187"/>
         <source>Video Tutorial</source>
         <translation>البرنامج التعليمي</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="161"/>
+        <location filename="../assets/TutorialTip.qml" line="187"/>
         <source>Would you like to see a video tutorial on how to use the app?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="161"/>
+        <location filename="../assets/TutorialTip.qml" line="187"/>
         <source>Yes</source>
         <translation>نعم</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="161"/>
+        <location filename="../assets/TutorialTip.qml" line="187"/>
         <source>No</source>
         <translation>ل</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="290"/>
+        <location filename="../assets/TutorialTip.qml" line="316"/>
         <source>Stop all Tutorials</source>
         <translation>لا شكرًا</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="291"/>
+        <location filename="../assets/TutorialTip.qml" line="317"/>
         <source>Prevent any tutorials from showing...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="297"/>
-        <location filename="../assets/TutorialTip.qml" line="314"/>
+        <location filename="../assets/TutorialTip.qml" line="323"/>
+        <location filename="../assets/TutorialTip.qml" line="340"/>
         <source>Suppress Tutorials</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="314"/>
+        <location filename="../assets/TutorialTip.qml" line="340"/>
         <source>Are you sure you want to prevent all further tutorials? If you ever want to enable them again, swipe-down from the top-bezel, go to Help, tap on the title bar and uncheck the &apos;Suppress Tutorials&apos; checkmark.</source>
         <translation type="unfinished"></translation>
     </message>

@@ -3,10 +3,7 @@ import bb.cascades 1.0
 ControlDelegate
 {
     delegateActive: !reporter.online
-    signal imageTapped();
     visible: delegateActive
-    property variant graphic: "images/common/ic_offline.png"
-    
     horizontalAlignment: HorizontalAlignment.Fill
     verticalAlignment: VerticalAlignment.Center
     
@@ -24,16 +21,16 @@ ControlDelegate
                 id: imageView
                 horizontalAlignment: HorizontalAlignment.Center
                 verticalAlignment: VerticalAlignment.Center
-                imageSource: graphic
+                imageSource: "images/common/ic_offline.png"
                 scalingMethod: ScalingMethod.AspectFit
                 loadEffect: ImageViewLoadEffect.FadeZoom
                 
                 gestureHandlers: [
-                    TapHandler {
+                    TapHandler
+                    {
                         onTapped: {
                             console.log("UserEvent: OfflineDelegateTapped");
-                            imageTapped();
-                            
+                            persist.launchSettingsApp("networkconnections");
                             reporter.record("OfflineDelegateTapped");
                         }
                     }
