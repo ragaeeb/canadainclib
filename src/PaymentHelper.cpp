@@ -55,6 +55,7 @@ void PaymentHelper::existingPurchasesFinished(bb::platform::ExistingPurchasesRep
 
     reply->deleteLater();
     m_persistance->setFlag("purchasesRefreshed", 1);
+    m_persistance->showToast( tr("Purchases successfully refreshed!"), "images/common/restored_purchases.png" );
 }
 
 
@@ -65,9 +66,11 @@ void PaymentHelper::purchaseFinished(bb::platform::PurchaseReply* reply)
 
     QString sku = p.digitalGoodSku();
 
-    if ( !sku.isEmpty() ) {
+    if ( !sku.isEmpty() )
+    {
         m_persistance->saveValueFor( p.digitalGoodSku(), p.date() );
         AppLogFetcher::getInstance()->record("Purchased", sku);
+        m_persistance->showToast( tr("Succesfully purchased!"), "images/common/purchased.png" );
     }
 
     reply->deleteLater();
