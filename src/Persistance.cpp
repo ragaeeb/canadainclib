@@ -28,6 +28,10 @@ Persistance::Persistance(bb::system::InvokeManager* im) :
     rootContext->setContextProperty("persist", this);
 
     connect( QCoreApplication::instance(), SIGNAL( aboutToQuit() ), this, SLOT( commit() ) );
+
+#ifdef DEBUG_RELEASE
+    setErrorHandler(&Persistance::onErrorMessage);
+#endif
 }
 
 
