@@ -13,9 +13,11 @@ Page
     
     function cleanUp() {}
     
-    onActionBarVisibilityChanged: {
-        if (actionMenuVisualState == ActionMenuVisualState.VisibleFull) {
+    onActionMenuVisualStateChanged: {
+        if (actionMenuVisualState == ActionMenuVisualState.VisibleFull)
+        {
             tutorial.execOverFlow( "clearCache", qsTr("If you notice the app taking up a lot of space, you should choose '%1' from the overflow menu."), clearCacheAction );
+            reporter.record("HelpMenuShown");
         }
     }
     
