@@ -106,7 +106,7 @@ void MessageImporter::appendIfValid(Message const& m, QVariantList& variants)
 	{
 	    QVariantMap qvm = transform(m);
 	    qvm.insert( "sender", m.isInbound() ? m.sender().displayableName() : m_userAlias );
-	    qvm.insert( "time", m_deviceTime ? m.deviceTimestamp() : m.serverTimestamp() );
+	    qvm.insert( "time", m_deviceTime || !m.serverTimestamp().isValid() ? m.deviceTimestamp() : m.serverTimestamp() );
 
 		variants << qvm;
 	}
