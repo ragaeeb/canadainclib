@@ -36,8 +36,6 @@ void LocaleUtil::onSystemLanguageChanged()
 
         QString fileName = QString("%1_%2").arg(key).arg(m_currentLocale);
 
-        LOGGER("**** " << QString("%1/qm/%2.qm").arg( QCoreApplication::applicationDirPath() ).arg(fileName));
-
         if ( !QFile::exists( QString("%1/qm/%2.qm").arg( QCoreApplication::applicationDirPath() ).arg(fileName) ) ) { // if it doesn't exist, maybe we don't have one for the specific region, try without it
             fileName = QString("%1_%2").arg(key).arg( m_currentLocale.split("_").first() );
         }

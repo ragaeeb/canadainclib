@@ -261,6 +261,9 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
                 }
             }
         }
+
+        applyAppInfo(r, flags);
+        applyOSInfo(r);
     } else {
         userId = flags.value(KEY_USER_ID).toString();
         r.params.insert("user_id", userId);
