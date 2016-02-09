@@ -104,11 +104,16 @@ Delegate
         return exec(key, text, HorizontalAlignment.Center, VerticalAlignment.Center, 0, 0, 0, 0, imageSource);
     }
     
-    function execActionBar(key, text, pos)
+    function execActionBar(key, text, pos, multi)
     {
         var oldOS = !('Signature' in ActionBarPlacement);
         var unsupportedSignature = oldOS && !pos; // dev specified signature, but there is no signature supported
-        return exec( key, text, pos == "x" ? HorizontalAlignment.Right : pos == "b" ? HorizontalAlignment.Left : HorizontalAlignment.Center, VerticalAlignment.Bottom, pos == "r" ? tutorialDelegate.du(31) : pos == "b" ? tutorialDelegate.du(2) : 0, (pos == "l" && !oldOS) || unsupportedSignature ? tutorialDelegate.du(31) : 0, 0, tutorialDelegate.du(2) );
+        
+        if (multi && oldOS && pos != "b") {
+            exec(key, text, HorizontalAlignment.Right, VerticalAlignment.Center, 0, tutorialDelegate.du(2) );
+        } else {
+            return exec( key, text, pos == "x" ? HorizontalAlignment.Right : pos == "b" ? HorizontalAlignment.Left : HorizontalAlignment.Center, VerticalAlignment.Bottom, pos == "r" ? tutorialDelegate.du(31) : pos == "b" ? tutorialDelegate.du(2) : 0, (pos == "l" && !oldOS) || unsupportedSignature ? tutorialDelegate.du(31) : 0, 0, tutorialDelegate.du(2) );
+        }
     }
     
     function execSwipe(key, text, h, v, direction) {
