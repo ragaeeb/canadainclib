@@ -10,11 +10,6 @@
 #include <stdint.h>
 #include <sys/types.h>
 
-#include <iostream>
-#include <string>
-#include <set>
-#include <cstdlib>
-
 #define BYTES_PER_KB 1024
 
 namespace {
@@ -47,30 +42,6 @@ QString TextUtils::zeroFill(int input, int numZeroes) {
 }
 
 
-QString TextUtils::plainText(QString const& htmlString)
-{
-    QString plainString = htmlString;
-    plainString.remove(QRegExp("<[^>]*>"));
-
-    return plainString;
-}
-
-
-QString TextUtils::formatTime(unsigned int duration)
-{
-	unsigned int secs = floor(duration / 1000);
-	secs %= 60;
-	unsigned int mins = floor( (duration / (1000 * 60) ) % 60);
-	unsigned int hrs = floor( (duration / (1000 * 60 * 60) ) % 24);
-
-	QString seconds = QString::number(secs).rightJustified(2,'0');
-	QString minutes = QString::number(mins).rightJustified(2,'0');
-	QString hours = hrs > 0 ? QString("%1:").arg(hrs) : "";
-
-	return QString("%1%2:%3").arg(hours).arg(minutes).arg(seconds);
-}
-
-
 QString TextUtils::sanitize(QString const& original)
 {
     QString result;
@@ -89,49 +60,6 @@ QString TextUtils::sanitize(QString const& original)
     }
 
     return result;
-}
-
-
-QString TextUtils::longestCommonSubstring(QString const& s1, QString const& s2)
-{
-    string str1 = s1.toStdString();
-    string str2 = s2.toStdString();
-
-    set<char *> res;
-    string res_str;
-    int longest = 0;
-
-    int **n = (int **) calloc (str1.length() + 1,  sizeof(int *));
-    for(uint i = 0; i <= str1.length(); i++) {
-        n[i] = (int *) calloc (str2.length() + 1, sizeof(int));
-    }
-
-    for(uint i = 0; i < str1.length(); i ++) {
-        for(uint j = 0; j < str2.length(); j++) {
-            if( toupper(str1[i]) == toupper(str2[j]) )
-            {
-                n[i+1][j+1] = n[i][j] + 1;
-                if(n[i+1][j+1] > longest) {
-                    longest = n[i+1][j+1];
-                    res.clear();
-                }
-                if(n[i+1][j+1] == longest)
-                    for(uint it = i-longest+1; it <= i; it++){
-                        res.insert((char *) &str1[it]);
-                    }
-            }
-        }
-
-    }
-    for(set<char *>::const_iterator it = res.begin(); it != res.end(); it ++)
-    {
-        res_str.append(1,**it);
-    }
-    for(uint i = 0; i <= str1.length(); i++)
-        free(n[i]);
-    free(n);
-
-    return QString::fromStdString(res_str);
 }
 
 
@@ -162,50 +90,6 @@ int TextUtils::randInt(int low, int high)
     }
 
     return qrand() % ((high + 1) - low) + low;
-}
-
-
-QString TextUtils::toTitleCase(QString const& s)
-{
-    static const QString matchWords = QString("\\b([\\w'%1%2]+)\\b").arg( QChar(8217) ).arg( QChar(8216) );
-    static const QString littleWords = "\\b(a|an|and|as|at|by|for|if|in|of|on|or|to|the|ibn|bin|bint|b\\.)\\b";
-    QString result = s.toLower();
-
-    QRegExp wordRegExp(matchWords);
-    int i = wordRegExp.indexIn( result );
-    QString match = wordRegExp.cap(1);
-    bool first = true;
-
-    QRegExp littleWordRegExp(littleWords);
-    while (i > -1)
-    {
-        if ( match == match.toLower() && ( first || !littleWordRegExp.exactMatch( match ) ) )
-        {
-            result[i] = result[i].toUpper();
-        }
-
-        i = wordRegExp.indexIn( result, i + match.length() );
-        match = wordRegExp.cap(1);
-        first = false;
-    }
-
-    return result;
-}
-
-QString TextUtils::removeBrackets(QString& input)
-{
-    input.remove(0,1);
-    input.chop(1);
-
-    return input;
-}
-
-
-QString TextUtils::optimize(QString input)
-{
-    input.replace( QChar(253), "'" );
-    input.replace( QRegExp("\n{2,}\\s*"), "\n\n" );
-    return input.trimmed();
 }
 
 

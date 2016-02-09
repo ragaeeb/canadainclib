@@ -28,15 +28,9 @@ class PimUtil : public QObject
 	Q_OBJECT
 
 public:
-	static QString extractText(Message const& m);
-	Q_INVOKABLE static void openEmail(qint64 accountId, qint64 messageId);
-	Q_INVOKABLE static void openSMSMessage(QString const& conversationKey, qint64 messageId);
-	Q_INVOKABLE static void launchPhoneCall(QString const& number);
-	Q_INVOKABLE static void replyToSMS(QString const& senderAddress, QString const& body, InvokeManager& invokeManager);
-	Q_INVOKABLE static bool hasCalendarAccess();
-	Q_INVOKABLE static bool hasContactsAccess();
-	static qint64 extractIdsFromInvoke(QString const& uri, QByteArray const& data, qint64& accountId);
-	static qint64 sendMessage(MessageService* ms, Message const& m, QString text, QList<Attachment> const& attachments=QList<Attachment>(), bool replyPrefix=false);
+    static qint64 extractIdsFromInvoke(QString const& uri, QByteArray const& data, qint64& accountId);
+    static qint64 sendMessage(MessageService* ms, Message const& m, QString text, QList<Attachment> const& attachments=QList<Attachment>(), bool replyPrefix=false);
+    static QString extractText(Message const& m);
 };
 
 } /* namespace canadainc */

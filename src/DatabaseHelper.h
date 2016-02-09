@@ -18,11 +18,9 @@ public:
         AttachDatabase = -1,
         ForeignKeySetup = -2,
         DetachDatabase = -3,
-        FetchAllIds = -4,
-        PendingTransaction = -5,
-        UpdateIdWithIndex = -6,
-        SettingUp = -7,
-        Setup = -8
+        PendingTransaction = -4,
+        SettingUp = -5,
+        Setup = -6
     };
 };
 
@@ -73,8 +71,6 @@ public:
     Q_INVOKABLE void executeClear(QObject* caller, QString const& table, int type);
     Q_INVOKABLE qint64 executeInsert(QString const& table, QVariantMap const& keyValues);
     Q_INVOKABLE void executeUpdate(QObject* caller, QString const& table, QVariantMap const& keyValues, int type, qint64 id, QString const& idField="id");
-    Q_INVOKABLE void fetchAllIds(QObject* caller, QString const& table);
-    Q_INVOKABLE void setIndexAsId(QObject* caller, QVariantList const& q, QVariantList const& intersection=QVariantList());
     Q_INVOKABLE void startTransaction(QObject* caller, int id);
     bool createDatabaseIfNotExists(QObject* caller=NULL, QStringList const& setupStatements=QStringList());
     void setEnabled(bool enabled);

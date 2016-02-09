@@ -14,10 +14,7 @@ struct AppLaunch
     qreal windowPosted;
     qreal fullyVisible;
 
-    AppLaunch(QString const& name, int t, qreal created, qreal posted, qreal visible) :
-        appName(name), launchType(t), processCreated(created), windowPosted(posted), fullyVisible(visible)
-    {
-    }
+    AppLaunch(QString const& name, int t, qreal created, qreal posted, qreal visible);
 };
 
 struct ReportType
@@ -45,13 +42,9 @@ struct Report
     QMap<QString, QString> removedApps;
     QList<AppLaunch> appLaunches;
 
-    Report(ReportType::Type t) : dumpAll(false), type(t)
-    {
-    }
-
-    Report() : dumpAll(false), type(ReportType::BugReportManual)
-    {
-    }
+    Report(ReportType::Type t);
+    Report();
+    void applyAddresses(QStringList const& addresses);
 };
 
 typedef void (*CompressFiles)(Report&, QString const&, const char*);

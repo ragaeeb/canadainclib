@@ -37,8 +37,10 @@ ControlDelegate
                 ]
                 
                 onCreationCompleted: {
-                    if ( "navigation" in imageView ) {
-                        imageView.navigation.focusPolicy = 0x2;
+                    if ( "navigation" in imageView )
+                    {
+                        var ivNav = imageView.navigation;
+                        ivNav.focusPolicy = 0x2;
                     }
                 }
             }

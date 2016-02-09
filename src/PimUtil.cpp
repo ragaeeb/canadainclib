@@ -2,9 +2,6 @@
 #include "Logger.h"
 #include "InvocationUtils.h"
 
-#include <bb/pim/calendar/CalendarService>
-#include <bb/pim/calendar/CalendarSettings>
-
 #include <bb/pim/contacts/ContactService>
 
 #include <bb/pim/message/MessageBuilder>
@@ -17,76 +14,6 @@
 #include <bb/data/JsonDataAccess>
 
 namespace canadainc {
-
-void PimUtil::openEmail(qint64 accountId, qint64 messageId)
-{
-	LOGGER(accountId << messageId);
-	bb::system::InvokeManager invokeManager;
-
-	bb::system::InvokeRequest request;
-	request.setAction("bb.action.VIEW");
-	request.setMimeType("message/rfc822");
-	request.setUri( QString("pim:message/rfc822:%1:%2").arg(accountId).arg(messageId) );
-
-	invokeManager.invoke(request);
-}
-
-
-void PimUtil::openSMSMessage(QString const& conversationKey, qint64 messageId)
-{
-	LOGGER(conversationKey << messageId);
-	bb::system::InvokeManager invokeManager;
-
-	QVariantMap map;
-	map.insert( "accountid", ACCOUNT_KEY_SMS );
-	map.insert( "messageid", messageId );
-	map.insert( "conversationid", conversationKey );
-
-	QByteArray requestData = bb::PpsObject::encode(map, NULL);
-
-	bb::system::InvokeRequest request;
-	request.setTarget("sys.pim.text_messaging");
-	request.setAction("bb.action.VIEW");
-	request.setMimeType("application/text_messaging");
-	request.setData(requestData);
-
-	invokeManager.invoke(request);
-}
-
-
-void PimUtil::launchPhoneCall(QString const& number)
-{
-	QVariantMap map;
-	map.insert("number", number);
-	QByteArray requestData = bb::PpsObject::encode(map, NULL);
-
-	bb::system::InvokeRequest request;
-	request.setAction("bb.action.DIAL");
-	request.setMimeType("application/vnd.blackberry.phone.startcall");
-	request.setData(requestData);
-
-	InvokeManager().invoke(request);
-}
-
-
-void PimUtil::replyToSMS(QString const& senderAddress, QString const& body, InvokeManager& invokeManager)
-{
-	LOGGER(senderAddress << body);
-
-	bb::system::InvokeRequest request;
-	request.setTarget("sys.pim.text_messaging.composer");
-	request.setAction("bb.action.COMPOSE");
-	request.setMimeType("application/text_messaging");
-
-	QVariantMap data;
-	data["to"] = QVariantList() << senderAddress;
-	data["send"] = false;
-	data["body"] = body;
-	request.setData( bb::PpsObject::encode(data) );
-
-	invokeManager.invoke(request);
-}
-
 
 QString PimUtil::extractText(Message const& m)
 {
@@ -101,27 +28,6 @@ QString PimUtil::extractText(Message const& m)
 	}
 
 	return text;
-}
-
-
-bool PimUtil::hasCalendarAccess()
-{
-	bb::pim::calendar::CalendarSettings cs = bb::pim::calendar::CalendarService().settings();
-	return cs.isValid();
-}
-
-
-bool PimUtil::hasContactsAccess()
-{
-	bb::pim::contacts::ContactService cs;
-	int count = cs.count( bb::pim::contacts::ContactListFilters() );
-
-	if (count == 0) {
-	    LOGGER("ZeroContactsList");
-	    return false;
-	}
-
-	return true;
 }
 
 

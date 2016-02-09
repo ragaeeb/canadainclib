@@ -18,26 +18,6 @@ void IOUtils::startThread(QRunnable* qr, bool autoDelete)
 }
 
 
-QString IOUtils::setupOutputDirectory(QString const& sharedFolder, QString const& name)
-{
-	QString sdDirectory = QString("%1/%2").arg(directory_sdcard).arg(sharedFolder);
-
-	if ( !QDir(sdDirectory).exists() ) {
-		sdDirectory = QString("%1/%2/%3").arg(directory_local_shared).arg(sharedFolder).arg(name);
-	} else {
-		sdDirectory = QString("%1/%2").arg(sdDirectory).arg(name);
-	}
-
-	QDir dir(sdDirectory);
-	if ( !dir.exists() ) {
-		bool created = dir.mkdir(sdDirectory);
-		LOGGER("Directory didn't exist, creating!" << created);
-	}
-
-	return sdDirectory;
-}
-
-
 bool IOUtils::writeFile(QString const& filePath, QByteArray const& data, bool replace)
 {
 	bool result = false;
@@ -102,25 +82,6 @@ bool IOUtils::writeTextFile(QString const& filePath, QString contents, bool repl
 }
 
 
-QString IOUtils::readTextFile(QString const& filePath)
-{
-	QFile outputFile(filePath);
-	bool opened = outputFile.open(QIODevice::ReadOnly);
-	QString result;
-
-	if (opened) {
-		QTextStream stream(&outputFile);
-		result = stream.readAll();
-	} else {
-		LOGGER("Could not open " << filePath << "for reading!");
-		result = QString();
-	}
-
-	outputFile.close();
-	return result;
-}
-
-
 QStringList IOUtils::executeCommand(QString const& command)
 {
     QStringList result;
@@ -150,27 +111,6 @@ QStringList IOUtils::executeCommand(QString const& command)
     pclose(fp);
 
     return result;
-}
-
-
-void IOUtils::preventIndexing(QString const& dirPath)
-{
-    QDir q(dirPath);
-
-    if ( q.exists() )
-    {
-        QFile f( QString("%1/.nomedia").arg(dirPath) );
-
-        if ( !f.exists() ) {
-            bool written = f.open(QIODevice::WriteOnly);
-            f.close();
-            LOGGER(f.fileName() << "written" << written);
-        } else {
-            LOGGER(".nomediaExists");
-        }
-    } else {
-        LOGGER(dirPath << "noexists");
-    }
 }
 
 
@@ -224,11 +164,6 @@ QString IOUtils::getMd5(QByteArray const& input)
 }
 
 
-bool IOUtils::validateMd5(QString const& expected, QByteArray const& input) {
-    return expected == getMd5(input);
-}
-
-
 bool IOUtils::writeIfValidMd5(QString const& filePath, QString const& expectedMd5, QByteArray const& data, bool replace)
 {
     if ( expectedMd5 == getMd5(data) ) {
@@ -236,44 +171,6 @@ bool IOUtils::writeIfValidMd5(QString const& filePath, QString const& expectedMd
     } else {
         return false;
     }
-}
-
-
-QMap<QString,QString> IOUtils::extractPpsValue(QString const& path, QMap<QString, QString> const& keyPrefix)
-{
-    QMap<QString,QString> result;
-
-    if ( QFile::exists(path) )
-    {
-        QStringList data = readTextFile(path).trimmed().split(LINE_SEPARATOR);
-
-        foreach (QString const& current, data) // go line by line
-        {
-            QStringList keys = keyPrefix.keys();
-
-            foreach (QString const& key, keys)
-            {
-                QString prefix = keyPrefix.value(key);
-
-                if ( current.startsWith(prefix) ) {
-                    result.insert( key, current.mid( prefix.length() ).trimmed() );
-                }
-            }
-        }
-    }
-
-    return result;
-}
-
-
-QString IOUtils::extractPpsValue(QString const& path, QString const& prefix)
-{
-    QMap<QString, QString> keyPrefix;
-    keyPrefix[prefix] = prefix;
-
-    keyPrefix = extractPpsValue(path, keyPrefix);
-
-    return keyPrefix.value(prefix);
 }
 
 

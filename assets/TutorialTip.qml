@@ -15,8 +15,10 @@ Delegate
     
     function du(units)
     {
-        if ('Signature' in ActionBarPlacement && Application.scene) {
-            return Application.scene.ui.du(units);
+        if ('Signature' in ActionBarPlacement && Application.scene)
+        {
+            var appSceneUI = Application.scene.ui;
+            return appSceneUI.du(units);
         }
         
         if (factor > 0) {

@@ -7,8 +7,6 @@
 #include <QtCore>
 
 #define CHECK_ENABLED if (!m_enabled) return
-#define FIELD_ID "id"
-#define FIELD_TABLE_NAME "table_name"
 
 namespace {
 
@@ -202,38 +200,6 @@ void DatabaseHelper::executeDelete(QObject* caller, QString const& table, int ty
 void DatabaseHelper::executeClear(QObject* caller, QString const& table, int type) {
     executeQuery( caller, QString("DELETE FROM %1").arg(table), type );
 }
-
-
-void DatabaseHelper::fetchAllIds(QObject* caller, QString const& table) {
-    executeQuery(caller, QString("SELECT %3,'%1' AS %2 FROM %1 ORDER BY %3").arg(table).arg(FIELD_TABLE_NAME).arg(FIELD_ID), InternalQueryId::FetchAllIds);
-}
-
-
-void DatabaseHelper::setIndexAsId(QObject* caller, QVariantList const& data, QVariantList const& intersection)
-{
-    QSet<qint64> commonIds;
-
-    foreach (QVariant q, intersection) {
-        commonIds << q.toMap().value(FIELD_ID).toLongLong();
-    }
-
-    startTransaction(caller, InternalQueryId::PendingTransaction);
-
-    for (int i = 0; i < data.size(); i++)
-    {
-        QVariantMap current = data[i].toMap();
-        QString table = current.value(FIELD_TABLE_NAME).toString();
-        qint64 id = current.value(FIELD_ID).toLongLong();
-        qint64 target = i+1;
-
-        if ( id != target && !commonIds.contains(id) ) {
-            executeQuery(caller, QString("UPDATE %1 SET %4=%3 WHERE %4=%2").arg(table).arg(id).arg(target).arg(FIELD_ID), InternalQueryId::PendingTransaction);
-        }
-    }
-
-    endTransaction(caller, InternalQueryId::UpdateIdWithIndex);
-}
-
 
 void DatabaseHelper::onDestroyed(QObject* obj)
 {

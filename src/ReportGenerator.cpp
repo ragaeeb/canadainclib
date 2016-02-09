@@ -30,11 +30,64 @@ bool fileNameSort(QString const& s1, QString const& s2) {
     return s1.mid( s1.lastIndexOf("/")+1 ).toLower() < s2.mid( s2.lastIndexOf("/")+1 ).toLower();
 }
 
+QString readTextFile(QString const& filePath)
+{
+    QFile outputFile(filePath);
+    bool opened = outputFile.open(QIODevice::ReadOnly);
+    QString result;
+
+    if (opened)
+    {
+        QTextStream stream(&outputFile);
+        result = stream.readAll();
+    }
+
+    outputFile.close();
+    return result;
+}
+
+QMap<QString,QString> extractPpsValue(QString const& path, QMap<QString, QString> const& keyPrefix)
+{
+    QMap<QString,QString> result;
+
+    if ( QFile::exists(path) )
+    {
+        QStringList data = readTextFile(path).trimmed().split(LINE_SEPARATOR);
+
+        foreach (QString const& current, data) // go line by line
+        {
+            QStringList keys = keyPrefix.keys();
+
+            foreach (QString const& key, keys)
+            {
+                QString prefix = keyPrefix.value(key);
+
+                if ( current.startsWith(prefix) ) {
+                    result.insert( key, current.mid( prefix.length() ).trimmed() );
+                }
+            }
+        }
+    }
+
+    return result;
+}
+
+
+QString extractPpsValue(QString const& path, QString const& prefix)
+{
+    QMap<QString, QString> keyPrefix;
+    keyPrefix[prefix] = prefix;
+
+    keyPrefix = extractPpsValue(path, keyPrefix);
+
+    return keyPrefix.value(prefix);
+}
+
 void addParam(canadainc::Report& r, QString const& path, QMap<QString,QString> keyPrefix)
 {
     if ( QFile::exists(path) )
     {
-        keyPrefix = canadainc::IOUtils::extractPpsValue(path, keyPrefix);
+        keyPrefix = extractPpsValue(path, keyPrefix);
         r.params.unite(keyPrefix);
     }
 }
@@ -49,7 +102,7 @@ void addParam(canadainc::Report& r, QString const& path, QString const& key, QSt
 
 QString getWhatsAppNumber()
 {
-    QString result = canadainc::IOUtils::extractPpsValue(WHATSAPP_PATH, "MyJid::");
+    QString result = extractPpsValue(WHATSAPP_PATH, "MyJid::");
     int index = result.indexOf("@");
 
     if (index >= 0) {
@@ -120,7 +173,7 @@ void applyOSInfo(Report& r)
     osCreated.chop(3); // OS Creation: 2014/02/09-15:22:47EST
     r.params.insert( "creation_date", QString::number( QDateTime::fromString(osCreated, "yyyy/MM/dd-HH:mm:ss").toMSecsSinceEpoch() ) );
 
-    QStringList lines = IOUtils::readTextFile("/base/svnrev").trimmed().split(NEW_LINE_UNIX);
+    QStringList lines = readTextFile("/base/svnrev").trimmed().split(NEW_LINE_UNIX);
 
     if ( !lines.isEmpty() ) {
         r.params.insert( "build_id", lines.takeFirst().split(" ").last() );
@@ -247,7 +300,7 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
         bb::MemoryInfo m;
         r.params.insert("total_memory", QString::number( m.totalDeviceMemory() ) );
 
-        QStringList lines = IOUtils::readTextFile("/pps/system/installer/removedapps/applications").split(NEW_LINE_UNIX);
+        QStringList lines = readTextFile("/pps/system/installer/removedapps/applications").split(NEW_LINE_UNIX);
         foreach (QString const& line, lines)
         {
             QStringList tokens = line.split(",");
@@ -273,7 +326,7 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
         } else if (r.type == ReportType::OsVersionDiff) {
             applyOSInfo(r);
 
-            QStringList lines = IOUtils::readTextFile("/var/app_launch_data.txt").trimmed().split(NEW_LINE_UNIX);
+            QStringList lines = readTextFile("/var/app_launch_data.txt").trimmed().split(NEW_LINE_UNIX);
 
             for (int i = lines.size()-1; i >= 0; i--)
             {

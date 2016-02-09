@@ -24,28 +24,14 @@ public:
 	 */
 	static bool writeTextFile(QString const& filePath, QString contents, bool replace=true, bool correctNewLines=true, bool log=true);
 
-	static QString readTextFile(QString const& filePath);
-
-	static QString setupOutputDirectory(QString const& sharedFolder, QString const& name);
-
 	static QStringList executeCommand(QString const& command);
-
-	static void preventIndexing(QString const& dirPath);
 
 	static void clearAllCache();
 
 	static bool removeDir(QString const& dirName);
 
 	static QString getMd5(QByteArray const& input);
-	static bool validateMd5(QString const& expected, QByteArray const& input);
 	static bool writeIfValidMd5(QString const& filePath, QString const& expectedMd5, QByteArray const& data, bool replace=true);
-	static QString extractPpsValue(QString const& path, QString const& prefix);
-
-	/**
-	 * @param keyPrefix ["whatsApp"] = "MyJid::";
-	 * @return the MyJid will be replaced with the actual value
-	 */
-	static QMap<QString,QString> extractPpsValue(QString const& path, QMap<QString, QString> const& keyPrefix);
 };
 
 } /* namespace canadainc */
