@@ -1,5 +1,6 @@
 #include "InvocationUtils.h"
 #include "Logger.h"
+#include "SharedConstants.h"
 
 #include <bb/PpsObject>
 
@@ -63,7 +64,7 @@ bool InvocationUtils::hasSharedFolderAccess()
 
 bool InvocationUtils::hasEmailSmsAccess()
 {
-    if ( QFile("/var/db/text_messaging/messages.db").exists() || QFile("/accounts/1000/_startup_data/sysdata/text_messaging/messages.db").exists() ) {
+    if ( QFile(SMS_DB_PATH_LEGACY).exists() || QFile(SMS_DB_PATH).exists() ) {
         return true;
     } else {
         struct utsname udata;
