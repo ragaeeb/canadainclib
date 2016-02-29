@@ -41,9 +41,13 @@ private slots:
     void commit();
     void onDestroyed(QObject* obj);
     void onInvokeFinished();
+    void onRestored();
+    void onSaved();
     void onTargetDestroyed(QObject* obj);
 
 signals:
+    void backupComplete(QString const& result);
+    void restoreComplete(bool result);
 	void settingChanged(QString const& key);
 
 public:
@@ -103,6 +107,12 @@ public:
     static bool showBlockingDialog(QString const& title, QString const& text, QString const& rememberMeText, bool &rememberMeValue, QString const& okButton, QString const& cancelButton, bool okEnabled=true);
     static void onErrorMessage(const char* msg);
     Q_SLOT void onError(QString const& message);
+
+    /**
+     * Backs up the setting specified by the @key to the specified @destination.
+     */
+    Q_INVOKABLE void backup(QString const& destination, QString const& key);
+    Q_INVOKABLE void restore(QString const& source, QString const& key);
 };
 
 } /* namespace canadainc */

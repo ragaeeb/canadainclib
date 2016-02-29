@@ -12,9 +12,42 @@
 
 #include <bb/cascades/QmlDocument>
 
+#include <bb/data/JsonDataAccess>
+
 #include <bb/PackageInfo>
 
 #include <QCoreApplication>
+
+namespace {
+
+QString performBackup(QString const& destination, QString const& key)
+{
+    QSettings s;
+    QVariant qvl = s.value(key);
+
+    bb::data::JsonDataAccess jda;
+    jda.save(qvl, destination);
+
+    return destination;
+}
+
+
+bool performRestore(QString const& source, QString const& key)
+{
+    bb::data::JsonDataAccess jda;
+    QVariant result = jda.load(source);
+
+    if ( result.isValid() )
+    {
+        QSettings s;
+        s.setValue(key, result);
+        return true;
+    }
+
+    return false;
+}
+
+}
 
 namespace canadainc {
 
@@ -482,6 +515,52 @@ void Persistance::onError(QString const& message)
 {
     QByteArray qba = message.toUtf8();
     onErrorMessage( qba.constData() );
+}
+
+
+void Persistance::backup(QString const& destination, QString const& key)
+{
+    LOGGER(destination);
+
+    QFutureWatcher<QString>* qfw = new QFutureWatcher<QString>(this);
+    connect( qfw, SIGNAL( finished() ), this, SLOT( onSaved() ) );
+
+    QFuture<QString> future = QtConcurrent::run(performBackup, destination, key);
+    qfw->setFuture(future);
+}
+
+
+void Persistance::restore(QString const& source, QString const& key)
+{
+    LOGGER(source);
+
+    QFutureWatcher<bool>* qfw = new QFutureWatcher<bool>(this);
+    connect( qfw, SIGNAL( finished() ), this, SLOT( onRestored() ) );
+
+    QFuture<bool> future = QtConcurrent::run(performRestore, source, key);
+    qfw->setFuture(future);
+}
+
+
+void Persistance::onSaved()
+{
+    QFutureWatcher<QString>* qfw = static_cast< QFutureWatcher<QString>* >( sender() );
+    QString result = qfw->result();
+
+    emit backupComplete(result);
+
+    qfw->deleteLater();
+}
+
+
+void Persistance::onRestored()
+{
+    QFutureWatcher<bool>* qfw = static_cast< QFutureWatcher<bool>* >( sender() );
+    qfw->deleteLater();
+    bool result = qfw->result();
+
+    LOGGER("RestoreResult" << result);
+    emit restoreComplete(result);
 }
 
 
