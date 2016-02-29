@@ -71,7 +71,7 @@ Page
             onTriggered: {
                 console.log("UserEvent: ClearCache");
                 reporter.record("ClearCache");
-                persist.showDialog( clearCacheAction, qsTr("Confirmation"), qsTr("Are you sure you want to clear the application cache?") );
+                persist.showConfirmDialog( clearCacheAction, qsTr("Are you sure you want to clear the application cache?") );
             }
         }
     ]

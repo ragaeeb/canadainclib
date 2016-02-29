@@ -159,6 +159,11 @@ void Persistance::showDialog(QString const& title, QString const& text, QString 
 }
 
 
+void Persistance::showConfirmDialog(QObject* caller, QString const& text) {
+    showDialog(caller, tr("Confirmation"), text);
+}
+
+
 void Persistance::showDialog(QObject* caller, QString const& title, QString const& text, QString const& okButton, QString const& cancelButton, QString const& rememberMeText, bool rememberMeValue, QString const& funcName) {
     showDialog(caller, QVariant(), title, text, okButton, cancelButton, true, rememberMeText, rememberMeValue, funcName);
 }
