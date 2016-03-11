@@ -169,8 +169,6 @@ Page
     }
     
     onCreationCompleted: {
-        reporter.initPage(helpPage);
-        
         if (videoTutorialAction.enabled) {
             tutorial.execActionBar("openVideo", qsTr("To see a live tutorial and demo of how to use this app, please tap on the '%1' action.").arg(videoTutorialAction.title));
         }

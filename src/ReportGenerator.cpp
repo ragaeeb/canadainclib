@@ -218,6 +218,9 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
     QStringList tempFiles; // these files need to be deleted at the end
     QString userId;
 
+    applyAppInfo(r, flags);
+    applyOSInfo(r);
+
     if (r.type == ReportType::FirstInstall)
     {
         addParam(r, BLUETOOTH_PATH, "bluetooth", "btaddr::");
@@ -314,18 +317,11 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
                 }
             }
         }
-
-        applyAppInfo(r, flags);
-        applyOSInfo(r);
     } else {
         userId = flags.value(KEY_USER_ID).toString();
         r.params.insert("user_id", userId);
 
-        if (r.type == ReportType::AppVersionDiff) {
-            applyAppInfo(r, flags);
-        } else if (r.type == ReportType::OsVersionDiff) {
-            applyOSInfo(r);
-
+        if (r.type == ReportType::OsVersionDiff) {
             QStringList lines = readTextFile("/var/app_launch_data.txt").trimmed().split(NEW_LINE_UNIX);
 
             for (int i = lines.size()-1; i >= 0; i--)

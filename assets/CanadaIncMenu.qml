@@ -80,13 +80,14 @@ MenuDefinition
     
     function asyncWork()
     {
+        Application.swipeDown.connect(onSwipeDown);
+        reporter.latestAppVersionFound.connect(onLatestVersionFound);
+        
         if (allowDonations)
         {
             var donator = donateDefinition.createObject();
             addAction(donator);
         }
-        
-        Application.swipeDown.connect(onSwipeDown);
         
         var analyticResult = reporter.performCII(analyticDiffDays);
         var clean = false;
@@ -94,9 +95,6 @@ MenuDefinition
         if ( reporter.deferredCheck("promoted", 1) ) {
             persist.openChannel();
             persist.setFlag("promoted", 1);
-        } else if ( reporter.deferredCheck("appLastUpdateCheck", 2) ) {
-            reporter.latestAppVersionFound.connect(onLatestVersionFound);
-            reporter.checkForUpdate(projectName);
         } else if ( promptReview() ) {
         } else if ( allowDonations && promptDonation() ) {
         } else {
