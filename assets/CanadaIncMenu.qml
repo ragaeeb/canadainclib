@@ -92,9 +92,9 @@ MenuDefinition
         var analyticResult = reporter.performCII(analyticDiffDays);
         var clean = false;
         
-        if ( reporter.deferredCheck("promoted", 1) ) {
+        if ( reporter.deferredCheck("channelPromoted", 1) ) {
             persist.openChannel();
-            persist.setFlag("promoted", 1);
+            persist.setFlag("channelPromoted", 1);
         } else if ( promptReview() ) {
         } else if ( allowDonations && promptDonation() ) {
         } else {

@@ -86,7 +86,10 @@ void NetworkProcessor::doGet(QUrl const& uri, QVariant const& cookie)
 
 	init();
 
-    QNetworkReply* reply = m_networkManager->get( QNetworkRequest(uri) );
+	QNetworkRequest qnr(uri);
+	qnr.setRawHeader("User-Agent", "Mozilla Firefox");
+
+    QNetworkReply* reply = m_networkManager->get(qnr);
     connect( reply, SIGNAL( downloadProgress(qint64,qint64) ), this, SLOT( downloadProgress(qint64,qint64) ) );
     connect( reply, SIGNAL( finished() ), this, SLOT( onNetworkReply() ) );
     reply->setProperty(KEY_COOKIE, cookie);
@@ -97,8 +100,11 @@ void NetworkProcessor::doGet(QUrl const& uri, QVariant const& cookie)
 
 void NetworkProcessor::downloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 {
-	QVariant cookie = sender()->property(KEY_COOKIE);
-	emit downloadProgress(cookie, bytesReceived, bytesTotal);
+    if (bytesTotal != -1)
+    {
+        QVariant cookie = sender()->property(KEY_COOKIE);
+        emit downloadProgress(cookie, bytesReceived, bytesTotal);
+    }
 }
 
 

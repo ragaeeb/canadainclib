@@ -83,6 +83,31 @@ Delegate
         }
     }
     
+    function showAd(key, name, title, uri, bbm, ig, email, facebook, diff)
+    {
+        key += "Advertised";
+        
+        if ( reporter.deferredCheck(key, diff) )
+        {
+            definition.source = "Advertisement.qml";
+            var advertisement = definition.createObject();
+            advertisement.key = key;
+            advertisement.name = name;
+            advertisement.title = title;
+            advertisement.uri = uri;
+            advertisement.pin = bbm;
+            advertisement.email = email;
+            advertisement.instagram = ig;
+            advertisement.facebook = facebook;
+            advertisement.twitter = twitter;
+            advertisement.open();
+            
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     function isTopPane(navPane, p) {
         return navPane.parent && navPane.parent.parent ? navPane.parent.parent.activePane == navPane && navPane.top == p : navPane.parent ? navPane.parent.activePane == navPane && navPane.top == p : navPane.top == p;
     }
