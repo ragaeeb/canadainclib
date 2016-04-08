@@ -5,12 +5,14 @@
 #include <bb/data/SqlConnection>
 #include <QFile>
 
+//#define SHOW_STATS 1
+
 namespace canadainc {
 
 using namespace bb::data;
 
 CustomSqlDataSource::CustomSqlDataSource(QObject *parent) : QObject(parent),
-        m_name("connect"), m_sqlConnector(NULL), m_execTimestamp(0), m_verbose(false)
+        m_name("connect"), m_sqlConnector(NULL), m_verbose(false)
 {
 }
 
@@ -107,7 +109,9 @@ void CustomSqlDataSource::execute(QVariant const& criteria, int id)
             LOGGER(id);
         }
 
-    	//m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
+#ifdef SHOW_STATS
+        m_elapsed.restart();
+#endif
         m_sqlConnector->execute(criteria, id);
     }
 }
@@ -123,7 +127,9 @@ void CustomSqlDataSource::executePrepared(QVariantList const& values, int id)
             LOGGER(id);
         }
 
-    	//m_execTimestamp = QDateTime::currentMSecsSinceEpoch();
+#ifdef SHOW_STATS
+        m_elapsed.restart();
+#endif
         m_sqlConnector->execute(m_query, values, id);
     }
 }
@@ -160,6 +166,11 @@ void CustomSqlDataSource::onLoadAsyncResultData(bb::data::DataAccessReply const&
     } else {
         QVariantList resultList = replyData.result().toList();
         LOGGER( replyData.id() << "=" << resultList.size() );
+
+#ifdef SHOW_STATS
+        LOGGER( "ExecTime:" << m_elapsed.elapsed() );
+#endif
+
         emit dataLoaded( replyData.id(), resultList );
     }
 }

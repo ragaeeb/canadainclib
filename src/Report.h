@@ -4,6 +4,8 @@
 #include <QMap>
 #include <QStringList>
 
+#define KEY_USER_ID "user_id"
+
 namespace canadainc {
 
 struct AppLaunch

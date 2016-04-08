@@ -3,6 +3,7 @@
 
 #include <bb/data/DataAccessReply>
 
+#include <QElapsedTimer>
 #include <QStringList>
 
 namespace bb {
@@ -34,7 +35,7 @@ class CustomSqlDataSource: public QObject
     QString m_query;
     QString m_source;
     SqlConnection* m_sqlConnector;
-    qint64 m_execTimestamp;
+    QElapsedTimer m_elapsed;
     bool m_verbose;
 
 private slots:
