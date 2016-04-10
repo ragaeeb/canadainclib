@@ -12,6 +12,9 @@ Delegate
     signal tutorialStarted(string key)
     property string appMenuKey: "showAppMenu"
     property real factor: 0
+    property variant qmlDef: ComponentDefinition {
+        id: definition
+    }
     
     function du(units)
     {
@@ -83,7 +86,7 @@ Delegate
         }
     }
     
-    function showAd(key, name, title, uri, bbm, ig, email, facebook, diff)
+    function showAd(key, name, title, uri, bbm, ig, email, facebook, twitter, diff)
     {
         key += "Advertised";
         
@@ -101,7 +104,7 @@ Delegate
             advertisement.facebook = facebook;
             advertisement.twitter = twitter;
             advertisement.open();
-            
+
             return true;
         } else {
             return false;
