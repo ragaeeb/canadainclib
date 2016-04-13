@@ -24,7 +24,7 @@ struct SimilarReference
 
 struct SearchDecorator
 {
-    static SimilarReference decorateResults(QVariantList input, bb::cascades::ArrayDataModel* adm, QVariantList const& additional);
+    static SimilarReference decorateResults(QVariantList input, bb::cascades::ArrayDataModel* adm, QVariantList const& additional, QString const& textKey);
     static SimilarReference decorateSimilar(QVariantList input, bb::cascades::ArrayDataModel* adm, bb::cascades::AbstractTextControl* atc, QString body);
     static QString longestCommonSubstring(QString const& str1, QString const& str2);
     static void onResultsDecorated(SimilarReference const& result);

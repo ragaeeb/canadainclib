@@ -6,7 +6,7 @@
 #include <string>
 #include <set>
 
-#define DECORATE(text, searchText) text = toHtmlEscaped(text); text.replace(searchText, "<span style='font-style:italic;font-weight:bold;color:lightgreen'>"+searchText+"</span>", Qt::CaseInsensitive)
+#define DECORATE(text, searchText) text.replace(searchText, "<span style='font-style:italic;font-weight:bold;color:lightgreen'>"+searchText+"</span>", Qt::CaseInsensitive)
 #define HTMLIZE(input) "<html>"+input+"</html>"
 
 namespace {
@@ -55,30 +55,22 @@ SimilarReference::SimilarReference() : adm(NULL), textControl(NULL)
 {
 }
 
-SimilarReference SearchDecorator::decorateResults(QVariantList input, ArrayDataModel* adm, QVariantList const& queries)
+SimilarReference SearchDecorator::decorateResults(QVariantList input, ArrayDataModel* adm, QVariantList const& queries, QString const& textKey)
 {
-    int n = input.size();
+    QStringList searches;
 
-    QSet<QString> searches;
-
-    foreach (QVariant const& q, queries)
-    {
-        QString value = q.toString();
-
-        if ( !value.isEmpty() ) {
-            searches << value;
-        }
+    foreach (QVariant const& q, queries) {
+        searches << q.toString();
     }
 
-    for (int i = 0; i < n; i++)
+    QRegExp regex = QRegExp( QString("(%1)").arg( searches.join("|") ) );
+    regex.setCaseSensitivity(Qt::CaseInsensitive);
+
+    for (int i = input.size()-1; i >= 0; i--)
     {
         QVariantMap current = input[i].toMap();
-        QString textKey = current.contains("body") ? "body" : "translation";
-        QString text = current.value(textKey).toString();
-
-        foreach (QString const& searchText, searches) {
-            DECORATE(text, searchText);
-        }
+        QString text = toHtmlEscaped( current.value(textKey).toString() );
+        text.replace( regex, "<span style='font-style:italic;font-weight:bold;color:lightgreen'>\\1</span>" );
 
         current[textKey] = HTMLIZE(text);
         input[i] = current;
