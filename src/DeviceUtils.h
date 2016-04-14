@@ -60,6 +60,10 @@ public:
 
     static void registerTutorialTips(QObject* parent);
     Q_INVOKABLE void log(QVariant const& message, QObject* q=NULL);
+
+    Q_INVOKABLE static bool isUrl(QString const& input);
+    Q_INVOKABLE static bool isValidEmail(QString const& email);
+    Q_INVOKABLE static bool isValidPhoneNumber(QString const& phone);
 };
 
 } /* namespace canadainc */

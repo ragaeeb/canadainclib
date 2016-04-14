@@ -385,11 +385,26 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
 
     r.attachments = attachments;
 
+    if ( userId.isNull() ) {
+        r.id = QString("%1_%2").arg( QDateTime::currentDateTime().toTime_t() ).arg( generateRandomInt() ); // this will just be a placeholder, we will get the real time back from the server
+    } else {
+        r.id = QString("%1_%2").arg(userId).arg( QDateTime::currentDateTime().toTime_t() );
+    }
+
     if (r.type >= ReportType::AppVersionDiff && r.type <= ReportType::Periodic)
     {
         const QString zipPath = QString("%1/logs.zip").arg( QDir::tempPath() );
 
-        func(r, zipPath, r.type == ReportType::Periodic ? "z4*47F9*2xXr3_*" : "V2*2Kn9*9Szy6__*");
+        const char* zipPassword = "z4*47F9*2xXr3_*";
+
+        if (r.type != ReportType::Periodic)
+        {
+            QString idHash = QString( QCryptographicHash::hash( r.id.toLocal8Bit(), QCryptographicHash::Md5).toHex() );
+            QByteArray qba = idHash.toUtf8();
+            zipPassword = qba.constData();
+        }
+
+        func(r, zipPath, zipPassword);
 
         if (r.type == ReportType::BugReportAuto || r.type == ReportType::BugReportManual || r.type == ReportType::Periodic)
         {
@@ -408,12 +423,6 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
         }
     } else if (r.type == ReportType::Simulation) {
         qSort( r.attachments.begin(), r.attachments.end(), fileNameSort );
-    }
-
-    if ( userId.isNull() ) {
-        r.id = QString("%1_%2").arg( QDateTime::currentDateTime().toTime_t() ).arg( generateRandomInt() ); // this will just be a placeholder, we will get the real time back from the server
-    } else {
-        r.id = QString("%1_%2").arg(userId).arg( QDateTime::currentDateTime().toTime_t() );
     }
 
     r.params.insert("report_id", r.id);

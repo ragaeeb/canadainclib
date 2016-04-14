@@ -302,7 +302,7 @@ Page
                                             errorMessage: qsTr("Invalid email address!") + Retranslate.onLanguageChanged
                                             
                                             onValidate: {
-                                                valid = ciu.isValidEmail( emailField.text.trim() );
+                                                valid = deviceUtils.isValidEmail( emailField.text.trim() );
                                             }
                                         }
                                     }
@@ -323,12 +323,6 @@ Page
                                         verticalAlignment: VerticalAlignment.Fill
                                     }
                                 }
-                                
-                                attachedObjects: [
-                                    CanadaIncUtils {
-                                        id: ciu
-                                    }
-                                ]
                             }
                         }
                     }
