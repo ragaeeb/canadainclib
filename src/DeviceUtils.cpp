@@ -151,14 +151,14 @@ void DeviceUtils::log(QVariant const& message, QObject* q)
 
 bool DeviceUtils::isValidPhoneNumber(QString const& phone)
 {
-    QRegExp regex("^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$");
+    QRegExp regex("^(?:(?:\(?(?:00|\\+)([1-4]\\d\\d|[1-9]\\d?)\\)?)?[\\-\\.\ \\\\/]?)?((?:\(?\\d{1,}\\)?[\\-\\.\ \\\\/]?){0,})(?:[\\-\\.\ \\\\/]?(?:#|ext\\.?|extension|x)[\\-\\.\ \\\\/]?(\\d+))?$");
     return regex.exactMatch(phone);
 }
 
 
 bool DeviceUtils::isValidEmail(QString const& email)
 {
-    QRegExp regex("^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$");
+    QRegExp regex("^(([^<>()[\\]\\.,;:\\s@\"]+(\\.[^<>()[\\]\\.,;:\\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$");
     regex.setCaseSensitivity(Qt::CaseInsensitive);
 
     return regex.exactMatch(email);

@@ -8,7 +8,7 @@
 #include <string>
 #include <set>
 
-#define DECORATE(text, searchText) text.replace(searchText, "<span style='font-style:italic;font-weight:bold;color:lightgreen'>"+searchText+"</span>", Qt::CaseInsensitive)
+#define DECORATE(body, common) body.replace( common, "<span style='font-style:italic;font-weight:bold;color:lightgreen'>"+common+"</span>" )
 #define HTMLIZE(input) "<html>"+input+"</html>"
 
 using namespace bb::cascades;
@@ -16,105 +16,7 @@ using namespace std;
 
 namespace {
 
-void searchAndDecorate(QVariantList input, ArrayDataModel* adm, QVariantList const& queries, QString const& textKey)
-{
-    QStringList searches;
-
-    foreach (QVariant const& q, queries) {
-        searches << q.toString();
-    }
-
-    QRegExp regex = QRegExp( QString("(%1)").arg( searches.join("|") ) );
-    regex.setCaseSensitivity(Qt::CaseInsensitive);
-
-    for (int i = input.size()-1; i >= 0; i--)
-    {
-        QVariantMap current = input[i].toMap();
-        QString text = canadainc::SearchDecorator::toHtmlEscaped( current.value(textKey).toString() );
-        text.replace( regex, "<span style='font-style:italic;font-weight:bold;color:lightgreen'>\\1</span>" );
-
-        current[textKey] = HTMLIZE(text);
-        input[i] = current;
-
-        adm->replace(i, current);
-    }
-}
-
-}
-
-namespace canadainc {
-
-SimilarReference::SimilarReference() : adm(NULL), textControl(NULL)
-{
-}
-
-
-SimilarReference SearchDecorator::decorateSimilar(QVariantList input, ArrayDataModel* adm, AbstractTextControl* atc, QString body)
-{
-    SimilarReference s;
-    s.adm = adm;
-    s.textControl = atc;
-
-    int n = input.size();
-
-    if (n > 0)
-    {
-        QString common = longestCommonSubstring( body, input[0].toMap().value("content").toString() );
-        DECORATE(body, common);
-        s.body = HTMLIZE(body);
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        QVariantMap current = input[i].toMap();
-        QString text = current.value("content").toString();
-        QString common = longestCommonSubstring(text, body);
-
-        DECORATE(text, common);
-        s.body = HTMLIZE(text);
-        input[i] = current;
-    }
-
-    s.input = input;
-
-    return s;
-}
-
-
-QString SearchDecorator::toHtmlEscaped(QString const& input)
-{
-    QString rich;
-    const int len = input.length();
-    rich.reserve(int(len * 1.1));
-    for (int i = 0; i < len; ++i) {
-        if (input.at(i) == QLatin1Char('<'))
-            rich += QLatin1String("&lt;");
-        else if (input.at(i) == QLatin1Char('>'))
-            rich += QLatin1String("&gt;");
-        else if (input.at(i) == QLatin1Char('&'))
-            rich += QLatin1String("&amp;");
-        else if (input.at(i) == QLatin1Char('"'))
-            rich += QLatin1String("&quot;");
-        else if (input.at(i) == QLatin1Char('\r')) {
-            if(i < len - 1 && input.at(i+1) != QLatin1Char('\n')) {
-                rich += QLatin1String("<br>");
-            }
-        } else if (input.at(i) == QLatin1Char('\n'))
-            rich += QLatin1String("<br>");
-        else if (input.at(i) == QLatin1Char(' ')) {
-            if(i < len - 1 && input.at(i+1) == QLatin1Char(' '))
-                rich += QLatin1String("&nbsp;");
-            else
-                rich += input.at(i);
-        }
-        else
-            rich += input.at(i);
-    }
-    rich.squeeze();
-    return rich;
-}
-
-QString SearchDecorator::longestCommonSubstring(QString const& s1, QString const& s2)
+QString longestCommonSubstring(QString const& s1, QString const& s2)
 {
     string str1 = s1.toStdString();
     string str2 = s2.toStdString();
@@ -156,9 +58,95 @@ QString SearchDecorator::longestCommonSubstring(QString const& s1, QString const
     return QString::fromStdString(res_str);
 }
 
+void searchAndDecorate(QVariantList input, ArrayDataModel* adm, QVariantList const& queries, QString const& textKey)
+{
+    QStringList searches;
+
+    foreach (QVariant const& q, queries) {
+        searches << q.toString();
+    }
+
+    QRegExp regex = QRegExp( QString("(%1)").arg( searches.join("|") ) );
+    regex.setCaseSensitivity(Qt::CaseInsensitive);
+
+    for (int i = input.size()-1; i >= 0; i--)
+    {
+        QVariantMap current = input[i].toMap();
+        QString text = canadainc::SearchDecorator::toHtmlEscaped( current.value(textKey).toString() );
+        text.replace( regex, "<span style='font-style:italic;font-weight:bold;color:lightgreen'>\\1</span>" );
+
+        current[textKey] = HTMLIZE(text);
+        input[i] = current;
+
+        adm->replace(i, current);
+    }
+}
+
+void groupAndDecorate(QVariantList const& input, ArrayDataModel* adm, AbstractTextControl* atc, QString const& textKey)
+{
+    QString body = canadainc::SearchDecorator::toHtmlEscaped( atc->text() );
+
+    for (int i = input.size()-1; i >= 0; i--)
+    {
+        QVariantMap current = input[i].toMap();
+        QString text = canadainc::SearchDecorator::toHtmlEscaped( current.value(textKey).toString() );
+        QString common = longestCommonSubstring(body, text);
+        DECORATE(text, common);
+
+        current[textKey] = HTMLIZE(text);
+        adm->replace(i, current);
+
+        if (i == 0) {
+            DECORATE(body, common);
+            atc->setProperty("decorated", HTMLIZE(body) );
+        }
+    }
+}
+
+}
+
+namespace canadainc {
+
+QString SearchDecorator::toHtmlEscaped(QString const& input)
+{
+    QString rich;
+    const int len = input.length();
+    rich.reserve(int(len * 1.1));
+    for (int i = 0; i < len; ++i) {
+        if (input.at(i) == QLatin1Char('<'))
+            rich += QLatin1String("&lt;");
+        else if (input.at(i) == QLatin1Char('>'))
+            rich += QLatin1String("&gt;");
+        else if (input.at(i) == QLatin1Char('&'))
+            rich += QLatin1String("&amp;");
+        else if (input.at(i) == QLatin1Char('"'))
+            rich += QLatin1String("&quot;");
+        else if (input.at(i) == QLatin1Char('\r')) {
+            if(i < len - 1 && input.at(i+1) != QLatin1Char('\n')) {
+                rich += QLatin1String("<br>");
+            }
+        } else if (input.at(i) == QLatin1Char('\n'))
+            rich += QLatin1String("<br>");
+        else if (input.at(i) == QLatin1Char(' ')) {
+            if(i < len - 1 && input.at(i+1) == QLatin1Char(' '))
+                rich += QLatin1String("&nbsp;");
+            else
+                rich += input.at(i);
+        }
+        else
+            rich += input.at(i);
+    }
+    rich.squeeze();
+    return rich;
+}
+
 
 void SearchDecorator::decorateSearchResults(QVariantList const& input, bb::cascades::ArrayDataModel* adm, QVariantList const& queries, QString const& key) {
     QtConcurrent::run(&searchAndDecorate, input, adm, queries, key);
+}
+
+void SearchDecorator::decorateSimilar(QVariantList const& input, bb::cascades::ArrayDataModel* adm, bb::cascades::AbstractTextControl* atc, QString const& key) {
+    QtConcurrent::run(&groupAndDecorate, input, adm, atc, key);
 }
 
 
@@ -169,25 +157,6 @@ SearchDecorator::SearchDecorator(QObject* parent) : QObject(parent)
 
 SearchDecorator::~SearchDecorator()
 {
-}
-
-
-void SearchDecorator::onResultsDecorated(SimilarReference const& result)
-{
-    QVariantList data = result.input;
-
-    if (result.adm)
-    {
-        ArrayDataModel* adm = result.adm;
-
-        for (int i = data.size()-1; i >= 0; i--) {
-            adm->replace(i, data[i]);
-        }
-    }
-
-    if (result.textControl) {
-        result.textControl->setText(result.body);
-    }
 }
 
 } /* namespace islamiclib */
