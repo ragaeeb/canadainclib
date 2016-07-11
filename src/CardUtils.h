@@ -11,7 +11,7 @@ namespace canadainc {
 class CardUtils
 {
 public:
-    static QObject* initAppropriate(QString const& qml, QMap<QString, QObject*> const& context, QObject* parent);
+    static QObject* initAppropriate(QString const& qml, QMap<QString, QObject*> context, QObject* parent, bool qrc=false);
 };
 
 } /* namespace canadainc */

@@ -60,21 +60,9 @@ Persistance::Persistance(bb::system::InvokeManager* im) :
     QDeclarativeContext* rootContext = QmlDocument::defaultDeclarativeEngine()->rootContext();
     rootContext->setContextProperty("persist", this);
 
-    connect( QCoreApplication::instance(), SIGNAL( aboutToQuit() ), this, SLOT( commit() ) );
-
 #ifdef DEBUG_RELEASE
     setErrorHandler(&Persistance::onErrorMessage);
 #endif
-}
-
-
-void Persistance::commit()
-{
-    QStringList keys = m_pending.keys();
-
-    foreach ( QString const& key, m_pending.keys() ) {
-        m_settings.setValue( key, m_pending.value(key) );
-    }
 }
 
 
@@ -231,13 +219,13 @@ void Persistance::forceSync()
 }
 
 
-QVariant Persistance::getValueFor(QString const& objectName)
+QVariant Persistance::getValueFor(QString const& objectName, QVariant const& defaultVal)
 {
-    QVariant value = m_pending.contains(objectName) ? m_pending.value(objectName) : m_settings.value(objectName);
+    QVariant value = m_settings.value(objectName, defaultVal);
 
     if ( !m_logMap.contains(objectName) )
     {
-        m_logMap.insert(objectName, true);
+        m_logMap << objectName;
 
 #if defined(QT_NO_DEBUG)
         int type = value.type();
@@ -255,23 +243,17 @@ QVariant Persistance::getValueFor(QString const& objectName)
 
 
 bool Persistance::contains(QString const& key) const {
-	return m_pending.contains(key) || m_settings.contains(key);
+	return m_settings.contains(key);
 }
 
 
 bool Persistance::saveValueFor(QString const& key, QVariant const& value, bool fireEvent)
 {
-    bool isPending = m_pending.contains(key);
-
-    if ( isPending && ( m_pending.value(key) == value ) ) {
-        return false;
-    }
-
 	if ( m_settings.value(key) != value )
 	{
 	    LOGGER(key << value);
 
-        setValueInternal(key, value);
+	    m_settings.setValue(key, value);
         m_logMap.remove(key);
 
 	    if (fireEvent) {
@@ -284,10 +266,6 @@ bool Persistance::saveValueFor(QString const& key, QVariant const& value, bool f
 	        }
 	    }
 
-	    if (isPending) {
-	        m_pending[key] = value;
-	    }
-
 		return true;
 	} else {
 		return false;
@@ -297,10 +275,6 @@ bool Persistance::saveValueFor(QString const& key, QVariant const& value, bool f
 
 void Persistance::remove(QString const& key, bool fireEvent)
 {
-    if ( m_pending.contains(key) ) {
-        m_pending.remove(key);
-    }
-
 	if ( contains(key) )
 	{
 	    LOGGER(key);
@@ -465,11 +439,6 @@ void Persistance::onInvokeFinished()
 }
 
 
-bool Persistance::isBlocked() const {
-    return m_dialogs.isBlocked();
-}
-
-
 bool Persistance::isUpdateNeeded(QString const& key, int diffDaysMin)
 {
     QDateTime now = QDateTime::currentDateTime();
@@ -509,12 +478,6 @@ void Persistance::onErrorMessage(const char* msg)
     dialog.cancelButton()->setLabel("");
     dialog.show();
 }
-
-
-void Persistance::setValueInternal(QString const& key, QVariant const& value) {
-    m_settings.setValue(key, value);
-}
-
 
 void Persistance::onError(QString const& message)
 {

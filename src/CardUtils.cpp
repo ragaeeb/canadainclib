@@ -9,16 +9,16 @@ namespace canadainc {
 
 using namespace bb::cascades;
 
-QObject* CardUtils::initAppropriate(QString const& qmlDoc, QMap<QString, QObject*> const& context, QObject* parent)
+QObject* CardUtils::initAppropriate(QString const& qmlDoc, QMap<QString, QObject*> context, QObject* parent, bool qrc)
 {
     QDeclarativeContext* rootContext = QmlDocument::defaultDeclarativeEngine()->rootContext();
-    rootContext->setContextProperty("app", parent);
+    context["app"] = parent;
 
     bool invoked = qmlDoc != "main.qml";
-    QmlDocument* qml = QmlDocument::create( QString("asset:///%1").arg(qmlDoc) ).parent(parent);
+    QmlDocument* qml = QmlDocument::create( QString(qrc ? "qrc:/assets/%1": "asset:///%1").arg(qmlDoc) ).parent(parent);
 
     foreach ( QString const& key, context.keys() ) {
-        qml->setContextProperty( key, context.value(key) );
+        rootContext->setContextProperty( key, context.value(key) );
     }
 
     AbstractPane* root = NULL;

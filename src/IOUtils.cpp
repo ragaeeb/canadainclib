@@ -2,6 +2,7 @@
 #include "Logger.h"
 
 #include <QCryptographicHash>
+#include <QDesktopServices>
 #include <QDir>
 #include <QTextStream>
 #include <QThreadPool>
@@ -118,6 +119,8 @@ void IOUtils::clearAllCache()
 {
     QString homePath = QDir::homePath();
 
+    removeDir( QDesktopServices::storageLocation(QDesktopServices::CacheLocation) );
+
     QFile::remove( QString("%1/adreno_cached_blob.bin").arg(homePath) );
     QFile::remove( QString("%1/cookieCollection.db").arg(homePath) );
     QFile::remove( QString("%1/cookieCollection.db-wal").arg(homePath) );
@@ -154,6 +157,23 @@ bool IOUtils::removeDir(QString const& dirName)
         result = dir.rmdir(dirName);
     }
 
+    return result;
+}
+
+
+QString IOUtils::readTextFile(QString const& filePath)
+{
+    QFile outputFile(filePath);
+    bool opened = outputFile.open(QIODevice::ReadOnly);
+    QString result;
+
+    if (opened)
+    {
+        QTextStream stream(&outputFile);
+        result = stream.readAll();
+    }
+
+    outputFile.close();
     return result;
 }
 

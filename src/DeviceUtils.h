@@ -26,8 +26,9 @@ using namespace bb::device;
 class DeviceUtils : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QSize pixelSize READ pixelSize FINAL)
-    Q_PROPERTY(bool isPhysicalKeyboardDevice READ isPhysicalKeyboardDevice FINAL)
+    Q_PROPERTY(QSize pixelSize READ pixelSize CONSTANT FINAL)
+    Q_PROPERTY(bool isPhysicalKeyboardDevice READ isPhysicalKeyboardDevice CONSTANT FINAL)
+    Q_PROPERTY(bool isPassport READ isPassport CONSTANT FINAL)
 
     static DeviceUtils* instance;
     HardwareInfo* m_hw;
@@ -49,6 +50,7 @@ public:
     Q_INVOKABLE void attachTopBottomKeys(QObject* page, QObject* listView, bool onBar=false);
     QSize pixelSize();
     bool isPhysicalKeyboardDevice();
+    bool isPassport();
 
     /**
      * This method is needed because QML sometimes has issues comparing Page objects since one of them happens to be a QVariant(QMLPage)
@@ -58,7 +60,7 @@ public:
 
     Q_INVOKABLE void cleanUpAndDestroy(QObject* q);
 
-    static void registerTutorialTips(QObject* parent);
+    static void registerTutorialTips(QObject* parent, bool qrc=false);
     Q_INVOKABLE void log(QVariant const& message, QObject* q=NULL);
 
     Q_INVOKABLE static bool isUrl(QString const& input);

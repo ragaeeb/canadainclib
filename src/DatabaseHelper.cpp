@@ -39,7 +39,7 @@ void cleanArguments(QVariantList& args)
 namespace canadainc {
 
 DatabaseHelper::DatabaseHelper(QString const& dbase, QObject* parent) :
-        QObject(parent), m_currentId(0), m_enabled(true)
+        QObject(parent), m_enabled(true)
 {
     m_sql.setSource(dbase);
     connect( &m_sql, SIGNAL( dataLoaded(int, QVariant const&) ), this, SLOT( dataLoaded(int, QVariant const&) ), Qt::QueuedConnection );
@@ -96,53 +96,18 @@ void DatabaseHelper::enableForeignKeys()
 
 void DatabaseHelper::dataLoaded(int id, QVariant const& data)
 {
-    if ( m_idToObjectQueryType.contains(id) )
-    {
-        QPair<QObject*, int> value = m_idToObjectQueryType[id];
-        QObject* caller = value.first;
-        int t = value.second;
-
-        m_idToObjectQueryType.remove(id);
-
-        QSet<int> idsForObject = m_objectToIds[caller];
-        idsForObject.remove(id);
-
-        if ( !idsForObject.isEmpty() ) {
-            m_objectToIds[caller] = idsForObject;
-        } else {
-            m_objectToIds.remove(caller);
-        }
-
-        QMetaObject::invokeMethod(caller, "onDataLoaded", Qt::QueuedConnection, Q_ARG(QVariant, t), Q_ARG(QVariant, data) );
-        emit finished(t);
-    }
-}
-
-
-void DatabaseHelper::stash(QObject* caller, int t)
-{
-    ++m_currentId;
-
-    QPair<QObject*, int> pair = qMakePair<QObject*, int>(caller, t);
-    m_idToObjectQueryType.insert(m_currentId, pair);
-
-    if ( !m_objectToIds.contains(caller) ) {
-        connect( caller, SIGNAL( destroyed(QObject*) ), this, SLOT( onDestroyed(QObject*) ) );
-    }
-
-    QSet<int> idsForObject = m_objectToIds[caller];
-    idsForObject << m_currentId;
-    m_objectToIds[caller] = idsForObject;
+    id = m_ticket.drop(id, data);
+    emit finished(id);
 }
 
 
 void DatabaseHelper::executeQuery(QObject* caller, QString const& query, int t, QVariantList const& args)
 {
     if (caller) {
-        stash(caller, t);
+        m_ticket.stash(caller, t);
     }
 
-    executeInternal(query, m_currentId, args);
+    executeInternal(query, m_ticket.currentId(), args);
 }
 
 
@@ -201,38 +166,28 @@ void DatabaseHelper::executeClear(QObject* caller, QString const& table, int typ
     executeQuery( caller, QString("DELETE FROM %1").arg(table), type );
 }
 
-void DatabaseHelper::onDestroyed(QObject* obj)
-{
-    QSet<int> ids = m_objectToIds[obj];
-    m_objectToIds.remove(obj);
-
-    foreach (int i, ids) {
-        m_idToObjectQueryType.remove(i);
-    }
-}
-
 
 void DatabaseHelper::startTransaction(QObject* caller, int id)
 {
     if (caller) {
-        stash(caller, id);
+        m_ticket.stash(caller, id);
     }
 
     CHECK_ENABLED;
 
-    m_sql.startTransaction(m_currentId);
+    m_sql.startTransaction( m_ticket.currentId() );
 }
 
 
 void DatabaseHelper::endTransaction(QObject* caller, int id)
 {
     if (caller) {
-        stash(caller, id);
+        m_ticket.stash(caller, id);
     }
 
     CHECK_ENABLED;
 
-    m_sql.endTransaction(m_currentId);
+    m_sql.endTransaction( m_ticket.currentId() );
 }
 
 

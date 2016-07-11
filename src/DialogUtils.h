@@ -36,9 +36,6 @@ private slots:
     void onLookupFinished();
     void promptFinished(bb::system::SystemUiResult::Type value);
 
-signals:
-    void isBlockedChanged();
-
 public:
     DialogUtils();
     virtual ~DialogUtils() {}

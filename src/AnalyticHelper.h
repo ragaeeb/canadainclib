@@ -16,6 +16,7 @@ class AnalyticHelper : public QObject
     Q_OBJECT
 
     QMap< QPair<QString, QString>, int> m_counters;
+    bool m_enabled;
 
 private slots:
     void onAboutToQuit();
@@ -25,9 +26,10 @@ public:
     AnalyticHelper();
     virtual ~AnalyticHelper();
 
-    void reset();
     Q_SLOT void commitStats();
-    void record(QString const& event, QString const& context);
+    void record(QString const& event, QString const& context, bool force=false);
+    void reset();
+    void setEnabled(bool enabled);
 };
 
 } /* namespace canadainc */

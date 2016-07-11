@@ -37,6 +37,11 @@ QSize DeviceUtils::pixelSize()
 }
 
 
+bool DeviceUtils::isPassport() {
+    return isPhysicalKeyboardDevice() && m_hw->modelName() == "Passport";
+}
+
+
 void DeviceUtils::attachTopBottomKeys(QObject* p, QObject* listView, bool onBar)
 {
     if ( !isPhysicalKeyboardDevice() )
@@ -116,9 +121,9 @@ void DeviceUtils::cleanUpAndDestroy(QObject* q)
 }
 
 
-void DeviceUtils::registerTutorialTips(QObject* parent)
+void DeviceUtils::registerTutorialTips(QObject* parent, bool qrc)
 {
-    QmlDocument* qml = QmlDocument::create("asset:///TutorialTip.qml").parent(parent);
+    QmlDocument* qml = QmlDocument::create(qrc ? "qrc:/assets/TutorialTip.qml" : "asset:///TutorialTip.qml").parent(parent);
     QmlDocument::defaultDeclarativeEngine()->rootContext()->setContextProperty( "tutorial", qml->createRootObject<QObject>() );
 }
 

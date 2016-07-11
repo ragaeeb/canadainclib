@@ -10,7 +10,8 @@ namespace canadainc {
 
 using namespace bb::cascades;
 
-LazySceneCover::LazySceneCover(bool appLaunch, QObject* ui) : m_ready(false)
+LazySceneCover::LazySceneCover(bool appLaunch, QObject* ui, bool qrc) :
+        m_ready(false), m_qrc(qrc)
 {
     if (appLaunch)
     {
@@ -41,7 +42,7 @@ void LazySceneCover::onThumbnail()
         if ( Application::instance()->cover() == NULL )
         {
             LOGGER("CreatingThumbnail");
-            QmlDocument* qmlCover = QmlDocument::create("asset:///Cover.qml").parent(this);
+            QmlDocument* qmlCover = QmlDocument::create(m_qrc ? "qrc:/assets/Cover.qml" : "asset:///Cover.qml").parent(this);
 
             QStringList keys = m_context.keys();
 

@@ -18,7 +18,7 @@ using namespace QtMobilitySubset;
 class GeoLocationReader : public QObject
 {
 	Q_OBJECT
-    Q_PROPERTY(QPointF coordinates READ coordinates NOTIFY coordinatesChanged)
+    Q_PROPERTY(QPointF coordinates READ coordinates NOTIFY coordinatesChanged FINAL)
 
 	QGeoPositionInfoSource* m_src;
 	QPointF m_cached;

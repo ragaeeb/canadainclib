@@ -17,7 +17,7 @@ namespace canadainc {
 class NetworkProcessor : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(bool online READ online NOTIFY onlineChanged)
+	Q_PROPERTY(bool online READ online NOTIFY onlineChanged FINAL)
 
 	QHash<QString, QString> m_headers;
     QNetworkAccessManager* m_networkManager;

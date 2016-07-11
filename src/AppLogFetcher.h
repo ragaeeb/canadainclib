@@ -19,8 +19,8 @@ class Persistance;
 class AppLogFetcher : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(bool isAdmin READ adminEnabled FINAL)
-    Q_PROPERTY(bool online READ online NOTIFY onlineChanged)
+    Q_PROPERTY(bool isAdmin READ adminEnabled CONSTANT FINAL)
+    Q_PROPERTY(bool online READ online NOTIFY onlineChanged FINAL)
 
     static AppLogFetcher* instance;
     NetworkProcessor m_network;
@@ -51,6 +51,7 @@ public:
 
     bool adminEnabled() const;
     bool online() const;
+    void disableAnalytics();
     Q_SLOT int performCII(int analyticDiffDays=30);
     Q_INVOKABLE bool deferredCheck(QString const& key, qint64 diff, bool versionBased=false);
     Q_INVOKABLE void record(QString const& event, QString const& context="");

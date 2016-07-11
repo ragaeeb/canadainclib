@@ -32,6 +32,7 @@ public:
 
 	static QString getMd5(QByteArray const& input);
 	static bool writeIfValidMd5(QString const& filePath, QString const& expectedMd5, QByteArray const& data, bool replace=true);
+	static QString readTextFile(QString const& filePath);
 };
 
 } /* namespace canadainc */

@@ -21,13 +21,13 @@ class CustomSqlDataSource: public QObject
     Q_OBJECT
 
     /** The path to the SQL database. */
-    Q_PROPERTY(QString source READ source WRITE setSource NOTIFY sourceChanged)
+    Q_PROPERTY(QString source READ source WRITE setSource NOTIFY sourceChanged FINAL)
 
     /** The initial query that will be run on the database. */
-    Q_PROPERTY(QString query READ query WRITE setQuery NOTIFY queryChanged)
+    Q_PROPERTY(QString query READ query WRITE setQuery NOTIFY queryChanged FINAL)
 
     /** The name of the database connection. */
-    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
+    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged FINAL)
 
     bool checkConnection();
 

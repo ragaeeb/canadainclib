@@ -22,15 +22,15 @@ using namespace bb::multimedia;
 class LazyMediaPlayer : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(int currentIndex READ currentIndex)
+	Q_PROPERTY(int currentIndex READ currentIndex FINAL)
 	Q_PROPERTY(int count READ count FINAL)
-	Q_PROPERTY(bool playing READ playing NOTIFY playingChanged)
-	Q_PROPERTY(bool active READ active NOTIFY activeChanged)
-	Q_PROPERTY(QSize videoDimensions READ videoDimensions)
-	Q_PROPERTY(QVariant position READ currentPosition)
-	Q_PROPERTY(QVariantMap metaData READ metaData)
-	Q_PROPERTY(bool repeat READ repeat WRITE setRepeat NOTIFY repeatChanged)
-	Q_PROPERTY(int equalizer READ equalizer WRITE setEqualizer NOTIFY equalizerChanged)
+	Q_PROPERTY(bool playing READ playing NOTIFY playingChanged FINAL)
+	Q_PROPERTY(bool active READ active NOTIFY activeChanged FINAL)
+	Q_PROPERTY(QSize videoDimensions READ videoDimensions FINAL)
+	Q_PROPERTY(QVariant position READ currentPosition FINAL)
+	Q_PROPERTY(QVariantMap metaData READ metaData FINAL)
+	Q_PROPERTY(bool repeat READ repeat WRITE setRepeat NOTIFY repeatChanged FINAL)
+	Q_PROPERTY(int equalizer READ equalizer WRITE setEqualizer NOTIFY equalizerChanged FINAL)
 
 	QString m_name;
 	MediaPlayer* m_mp;

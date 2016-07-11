@@ -25,11 +25,9 @@ namespace canadainc {
 class Persistance : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(bool isBlocked READ isBlocked FINAL)
 
     bb::system::InvokeManager* m_invokeManager;
-    QMap<QString, bool> m_logMap;
-    QMap<QString, QVariant> m_pending;
+    QSet<QString> m_logMap;
     QSettings m_flags;
     QSettings m_settings;
     QMap<QString, QObjectList> m_settingToListeners;
@@ -38,7 +36,6 @@ class Persistance : public QObject
     DialogUtils m_dialogs;
 
 private slots:
-    void commit();
     void onDestroyed(QObject* obj);
     void onInvokeFinished();
     void onRestored();
@@ -64,7 +61,7 @@ public:
     Q_INVOKABLE bool saveValueFor(QString const& objectName, QVariant const& inputValue, bool fireEvent=true);
     Q_INVOKABLE QString getClipboardText() const;
     Q_INVOKABLE QVariant getFlag(QString const& key);
-    Q_INVOKABLE QVariant getValueFor(QString const& objectName);
+    Q_INVOKABLE QVariant getValueFor(QString const& objectName, QVariant const& defaultVal=QVariant());
     Q_INVOKABLE static bool hasEmailSmsAccess();
     Q_INVOKABLE static bool hasLocationAccess();
     Q_INVOKABLE static bool hasPhoneControlAccess();
@@ -104,7 +101,6 @@ public:
     Q_SLOT void openChannel();
     Q_SLOT void openUri(QString const& uri);
     Q_SLOT void reviewApp();
-    void setValueInternal(QString const& key, QVariant const& value);
     static bool showBlockingDialog(QString const& title, QString const& text, QString const& rememberMeText, bool &rememberMeValue, QString const& okButton, QString const& cancelButton, bool okEnabled=true);
     static void onErrorMessage(const char* msg);
     Q_SLOT void onError(QString const& message);

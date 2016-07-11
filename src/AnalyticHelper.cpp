@@ -11,7 +11,7 @@
 
 namespace canadainc {
 
-AnalyticHelper::AnalyticHelper() {
+AnalyticHelper::AnalyticHelper() : m_enabled(true) {
     connect( QCoreApplication::instance(), SIGNAL( aboutToQuit() ), this, SLOT( onAboutToQuit() ) );
 }
 
@@ -79,13 +79,21 @@ void AnalyticHelper::onDataLoaded(int id, QVariant const& data)
 }
 
 
-void AnalyticHelper::record(QString const& event, QString const& context)
+void AnalyticHelper::record(QString const& event, QString const& context, bool force)
 {
-    QPair<QString, QString> pair = qMakePair<QString, QString>(event, context);
-    int count = m_counters.value(pair);
-    ++count;
+    if (m_enabled || force)
+    {
+        QPair<QString, QString> pair = qMakePair<QString, QString>(event, context);
+        int count = m_counters.value(pair);
+        ++count;
 
-    m_counters[pair] = count;
+        m_counters[pair] = count;
+    }
+}
+
+
+void AnalyticHelper::setEnabled(bool enabled) {
+    m_enabled = enabled;
 }
 
 

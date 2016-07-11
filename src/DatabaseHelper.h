@@ -2,9 +2,12 @@
 #define DATABASEHELPER_H_
 
 #include "customsqldatasource.h"
+#include "TicketManager.h"
 
 #include <QDir>
 #include <QFutureWatcher>
+
+#define LIKE_CLAUSE(field) QString("(%1 LIKE '%' || ? || '%')").arg(field)
 
 namespace canadainc {
 
@@ -29,15 +32,12 @@ class DatabaseHelper : public QObject
     Q_OBJECT
 
     CustomSqlDataSource m_sql;
-    int m_currentId;
-    QMap< QObject*, QSet<int> > m_objectToIds;
-    QMap<int, QPair<QObject*,int> > m_idToObjectQueryType;
     QSet<QString> m_attached;
+    TicketManager m_ticket;
     bool m_enabled;
     QFutureWatcher< QPair<QObject*, QStringList> > m_setup;
 
     void processSetup(QObject* caller, QStringList const& statements);
-    void stash(QObject* caller, int t);
 
 signals:
     void error(QString const& message);
@@ -53,7 +53,6 @@ signals:
 private slots:
     void dataLoaded(int id, QVariant const& data);
     void onDatabaseCreated();
-    void onDestroyed(QObject* obj);
     void onSetupFinished();
 
 public:

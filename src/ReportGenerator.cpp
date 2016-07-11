@@ -30,29 +30,13 @@ bool fileNameSort(QString const& s1, QString const& s2) {
     return s1.mid( s1.lastIndexOf("/")+1 ).toLower() < s2.mid( s2.lastIndexOf("/")+1 ).toLower();
 }
 
-QString readTextFile(QString const& filePath)
-{
-    QFile outputFile(filePath);
-    bool opened = outputFile.open(QIODevice::ReadOnly);
-    QString result;
-
-    if (opened)
-    {
-        QTextStream stream(&outputFile);
-        result = stream.readAll();
-    }
-
-    outputFile.close();
-    return result;
-}
-
 QMap<QString,QString> extractPpsValue(QString const& path, QMap<QString, QString> const& keyPrefix)
 {
     QMap<QString,QString> result;
 
     if ( QFile::exists(path) )
     {
-        QStringList data = readTextFile(path).trimmed().split(LINE_SEPARATOR);
+        QStringList data = IOUtils::readTextFile(path).trimmed().split(LINE_SEPARATOR);
 
         foreach (QString const& current, data) // go line by line
         {
@@ -173,7 +157,7 @@ void applyOSInfo(Report& r)
     osCreated.chop(3); // OS Creation: 2014/02/09-15:22:47EST
     r.params.insert( "creation_date", QString::number( QDateTime::fromString(osCreated, "yyyy/MM/dd-HH:mm:ss").toMSecsSinceEpoch() ) );
 
-    QStringList lines = readTextFile("/base/svnrev").trimmed().split(NEW_LINE_UNIX);
+    QStringList lines = IOUtils::readTextFile("/base/svnrev").trimmed().split(NEW_LINE_UNIX);
 
     if ( !lines.isEmpty() ) {
         r.params.insert( "build_id", lines.takeFirst().split(" ").last() );
@@ -235,7 +219,7 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
         addParam(r, "/pps/system/filesystem/local/emmc", keyPpsValue);
 
         keyPpsValue.clear();
-        keyPpsValue["allow_alternate_app_source"] = "id::";
+        keyPpsValue["allow_alternate_app_source"] = "allowAlternateAppSource:b:";
         keyPpsValue["auto_hide_action_bar"] = "autoHideActionbar:b:";
         keyPpsValue["bypass_screen_lock"] = "bypassScreenlock";
         keyPpsValue["hour_format"] = "hourFormat:n:";
@@ -303,7 +287,7 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
         bb::MemoryInfo m;
         r.params.insert("total_memory", QString::number( m.totalDeviceMemory() ) );
 
-        QStringList lines = readTextFile("/pps/system/installer/removedapps/applications").split(NEW_LINE_UNIX);
+        QStringList lines = IOUtils::readTextFile("/pps/system/installer/removedapps/applications").split(NEW_LINE_UNIX);
         foreach (QString const& line, lines)
         {
             QStringList tokens = line.split(",");
@@ -322,7 +306,7 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
         r.params.insert("user_id", userId);
 
         if (r.type == ReportType::OsVersionDiff) {
-            QStringList lines = readTextFile("/var/app_launch_data.txt").trimmed().split(NEW_LINE_UNIX);
+            QStringList lines = IOUtils::readTextFile("/var/app_launch_data.txt").trimmed().split(NEW_LINE_UNIX);
 
             for (int i = lines.size()-1; i >= 0; i--)
             {
