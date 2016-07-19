@@ -99,6 +99,14 @@ Delegate
         return exec( key, text, pos == "l" ? HorizontalAlignment.Left : pos == "r" ? HorizontalAlignment.Right : HorizontalAlignment.Center, VerticalAlignment.Top, 0, 0, tutorialDelegate.du(14) + topPadding, 0, imageSource, type );
     }
     
+    function execTabbedPane(key, message, tab) {
+        exec( key+"Tab", message.arg(tab.title), HorizontalAlignment.Left, VerticalAlignment.Top, tutorialDelegate.du(1), 0, tutorialDelegate.du(10), 0, tab.imageSource.toString(), "d" );
+    }
+    
+    function expandOverflow(key) {
+        execActionBar( key+"Overflow", qsTr("Tap here for more actions you can take on this page."), "x" );
+    }
+    
     function execOverFlow(key, text, action) {
         exec(key, text.arg(action.title), HorizontalAlignment.Right, VerticalAlignment.Center, 0, tutorialDelegate.du(2), 0, 0, action.imageSource.toString());
     }

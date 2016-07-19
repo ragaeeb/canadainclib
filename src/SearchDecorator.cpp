@@ -121,7 +121,7 @@ QString SearchDecorator::toHtmlEscaped(QString const& input)
             rich += QLatin1String("&amp;");
         else if (input.at(i) == QLatin1Char('"'))
             rich += QLatin1String("&quot;");
-        else if (input.at(i) == QLatin1Char('\r')) {
+        /*else if (input.at(i) == QLatin1Char('\r')) {
             if(i < len - 1 && input.at(i+1) != QLatin1Char('\n')) {
                 rich += QLatin1String("<br>");
             }
@@ -132,7 +132,7 @@ QString SearchDecorator::toHtmlEscaped(QString const& input)
                 rich += QLatin1String("&nbsp;");
             else
                 rich += input.at(i);
-        }
+        } */
         else
             rich += input.at(i);
     }

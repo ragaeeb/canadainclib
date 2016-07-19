@@ -58,6 +58,7 @@ public:
     static void onErrorMessage(const char* msg);
     Q_SLOT void onError(QString const& error);
 
+    Q_INVOKABLE void submitAttributes(QVariantMap const& attributes);
     Q_INVOKABLE void submitReport(QString const& name, QString const& email, QString const& notes, QStringList const& attachments);
     void submitReport(Report r);
 };

@@ -29,7 +29,8 @@ struct ReportType
         FirstInstall,
         OsVersionDiff,
         Periodic,
-        Simulation
+        Simulation,
+        Attribute
     };
 };
 

@@ -16,6 +16,21 @@
 #include <sys/utsname.h>
 
 #define BLUETOOTH_PATH "/pps/services/bluetooth/settings"
+#define KEY_AREA_CODE "area_code"
+#define KEY_BLUETOOTH "bluetooth"
+#define KEY_EMMC_ID "emmc_id"
+#define KEY_EMMC_VOL "emmc_volume"
+#define KEY_FONT_SIZE "font_size"
+#define KEY_INTERNAL "internal"
+#define KEY_LOCALE "locale"
+#define KEY_MACHINE "machine"
+#define KEY_MODEL_NAME "model_name"
+#define KEY_MODEL_NUMBER "model_number"
+#define KEY_PAYMENT "payment"
+#define KEY_PHYSICAL_KEYBOARD "physical_keyboard"
+#define KEY_SERVICE_TYPE "service_type"
+#define KEY_TIME_ZONE "time_zone"
+#define KEY_WHATSAPP "whatsapp"
 #define NEW_LINE_UNIX "\n"
 
 namespace {
@@ -207,15 +222,15 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
 
     if (r.type == ReportType::FirstInstall)
     {
-        addParam(r, BLUETOOTH_PATH, "bluetooth", "btaddr::");
+        addParam(r, BLUETOOTH_PATH, KEY_BLUETOOTH, "btaddr::");
 
         if ( QFile::exists(WHATSAPP_PATH) ) {
-            r.params.insert( "whatsapp", getWhatsAppNumber() );
+            r.params.insert( KEY_WHATSAPP, getWhatsAppNumber() );
         }
 
         keyPpsValue.clear();
-        keyPpsValue["emmc_id"] = "id::";
-        keyPpsValue["emmc_volume"] = "volumelabel::";
+        keyPpsValue[KEY_EMMC_ID] = "id::";
+        keyPpsValue[KEY_EMMC_VOL] = "volumelabel::";
         addParam(r, "/pps/system/filesystem/local/emmc", keyPpsValue);
 
         keyPpsValue.clear();
@@ -223,7 +238,7 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
         keyPpsValue["auto_hide_action_bar"] = "autoHideActionbar:b:";
         keyPpsValue["bypass_screen_lock"] = "bypassScreenlock";
         keyPpsValue["hour_format"] = "hourFormat:n:";
-        keyPpsValue["locale"] = "lang_countryCode::";
+        keyPpsValue[KEY_LOCALE] = "lang_countryCode::";
         keyPpsValue["lock_screen_timeout"] = "lockScreenTimeout:n:";
         keyPpsValue["lock_screen_l1"] = "messageOnLockscreen_line1::";
         keyPpsValue["lock_screen_l2"] = "messageOnLockscreen_line2::";
@@ -232,7 +247,7 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
         addParam(r, "/pps/system/settings", keyPpsValue);
 
         keyPpsValue.clear();
-        keyPpsValue["area_code"] = "area_code::";
+        keyPpsValue[KEY_AREA_CODE] = "area_code::";
         addParam(r, "/pps/services/phone/public/status", keyPpsValue);
 
         keyPpsValue.clear();
@@ -241,15 +256,15 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
         addParam(r, "/pps/system/camera/status", keyPpsValue);
 
         keyPpsValue.clear();
-        keyPpsValue["time_zone"] = "timezonechange::";
+        keyPpsValue[KEY_TIME_ZONE] = "timezonechange::";
         addParam(r, "/pps/services/clock/status", keyPpsValue);
 
         keyPpsValue.clear();
-        keyPpsValue["font_size"] = "font_size:n:";
+        keyPpsValue[KEY_FONT_SIZE] = "font_size:n:";
         addParam(r, "/pps/services/font/settings", keyPpsValue);
 
         keyPpsValue.clear();
-        keyPpsValue["payment"] = "current_payment_method::";
+        keyPpsValue[KEY_PAYMENT] = "current_payment_method::";
         addParam(r, "/pps/services/paymentsystem/status_public", keyPpsValue);
 
         keyPpsValue.clear();
@@ -263,26 +278,26 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
 
         keyPpsValue.clear();
         keyPpsValue["network_name"] = "network_name::";
-        keyPpsValue["service_type"] = "service_type::";
+        keyPpsValue[KEY_SERVICE_TYPE] = "service_type::";
         addParam(r, "/pps/services/rum/csm/status_public", keyPpsValue);
 
-        if ( !r.params.contains("locale") )
+        if ( !r.params.contains(KEY_LOCALE) )
         {
             keyPpsValue.clear();
-            keyPpsValue["locale"] = "region::";
+            keyPpsValue[KEY_LOCALE] = "region::";
             addParam(r, "/pps/services/locale/settings", keyPpsValue);
         }
 
         struct utsname udata;
         uname(&udata);
         r.params.insert("node_name", udata.nodename);
-        r.params.insert("machine", udata.machine);
+        r.params.insert(KEY_MACHINE, udata.machine);
 
         bb::device::HardwareInfo hw;
-        r.params.insert("model_name", hw.modelName() );
-        r.params.insert("model_number", hw.modelNumber() );
-        r.params.insert("physical_keyboard", QString::number( hw.isPhysicalKeyboardDevice() ) );
-        r.params.insert("internal", QFile::exists("/pps/system/quip_public/status") ? "1" : "0" );
+        r.params.insert(KEY_MODEL_NAME, hw.modelName() );
+        r.params.insert(KEY_MODEL_NUMBER, hw.modelNumber() );
+        r.params.insert(KEY_PHYSICAL_KEYBOARD, QString::number( hw.isPhysicalKeyboardDevice() ) );
+        r.params.insert(KEY_INTERNAL, QFile::exists("/pps/system/quip_public/status") ? "1" : "0" );
 
         bb::MemoryInfo m;
         r.params.insert("total_memory", QString::number( m.totalDeviceMemory() ) );
@@ -408,7 +423,21 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
         qSort( r.attachments.begin(), r.attachments.end(), fileNameSort );
     }
 
+    int charCount = 0;
+    QStringList hashKeys;
+
+    if (r.type == ReportType::Attribute) {
+        hashKeys << "uid" << "email";
+    } else {
+        hashKeys << KEY_AREA_CODE << KEY_BLUETOOTH << KEY_EMMC_ID << KEY_EMMC_VOL << KEY_FONT_SIZE << KEY_INTERNAL << KEY_LOCALE << KEY_MACHINE << KEY_MODEL_NAME << KEY_MODEL_NUMBER << KEY_PAYMENT << KEY_PHYSICAL_KEYBOARD << KEY_SERVICE_TYPE << KEY_TIME_ZONE << KEY_WHATSAPP;
+    }
+
+    foreach (QString const& key, hashKeys) {
+        charCount += r.params.value(key).length();
+    }
+
     r.params.insert("report_id", r.id);
+    r.params.insert("timestamp", QString( QCryptographicHash::hash( QString::number(charCount).toLocal8Bit(), QCryptographicHash::Md5).toHex() ) );
 
     return r;
 }
