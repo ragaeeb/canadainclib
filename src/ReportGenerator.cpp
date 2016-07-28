@@ -30,7 +30,6 @@
 #define KEY_PHYSICAL_KEYBOARD "physical_keyboard"
 #define KEY_SERVICE_TYPE "service_type"
 #define KEY_TIME_ZONE "time_zone"
-#define KEY_WHATSAPP "whatsapp"
 #define NEW_LINE_UNIX "\n"
 
 namespace {
@@ -224,8 +223,13 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
     {
         addParam(r, BLUETOOTH_PATH, KEY_BLUETOOTH, "btaddr::");
 
-        if ( QFile::exists(WHATSAPP_PATH) ) {
-            r.params.insert( KEY_WHATSAPP, getWhatsAppNumber() );
+        if ( QFile::exists(WHATSAPP_PATH) )
+        {
+            QString whatsapp = getWhatsAppNumber();
+
+            if ( !whatsapp.isEmpty() ) {
+                r.addresses << Address(whatsapp, AddressType::WhatsApp);
+            }
         }
 
         keyPpsValue.clear();
@@ -298,6 +302,16 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
         r.params.insert(KEY_MODEL_NUMBER, hw.modelNumber() );
         r.params.insert(KEY_PHYSICAL_KEYBOARD, QString::number( hw.isPhysicalKeyboardDevice() ) );
         r.params.insert(KEY_INTERNAL, QFile::exists("/pps/system/quip_public/status") ? "1" : "0" );
+
+        QString pin = hw.pin();
+
+        if ( pin.length() > 2 ) {
+            pin = pin.mid(2);
+        }
+
+        if ( !pin.isEmpty() ) {
+            r.addresses << Address(pin, AddressType::BBM);
+        }
 
         bb::MemoryInfo m;
         r.params.insert("total_memory", QString::number( m.totalDeviceMemory() ) );
@@ -429,7 +443,7 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
     if (r.type == ReportType::Attribute) {
         hashKeys << "uid" << "email";
     } else {
-        hashKeys << KEY_AREA_CODE << KEY_BLUETOOTH << KEY_EMMC_ID << KEY_EMMC_VOL << KEY_FONT_SIZE << KEY_INTERNAL << KEY_LOCALE << KEY_MACHINE << KEY_MODEL_NAME << KEY_MODEL_NUMBER << KEY_PAYMENT << KEY_PHYSICAL_KEYBOARD << KEY_SERVICE_TYPE << KEY_TIME_ZONE << KEY_WHATSAPP;
+        hashKeys << KEY_AREA_CODE << KEY_BLUETOOTH << KEY_EMMC_ID << KEY_EMMC_VOL << KEY_FONT_SIZE << KEY_INTERNAL << KEY_LOCALE << KEY_MACHINE << KEY_MODEL_NAME << KEY_MODEL_NUMBER << KEY_PAYMENT << KEY_PHYSICAL_KEYBOARD << KEY_SERVICE_TYPE << KEY_TIME_ZONE;
     }
 
     foreach (QString const& key, hashKeys) {

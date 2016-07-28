@@ -6,6 +6,8 @@
 #include <QSettings>
 #include <QStringList>
 
+#include <bb/data/JsonDataAccess>
+
 #include "AnalyticHelper.h"
 #include "NetworkProcessor.h"
 #include "Report.h"
@@ -30,6 +32,9 @@ class AppLogFetcher : public QObject
     bool m_dumpAll;
     AnalyticHelper m_analytics;
     QQueue<Report> m_queue; // we use this queue in case multiple different BugReportAutos are generated in short bursts
+    bb::data::JsonDataAccess m_json;
+    QMap<ReportType::Type, QString> m_endpoint;
+    QMap<AddressType::Type, QString> m_addressType;
 
     AppLogFetcher(Persistance* settings, CompressFiles func, QObject* parent=NULL, bool dumpAll=true);
 

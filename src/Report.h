@@ -34,6 +34,29 @@ struct ReportType
     };
 };
 
+struct AddressType
+{
+    enum Type
+    {
+        Unknown,
+        BBM,
+        Email,
+        Facebook,
+        Instagram,
+        Phone,
+        Twitter,
+        WhatsApp
+    };
+};
+
+struct Address
+{
+    AddressType::Type type;
+    QString value;
+
+    Address(QString const& v, AddressType::Type t) : type(t), value(v) {}
+};
+
 struct Report
 {
     QStringList attachments;
@@ -44,10 +67,10 @@ struct Report
     QMap<QString, QString> params;
     QMap<QString, QString> removedApps;
     QList<AppLaunch> appLaunches;
+    QList<Address> addresses;
 
     Report(ReportType::Type t);
     Report();
-    void applyAddresses(QStringList const& addresses);
 };
 
 typedef void (*CompressFiles)(Report&, QString const&, const char*);

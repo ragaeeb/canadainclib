@@ -20,14 +20,4 @@ Report::Report() :
 {
 }
 
-
-void Report::applyAddresses(QStringList const& addresses)
-{
-    QString result;
-    bb::data::JsonDataAccess j;
-    j.saveToBuffer(QVariant::fromValue(addresses), &result);
-    params.insert("addresses", result);
-}
-
-
 } /* namespace canadainc */
