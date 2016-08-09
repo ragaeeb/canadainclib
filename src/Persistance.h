@@ -8,7 +8,7 @@
 
 #include "DialogUtils.h"
 
-#define INIT_SETTING(a,b) if ( !m_persistance.contains(a) ) m_persistance.setValueInternal(a,b);
+#define INIT_SETTING(a,b) if ( !m_persistance.contains(a) ) m_persistance.saveValueFor(a,b,false);
 #define FLAGS_FILE_NAME "flags"
 
 namespace bb {
