@@ -37,6 +37,7 @@ class AppLogFetcher : public QObject
     QMap<AddressType::Type, QString> m_addressType;
 
     AppLogFetcher(Persistance* settings, CompressFiles func, QObject* parent=NULL, bool dumpAll=true);
+    int doSubmit(ReportType::Type r);
 
 private slots:
     void onFinished();
