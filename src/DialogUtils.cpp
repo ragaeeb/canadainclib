@@ -56,9 +56,13 @@ void DialogUtils::findTarget(QString const& uri, QString const& target, QObject*
     request.setUri(uri);
 
     InvokeQueryTargetsReply* itr = im->queryTargets(request);
-    connect( itr, SIGNAL( finished() ), this, SLOT( onLookupFinished() ) );
-    itr->setParent(caller);
-    itr->setProperty(INVOKE_TARGET_PROPERTY, target);
+
+    if (itr) // guard against NULL [as specified in docs]
+    {
+        connect( itr, SIGNAL( finished() ), this, SLOT( onLookupFinished() ) );
+        itr->setParent(caller);
+        itr->setProperty(INVOKE_TARGET_PROPERTY, target);
+    }
 }
 
 
