@@ -58,7 +58,17 @@ QString longestCommonSubstring(QString const& s1, QString const& s2)
     return QString::fromStdString(res_str);
 }
 
-void searchAndDecorate(QVariantList input, ArrayDataModel* adm, QVariantList const& queries, QString const& textKey)
+QVariantMap decorateElement(QVariantMap current, QRegExp const& regex, QString const& textKey)
+{
+    QString text = canadainc::SearchDecorator::toHtmlEscaped( current.value(textKey).toString() );
+    text.replace( regex, "<span style='font-style:italic;font-weight:bold;color:lightgreen'>\\1</span>" );
+
+    current[textKey] = HTMLIZE(text);
+
+    return current;
+}
+
+void searchAndDecorate(QVariantList input, ArrayDataModel* adm, QVariantList const& queries, QString const& textKey, int index)
 {
     QStringList searches;
 
@@ -69,16 +79,18 @@ void searchAndDecorate(QVariantList input, ArrayDataModel* adm, QVariantList con
     QRegExp regex = QRegExp( QString("(%1)").arg( searches.join("|") ) );
     regex.setCaseSensitivity(Qt::CaseInsensitive);
 
-    for (int i = input.size()-1; i >= 0; i--)
+    if (index < 0)
     {
-        QVariantMap current = input[i].toMap();
-        QString text = canadainc::SearchDecorator::toHtmlEscaped( current.value(textKey).toString() );
-        text.replace( regex, "<span style='font-style:italic;font-weight:bold;color:lightgreen'>\\1</span>" );
-
-        current[textKey] = HTMLIZE(text);
-        input[i] = current;
-
-        adm->replace(i, current);
+        for (int i = input.size()-1; i >= 0; i--)
+        {
+            QVariantMap current = input[i].toMap();
+            current = decorateElement(current, regex, textKey);
+            adm->replace(i, current);
+        }
+    } else {
+        QVariantMap current = input[index].toMap();
+        current = decorateElement(current, regex, textKey);
+        adm->replace(index, current);
     }
 }
 
@@ -141,8 +153,8 @@ QString SearchDecorator::toHtmlEscaped(QString const& input)
 }
 
 
-void SearchDecorator::decorateSearchResults(QVariantList const& input, bb::cascades::ArrayDataModel* adm, QVariantList const& queries, QString const& key) {
-    QtConcurrent::run(&searchAndDecorate, input, adm, queries, key);
+void SearchDecorator::decorateSearchResults(QVariantList const& input, bb::cascades::ArrayDataModel* adm, QVariantList const& queries, QString const& key, int index) {
+    QtConcurrent::run(&searchAndDecorate, input, adm, queries, key, index);
 }
 
 void SearchDecorator::decorateSimilar(QVariantList const& input, bb::cascades::ArrayDataModel* adm, bb::cascades::AbstractTextControl* atc, QString const& key) {
