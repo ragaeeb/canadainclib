@@ -71,6 +71,27 @@ void Persistance::showToast(QString const& text, QString const& icon, int pos) {
 }
 
 
+void Persistance::downloadApp(QString const& appID)
+{
+    InvokeRequest invokeRequest;
+    invokeRequest.setTarget("sys.appworld.install");
+    invokeRequest.setAction("bb.action.OPEN");
+
+    bb::data::JsonDataAccess jsonDataAccess;
+
+    QVariantMap data;
+    data["contentid"] = appID;
+    data["url"] = QString("appworld://usfdownload/%1?&licensetypeid=1").arg(appID);
+
+    QByteArray jsonData;
+    jsonDataAccess.saveToBuffer(data, &jsonData);
+
+    invokeRequest.setData(jsonData);
+
+    m_invokeManager->invoke(invokeRequest);
+}
+
+
 void Persistance::findTarget(QString const& uri, QString const& target, QObject* caller) {
     m_dialogs.findTarget(uri, target, caller, m_invokeManager);
 }
@@ -290,11 +311,6 @@ void Persistance::remove(QString const& key, bool fireEvent)
 
 bool Persistance::containsFlag(QString const& key) {
     return m_flags.contains(key);
-}
-
-
-void Persistance::expose(QString const& key, QObject* q) {
-    QmlDocument::defaultDeclarativeEngine()->rootContext()->setContextProperty(key, q);
 }
 
 

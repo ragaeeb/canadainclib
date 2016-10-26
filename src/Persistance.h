@@ -56,7 +56,6 @@ public:
     void portLegacy(QStringList settingKeys);
     Q_INVOKABLE bool contains(QString const& key) const;
     Q_INVOKABLE bool containsFlag(QString const& key);
-    Q_INVOKABLE void expose(QString const& key, QObject* q);
     Q_INVOKABLE bool isUpdateNeeded(QString const& key, int diffDaysMin=30);
     Q_INVOKABLE bool saveValueFor(QString const& objectName, QVariant const& inputValue, bool fireEvent=true);
     Q_INVOKABLE QString getClipboardText() const;
@@ -73,6 +72,7 @@ public:
     Q_INVOKABLE static QString tempPath();
     Q_INVOKABLE void call(QString const& number);
     Q_INVOKABLE void copyToClipboard(QString const& text, bool showToastMessage=true);
+    Q_INVOKABLE void downloadApp(QString const& appID);
     Q_INVOKABLE void findTarget(QString const& uri, QString const& target, QObject* caller);
     Q_INVOKABLE void invoke(QString const& targetId, QString const& action="", QString const& mime="", QString const& uri="", QString const& data="", QObject* callback=NULL);
     Q_INVOKABLE void launchAppPermissionSettings();

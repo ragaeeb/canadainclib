@@ -130,16 +130,6 @@ Page
                         }
                     }
                     
-                    CheckBox
-                    {
-                        id: updateChecking
-                        text: qsTr("Disable Update Checking") + Retranslate.onLanguageChanged
-                        
-                        onCheckedChanged: {
-                            persist.setFlag("appLastUpdateCheck", new Date().getTime());
-                        }
-                    }
-                    
                     Container
                     {
                         id: expandedContainer
@@ -176,7 +166,6 @@ Page
         tutorial.execActionBar("openChannel", qsTr("To stay up to date on the latest news on our apps or to reach out to us for support regarding any of our apps, tap on the '%1' action.").arg(channelAction.title), videoTutorialUri.length > 0 ? "r" : undefined);
         appNameLabel.text = "%1 %2".arg(Application.applicationName).arg(Application.applicationVersion)
         body.textStyle.color = appNameLabel.textStyle.color;
-        updateChecking.checked = persist.getFlag("appLastUpdateCheck") == -1;
         titleControl.kindProperties.expandableArea.expandedChanged(titleControl.kindProperties.expandableArea.expanded);
     }
 }

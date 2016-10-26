@@ -23,36 +23,18 @@ MenuDefinition
         }
     }
     
-    function onFinished(confirm, remember)
-    {
-        if (confirm) {
-            persist.openBlackBerryWorld(bbWorldID);
-        }
-        
-        if (remember) {
-            persist.setFlag("appLastUpdateCheck", -1);
-        } else {
-            persist.setFlag("appLastUpdateCheck", new Date().getTime());
-        }
-        
-        reporter.record( "PerformAppUpdate", confirm.toString() );
-    }
-    
     function onLatestVersionFound(latestVersion)
     {
         var currentVersion = Application.applicationVersion;
         var isOlder = currentVersion.localeCompare(latestVersion) < 0;
         console.log("latestVersionFound", latestVersion, currentVersion, isOlder);
 
-        if (isOlder && !persist.isBlocked) {// if it's an older client, and we are not blocked
-            persist.showDialog( menuDef, qsTr("Update Available"), qsTr("%1 %2 is available (you have %3). Would you like to visit BlackBerry World to download the latest version?").arg(Application.applicationName).arg(latestVersion).arg(currentVersion), qsTr("Yes"), qsTr("No"), qsTr("Don't Show Again") );
-        } else if (!isOlder) { // if it's a newer client, then don't check for a while
-            persist.setFlag("appLastUpdateCheck", new Date().getTime() );
+        if (isOlder) {// if it's an older client
+            persist.downloadApp(bbWorldID);
         }
     }
     
-    function onSwipeDown()
-    {
+    function onSwipeDown() {
         reporter.record("SwipeDown");
     }
     
