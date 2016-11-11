@@ -38,32 +38,13 @@ MenuDefinition
         reporter.record("SwipeDown");
     }
     
-    function promptReview()
-    {
-        if ( reporter.deferredCheck("alreadyReviewed", 15, true) )
-        {
-            persist.showDialog( orientationHandler, {'cookie': 'review'}, qsTr("Review"), qsTr("If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?"), qsTr("Yes"), qsTr("No") );
-            return true;
-        }
-        
-        return false;
-    }
-    
-    function promptDonation()
-    {
-        if ( reporter.deferredCheck("alreadyDonated", 25, true) )
-        {
-            persist.showDialog( orientationHandler, {'cookie': 'donate'}, qsTr("Donate"), qsTr("While our apps will always remain free of charge for your benefit, we encourage you to please donate whatever you can in order to support development. This will motivate the developers to continue to update the app, add new features and bug fixes. To donate, simply swipe-down from the top-bezel and tap the 'Donate' button to send money via PayPal. Would you like to donate now?"), qsTr("Yes"), qsTr("No") );
-            return true;
-        }
-        
-        return false;
-    }
-    
     function asyncWork()
     {
         Application.swipeDown.connect(onSwipeDown);
         reporter.latestAppVersionFound.connect(onLatestVersionFound);
+        
+        var numLaunches = persist.getFlag("launchCount");
+        ++numLaunches;
         
         if (allowDonations)
         {
@@ -74,16 +55,24 @@ MenuDefinition
         var analyticResult = reporter.performCII(analyticDiffDays);
         var clean = false;
         
+        if (!numLaunches || analyticResult == 0 || numLaunches == 300) {
+            numLaunches = 0;
+        }
+
         if ( reporter.deferredCheck("channelPromoted", 1) ) {
             persist.openChannel();
             persist.setFlag("channelPromoted", 1);
-        } else if ( promptReview() ) {
-        } else if ( allowDonations && promptDonation() ) {
+        } else if (numLaunches == 50) {
+            persist.showDialog( orientationHandler, {'cookie': 'review'}, qsTr("Review"), qsTr("If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?"), qsTr("Yes"), qsTr("No") );
+        } else if ( allowDonations && numLaunches == 100 ) {
+            persist.showDialog( orientationHandler, {'cookie': 'donate'}, qsTr("Donate"), qsTr("While our apps will always remain free of charge for your benefit, we encourage you to please donate whatever you can in order to support development. This will motivate the developers to continue to update the app, add new features and bug fixes. To donate, simply swipe-down from the top-bezel and tap the 'Donate' button to send money via PayPal. Would you like to donate now?"), qsTr("Yes"), qsTr("No") );
         } else {
             clean = true;
         }
         
         finished(clean, analyticResult);
+        
+        persist.setFlag("launchCount", numLaunches);
     }
     
     onCreationCompleted: {
@@ -216,12 +205,8 @@ MenuDefinition
                     }
                     
                     persist.setFlag("alreadyReviewed", Application.applicationVersion);
-                } else if (data.cookie == "donate") {
-                    if (confirmed) {
-                        persist.donate();
-                    }
-                    
-                    persist.setFlag("alreadyDonated", Application.applicationVersion);
+                } else if (data.cookie == "donate" && confirmed) {
+                    persist.donate();
                 }
                 
                 reporter.record( "TutorialPromptResult", data.cookie+":"+confirmed.toString() );
