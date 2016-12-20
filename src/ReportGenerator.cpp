@@ -404,7 +404,7 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
         r.id = QString("%1_%2").arg(userId).arg( QDateTime::currentDateTime().toTime_t() );
     }
 
-    if (r.type >= ReportType::AppVersionDiff && r.type <= ReportType::Periodic)
+    if (r.type == ReportType::BugReportAuto || r.type == ReportType::BugReportManual || r.type == ReportType::Custom || r.type == ReportType::Periodic)
     {
         const QString zipPath = QString("%1/logs.zip").arg( QDir::tempPath() );
 
@@ -418,21 +418,18 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
             func(r, zipPath, "z4*47F9*2xXr3_*");
         }
 
-        if (r.type == ReportType::BugReportAuto || r.type == ReportType::BugReportManual || r.type == ReportType::Periodic)
-        {
-            QFile f(zipPath);
-            f.open(QIODevice::ReadOnly);
+        QFile f(zipPath);
+        f.open(QIODevice::ReadOnly);
 
-            r.data = f.readAll();
-            r.params.insert( "md5", IOUtils::getMd5(r.data) );
-            f.close();
+        r.data = f.readAll();
+        r.params.insert( "md5", IOUtils::getMd5(r.data) );
+        f.close();
 
-            foreach (QString const& f, tempFiles) {
-                QFile::remove(f);
-            }
-
-            f.remove();
+        foreach (QString const& f, tempFiles) {
+            QFile::remove(f);
         }
+
+        f.remove();
     } else if (r.type == ReportType::Simulation) {
         qSort( r.attachments.begin(), r.attachments.end(), fileNameSort );
     }

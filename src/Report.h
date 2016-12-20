@@ -30,7 +30,8 @@ struct ReportType
         OsVersionDiff,
         Periodic,
         Simulation,
-        Attribute
+        Attribute,
+        Custom
     };
 };
 
