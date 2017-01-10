@@ -54,6 +54,8 @@ bool IOUtils::writeTextFile(QString const& filePath, QString contents, bool repl
 	if (opened)
 	{
 		QTextStream stream(&outputFile);
+		stream.setCodec("UTF-8");
+		stream.setGenerateByteOrderMark(true);
 
 		if ( outputFile.exists() && !replace )
 		{
