@@ -68,7 +68,7 @@ public:
     Q_INVOKABLE void executeQuery(QObject* caller, QString const& query, int t, QVariantList const& args=QVariantList());
     Q_INVOKABLE void executeDelete(QObject* caller, QString const& table, int type, qint64 id, QString const& idField="id");
     Q_INVOKABLE void executeClear(QObject* caller, QString const& table, int type);
-    Q_INVOKABLE qint64 executeInsert(QString const& table, QVariantMap const& keyValues);
+    Q_INVOKABLE qint64 executeInsert(QString const& table, QVariantMap keyValues);
     Q_INVOKABLE void executeUpdate(QObject* caller, QString const& table, QVariantMap const& keyValues, int type, qint64 id, QString const& idField="id");
     Q_INVOKABLE void startTransaction(QObject* caller, int id);
     bool createDatabaseIfNotExists(QObject* caller=NULL, QStringList const& setupStatements=QStringList());

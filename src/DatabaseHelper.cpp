@@ -7,6 +7,7 @@
 #include <QtCore>
 
 #define CHECK_ENABLED if (!m_enabled) return
+#define PRIMARY_KEY "id"
 
 namespace {
 
@@ -126,24 +127,35 @@ void DatabaseHelper::executeInternal(QString const& query, int t, QVariantList a
 }
 
 
-qint64 DatabaseHelper::executeInsert(QString const& table, QVariantMap const& keyValues)
+qint64 DatabaseHelper::executeInsert(QString const& table, QVariantMap keyValues)
 {
     qint64 id = 0;
+
+    m_sql.setQuery( QString("SELECT A.%2 + 1 AS %2 FROM %1 AS A WHERE NOT EXISTS (SELECT B.%2 FROM %1 AS B WHERE A.%2 + 1 = B.%2) GROUP BY A.%2 LIMIT 1").arg(table).arg(PRIMARY_KEY) );
+    DataAccessReply dar = m_sql.executeAndWait(QVariant());
+    QVariantList resultSet = dar.result().toList();
+
+    if ( !resultSet.isEmpty() )
+    {
+        id = resultSet.first().toMap().value(PRIMARY_KEY).toLongLong();
+        keyValues[PRIMARY_KEY] = id;
+    }
+
     QVariantList args = keyValues.values();
     cleanArguments(args);
 
     m_sql.setQuery( QString("INSERT INTO %1 (%2) VALUES (%3)").arg(table).arg( QStringList( keyValues.keys() ).join(",") ).arg( getPlaceHolders( keyValues.size(), false ) ) );
-    DataAccessReply dar = m_sql.executeAndWait(args);
+    dar = m_sql.executeAndWait(args);
 
     if ( dar.hasError() ) {
         emit error( dar.errorMessage() );
-    } else {
-        m_sql.setQuery("SELECT last_insert_rowid() AS id");
+    } else if (!id) {
+        m_sql.setQuery( QString("SELECT last_insert_rowid() AS %1").arg(PRIMARY_KEY) );
         dar = m_sql.executeAndWait(QVariant());
-        QVariantList resultSet = dar.result().toList();
+        resultSet = dar.result().toList();
 
         if ( !resultSet.isEmpty() ) {
-            id = resultSet.first().toMap().value("id").toLongLong();
+            id = resultSet.first().toMap().value(PRIMARY_KEY).toLongLong();
         }
     }
 
