@@ -75,8 +75,26 @@ MenuDefinition
         persist.setFlag("launchCount", numLaunches);
     }
     
+    function launch(qml)
+    {
+        var page = initQml(qml);
+        parent.activePane.push(page);
+        
+        return page;
+    }
+    
+    function initQml(qml)
+    {
+        definition.source = qml;
+        var x = definition.createObject();
+        
+        return x;
+    }
+    
     onCreationCompleted: {
         app.lazyInitComplete.connect(asyncWork);
+        Qt.launch = launch;
+        Qt.initQml = initQml;
     }
     
     settingsAction: SettingsActionItem
@@ -93,7 +111,7 @@ MenuDefinition
         {
             console.log("UserEvent: SettingsPage");
             
-            var p = definition.init("SettingsPage.qml");
+            var p = launch("SettingsPage.qml");
             persist.registerForDestroyed(p, settingsActionItem);
             enabled = false;
             launchPage(p);
@@ -116,7 +134,7 @@ MenuDefinition
             onTriggered: {
                 console.log("UserEvent: BugReportPage");
 
-                var p = definition.init("BugReportPage.qml");
+                var p = launch("BugReportPage.qml");
                 p.projectName = projectName;
                 persist.registerForDestroyed(p, bugReportActionItem);
                 launchPage(p);
@@ -154,7 +172,7 @@ MenuDefinition
         {
             console.log("UserEvent: HelpPage");
             
-            var p = definition.init(helpPageQml);
+            var p = launch(helpPageQml);
             persist.registerForDestroyed(p, helpActionItem);
             launchPage(p);
             enabled = false;
@@ -164,15 +182,8 @@ MenuDefinition
     }
     
     attachedObjects: [
-        ComponentDefinition
-        {
+        ComponentDefinition {
             id: definition
-            
-            function init(qml)
-            {
-                source = qml;
-                return createObject();
-            }
         },
         
         ComponentDefinition
