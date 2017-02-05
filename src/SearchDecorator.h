@@ -21,7 +21,7 @@ public:
     SearchDecorator(QObject* parent=NULL);
     virtual ~SearchDecorator();
 
-    static QString toHtmlEscaped(QString const& input);
+    Q_INVOKABLE static QString toHtmlEscaped(QString const& input);
     Q_INVOKABLE void decorateSimilar(QVariantList const& input, bb::cascades::ArrayDataModel* adm, bb::cascades::AbstractTextControl* atc, QString const& key);
     Q_INVOKABLE void decorateSearchResults(QVariantList const& input, bb::cascades::ArrayDataModel* adm, QVariantList const& queries, QString const& key, int index=-1);
 };
