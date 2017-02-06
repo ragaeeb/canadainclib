@@ -8,7 +8,7 @@
 #include <string>
 #include <set>
 
-#define DECORATE(body, common) body.replace( common, "<span style='font-style:italic;font-weight:bold;color:lightgreen'>"+common+"</span>" )
+#define DECORATE(body, common) body.replace( common, "<span style='font-style:italic;font-weight:bold;color:lightgreen'>"+common+"</span>", Qt::CaseInsensitive )
 #define HTMLIZE(input) "<html>"+input+"</html>"
 
 using namespace bb::cascades;
@@ -107,8 +107,10 @@ void groupAndDecorate(QVariantList const& input, ArrayDataModel* adm, AbstractTe
 
         current[textKey] = HTMLIZE(text);
         adm->replace(i, current);
+        LOGGER("*** SDLFJSDKLF" << i << common);
 
         if (i == 0) {
+            LOGGER("*** SDLFJSDKL33F" << i);
             DECORATE(body, common);
             atc->setProperty("decorated", HTMLIZE(body) );
         }
