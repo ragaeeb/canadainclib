@@ -22,7 +22,7 @@ public:
 	/**
 	 * @param replace If this is <code>false</code> then we will just append to the text file.
 	 */
-	static bool writeTextFile(QString const& filePath, QString contents, bool replace=true, bool correctNewLines=true, bool log=true);
+	static bool writeTextFile(QString const& filePath, QString contents, bool replace=true, bool log=true, QString const& codec="UTF-8");
 
 	static QStringList executeCommand(QString const& command);
 

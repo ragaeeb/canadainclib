@@ -10,6 +10,7 @@ Delegate
     property int currentIndex: -1
     signal tutorialFinished(string key)
     signal tutorialStarted(string key)
+    signal transactionFinished()
     property string appMenuKey: "showAppMenu"
     property real factor: 0
     property variant qmlDef: ComponentDefinition {
@@ -298,14 +299,17 @@ Delegate
             }
             
             onOpened: {
+                console.log("*** OPENED...");
                 mainAnim.play();
                 Application.swipeDown.connect(onSwipeDown);
             }
             
             onClosed: {
+                console.log("*** CLOSED...");
                 icon.resetImageSource();
                 bodyControl.resetText();
                 Application.swipeDown.disconnect(onSwipeDown);
+                transactionFinished();
             }
             
             onCreationCompleted: {

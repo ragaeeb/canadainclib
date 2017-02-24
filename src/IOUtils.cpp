@@ -42,10 +42,10 @@ bool IOUtils::writeFile(QString const& filePath, QByteArray const& data, bool re
 }
 
 
-bool IOUtils::writeTextFile(QString const& filePath, QString contents, bool replace, bool correctNewLines, bool log)
+bool IOUtils::writeTextFile(QString const& filePath, QString contents, bool replace, bool log, QString const& codec)
 {
     if (log) {
-        LOGGER(filePath << contents.length() << replace << correctNewLines);
+        LOGGER(filePath << contents.length() << replace << codec);
     }
 
 	QFile outputFile(filePath);
@@ -54,8 +54,12 @@ bool IOUtils::writeTextFile(QString const& filePath, QString contents, bool repl
 	if (opened)
 	{
 		QTextStream stream(&outputFile);
-		stream.setCodec("UTF-8");
-		stream.setGenerateByteOrderMark(true);
+
+		if ( !codec.isEmpty() )
+		{
+	        stream.setCodec("UTF-8");
+	        stream.setGenerateByteOrderMark(true);
+		}
 
 		if ( outputFile.exists() && !replace )
 		{
@@ -66,12 +70,7 @@ bool IOUtils::writeTextFile(QString const& filePath, QString contents, bool repl
 			stream << QString("%1%1").arg(NEW_LINE);
 		}
 
-		if (correctNewLines) {
-			stream << contents.replace("\n", NEW_LINE);
-		} else {
-			stream << contents;
-		}
-
+		stream << contents;
 		outputFile.close();
 	} else {
 	    if (log) {

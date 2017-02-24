@@ -83,7 +83,7 @@ MenuDefinition
         return page;
     }
     
-    function initQml(qml)
+    function initQml(qml, params)
     {
         definition.source = qml;
         var x = definition.createObject();

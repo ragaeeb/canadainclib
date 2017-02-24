@@ -61,7 +61,6 @@ public:
     Q_INVOKABLE void cleanUpAndDestroy(QObject* q);
 
     static void registerTutorialTips(QObject* parent, bool qrc=false);
-    Q_INVOKABLE void log(QVariant const& message, QObject* q=NULL);
 
     Q_INVOKABLE static bool isUrl(QString const& input);
     Q_INVOKABLE static bool isValidEmail(QString const& email);

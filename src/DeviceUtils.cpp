@@ -128,32 +128,6 @@ void DeviceUtils::registerTutorialTips(QObject* parent, bool qrc)
 }
 
 
-void DeviceUtils::log(QVariant const& message, QObject* q)
-{
-    if (!q) {
-        if ( message.type() == QVariant::String ) {
-            LOGGER( message.toString() );
-        } else if ( message.type() == QVariant::Double ) {
-            LOGGER( message.toReal() );
-        } else if ( message.type() == QVariant::Int ) {
-            LOGGER( message.toLongLong() );
-        } else {
-            LOGGER(message);
-        }
-    } else {
-        if ( message.type() == QVariant::String ) {
-            LOGGER( q << message.toString() );
-        } else if ( message.type() == QVariant::Double ) {
-            LOGGER( q << message.toReal() );
-        } else if ( message.type() == QVariant::Int ) {
-            LOGGER( q << message.toLongLong() );
-        } else {
-            LOGGER(q << message);
-        }
-    }
-}
-
-
 bool DeviceUtils::isValidPhoneNumber(QString const& phone)
 {
     QRegExp regex("^(?:(?:\(?(?:00|\\+)([1-4]\\d\\d|[1-9]\\d?)\\)?)?[\\-\\.\ \\\\/]?)?((?:\(?\\d{1,}\\)?[\\-\\.\ \\\\/]?){0,})(?:[\\-\\.\ \\\\/]?(?:#|ext\\.?|extension|x)[\\-\\.\ \\\\/]?(\\d+))?$");

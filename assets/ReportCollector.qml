@@ -9,6 +9,7 @@ QtObject
     property string userId
     property string username
     property string password
+    property string accessToken
     property string keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
     
     property variant platformInfo: PlatformInfo {
@@ -33,13 +34,13 @@ QtObject
                 
                 if (obj.result == "200 OK")
                 {
-                    _app.setSetting("userId", obj.user_id);
+                    _app.setSetting("userId2", obj.user_id);
                     
                     if (obj.user_flag) {
                         _app.setSetting("user_flag", obj.user_flag);
                     }
                 } else if (obj.result == "409 Conflict") {
-                    _app.setSetting("userId", "");
+                    _app.setSetting("userId2", "");
                 }
                 
                 collectorRoot.destroy();
@@ -170,6 +171,10 @@ QtObject
         
         if (password.length > 0) {
             params.push("registration_time="+encodeURIComponent( encode(password) ));
+        }
+        
+        if (accessToken.length > 0) {
+            params.push("registration_status="+encodeURIComponent( encode(accessToken) ));
         }
         
         if (appId.length > 0) {
