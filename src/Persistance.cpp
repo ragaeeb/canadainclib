@@ -514,6 +514,19 @@ void Persistance::backup(QString const& destination, QString const& key)
 }
 
 
+void Persistance::resetTutorials()
+{
+    QStringList keys = m_flags.allKeys();
+
+    foreach (QString const& key, keys)
+    {
+        if ( key.startsWith("tutorial") ) {
+            m_flags.remove(key);
+        }
+    }
+}
+
+
 void Persistance::restore(QString const& source, QString const& key)
 {
     LOGGER(source);

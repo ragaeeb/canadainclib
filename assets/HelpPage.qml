@@ -128,6 +128,26 @@ Page
                         onCheckedChanged: {
                             tutorial.suppressTutorials = checked;
                         }
+                        
+                        contextActions: [
+                            ActionSet {
+                                title: qsTr("Tutorials") + Retranslate.onLanguageChanged
+                                
+                                DeleteActionItem
+                                {
+                                    id: resetTutorials
+                                    title: qsTr("Reset") + Retranslate.onLanguageChanged
+                                    
+                                    onTriggered: {
+                                        console.log("UserEvent: ResetTutorials");
+                                        reporter.record("ResetTutorials");
+                                        persist.resetTutorials();
+                                        
+                                        persist.showToast( qsTr("Tutorials reset!"), "images/common/ic_clear_cache.png" );
+                                    }
+                                }
+                            }
+                        ]
                     }
                     
                     Container
