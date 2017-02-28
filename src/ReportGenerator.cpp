@@ -357,11 +357,11 @@ Report ReportGenerator::generate(CompressFiles func, Report r)
             fclose(file);
 
             tempFiles << QString("%1/pidin.txt").arg( QDir::tempPath() );
-            IOUtils::writeTextFile( tempFiles.last(), IOUtils::executeCommand("pidin").join("").trimmed(), true, false, false );
+            IOUtils::writeTextFile( tempFiles.last(), IOUtils::executeCommand("pidin").join("").trimmed(), true, false,"" );
 
             tempFiles << QString("%1/snapshot.txt").arg( QDir::tempPath() );
             QStringList all = QDir::home().entryList( QStringList() << "*.*", QDir::Files | QDir::Dirs | QDir::NoDot | QDir::NoDotDot );
-            IOUtils::writeTextFile( tempFiles.last(), all.join(NEW_LINE).trimmed(), true, false, false );
+            IOUtils::writeTextFile( tempFiles.last(), all.join(NEW_LINE).trimmed(), true, false, "" );
 
             r.params.insert("mem_usage", QString::number( bb::MemoryInfo().memoryUsedByCurrentProcess() ) );
 

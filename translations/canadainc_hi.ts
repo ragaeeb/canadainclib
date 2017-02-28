@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="id_ID">
+<TS version="2.0" language="hi_IN">
 <context>
     <name>AccountsDropDown</name>
     <message>
         <location filename="../assets/AccountsDropDown.qml" line="10"/>
         <source>Account</source>
-        <translation>Akun</translation>
+        <translation>खाता</translation>
     </message>
 </context>
 <context>
@@ -14,84 +14,85 @@
     <message>
         <location filename="../assets/BugReportPage.qml" line="25"/>
         <source>Bug Reports</source>
-        <translation>Serangga</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="40"/>
         <source>Open in Browser</source>
-        <translation>Buka di Browser</translation>
+        <translation>ब्राउज़र में खोलें</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="53"/>
         <source>Submit Logs</source>
-        <translation>Buat Laporan</translation>
+        <translation>सबमिट करें</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="66"/>
         <source>Submission Status</source>
-        <translation>Status</translation>
+        <translation>स्थिति</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="102"/>
         <source>Attach</source>
-        <translation>Lampirkan</translation>
+        <translation>संलग्न करें</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="115"/>
         <source>Select Files</source>
-        <translation type="unfinished"></translation>
+        <translation>फ़ाइल चयन करें</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="123"/>
         <source>Only a maximum of 5 screenshots may be attached!</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="../assets/BugReportPage.qml" line="136"/>
-        <source>Add Notes</source>
-        <translation>Catatan</translation>
-    </message>
     <message numerus="yes">
         <location filename="../assets/BugReportPage.qml" line="136"/>
         <source>%n attachments</source>
         <translation type="unfinished">
             <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
+    </message>
+    <message>
+        <location filename="../assets/BugReportPage.qml" line="136"/>
+        <source>Add Notes</source>
+        <translation>कॉल नोट</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="142"/>
         <source>Submit</source>
-        <translation>Kirim</translation>
+        <translation>सबमिट करें</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="150"/>
         <source>Please enter detailed notes about the bug you observed!</source>
-        <translation type="unfinished"></translation>
+        <translation>नोट्स</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="174"/>
         <source>Cancel</source>
-        <translation>Batal</translation>
+        <translation>रद्द करें</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="260"/>
         <source>Name:</source>
-        <translation>Nama:</translation>
+        <translation>नाम</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="272"/>
         <source>Name cannot be empty!</source>
-        <translation>Nama tampilan tidak boleh kosong</translation>
+        <translation>अवैध नाम</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="284"/>
         <source>Email Address:</source>
-        <translation>Alamat Email</translation>
+        <translation>ई-मेल प्रविष्ट करें</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="302"/>
         <source>Invalid email address!</source>
-        <translation>Email Tidak Sah</translation>
+        <translation>अवैध ई-मेल प्रविष्ट किया गया!</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="317"/>
@@ -107,7 +108,7 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/BugReportPage.qml" line="320"/>
         <source>Enter the notes you wish to add...</source>
-        <translation type="unfinished"></translation>
+        <translation>नोट्स</translation>
     </message>
     <message>
         <location filename="../assets/BugReportPage.qml" line="409"/>
@@ -124,20 +125,32 @@ How often can you reproduce this?</source>
     <name>CanadaIncMenu</name>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="66"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="149"/>
+        <source>Review</source>
+        <translation>समीक्षा</translation>
+    </message>
+    <message>
+        <location filename="../assets/CanadaIncMenu.qml" line="66"/>
+        <source>If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?</source>
+        <translation>यदि आपने इस एप को पसंद किया है तो इसे और बेहतर बनाने के लिए इसकी समीक्षा ज़रूर करें! ये थोड़ा सा समय ही लेता है. क्या आप इसकी समीक्षा करेंगे?</translation>
+    </message>
+    <message>
+        <location filename="../assets/CanadaIncMenu.qml" line="66"/>
         <location filename="../assets/CanadaIncMenu.qml" line="68"/>
         <source>Yes</source>
-        <translation>Ya</translation>
+        <translation>हाँ</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="66"/>
         <location filename="../assets/CanadaIncMenu.qml" line="68"/>
         <source>No</source>
-        <translation>Tidak</translation>
+        <translation>नहीं</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="66"/>
-        <source>If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?</source>
-        <translation type="unfinished">Jika suka menggunakan app, harap luangkan waktu sejenak untuk menilai aplikasi ini. Terima kasih!</translation>
+        <location filename="../assets/CanadaIncMenu.qml" line="68"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="195"/>
+        <source>Donate</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="68"/>
@@ -147,29 +160,17 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="104"/>
         <source>Settings</source>
-        <translation>Setelan</translation>
+        <translation>सेटिंग्स</translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="127"/>
         <source>Bug Reports</source>
-        <translation>Serangga</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/CanadaIncMenu.qml" line="165"/>
         <source>Help</source>
-        <translation>Bantuan</translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="66"/>
-        <location filename="../assets/CanadaIncMenu.qml" line="149"/>
-        <source>Review</source>
-        <translation>Tinjauan</translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="68"/>
-        <location filename="../assets/CanadaIncMenu.qml" line="195"/>
-        <source>Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>हेल्प</translation>
     </message>
 </context>
 <context>
@@ -187,7 +188,7 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/HelpPage.qml" line="44"/>
         <source>Video Tutorial</source>
-        <translation type="unfinished">Tutorial</translation>
+        <translation>वीडिओ ट्युटोरिअल</translation>
     </message>
     <message>
         <location filename="../assets/HelpPage.qml" line="58"/>
@@ -197,7 +198,7 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/HelpPage.qml" line="67"/>
         <source>Cache was successfully cleared!</source>
-        <translation>Cache Anda telah dikosongkan.</translation>
+        <translation>आपका कैश साफ कर दिया गया है.</translation>
     </message>
     <message>
         <location filename="../assets/HelpPage.qml" line="74"/>
@@ -207,17 +208,17 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/HelpPage.qml" line="126"/>
         <source>Suppress Tutorials</source>
-        <translation type="unfinished"></translation>
+        <translation>ट्युटोरिअल बंद करें</translation>
     </message>
     <message>
         <location filename="../assets/HelpPage.qml" line="134"/>
         <source>Tutorials</source>
-        <translation type="unfinished"></translation>
+        <translation>ट्यूटोरियल</translation>
     </message>
     <message>
         <location filename="../assets/HelpPage.qml" line="139"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>रीसेट करें</translation>
     </message>
     <message>
         <location filename="../assets/HelpPage.qml" line="146"/>
@@ -250,7 +251,7 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/OfflineDelegate.qml" line="54"/>
         <source>You are currently offline. Please check your network connection.</source>
-        <translation>Tidak Ada Koneksi Jaringan</translation>
+        <translation>आप अभी ऑफ़लाईन हैं. कृपया नेटवर्क कनेक्शन जाँच लें।</translation>
     </message>
 </context>
 <context>
@@ -258,24 +259,25 @@ How often can you reproduce this?</source>
     <message>
         <location filename="../assets/SignupSheet.qml" line="21"/>
         <source>Change Password</source>
-        <translation>Ganti Kata Sandi</translation>
+        <translation>पासवर्ड बदलें</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="23"/>
         <source>Create Password</source>
-        <translation>Masukkan kata sandi baru</translation>
+        <translation>पासवर्ड बनाएँ</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="31"/>
         <source>Save</source>
-        <translation>Simpan</translation>
+        <translation>सहेजें</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="44"/>
         <source>Successfully set password!
 
 Make sure you remember it!</source>
-        <translation type="unfinished"></translation>
+        <translation>पासवर्ड निर्धारित कर दिया गया!
+ध्यान रहे ये आपको ज़रूर याद रहे!</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="59"/>
@@ -285,22 +287,22 @@ Make sure you remember it!</source>
     <message>
         <location filename="../assets/SignupSheet.qml" line="67"/>
         <source>The password must be at least 3 characters!</source>
-        <translation>Sedikitnya harus 3 karakter</translation>
+        <translation>पासवर्ड कम से कम ३ अक्षरों का होना चाहिए!</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="82"/>
         <source>Confirm password</source>
-        <translation>Konfirmasi</translation>
+        <translation>पासवर्ड की पुष्टि करें</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="89"/>
         <source>Passwords do not match!</source>
-        <translation>Kata sandi yang Anda ketikkan tidak sama</translation>
+        <translation>गलत पासवर्ड!</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="116"/>
         <source>Cancel</source>
-        <translation>Batal</translation>
+        <translation>रद्द करें</translation>
     </message>
     <message>
         <location filename="../assets/SignupSheet.qml" line="131"/>
@@ -342,47 +344,47 @@ Simply tap on the screen to move on to the next tutorial. If you want to skip al
     <message>
         <location filename="../assets/TutorialTip.qml" line="199"/>
         <source>Swipe down from the top-bezel to display the Settings and Help and file bugs!</source>
-        <translation type="unfinished"></translation>
+        <translation>सेटिंग्स तथा हेल्प तथा फाइल बग्स देखने हेतु ऊपर से नीचे स्वाईप करें!</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="206"/>
         <source>Video Tutorial</source>
-        <translation>Tutorial</translation>
+        <translation>वीडिओ ट्युटोरिअल</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="206"/>
         <source>Would you like to see a video tutorial on how to use the app?</source>
-        <translation type="unfinished"></translation>
+        <translation>क्या आप इस एप के प्रयोग संबंधी वीडियो ट्युटोरिअल देखना पसंद करेंगे?</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="206"/>
         <source>Yes</source>
-        <translation>Ya</translation>
+        <translation>हाँ</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="206"/>
         <source>No</source>
-        <translation>Tidak</translation>
+        <translation>नहीं</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="338"/>
         <source>Stop all Tutorials</source>
-        <translation type="unfinished"></translation>
+        <translation>सारे ट्युटोरिअल्स बंद करें</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="339"/>
         <source>Prevent any tutorials from showing...</source>
-        <translation type="unfinished"></translation>
+        <translation>किसी भी ट्युटोरिअल को प्रदर्शित होने से रोकें...</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="345"/>
         <source>Suppress Tutorials</source>
-        <translation type="unfinished"></translation>
+        <translation>ट्युटोरिअल बंद करें</translation>
     </message>
     <message>
         <location filename="../assets/TutorialTip.qml" line="362"/>
         <source>Are you sure you want to prevent all further tutorials? If you ever want to enable them again, swipe-down from the top-bezel, go to Help, tap on the title bar and uncheck the &apos;Suppress Tutorials&apos; checkmark.</source>
-        <translation type="unfinished"></translation>
+        <translation>क्या आप भविष्य के सारे ट्युटोरिअल्स को रोकना चाहते हैं? यदि आप कभी भी इन्हें शुरू करना चाहें तो ऊपर नीचे स्वाइप करें, मदद में जाएँ, टाइटल बार को दबाएँ तथा ‘ट्युटोरिअल बंद करें’ को अचिन्हित करें</translation>
     </message>
 </context>
 <context>
@@ -395,7 +397,7 @@ Simply tap on the screen to move on to the next tutorial. If you want to skip al
     <message>
         <location filename="../src/AccountImporter.cpp" line="46"/>
         <source>Local</source>
-        <translation>Lokal</translation>
+        <translation>स्थानीय</translation>
     </message>
     <message>
         <location filename="../src/AccountImporter.cpp" line="48"/>
@@ -405,20 +407,25 @@ Simply tap on the screen to move on to the next tutorial. If you want to skip al
     <message>
         <location filename="../src/AccountImporter.cpp" line="68"/>
         <source>Cellular</source>
-        <translation>Seluler</translation>
+        <translation>सेल्यूलर</translation>
     </message>
 </context>
 <context>
     <name>canadainc::AppLogFetcher</name>
     <message>
+        <location filename="../src/AppLogFetcher.cpp" line="122"/>
+        <source>Report could not be submitted because you are offline! Please reconnect to the network and try again...</source>
+        <translation>आप अभी ऑफ़लाईन हैं. कृपया नेटवर्क कनेक्शन जाँच लें।</translation>
+    </message>
+    <message>
         <location filename="../src/AppLogFetcher.cpp" line="124"/>
         <source>Could not submit report! Please try again...</source>
-        <translation>Tidak bisa menyampaikan laporan! Silahkan coba lagi...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="198"/>
         <source>Could not submit logs! Please try again...</source>
-        <translation>Tidak bisa menyampaikan laporan! Silahkan coba lagi...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/AppLogFetcher.cpp" line="198"/>
@@ -432,23 +439,18 @@ Simply tap on the screen to move on to the next tutorial. If you want to skip al
 You may have to close the app and re-open it to correct the error.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="../src/AppLogFetcher.cpp" line="122"/>
-        <source>Report could not be submitted because you are offline! Please reconnect to the network and try again...</source>
-        <translation>Laporan tidak bisa disampaikan karena anda sedang offline! Silahkan sambung kembali ke jaringan dan coba lagi...</translation>
-    </message>
 </context>
 <context>
     <name>canadainc::DeviceUtils</name>
     <message>
         <location filename="../src/DeviceUtils.cpp" line="49"/>
         <source>Top</source>
-        <translation>Gulir ke atas</translation>
+        <translation>शीर्ष</translation>
     </message>
     <message>
         <location filename="../src/DeviceUtils.cpp" line="52"/>
         <source>Bottom</source>
-        <translation>Gulir ke bawah</translation>
+        <translation>नीचे</translation>
     </message>
 </context>
 <context>
@@ -456,82 +458,82 @@ You may have to close the app and re-open it to correct the error.</source>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="81"/>
         <source>A DRM related error was encountered.</source>
-        <translation>File ini dilindungi oleh DRM yang tidak didukung.</translation>
+        <translation>यह फ़ाइल DRM द्वारा सुरक्षित की गई है जो कि समर्थित नहीं है.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="86"/>
         <source>An unexpected internal error has occured!</source>
-        <translation>File tidak bisa diputar karena kesalahan subsistem media tak terdefinisi.</translation>
+        <translation>अप्रत्याशित त्रुटि के कारण फ़ाइल को चलाया नहीं जा सकता है.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="89"/>
         <source>An invalid parameter was specified!</source>
-        <translation>File tidak bisa diputar karena kesalahan tak terduga.</translation>
+        <translation>अप्रत्याशित त्रुटि के कारण फ़ाइल को चलाया नहीं जा सकता है.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="92"/>
         <source>An illegal operation given the context state.</source>
-        <translation>File tidak bisa diputar karena kesalahan tak terduga.</translation>
+        <translation>अप्रत्याशित त्रुटि के कारण फ़ाइल को चलाया नहीं जा सकता है.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="95"/>
         <source>An unrecognized input or output type or an out-of-range speed setting encountered.</source>
-        <translation>File ini rusak. Muatlah versi yang tidak rusak dan coba lagi.</translation>
+        <translation>इस फ़ाइल में एक असमर्थित मीडिया स्वरूप शामिल है.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="98"/>
         <source>A data format not recognized by any plugin encountered.</source>
-        <translation>File ini mengandung format media yang tidak didukung.</translation>
+        <translation>इस फ़ाइल में एक असमर्थित मीडिया स्वरूप शामिल है.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="101"/>
         <source>A DRM protected input was specified.</source>
-        <translation>File ini dilindungi oleh DRM yang tidak didukung.</translation>
+        <translation>यह फ़ाइल DRM द्वारा सुरक्षित की गई है जो कि समर्थित नहीं है.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="104"/>
         <source>An illegal operation was encountered by the playback process.</source>
-        <translation>File tidak bisa diputar karena kesalahan tak terduga.</translation>
+        <translation>अप्रत्याशित त्रुटि के कारण फ़ाइल को चलाया नहीं जा सकता है.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="107"/>
         <source>An I/O error has been encountered at the source!</source>
-        <translation>File tidak bisa diputar karena kesalahan tak terduga.</translation>
+        <translation>अप्रत्याशित त्रुटि के कारण फ़ाइल को चलाया नहीं जा सकता है.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="110"/>
         <source>An I/O error has been encountered at the sink!</source>
-        <translation>File tidak bisa diputar karena kesalahan tak terduga.</translation>
+        <translation>अप्रत्याशित त्रुटि के कारण फ़ाइल को चलाया नहीं जा सकता है.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="113"/>
         <source>The source is currently unavailable.</source>
-        <translation>File tidak bisa diputar karena kesalahan tak terduga.</translation>
+        <translation>अप्रत्याशित त्रुटि के कारण फ़ाइल को चलाया नहीं जा सकता है.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="116"/>
         <source>The resource was corrupted.</source>
-        <translation>File ini rusak. Muatlah versi yang tidak rusak dan coba lagi.</translation>
+        <translation>यह फ़ाइल दूषित है. किसी अदूषित संस्करण को लोड करें और पुन: प्रयास करें.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="119"/>
         <source>Cannot open the sink (possibly because no plugin recognizes it).</source>
-        <translation>File tidak bisa diputar karena kesalahan tak terduga.</translation>
+        <translation>जिस डिवाइस पर आप फ़ाइल को चलाने का प्रयास कर रहे हैं वह अनुपलब्ध है. डिवाइस के साथ अपने कनेक्शन की जांच करें और पुन: प्रयास</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="122"/>
         <source>Insufficient memory to perform the requested operation.</source>
-        <translation>Memori tidak cukup. Tutup beberapa aplikasi dan coba lagi.</translation>
+        <translation>उपलब्ध मेमोरी अपर्याप्त है. कुछ अनुप्रयोग बंद करें और पुन: प्रयास करें.</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="125"/>
         <source>A required resource such as an encoder or an output feed is presently unavailable.</source>
-        <translation>File tidak bisa diputar karena kesalahan tak terduga.</translation>
+        <translation>जिस डिवाइस पर आप फ़ाइल को चलाने का प्रयास कर रहे हैं वह अनुपलब्ध है. डिवाइस के साथ अपने कनेक्शन की जांच करें और पुन: प्रयास</translation>
     </message>
     <message>
         <location filename="../src/LazyMediaPlayer.cpp" line="128"/>
         <source>A playback permission error (e.g., user prohibition, region mismatch) error was encountered.</source>
-        <translation>File tidak bisa diputar karena kesalahan tak terduga.</translation>
+        <translation>जिस डिवाइस पर आप फ़ाइल को चलाने का प्रयास कर रहे हैं वह अनुपलब्ध है. डिवाइस के साथ अपने कनेक्शन की जांच करें और पुन: प्रयास</translation>
     </message>
 </context>
 <context>
@@ -539,7 +541,7 @@ You may have to close the app and re-open it to correct the error.</source>
     <message>
         <location filename="../src/MessageImporter.cpp" line="36"/>
         <source>You</source>
-        <translation>Anda</translation>
+        <translation>आप</translation>
     </message>
 </context>
 <context>
@@ -560,43 +562,43 @@ You may have to close the app and re-open it to correct the error.</source>
     <message>
         <location filename="../src/Persistance.cpp" line="172"/>
         <source>Confirmation</source>
-        <translation>Konfirmasi</translation>
+        <translation>पुष्टि करें</translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="192"/>
         <location filename="../src/Persistance.h" line="94"/>
         <source>Save</source>
-        <translation>Simpan</translation>
+        <translation>सहेजें</translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="192"/>
         <location filename="../src/Persistance.h" line="71"/>
         <location filename="../src/Persistance.h" line="94"/>
         <source>Cancel</source>
-        <translation>Batal</translation>
+        <translation>रद्द करें</translation>
     </message>
     <message>
         <location filename="../src/Persistance.cpp" line="213"/>
         <source>Copied: %1 to clipboard</source>
-        <translation>Disalin %1 ke clipboard</translation>
+        <translation>%1 मान क्लिपबोर्ड में कॉपी किए गए</translation>
     </message>
     <message>
         <location filename="../src/Persistance.h" line="68"/>
         <location filename="../src/Persistance.h" line="90"/>
         <source>Yes</source>
-        <translation>Ya</translation>
+        <translation>हाँ</translation>
     </message>
     <message>
         <location filename="../src/Persistance.h" line="68"/>
         <location filename="../src/Persistance.h" line="90"/>
         <source>No</source>
-        <translation>Tidak</translation>
+        <translation>नहीं</translation>
     </message>
     <message>
         <location filename="../src/Persistance.h" line="71"/>
         <location filename="../src/Persistance.h" line="93"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>ठीक</translation>
     </message>
 </context>
 <context>
@@ -612,32 +614,32 @@ You may have to close the app and re-open it to correct the error.</source>
     <message>
         <location filename="../src/TextUtils.cpp" line="65"/>
         <source>Bytes</source>
-        <translation>Byte</translation>
+        <translation>बाइट्स</translation>
     </message>
     <message>
         <location filename="../src/TextUtils.cpp" line="65"/>
         <source>KB</source>
-        <translation type="unfinished"></translation>
+        <translation>किलोबाइट्स</translation>
     </message>
     <message>
         <location filename="../src/TextUtils.cpp" line="65"/>
         <source>MB</source>
-        <translation type="unfinished"></translation>
+        <translation>मेगाबाइट्स</translation>
     </message>
     <message>
         <location filename="../src/TextUtils.cpp" line="65"/>
         <source>GB</source>
-        <translation type="unfinished"></translation>
+        <translation>गीगाबाइट्स</translation>
     </message>
     <message>
         <location filename="../src/TextUtils.cpp" line="65"/>
         <source>TB</source>
-        <translation type="unfinished"></translation>
+        <translation>टेराबाइट्स</translation>
     </message>
     <message>
         <location filename="../src/TextUtils.cpp" line="68"/>
         <source>0 Bytes</source>
-        <translation>0 byte</translation>
+        <translation>0 बाइट्स</translation>
     </message>
 </context>
 </TS>

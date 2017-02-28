@@ -359,7 +359,7 @@ Delegate
                             
                             onTriggered: {
                                 console.log("UserEvent: SuppressTutorials");
-                                persist.showDialog( dai, qsTr("Suppress Tutorials"), qsTr("Are you sure you want to prevent all further tutorials? If you ever want to enable them again, swipe-down from the top-bezel, go to Help, tap on the title bar and uncheck the 'Suppress Tutorials' checkmark.") );
+                                persist.showConfirmDialog( dai, qsTr("Are you sure you want to prevent all further tutorials? If you ever want to enable them again, swipe-down from the top-bezel, go to Help, tap on the title bar and uncheck the 'Suppress Tutorials' checkmark.") );
                                 
                                 reporter.record("SuppressTutorials");
                             }

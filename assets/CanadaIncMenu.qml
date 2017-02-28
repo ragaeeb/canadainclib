@@ -62,9 +62,9 @@ MenuDefinition
         if ( reporter.deferredCheck("channelPromoted", 1) ) {
             persist.openChannel();
             persist.setFlag("channelPromoted", 1);
-        } else if (numLaunches == 50) {
+        } else if (numLaunches == 5) {
             persist.showDialog( orientationHandler, {'cookie': 'review'}, qsTr("Review"), qsTr("If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?"), qsTr("Yes"), qsTr("No") );
-        } else if ( allowDonations && numLaunches == 100 ) {
+        } else if ( (allowDonations && numLaunches == 10) || (allowDonations && numLaunches == 100) ) {
             persist.showDialog( orientationHandler, {'cookie': 'donate'}, qsTr("Donate"), qsTr("While our apps will always remain free of charge for your benefit, we encourage you to please donate whatever you can in order to support development. This will motivate the developers to continue to update the app, add new features and bug fixes. To donate, simply swipe-down from the top-bezel and tap the 'Donate' button to send money via PayPal. Would you like to donate now?"), qsTr("Yes"), qsTr("No") );
         } else {
             clean = true;

@@ -10,49 +10,6 @@
     </message>
 </context>
 <context>
-    <name>AlFurqanAdvertisement</name>
-    <message>
-        <location filename="../assets/AlFurqanAdvertisement.qml" line="17"/>
-        <source>Twitter</source>
-        <translation>Твиттер</translation>
-    </message>
-    <message>
-        <location filename="../assets/AlFurqanAdvertisement.qml" line="31"/>
-        <source>Facebook</source>
-        <translation>Facebook</translation>
-    </message>
-    <message>
-        <location filename="../assets/AlFurqanAdvertisement.qml" line="45"/>
-        <source>Email</source>
-        <translation>Электронная почта</translation>
-    </message>
-    <message>
-        <location filename="../assets/AlFurqanAdvertisement.qml" line="58"/>
-        <source>Instagram</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/AlFurqanAdvertisement.qml" line="71"/>
-        <source>Learn Qu&apos;ran</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/AlFurqanAdvertisement.qml" line="71"/>
-        <source>Learn Arabic!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/AlFurqanAdvertisement.qml" line="76"/>
-        <source>BBM</source>
-        <translation>BBM</translation>
-    </message>
-    <message>
-        <location filename="../assets/AlFurqanAdvertisement.qml" line="88"/>
-        <source>Back</source>
-        <translation>Назад</translation>
-    </message>
-</context>
-<context>
     <name>BugReportPage</name>
     <message>
         <location filename="../assets/BugReportPage.qml" line="25"/>
@@ -155,12 +112,12 @@ How often can you reproduce this?</source>
         <translation>Заметки</translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="415"/>
+        <location filename="../assets/BugReportPage.qml" line="409"/>
         <source>If you were instructed by our staff to submit a bug report, please use the &apos;%1&apos; action at the bottom. Then fill out the form, and send the representative the Bug Report ID generated.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/BugReportPage.qml" line="416"/>
+        <location filename="../assets/BugReportPage.qml" line="410"/>
         <source>To open this page in the web browser, please use the &apos;%1&apos; action at the bottom.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -168,168 +125,53 @@ How often can you reproduce this?</source>
 <context>
     <name>CanadaIncMenu</name>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="48"/>
-        <source>Update Available</source>
-        <translation>Доступно обновление</translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="48"/>
-        <source>%1 %2 is available (you have %3). Would you like to visit BlackBerry World to download the latest version?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="48"/>
-        <location filename="../assets/CanadaIncMenu.qml" line="63"/>
-        <location filename="../assets/CanadaIncMenu.qml" line="74"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="66"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="68"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="48"/>
-        <location filename="../assets/CanadaIncMenu.qml" line="63"/>
-        <location filename="../assets/CanadaIncMenu.qml" line="74"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="66"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="68"/>
         <source>No</source>
         <translation>Нет</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="48"/>
-        <source>Don&apos;t Show Again</source>
-        <translation>Больше не показывать</translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="63"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="66"/>
         <source>If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?</source>
         <translation type="unfinished">Если вам нравится приложение, оцените это приложение. Благодарим за поддержку!</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="74"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="68"/>
         <source>While our apps will always remain free of charge for your benefit, we encourage you to please donate whatever you can in order to support development. This will motivate the developers to continue to update the app, add new features and bug fixes. To donate, simply swipe-down from the top-bezel and tap the &apos;Donate&apos; button to send money via PayPal. Would you like to donate now?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="115"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="104"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="138"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="127"/>
         <source>Bug Reports</source>
         <translation>Жук</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="176"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="165"/>
         <source>Help</source>
         <translation>Справка</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="63"/>
-        <location filename="../assets/CanadaIncMenu.qml" line="160"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="66"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="149"/>
         <source>Review</source>
         <translation>Обзор</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="74"/>
-        <location filename="../assets/CanadaIncMenu.qml" line="213"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="68"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="195"/>
         <source>Donate</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>CanadaIncUtils</name>
-    <message>
-        <location filename="../assets/CanadaIncUtils.qml" line="111"/>
-        <source>Ahad</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncUtils.qml" line="111"/>
-        <source>Ithnin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncUtils.qml" line="111"/>
-        <source>Thulatha</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncUtils.qml" line="111"/>
-        <source>Arbaa</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncUtils.qml" line="111"/>
-        <source>Khams</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncUtils.qml" line="111"/>
-        <source>Jumuah</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncUtils.qml" line="111"/>
-        <source>Sabt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncUtils.qml" line="112"/>
-        <source>Muharram</source>
-        <translation>Мухаррам</translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncUtils.qml" line="112"/>
-        <source>Safar</source>
-        <translation>Сафар</translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncUtils.qml" line="112"/>
-        <source>Rabi&apos;ul Awwal</source>
-        <translation>Рабии`у ль-авваль</translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncUtils.qml" line="112"/>
-        <source>Rabi&apos;ul Akhir</source>
-        <translation>Рабии`у с-саании</translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncUtils.qml" line="113"/>
-        <source>Jumadal Ula</source>
-        <translation>Джумаада ль-ууля</translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncUtils.qml" line="113"/>
-        <source>Jumadal Akhira</source>
-        <translation>Джумаада ль-аахыр</translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncUtils.qml" line="113"/>
-        <source>Rajab</source>
-        <translation>Ра́джаб</translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncUtils.qml" line="113"/>
-        <source>Sha&apos;ban</source>
-        <translation>Шаабан</translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncUtils.qml" line="114"/>
-        <source>Ramadan</source>
-        <translation>Рамадан</translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncUtils.qml" line="114"/>
-        <source>Shawwal</source>
-        <translation>Шавваль</translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncUtils.qml" line="114"/>
-        <source>Dhul Qa&apos;ada</source>
-        <translation>Зуль-ка`да</translation>
-    </message>
-    <message>
-        <location filename="../assets/CanadaIncUtils.qml" line="114"/>
-        <source>Dhul Hijja</source>
-        <translation>Зульхиджа</translation>
     </message>
 </context>
 <context>
@@ -370,27 +212,37 @@ How often can you reproduce this?</source>
         <translation>Скрыть Подсказки</translation>
     </message>
     <message>
-        <location filename="../assets/HelpPage.qml" line="136"/>
-        <source>Disable Update Checking</source>
+        <location filename="../assets/HelpPage.qml" line="134"/>
+        <source>Tutorials</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/HelpPage.qml" line="161"/>
+        <location filename="../assets/HelpPage.qml" line="139"/>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HelpPage.qml" line="146"/>
+        <source>Tutorials reset!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/HelpPage.qml" line="171"/>
         <source>Please report all bugs to: support@canadainc.org</source>
         <translation>Пожалуйста, сообщите о всех обнаруженных ошибках по адресу: support@canadainc.org</translation>
     </message>
     <message>
-        <location filename="../assets/HelpPage.qml" line="164"/>
+        <location filename="../assets/HelpPage.qml" line="174"/>
         <source>(c) %1 %2. All Rights Reserved.</source>
         <translation>(c) %1 %2. Все права защищены.</translation>
     </message>
     <message>
-        <location filename="../assets/HelpPage.qml" line="173"/>
+        <location filename="../assets/HelpPage.qml" line="183"/>
         <source>To see a live tutorial and demo of how to use this app, please tap on the &apos;%1&apos; action.</source>
         <translation>Чтобы увидеть подсказки и демовидео о том, как пользоваться этим приложением, пожалуйста, нажмите на &apos;%1&apos; action.</translation>
     </message>
     <message>
-        <location filename="../assets/HelpPage.qml" line="176"/>
+        <location filename="../assets/HelpPage.qml" line="186"/>
         <source>To stay up to date on the latest news on our apps or to reach out to us for support regarding any of our apps, tap on the &apos;%1&apos; action.</source>
         <translation>Чтобы быть в курсе последних новостей о наших приложениях или получить поддержку относительно каких-либо наших приложений, нажмите на &apos;%1&apos; action.</translation>
     </message>
@@ -476,7 +328,12 @@ Make sure you remember it!</source>
 <context>
     <name>TutorialTip</name>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="145"/>
+        <location filename="../assets/TutorialTip.qml" line="108"/>
+        <source>Tap here for more actions you can take on this page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/TutorialTip.qml" line="157"/>
         <source>Welcome to %1 v%2.
 
 These are interactive tutorials to help you learn how to use the app.
@@ -485,48 +342,47 @@ Simply tap on the screen to move on to the next tutorial. If you want to skip al
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="187"/>
+        <location filename="../assets/TutorialTip.qml" line="199"/>
         <source>Swipe down from the top-bezel to display the Settings and Help and file bugs!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="194"/>
+        <location filename="../assets/TutorialTip.qml" line="206"/>
         <source>Video Tutorial</source>
         <translation>Видео учебник</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="194"/>
+        <location filename="../assets/TutorialTip.qml" line="206"/>
         <source>Would you like to see a video tutorial on how to use the app?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="194"/>
+        <location filename="../assets/TutorialTip.qml" line="206"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="194"/>
+        <location filename="../assets/TutorialTip.qml" line="206"/>
         <source>No</source>
         <translation>Нет</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="323"/>
+        <location filename="../assets/TutorialTip.qml" line="338"/>
         <source>Stop all Tutorials</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="324"/>
+        <location filename="../assets/TutorialTip.qml" line="339"/>
         <source>Prevent any tutorials from showing...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="330"/>
-        <location filename="../assets/TutorialTip.qml" line="347"/>
+        <location filename="../assets/TutorialTip.qml" line="345"/>
         <source>Suppress Tutorials</source>
         <translation>Скрыть Подсказки</translation>
     </message>
     <message>
-        <location filename="../assets/TutorialTip.qml" line="347"/>
+        <location filename="../assets/TutorialTip.qml" line="362"/>
         <source>Are you sure you want to prevent all further tutorials? If you ever want to enable them again, swipe-down from the top-bezel, go to Help, tap on the title bar and uncheck the &apos;Suppress Tutorials&apos; checkmark.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -557,27 +413,27 @@ Simply tap on the screen to move on to the next tutorial. If you want to skip al
 <context>
     <name>canadainc::AppLogFetcher</name>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="104"/>
+        <location filename="../src/AppLogFetcher.cpp" line="124"/>
         <source>Could not submit report! Please try again...</source>
         <translation>Не удалось отправить отчет! Пожалуйста, попробуйте еще раз...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="102"/>
+        <location filename="../src/AppLogFetcher.cpp" line="122"/>
         <source>Report could not be submitted because you are offline! Please reconnect to the network and try again...</source>
         <translation>Отчет не может быть отправлен, так как Вы не в сети (оффлайн)! Пожалуйста, подключитесь к сети и попробуйте еще раз...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="166"/>
+        <location filename="../src/AppLogFetcher.cpp" line="198"/>
         <source>Could not submit logs! Please try again...</source>
         <translation>Не удалось отправить журналы! Пожалуйста, попробуйте еще раз...</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="166"/>
+        <location filename="../src/AppLogFetcher.cpp" line="198"/>
         <source>Logs have been submitted. Please provide the support team the following ID (copied to the clipboard): %1</source>
         <translation>Журналы отправлены. Пожалуйста, представьте в службу поддержки следующий ID (скопировано в буфер обмена): %1</translation>
     </message>
     <message>
-        <location filename="../src/AppLogFetcher.cpp" line="170"/>
+        <location filename="../src/AppLogFetcher.cpp" line="202"/>
         <source>
 
 You may have to close the app and re-open it to correct the error.</source>
@@ -587,12 +443,12 @@ You may have to close the app and re-open it to correct the error.</source>
 <context>
     <name>canadainc::DeviceUtils</name>
     <message>
-        <location filename="../src/DeviceUtils.cpp" line="44"/>
+        <location filename="../src/DeviceUtils.cpp" line="49"/>
         <source>Top</source>
         <translation>Начало</translation>
     </message>
     <message>
-        <location filename="../src/DeviceUtils.cpp" line="47"/>
+        <location filename="../src/DeviceUtils.cpp" line="52"/>
         <source>Bottom</source>
         <translation>Конец</translation>
     </message>
@@ -704,43 +560,43 @@ You may have to close the app and re-open it to correct the error.</source>
 <context>
     <name>canadainc::Persistance</name>
     <message>
-        <location filename="../src/Persistance.cpp" line="163"/>
+        <location filename="../src/Persistance.cpp" line="172"/>
         <source>Confirmation</source>
         <translation>Подтвердить</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="183"/>
-        <location filename="../src/Persistance.h" line="97"/>
+        <location filename="../src/Persistance.cpp" line="192"/>
+        <location filename="../src/Persistance.h" line="94"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="183"/>
-        <location filename="../src/Persistance.h" line="75"/>
-        <location filename="../src/Persistance.h" line="97"/>
+        <location filename="../src/Persistance.cpp" line="192"/>
+        <location filename="../src/Persistance.h" line="71"/>
+        <location filename="../src/Persistance.h" line="94"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.cpp" line="204"/>
+        <location filename="../src/Persistance.cpp" line="213"/>
         <source>Copied: %1 to clipboard</source>
         <translation>Скопировано: %1 в буфер обмена</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.h" line="72"/>
-        <location filename="../src/Persistance.h" line="93"/>
+        <location filename="../src/Persistance.h" line="68"/>
+        <location filename="../src/Persistance.h" line="90"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.h" line="72"/>
-        <location filename="../src/Persistance.h" line="93"/>
+        <location filename="../src/Persistance.h" line="68"/>
+        <location filename="../src/Persistance.h" line="90"/>
         <source>No</source>
         <translation>Нет</translation>
     </message>
     <message>
-        <location filename="../src/Persistance.h" line="75"/>
-        <location filename="../src/Persistance.h" line="96"/>
+        <location filename="../src/Persistance.h" line="71"/>
+        <location filename="../src/Persistance.h" line="93"/>
         <source>OK</source>
         <translation>ОК</translation>
     </message>
@@ -756,32 +612,32 @@ You may have to close the app and re-open it to correct the error.</source>
 <context>
     <name>canadainc::TextUtils</name>
     <message>
-        <location filename="../src/TextUtils.cpp" line="68"/>
+        <location filename="../src/TextUtils.cpp" line="65"/>
         <source>Bytes</source>
         <translation>Байты</translation>
     </message>
     <message>
-        <location filename="../src/TextUtils.cpp" line="68"/>
+        <location filename="../src/TextUtils.cpp" line="65"/>
         <source>KB</source>
         <translation>КБ</translation>
     </message>
     <message>
-        <location filename="../src/TextUtils.cpp" line="68"/>
+        <location filename="../src/TextUtils.cpp" line="65"/>
         <source>MB</source>
         <translation>МБ</translation>
     </message>
     <message>
-        <location filename="../src/TextUtils.cpp" line="68"/>
+        <location filename="../src/TextUtils.cpp" line="65"/>
         <source>GB</source>
         <translation>ГБ</translation>
     </message>
     <message>
-        <location filename="../src/TextUtils.cpp" line="68"/>
+        <location filename="../src/TextUtils.cpp" line="65"/>
         <source>TB</source>
         <translation>ТБ</translation>
     </message>
     <message>
-        <location filename="../src/TextUtils.cpp" line="71"/>
+        <location filename="../src/TextUtils.cpp" line="68"/>
         <source>0 Bytes</source>
         <translation>0 Байт</translation>
     </message>
