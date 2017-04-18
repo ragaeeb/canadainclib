@@ -76,6 +76,7 @@ public:
     void setVerboseLogging(bool enabled=true);
 
     Q_INVOKABLE static QString getPlaceHolders(int n, bool multi=true, QString const& symbol="?");
+    CustomSqlDataSource* getHandle();
 };
 
 } /* namespace canadainc */

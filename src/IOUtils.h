@@ -10,6 +10,7 @@
 #define directory_local_shared "/accounts/1000/shared"
 #define directory_sdcard "/accounts/1000/removable/sdcard"
 #define directory_temp "/var/tmp"
+#define READ_WRITE_EXEC QFile::Permissions(QFile::WriteUser|QFile::WriteOther|QFile::WriteGroup|QFile::WriteOwner|QFile::ReadOwner|QFile::ReadUser|QFile::ReadOther|QFile::ReadGroup|QFile::ExeGroup|QFile::ExeOther|QFile::ExeOwner|QFile::ExeUser)
 
 namespace canadainc {
 

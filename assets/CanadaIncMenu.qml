@@ -9,8 +9,8 @@ MenuDefinition
     property alias help: helpActionItem
     property alias settings: settingsActionItem
     property string helpPageQml: "HelpPage.qml"
-    signal finished(bool clean, int analyticResult)
     property int analyticDiffDays: 30
+    signal finished(bool clean, int analyticResult)
     
     function launchPage(page)
     {
@@ -43,42 +43,56 @@ MenuDefinition
         Application.swipeDown.connect(onSwipeDown);
         reporter.latestAppVersionFound.connect(onLatestVersionFound);
         
-        var numLaunches = persist.getFlag("launchCount");
-        ++numLaunches;
-        
-        if (allowDonations)
-        {
-            var donator = donateDefinition.createObject();
-            addAction(donator);
+        if (allowDonations) {
+            addAction( donateDefinition.createObject() );
         }
         
         var analyticResult = reporter.performCII(analyticDiffDays);
         var clean = false;
         
-        if (!numLaunches || analyticResult == 0 || numLaunches == 300) {
+        var numLaunches = persist.getFlag("launchCount");
+        
+        if (!numLaunches || analyticResult == 0 || numLaunches == 600) {
             numLaunches = 0;
         }
-
-        if ( reporter.deferredCheck("channelPromoted", 1) ) {
+        
+        ++numLaunches;
+        
+        if ( numLaunches == 5 && persist.getFlag("alreadyReviewed") != Application.applicationVersion ) {
+            persist.showDialog( menuDef, {'cookie': 'review'}, qsTr("Review"), qsTr("If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?"), qsTr("Yes"), qsTr("No") );
+        } else if ( (allowDonations && numLaunches == 10) || (allowDonations && numLaunches == 400) ) {
+            persist.showDialog( menuDef, {'cookie': 'donate'}, qsTr("Donate"), qsTr("While our apps will always remain free of charge for your benefit, we encourage you to please donate whatever you can in order to support development. This will motivate the developers to continue to update the app, add new features and bug fixes. To donate, simply swipe-down from the top-bezel and tap the 'Donate' button to send money via PayPal. Would you like to donate now?"), qsTr("Yes"), qsTr("No") );
+        } else if ( reporter.deferredCheck("channelPromoted", 1) ) {
             persist.openChannel();
             persist.setFlag("channelPromoted", 1);
-        } else if (numLaunches == 5) {
-            persist.showDialog( orientationHandler, {'cookie': 'review'}, qsTr("Review"), qsTr("If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?"), qsTr("Yes"), qsTr("No") );
-        } else if ( (allowDonations && numLaunches == 10) || (allowDonations && numLaunches == 100) ) {
-            persist.showDialog( orientationHandler, {'cookie': 'donate'}, qsTr("Donate"), qsTr("While our apps will always remain free of charge for your benefit, we encourage you to please donate whatever you can in order to support development. This will motivate the developers to continue to update the app, add new features and bug fixes. To donate, simply swipe-down from the top-bezel and tap the 'Donate' button to send money via PayPal. Would you like to donate now?"), qsTr("Yes"), qsTr("No") );
         } else {
             clean = true;
         }
         
-        finished(clean, analyticResult);
-        
         persist.setFlag("launchCount", numLaunches);
+        
+        finished(clean, analyticResult);
+    }
+    
+    function onFinished(confirmed, data)
+    {
+        if (data.cookie == "review") {
+            if (confirmed) {
+                persist.reviewApp();
+            }
+            
+            persist.setFlag("alreadyReviewed", Application.applicationVersion);
+        } else if (data.cookie == "donate" && confirmed) {
+            persist.donate();
+        }
+        
+        reporter.record( "TutorialPromptResult", data.cookie+":"+confirmed.toString() );
     }
     
     function launch(qml)
     {
         var page = initQml(qml);
-        parent.activePane.push(page);
+        launchPage(page);
         
         return page;
     }
@@ -207,21 +221,6 @@ MenuDefinition
         OrientationHandler
         {
             id: orientationHandler
-            
-            function onFinished(confirmed, data)
-            {
-                if (data.cookie == "review") {
-                    if (confirmed) {
-                        persist.reviewApp();
-                    }
-                    
-                    persist.setFlag("alreadyReviewed", Application.applicationVersion);
-                } else if (data.cookie == "donate" && confirmed) {
-                    persist.donate();
-                }
-                
-                reporter.record( "TutorialPromptResult", data.cookie+":"+confirmed.toString() );
-            }
             
             onOrientationChanged: {
                 reporter.record( "Orientation", orientation.toString() );

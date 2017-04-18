@@ -264,6 +264,11 @@ QString DatabaseHelper::getPlaceHolders(int n, bool multi, QString const& symbol
 }
 
 
+CustomSqlDataSource* DatabaseHelper::getHandle() {
+    return &m_sql;
+}
+
+
 DatabaseHelper::~DatabaseHelper()
 {
 }
