@@ -107,8 +107,8 @@ MenuDefinition
     
     onCreationCompleted: {
         app.lazyInitComplete.connect(asyncWork);
-        Qt.launch = launch;
-        Qt.initQml = initQml;
+        //Qt.launch = launch;
+        //Qt.initQml = initQml;
     }
     
     settingsAction: SettingsActionItem

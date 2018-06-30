@@ -123,51 +123,51 @@ How often can you reproduce this?</source>
 <context>
     <name>CanadaIncMenu</name>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="66"/>
-        <location filename="../assets/CanadaIncMenu.qml" line="68"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="62"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="64"/>
         <source>Yes</source>
         <translation>Evet</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="66"/>
-        <location filename="../assets/CanadaIncMenu.qml" line="68"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="62"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="64"/>
         <source>No</source>
         <translation>Hayır</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="66"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="62"/>
         <source>If you enjoy the app, we would really appreciate if you left us a review so we can improve! It should only take a second. Would you like to leave one?</source>
         <translation type="unfinished">App&apos;i kullanmaktan keyif aldıysanız, lütfen birkaç dakikanızı ayırıp uygulamayı değerlendirin. Teşekkürler!</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="68"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="64"/>
         <source>While our apps will always remain free of charge for your benefit, we encourage you to please donate whatever you can in order to support development. This will motivate the developers to continue to update the app, add new features and bug fixes. To donate, simply swipe-down from the top-bezel and tap the &apos;Donate&apos; button to send money via PayPal. Would you like to donate now?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="104"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="118"/>
         <source>Settings</source>
         <translation>Ayarlar</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="127"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="141"/>
         <source>Bug Reports</source>
         <translation>Böcek</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="165"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="179"/>
         <source>Help</source>
         <translation>Yardım</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="66"/>
-        <location filename="../assets/CanadaIncMenu.qml" line="149"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="62"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="163"/>
         <source>Review</source>
         <translation>İncele</translation>
     </message>
     <message>
-        <location filename="../assets/CanadaIncMenu.qml" line="68"/>
-        <location filename="../assets/CanadaIncMenu.qml" line="195"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="64"/>
+        <location filename="../assets/CanadaIncMenu.qml" line="209"/>
         <source>Donate</source>
         <translation type="unfinished"></translation>
     </message>

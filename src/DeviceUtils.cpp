@@ -96,7 +96,9 @@ void DeviceUtils::onBottomTriggered()
     LOGGER("UserEvent: BottomTriggered");
     processDirection(ScrollPosition::End);
 
-    AppLogFetcher::getInstance()->record("BottomTriggered");
+    if ( AppLogFetcher::getInstance() ) {
+        AppLogFetcher::getInstance()->record("BottomTriggered");
+    }
 }
 
 
@@ -105,7 +107,9 @@ void DeviceUtils::onTopTriggered()
     LOGGER("UserEvent: TopTriggered");
     processDirection(ScrollPosition::Beginning);
 
-    AppLogFetcher::getInstance()->record("TopTriggered");
+    if ( AppLogFetcher::getInstance() ) {
+        AppLogFetcher::getInstance()->record("TopTriggered");
+    }
 }
 
 
